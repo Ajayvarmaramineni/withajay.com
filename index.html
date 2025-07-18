@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>With Love AJ</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+h1, h2, .section-heading {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+  }
+  p, li, a, button {
+    font-family: 'Open Sans', sans-serif;
+  }
+    html { scroll-behavior: smooth; }
+
+    /* View transitions API (modern browsers) */
+    @supports (view-transition-name: none) {
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation: none;
+        mix-blend-mode: normal;
+      }
+      ::view-transition-old(root) {
+        z-index: 1;
+      }
+      ::view-transition-new(root) {
+        z-index: 9999;
+      }
+      .back-transition::view-transition-old(root) {
+        animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both fade-and-slide-out;
+      }
+      .back-transition::view-transition-new(root) {
+        animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both fade-and-slide-in reverse;
+      }
+    }
+
+    /* Fallback for older browsers */
+    @keyframes fade-and-slide-in {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fade-and-slide-out {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+    }
+
+    /* Shared element transitions */
+    .shared-element {
+      view-transition-name: shared-element;
+    }
+
+    /* Loading indicator */
+    .route-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, #4f46e5, #ec4899);
+      z-index: 10000;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+      pointer-events: none;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 3px 50px;
+      position: sticky;
+      top: 0;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+    .logo-svg {
+      height: 90px;
+      width: auto;
+      cursor: pointer;
+    }
+    @media (prefers-color-scheme: dark) {
+      .header-left img {
+        filter: brightness(1.2) contrast(1.1);
+      }
+    }
+
+    nav {
+      flex: 1;
+      text-align: right;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #f0f0f0;
+      font-weight: bold;
+      font-size: 1.1em;
+      transition: color 0.3s ease, transform 0.4s ease;
+    }
+
+    nav ul li a:hover {
+      color: #ff6f61;
+      transform: scale(1.2);
+    }
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      flex: 0 0 auto;
+    }
+
+    .social-icons img {
+      width: 30px;
+      filter: brightness(0) invert(1);
+      transition: transform 0.4s ease, filter 0.3s ease;
+    }
+
+    .social-icons img:hover {
+      transform: scale(1.2);
+      filter: brightness(1.5);
+    }
+
+    /* Hero Background */
+    .hero-background {
+  background: url('images/hero.jpg') center/cover no-repeat;
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+
+    .hero-background::before {
+      content: "";
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    /* General Section Heading */
+    .section-heading {
+      display: block;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.5em;
+      color: #fce7e3;
+    }
+
+    .section-heading span {
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-heading span::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: #ff6f61;
+      transition: width 0.3s ease;
+    }
+
+    .section-heading span:hover::after {
+      width: 100px;
+    }
+
+    /* Scroll Reveal Animation for Sections */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive Adjustments for Headings */
+    @media (max-width: 768px) {
+      .section-heading {
+        font-size: 2em;
+      }
+    }
+
+    /* About Section */
+    .about-section {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 40px 0;
+      position: relative;
+      z-index: 1;
+    }
+    .about-container {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .about-photo-wrapper {
+      flex: 1 1 300px;
+    }
+    .about-text {
+      flex: 2 1 500px;
+      color: #fff;
+      text-align: left;
+    }
+
+    .about-photo {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 2px solid #ff6f61;
+    }
+
+    .about-photo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .about-text h3 {
+      font-size: 1.8em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .about-text p {
+      margin-bottom: 20px;
+      font-size: 1.1em;
+      line-height: 1.8;
+      color: #fff;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #ff6f61;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background: #e55a50;
+      transform: translateY(-2px);
+    }
+
+    /* Responsive Adjustments for About */
+    @media (max-width: 768px) {
+      .about-container {
+        gap: 20px;
+        padding: 15px;
+      }
+
+      .about-photo-wrapper {
+        flex: 1 1 250px;
+      }
+
+      .about-text {
+        flex: 1 1 100%;
+      }
+
+      .about-text h3 {
+        font-size: 1.8em;
+      }
+
+      .about-text p {
+        font-size: 1em;
+      }
+    }
+
+    /* Section Spacer */
+    .section-spacer {
+      height: 125px;
+    }
+
+    @media (max-width: 768px) {
+      .section-spacer {
+        height: 80px;
+      }
+    }
+
+    /* Quote Section */
+    .quote-section {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 100px 20px;
+      text-align: center;
+    }
+
+    .quote-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .quote-container blockquote {
+      font-family: 'Georgia', serif;
+      font-size: 1.5em;
+      font-style: italic;
+      color: #f0f0f0;
+      line-height: 1.5;
+      margin: 0;
+      position: relative;
+    }
+
+    .quote-container blockquote p {
+      margin: 0;
+    }
+
+    .quote-container blockquote footer {
+      font-size: 1em;
+      font-weight: bold;
+      color: #e0e0e0;
+      margin-top: 20px;
+      padding: 0;
+      background: transparent;
+      display: inline;
+    }
+
+    /* Blog Section */
+    .blog-section {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 60px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .blog-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .blog-card {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .blog-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .blog-card-content {
+      padding: 15px;
+      color: #fff;
+    }
+
+    .blog-card-content h3 {
+      font-size: 1.3em;
+      color: #fce7e3;
+      margin-bottom: 8px;
+    }
+
+    .blog-card-content p {
+      font-size: 0.9em;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .read-more {
+      display: inline-block;
+      padding: 8px 15px;
+      background: #ff6f61;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s ease, transform 0.3s ease;
+      font-size: 0.9em;
+    }
+
+    .read-more:hover {
+      background: #e55a50;
+      transform: translateY(-2px);
+    }
+
+    .view-all-btn {
+      display: block;
+      text-align: center;
+      padding: 12px 30px;
+      background: #ff6f61;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 1.1em;
+      margin: 20px auto;
+      width: fit-content;
+      transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .view-all-btn:hover {
+      transform: translateY(-3px);
+      background: #e55a50;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Responsive Adjustments for Blog */
+    @media (max-width: 768px) {
+      .blog-section {
+        padding: 30px 15px;
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 50px 20px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-message {
+      font-size: 1.2em;
+      color: #fff;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background: #ff6f61;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 1.1em;
+      transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-3px);
+      background: #e55a50;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Responsive Adjustments for Contact */
+    @media (max-width: 768px) {
+      .contact-section {
+        padding: 30px 15px;
+      }
+
+      .contact-message {
+        font-size: 1em;
+      }
+
+      .contact-btn {
+        padding: 10px 25px;
+        font-size: 1em;
+      }
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #fff;
+      padding: 7px 50px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    footer .footer-logo {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    footer .social-icons {
+      display: flex;
+      gap: 20px;
+      flex: 0 0 auto;
+      justify-content: center;
+    }
+    footer .social-icons img {
+      width: 28px;
+      filter: brightness(0) invert(1);
+      transition: transform 0.4s ease, filter 0.3s ease;
+    }
+    footer .social-icons img:hover {
+      transform: scale(1.2);
+      filter: brightness(1.5);
+    }
+    footer p {
+      font-size: 0.9em;
+      color: #e0e0e0;
+    }
+    .hero-intro {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-align: center;
+  max-width: 800px;
+  z-index: 3;
+  animation: fadeIn 1.2s ease-in-out;
+}
+.hero-intro h1 {
+  font-size: 1.5em;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 10px;
+}
+.hero-intro p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -40%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+  </style>
+</head>
+<body>
+  <div class="route-loader"></div>
+  <div class="transition-overlay"></div>
+
+  <main id="main-content" data-transition-wrapper>
+    <header>
+      <div class="header-left">
+        <a href="#home" style="text-decoration: none;">
+          <img src="images/logo.svg" alt="Ajay Ramineni Logo" class="logo-svg" />
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="photos.html">Photos</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="social-icons flex justify-center gap-6">
+  <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Ajay's Instagram Profile" class="icon hover:scale-110 transition">
+  </a>
+  <a href="https://x.com/withloveeajay?s=21" target="_blank" aria-label="X">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png" alt="Ajay's X Profile" class="icon hover:scale-110 transition">
+  </a>
+  <a href="https://www.linkedin.com/in/ajayramineni2808?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="Ajay's LinkedIn Profile" class="icon hover:scale-110 transition">
+  </a>
+  <a href="https://github.com/Ajayvarmaramineni" target="_blank" aria-label="GitHub">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="Ajay's GitHub Profile" class="icon hover:scale-110 transition">
+  </a>
+</div>
+    </header>
+    <section id="home">
+      <div class="hero-background"></div>
+
+    </section>
+<div class="hero-intro">
+  <h1>Hello, This is Ajay....</h1>
+  <p>I write raw reflections on life, identity, and growth as masters student navigating a new world. With chai in hand and code on screen.I reflect on the messiness of becoming — one honest story at a time.</p>
+</div>
+    <section style="height: 90vh;"></section>
+
+    <h2 class="section-heading"><span>About</span></h2>
+    <section id="about" class="about-section">
+      <div class="about-container reveal">
+        <div class="about-photo-wrapper">
+          <img src="images/Aj.jpg" alt="Portrait of Ajay Ramineni" class="about-photo">
+        </div>
+        <div class="about-text">
+          <p>A business enthusiast with over two years of experience in business development and consulting. I’m passionate about helping organizations navigate complex challenges, drive growth, and deliver exceptional clientide experiences. Currently pursuing my Master’s in Business Analytics at WPI, I bring a blend of analytical rigor, team management skills, and a knack for building strong relationships.</p>
+          <p>Outside of work, I’m a creative at heart. I love photography, vlogging, blogging, and immersing myself in books. A curious mind and an avid learner, I enjoy playing chess and badminton to keep my strategic thinking sharp. Whether it’s on the court or in a brainstorming session, I’m always looking for the next opportunity to grow, connect, and make an impact.</p>
+
+          <a href="about.html" class="cta-btn">Read Full Story</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-spacer"></div>
+
+    <section class="quote-section">
+      <div class="quote-container reveal">
+        <blockquote>
+          <p>“Everyone has things they can do and things they can’t do. Right now, I need to do what I can’t… As long as I have hope there’s still a chance that I can win!”</p>
+          <footer>— Black Leg Sanji, ONE PIECE</footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <div style="height: 125px;"></div>
+
+    <section id="blog" class="blog-section">
+      <div class="blog-container">
+        <h2 class="section-heading reveal"><span>My Personal Blogs</span></h2>
+        <div class="blog-grid reveal">
+          <div class="blog-card">
+            <img src="images/night.jpg" alt="Blog Post 1">
+            <div class="blog-card-content">
+              <h3>The Night I Questioned Everything</h3>
+              <p>It was 4 a.m., and I couldn’t sleep. I tried blasting my favorite Nights playlist....</p>
+              <a href="The_Night_I_Questioned_Everything.html"class="read-more">Read More</a>
+            </div>
+          </div>
+          <div class="blog-card">
+            <img src="images/blog2.jpg" alt="Blog Post 1">
+            <div class="blog-card-content">
+              <h3>The Night I started Accepting</h3>
+              <p>It was past 1 a.m. when my best brother’s voice crackled through the call...</p>
+              <a href="The_Night_I_Started_Accepting.html"class="read-more">Read More</a>
+            </div>
+          </div>
+          <div class="blog-card">
+            <img src="images/blog3.jpg" alt="Blog Post 1">
+            <div class="blog-card-content">
+              <h3>The Night I felt Lost</h3>
+              <p>The stars were out, but they offered no guidance. It was one of those nights where the world felt...</p>
+              <a href="The_Night_I_Felt_Lost.html"class="read-more">Read More</a>
+            </div>
+          </div>
+          <div class="blog-card">
+            <img src="images/blog3.jpg" alt="Blog Post 1">
+            <div class="blog-card-content">
+              <h3>The Night I Realised</h3>
+              <p>This is the night I started realsisng stuff that kept me thinking...</p>
+              <a href="The_Night_I_Realised.html"class="read-more">Read More</a>
+            </div>
+          </div>
+        </div>
+        <a href="blog.html" class="view-all-btn">View All Posts</a>
+      </div>
+    </section>
+    <div style="height: 125px;"></div>
+    <section id="contact" class="contact-section">
+      <div class="contact-content reveal">
+        <h2 class="section-heading"><span>Get in Touch</span></h2>
+        <p class="contact-message">I’d love to hear from you! Let’s connect and create something amazing together.</p>
+        <a href="contact.html" class="contact-btn">Contact Me</a>
+      </div>
+    </section>
+
+    <div class="section-spacer"></div>
+
+    <footer>
+      <div class="footer-logo">Ajay Varma Ramineni</div>
+      <div class="social-icons flex justify-center gap-6">
+  <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Ajay's Instagram Profile" class="icon hover:scale-110 transition">
+  </a>
+  <a href="https://x.com/withloveeajay?s=21" target="_blank" aria-label="X">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png" alt="Ajay's X Profile" class="icon hover:scale-110 transition">
+  </a>
+  <a href="https://www.linkedin.com/in/ajayramineni2808?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="Ajay's LinkedIn Profile" class="icon hover:scale-110 transition">
+  </a>
+  <a href="https://github.com/Ajayvarmaramineni" target="_blank" aria-label="GitHub">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="Ajay's GitHub Profile" class="icon hover:scale-110 transition">
+  </a>
+</div>
+      <p>© 2025 Ajay | Powered by Ajay Varma Ramineni</p>
+    </footer>
+  </main>
+
+  <script type="module">
+    // Modern View Transitions API with fallback
+    if (!document.startViewTransition) {
+      document.startViewTransition = (callback) => {
+        callback();
+        return {
+          ready: Promise.resolve(),
+          updateCallbackDone: Promise.resolve(),
+          finished: Promise.resolve()
+        };
+      };
+    }
+
+    // Route handling with transitions
+    class Router {
+      constructor() {
+        this.loader = document.querySelector('.route-loader');
+        this.init();
+      }
+
+      init() {
+        this.handleLinks();
+        this.handlePopState();
+      }
+
+      handleLinks() {
+        document.addEventListener('click', (e) => {
+          const link = e.target.closest('a');
+          if (!link || link.target === '_blank' || link.href.match(/^#|mailto:|tel:/)) return;
+          if (link.hostname !== window.location.hostname) return;
+
+          e.preventDefault();
+          this.navigate(link.href);
+        });
+      }
+
+      handlePopState() {
+        window.addEventListener('popstate', () => {
+          this.navigate(window.location.href, true);
+        });
+      }
+
+      async navigate(url, isPopState = false) {
+        this.loader.style.transform = 'scaleX(0.3)';
+
+        const transition = document.startViewTransition(async () => {
+          if (isPopState) {
+            document.documentElement.classList.add('back-transition');
+          }
+
+          try {
+            const response = await fetch(url, {
+              headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            });
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+
+            document.title = doc.title;
+            document.querySelector('[data-transition-wrapper]').innerHTML =
+              doc.querySelector('[data-transition-wrapper]').innerHTML;
+
+            this.loader.style.transform = 'scaleX(1)';
+            setTimeout(() => {
+              this.loader.style.transform = 'scaleX(0)';
+            }, 300);
+
+            if (!isPopState) {
+              window.history.pushState({}, '', url);
+            }
+          } catch (error) {
+            console.error('Navigation failed:', error);
+            window.location.href = url;
+          } finally {
+            if (isPopState) {
+              setTimeout(() => {
+                document.documentElement.classList.remove('back-transition');
+              }, 300);
+            }
+          }
+        });
+
+        await transition.ready;
+      }
+    }
+
+    // Initialize router
+    new Router();
+
+    // Scroll reveal animation for all sections
+    function revealOnScroll() {
+      const revealElements = document.querySelectorAll('.reveal');
+      const revealPoint = 150;
+      const windowHeight = window.innerHeight;
+
+      revealElements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        if (elementPosition < windowHeight - revealPoint) {
+          element.classList.add('visible');
+        }
+      });
+    }
+
+    // Add event listeners for scroll and initial load
+    document.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener('scroll', revealOnScroll);
+      window.addEventListener('load', revealOnScroll);
+      revealOnScroll();
+    });
+  </script>
+</body>
+</html>

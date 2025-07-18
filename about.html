@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | With Love AJ</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    h1, h2, .section-heading {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+  }
+  p, li, .about-intro p, .timeline-content p, .about-quote blockquote, .about-quote footer {
+    font-family: 'Open Sans', sans-serif;
+  }
+    html { scroll-behavior: smooth; }
+
+    /* View transitions API (modern browsers) */
+    @supports (view-transition-name: none) {
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation: none;
+        mix-blend-mode: normal;
+      }
+      ::view-transition-old(root) {
+        z-index: 1;
+      }
+      ::view-transition-new(root) {
+        z-index: 9999;
+      }
+      .back-transition::view-transition-old(root) {
+        animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both fade-and-slide-out;
+      }
+      .back-transition::view-transition-new(root) {
+        animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both fade-and-slide-in reverse;
+      }
+    }
+
+    /* Fallback for older browsers */
+    @keyframes fade-and-slide-in {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fade-and-slide-out {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+    }
+
+    /* Shared element transitions */
+    .shared-element {
+      view-transition-name: shared-element;
+    }
+
+    /* Loading indicator */
+    .route-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, #4f46e5, #ec4899);
+      z-index: 10000;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+      pointer-events: none;
+    }
+
+    /* 🌸 Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 3px 50px;
+      position: sticky;
+      top: 0;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+    .logo-svg {
+      height: 90px;
+      width: auto;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+    }
+
+    @keyframes fadeInSlide {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @media (prefers-color-scheme: dark) {
+      .header-left img {
+        filter: brightness(1.2) contrast(1.1);
+      }
+    }
+
+    nav {
+      flex: 1;
+      text-align: right;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #f0f0f0;
+      font-weight: bold;
+      font-size: 1.1em;
+      transition: color 0.3s ease, transform 0.4s ease;
+    }
+
+    nav ul li a:hover {
+      color: #ff6f61;
+      transform: scale(1.2);
+    }
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      flex: 0 0 auto;
+    }
+
+    .social-icons img {
+      width: 30px;
+      filter: brightness(0) invert(1);
+      transition: transform 0.4s ease, filter 0.3s ease;
+    }
+
+    .social-icons img:hover {
+      transform: scale(1.2);
+      filter: brightness(1.5);
+    }
+
+    /* 🌸 Hero Background */
+    .hero-background {
+  background: url('images/About.jpg') center/cover no-repeat;
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+    .hero-background::before {
+      content: "";
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    .hero-content {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center; color: white; z-index: 2;
+      opacity: 1;
+      transition: opacity 0.5s ease-out;
+    }
+    .hero-content.scrolled {
+      opacity: 0;
+    }
+    .hero-content h1 {
+      font-size: 3em;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
+    }
+    .hero-content h2 {
+      font-size: 1.5em;
+      color: #fce7e3;
+    }
+
+    /* General Section Heading */
+    .section-heading {
+      display: block;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2.5em;
+      color: #fce7e3;
+    }
+
+    .section-heading span {
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-heading span::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: #ff6f61;
+      transition: width 0.3s ease;
+    }
+
+    .section-heading span:hover::after {
+      width: 100px;
+    }
+
+    /* Scroll Reveal Animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* About Section */
+    .about-section {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 80px 20px 60px;
+      position: relative;
+      z-index: 3;
+      min-height: calc(100vh - 80px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .about-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .about-intro {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #fff;
+    }
+
+    .about-intro p {
+      font-size: 1.2em;
+      line-height: 1.8;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      margin: 40px 0;
+      padding: 20px 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 100%;
+      background: #ff6f61;
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 40px;
+      position: relative;
+      width: 100%;
+    }
+
+    .timeline-item:nth-child(odd) {
+      flex-direction: row-reverse;
+    }
+
+    .timeline-content {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      max-width: 400px;
+      color: #fff;
+    }
+
+    .timeline-content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .timeline-content h3 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      color: #fce7e3;
+    }
+
+    .timeline-content p {
+      font-size: 1em;
+      line-height: 1.6;
+    }
+
+    .timeline-marker {
+      width: 20px;
+      height: 20px;
+      background: #ff6f61;
+      border-radius: 50%;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      border: 2px solid #fff;
+    }
+
+    /* Skills and Values Grid */
+    .skills-values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .skill-card, .value-card {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      color: #fff;
+    }
+
+    .skill-card:hover, .value-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .skill-card h3, .value-card h3 {
+      font-size: 1.3em;
+      margin-bottom: 10px;
+      color: #fce7e3;
+    }
+
+    .skill-card ul, .value-card ul {
+      list-style: none;
+      padding: 0;
+      font-size: 1em;
+    }
+
+    .skill-card ul li, .value-card ul li {
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .skill-card ul li::before, .value-card ul li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: #ff6f61;
+      font-weight: bold;
+    }
+
+    /* Quote Section */
+    .about-quote {
+      text-align: center;
+      margin: 40px 0;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      color: #fff;
+    }
+
+    .about-quote blockquote {
+      font-size: 1.5em;
+      font-style: italic;
+      margin: 0;
+    }
+
+    .about-quote footer {
+      font-size: 1em;
+      color: #e0e0e0;
+      margin-top: 10px;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .section-heading {
+        font-size: 2em;
+      }
+
+      .hero-content h1 {
+        font-size: 2em;
+      }
+
+      .hero-content h2 {
+        font-size: 1.2em;
+      }
+
+      .about-section {
+        padding: 60px 15px 30px;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .timeline-item:nth-child(odd) {
+        flex-direction: column;
+      }
+
+      .timeline-content {
+        max-width: 100%;
+        margin-left: 40px;
+      }
+
+      .timeline-marker {
+        left: 20px;
+        transform: none;
+      }
+    }
+
+    /* Section Spacer */
+    .section-spacer {
+      height: 125px;
+    }
+
+    @media (max-width: 768px) {
+      .section-spacer {
+        height: 80px;
+      }
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #fff;
+      padding: 7px 50px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    footer .footer-logo {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    footer .social-icons {
+      display: flex;
+      gap: 20px;
+      flex: 0 0 auto;
+      justify-content: center;
+    }
+    footer .social-icons img {
+      width: 28px;
+      filter: brightness(0) invert(1);
+      transition: transform 0.4s ease, filter 0.3s ease;
+    }
+    footer .social-icons img:hover {
+      transform: scale(1.2);
+      filter: brightness(1.5);
+    }
+    footer p {
+      font-size: 0.9em;
+      color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <div class="route-loader"></div>
+  <div class="transition-overlay"></div>
+
+  <main id="main-content" data-transition-wrapper>
+    <header>
+      <div class="header-left">
+        <a href="index.html" style="text-decoration: none;">
+          <img src="images/logo.svg" alt="Ajay Ramineni Logo" class="logo-svg" />
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="photos.html">Photos</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="social-icons flex justify-center gap-6">
+  <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Ajay's Instagram Profile" class="icon hover:scale-110 transition">
+  </a>
+  <a href="https://x.com/withloveeajay?s=21" target="_blank" aria-label="X">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png" alt="Ajay's X Profile" class="icon hover:scale-110 transition">
+  </a>
+  <a href="https://www.linkedin.com/in/ajayramineni2808?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="Ajay's LinkedIn Profile" class="icon hover:scale-110 transition">
+  </a>
+  <a href="https://github.com/Ajayvarmaramineni" target="_blank" aria-label="GitHub">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="Ajay's GitHub Profile" class="icon hover:scale-110 transition">
+  </a>
+</div>
+    </header>
+
+    <section id="home">
+      <div class="hero-background"></div>
+      <div class="hero-content">
+        <h1>My Journey</h1>
+        <h2>Strategist | Analytics Enthusiast | Storyteller</h2>
+      </div>
+    </section>
+
+    <section class="about-section">
+  <div class="about-container reveal">
+    <h2 class="section-heading"><span>Who I Am</span></h2>
+    <div class="about-intro">
+      <p>
+        I’m Ajay, a business enthusiast with a knack for turning data into stories and strategies into success. My journey blends analytical rigor with creative passion, from crunching numbers to capturing moments through a camera lens. With a Master’s in Business Analytics at WPI and over two years of professional experience in business development, I’m passionate about driving impact through data-driven insights and innovative solutions.
+      </p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <h3>Master’s in Business Analytics</h3>
+          <p>Currently pursuing my Master’s at Worcester Polytechnic Institute (Jan 2025 - Present), diving deep into predictive modeling, data visualization, and statistical analysis to solve real-world business challenges.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <h3>Business Development & Consulting</h3>
+          <p>Served as Business Development Manager at Visatree Consultants (Jun 2022 - Nov 2024), directing visa consulting operations, analyzing market data, and building client relationships to drive growth and adapt to policy changes.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <h3>Creative Explorer</h3>
+          <p>Engage in photography, vlogging, and blogging, crafting content on business trends and personal stories, with ongoing projects like a responsive website for CollegeROI (Spring 2025).</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <h3>Internships & Early Career</h3>
+          <p>Gained hands-on experience as a Sales & Marketing Intern at Universal Tribes (Jan 2022 - Mar 2022), Marketing Intern at GoodSpace (Feb 2022 - Mar 2022), and Volunteer Coordinator at Kitablovers (Apr 2022), laying the foundation for my professional journey.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <h3>Certifications & Learning</h3>
+          <p>Earned Google Ads Search, Google Analytics, and Hootsuite Platform Certifications (Apr 2025), enhancing my skills in campaign optimization, user tracking, and social media management.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <h3>Strategic Thinker</h3>
+          <p>Ranked 23rd in a state chess tournament and an avid badminton player, sharpening my strategic mindset through competitive play since 2016.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="skills-values-grid reveal">
+      <div class="skill-card">
+        <h3>Skills</h3>
+        <ul>
+          <li>Data Analysis & Visualization</li>
+          <li>Business Strategy</li>
+          <li>Client Relationship Management</li>
+          <li>Creative Content Creation</li>
+          <li>Predictive Modeling (Python, SQL)</li>
+        </ul>
+      </div>
+      <div class="value-card">
+        <h3>Values</h3>
+        <ul>
+          <li>Data-Informed Vision</li>
+          <li>Collaborative Spirit</li>
+          <li>Creative Communication</li>
+          <li>Continuous Learning</li>
+          <li>Impactful Innovation</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="personal-interests reveal" style="margin-top: 40px; text-align: center; color: #fff;">
+      <h3 style="font-size: 1.8em; color: #fce7e3; margin-bottom: 20px;">Personal Interests</h3>
+      <p>
+        Beyond analytics, I enjoy capturing life’s moments through photography and vlogging, exploring new cultures, and staying active with badminton. I also love diving into strategic games like chess and experimenting with new recipes in the kitchen.
+      </p>
+    </div>
+
+    <div class="achievements reveal" style="margin-top: 40px; text-align: center; color: #fff;">
+      <h3 style="font-size: 1.8em; color: #fce7e3; margin-bottom: 20px;">Achievements</h3>
+      <ul style="list-style: none; padding: 0; max-width: 600px; margin: 0 auto;">
+        <li style="margin-bottom: 10px;">Represented Hyderabad in the State-Level Tennikoit Championship (2016).</li>
+        <li style="margin-bottom: 10px;">Secured 23rd place in the Open Chess Tournament, State School Games Federation (2016).</li>
+        <li style="margin-bottom: 10px;">Led the College Cultural Committee as Head (2019-2022), organizing events like Cultural Day and Freshers Week.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+        <div class="about-quote reveal">
+          <blockquote>
+            “Life is a chessboard, and every move counts. I play with strategy, creativity, and heart.”
+          </blockquote>
+          <footer>— Ajay Varma Ramineni</footer>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-spacer"></div>
+
+    <footer>
+      <div class="social-icons flex justify-center gap-6">
+  <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Ajay's Instagram Profile" class="icon hover:scale-110 transition">
+  </a>
+  <a href="https://x.com/withloveeajay?s=21" target="_blank" aria-label="X">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png" alt="Ajay's X Profile" class="icon hover:scale-110 transition">
+  </a>
+  <a href="https://www.linkedin.com/in/ajayramineni2808?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="Ajay's LinkedIn Profile" class="icon hover:scale-110 transition">
+  </a>
+  <a href="https://github.com/Ajayvarmaramineni" target="_blank" aria-label="GitHub">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="Ajay's GitHub Profile" class="icon hover:scale-110 transition">
+  </a>
+</div>
+      <p>© 2025 Ajay | Powered by Ajay Varma Ramineni</p>
+    </footer>
+  </main>
+
+  <script type="module">
+    // Modern View Transitions API with fallback
+    if (!document.startViewTransition) {
+      document.startViewTransition = (callback) => {
+        callback();
+        return {
+          ready: Promise.resolve(),
+          updateCallbackDone: Promise.resolve(),
+          finished: Promise.resolve()
+        };
+      };
+    }
+
+    // Route handling with transitions
+    class Router {
+      constructor() {
+        this.loader = document.querySelector('.route-loader');
+        this.init();
+      }
+
+      init() {
+        this.handleLinks();
+        this.handlePopState();
+      }
+
+      handleLinks() {
+        document.addEventListener('click', (e) => {
+          const link = e.target.closest('a');
+          if (!link || link.target === '_blank' || link.href.match(/^#|mailto:|tel:/)) return;
+          if (link.hostname !== window.location.hostname) return;
+
+          e.preventDefault();
+          this.navigate(link.href);
+        });
+      }
+
+      handlePopState() {
+        window.addEventListener('popstate', () => {
+          this.navigate(window.location.href, true);
+        });
+      }
+
+      async navigate(url, isPopState = false) {
+        this.loader.style.transform = 'scaleX(0.3)';
+
+        const transition = document.startViewTransition(async () => {
+          if (isPopState) {
+            document.documentElement.classList.add('back-transition');
+          }
+
+          try {
+            const response = await fetch(url, {
+              headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            });
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+
+            document.title = doc.title;
+            document.querySelector('[data-transition-wrapper]').innerHTML =
+              doc.querySelector('[data-transition-wrapper]').innerHTML;
+
+            this.loader.style.transform = 'scaleX(1)';
+            setTimeout(() => {
+              this.loader.style.transform = 'scaleX(0)';
+            }, 300);
+
+            if (!isPopState) {
+              window.history.pushState({}, '', url);
+            }
+          } catch (error) {
+            console.error('Navigation failed:', error);
+            window.location.href = url;
+          } finally {
+            if (isPopState) {
+              setTimeout(() => {
+                document.documentElement.classList.remove('back-transition');
+              }, 300);
+            }
+          }
+        });
+
+        await transition.ready;
+      }
+    }
+
+    // Initialize router
+    new Router();
+
+    // Scroll reveal animation for all sections
+    function revealOnScroll() {
+      const revealElements = document.querySelectorAll('.reveal');
+      const heroContent = document.querySelector('.hero-content');
+      const revealPoint = 150;
+      const windowHeight = window.innerHeight;
+
+      revealElements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        if (elementPosition < windowHeight - revealPoint) {
+          element.classList.add('visible');
+        }
+      });
+
+      if (heroContent) {
+        const heroPosition = heroContent.getBoundingClientRect().top;
+        if (heroPosition < windowHeight - revealPoint) {
+          heroContent.classList.add('scrolled');
+        } else {
+          heroContent.classList.remove('scrolled');
+        }
+      }
+    }
+
+    // Add event listeners for scroll and initial load
+    document.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener('scroll', revealOnScroll);
+      window.addEventListener('load', revealOnScroll);
+      revealOnScroll();
+    });
+  </script>
+</body>
+</html>

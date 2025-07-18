@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | With Love AJ</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    h1, h2, .contact-heading {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+  }
+  p, li, label, input, textarea, .contact-text {
+    font-family: 'Open Sans', sans-serif;
+  }
+    html { scroll-behavior: smooth; }
+
+    /* View transitions API (modern browsers) */
+    @supports (view-transition-name: none) {
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation: none;
+        mix-blend-mode: normal;
+      }
+      ::view-transition-old(root) {
+        z-index: 1;
+      }
+      ::view-transition-new(root) {
+        z-index: 9999;
+      }
+      .back-transition::view-transition-old(root) {
+        animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both fade-and-slide-out;
+      }
+      .back-transition::view-transition-new(root) {
+        animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both fade-and-slide-in reverse;
+      }
+    }
+
+    /* Fallback for older browsers */
+    @keyframes fade-and-slide-in {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fade-and-slide-out {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+    }
+
+    /* Shared element transitions */
+    .shared-element {
+      view-transition-name: shared-element;
+    }
+
+    /* Loading indicator */
+    .route-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, #4f46e5, #ec4899);
+      z-index: 10000;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+      pointer-events: none;
+    }
+
+    /* 🌸 Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 3px 50px;
+      position: relative;
+      position: sticky;
+      top: 0;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+    .logo-svg {
+      height: 90px;
+      width: auto;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+    }
+
+    @keyframes fadeInSlide {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @media (prefers-color-scheme: dark) {
+      .header-left img {
+        filter: brightness(1.2) contrast(1.1);
+      }
+    }
+
+    nav {
+      flex: 1;
+      text-align: right;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #f0f0f0;
+      font-weight: bold;
+      font-size: 1.1em;
+      transition: color 0.3s ease, transform 0.4s ease;
+    }
+
+    nav ul li a:hover {
+      color: #ff6f61;
+      transform: scale(1.2);
+    }
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      flex: 0 0 auto;
+    }
+
+    .social-icons img {
+      width: 30px;
+      filter: brightness(0) invert(1);
+      transition: transform 0.4s ease, filter 0.3s ease;
+    }
+
+    .social-icons img:hover {
+      transform: scale(1.2);
+      filter: brightness(1.5);
+    }
+
+    /* 🌸 Hero Background */
+    .hero-background {
+  background: url('images/contact.jpg') center/cover no-repeat;
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+    .hero-background::before {
+      content: "";
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    /* General Section Heading */
+    .section-heading {
+      display: block;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2.5em;
+      color: #fce7e3;
+    }
+
+    .section-heading span {
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-heading span::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: #ff6f61;
+      transition: width 0.3s ease;
+    }
+
+    .section-heading span:hover::after {
+      width: 100px;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 50px 20px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-content {
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .contact-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .contact-heading {
+      font-size: 2.5em;
+      color: #fce7e3;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .contact-heading::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: #ff6f61;
+      transition: width 0.3s ease;
+    }
+
+    .contact-heading:hover::after {
+      width: 100px;
+    }
+
+    .contact-message {
+      font-size: 1.2em;
+      color: #fff;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 12px;
+      border: 2px solid #ff6f61;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 1em;
+      font-family: 'Georgia', serif;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: #f4a8a1;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: #e55a50;
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    .contact-form button {
+      padding: 12px 30px;
+      background: #ff6f61;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .contact-form button:hover {
+      transform: translateY(-3px);
+      background: #e55a50;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .section-heading {
+        font-size: 2em;
+      }
+
+      .contact-section {
+        padding: 30px 15px;
+      }
+
+      .contact-heading {
+        font-size: 2em;
+      }
+
+      .contact-message {
+        font-size: 1em;
+      }
+
+      .contact-form input,
+      .contact-form textarea,
+      .contact-form button {
+        font-size: 0.9em;
+      }
+    }
+
+    /* Section Spacer */
+    .section-spacer {
+      height: 125px;
+    }
+
+    @media (max-width: 768px) {
+      .section-spacer {
+        height: 80px;
+      }
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #fff;
+      padding: 7px 50px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    footer .footer-logo {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    footer .social-icons {
+      display: flex;
+      gap: 20px;
+      flex: 0 0 auto;
+      justify-content: center;
+    }
+    footer .social-icons img {
+      width: 28px;
+      filter: brightness(0) invert(1);
+      transition: transform 0.4s ease, filter 0.3s ease;
+    }
+    footer .social-icons img:hover {
+      transform: scale(1.2);
+      filter: brightness(1.5);
+    }
+    footer p {
+      font-size: 0.9em;
+      color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <div class="route-loader"></div>
+  <div class="transition-overlay"></div>
+
+  <main id="main-content" data-transition-wrapper>
+    <header>
+      <div class="header-left">
+        <a href="index.html" style="text-decoration: none;">
+          <img src="images/logo.svg" alt="Ajay Ramineni Logo" class="logo-svg" />
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="photos.html">Photos</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="social-icons flex justify-center gap-6">
+  <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Ajay's Instagram Profile" class="icon hover:scale-110 transition">
+  </a>
+  <a href="https://x.com/withloveeajay?s=21" target="_blank" aria-label="X">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png" alt="Ajay's X Profile" class="icon hover:scale-110 transition">
+  </a>
+  <a href="https://www.linkedin.com/in/ajayramineni2808?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="Ajay's LinkedIn Profile" class="icon hover:scale-110 transition">
+  </a>
+  <a href="https://github.com/Ajayvarmaramineni" target="_blank" aria-label="GitHub">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="Ajay's GitHub Profile" class="icon hover:scale-110 transition">
+  </a>
+</div>
+    </header>
+
+    <section id="home">
+      <div class="hero-background"></div>
+    </section>
+
+    <section id="contact" class="contact-section">
+      <div class="contact-content">
+        <h2 class="section-heading"><span>Let's Connect</span></h2>
+        <p class="contact-message">Whether you have a project idea, a question, or just want to say hi, drop me a message! I'm excited to collaborate and create something extraordinary together.</p>
+        <form id="contact-form" class="contact-form">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <input type="text" name="subject" placeholder="Subject" required>
+          <textarea name="message" placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <div class="section-spacer"></div>
+
+    <footer>
+      <div class="footer-logo">Ajay Varma Ramineni</div>
+      <div class="social-icons flex justify-center gap-6">
+  <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Ajay's Instagram Profile" class="icon hover:scale-110 transition">
+  </a>
+  <a href="https://x.com/withloveeajay?s=21" target="_blank" aria-label="X">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png" alt="Ajay's X Profile" class="icon hover:scale-110 transition">
+  </a>
+  <a href="https://www.linkedin.com/in/ajayramineni2808?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="Ajay's LinkedIn Profile" class="icon hover:scale-110 transition">
+  </a>
+  <a href="https://github.com/Ajayvarmaramineni" target="_blank" aria-label="GitHub">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="Ajay's GitHub Profile" class="icon hover:scale-110 transition">
+  </a>
+</div>
+      <p>© 2025 Ajay | Powered by Ajay Varma Ramineni</p>
+    </footer>
+  </main>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  (function() {
+    emailjs.init("service_syab98i"); // Replace with your EmailJS Public Key
+  })();
+</script>
+  <script type="module">
+    // Modern View Transitions API with fallback
+    if (!document.startViewTransition) {
+      document.startViewTransition = (callback) => {
+        callback();
+        return {
+          ready: Promise.resolve(),
+          updateCallbackDone: Promise.resolve(),
+          finished: Promise.resolve()
+        };
+      };
+    }
+
+    // Route handling with transitions
+    class Router {
+      constructor() {
+        this.loader = document.querySelector('.route-loader');
+        this.init();
+      }
+
+      init() {
+        this.handleLinks();
+        this.handlePopState();
+      }
+
+      handleLinks() {
+        document.addEventListener('click', (e) => {
+          const link = e.target.closest('a');
+          if (!link || link.target === '_blank' || link.href.match(/^#|mailto:|tel:/)) return;
+          if (link.hostname !== window.location.hostname) return;
+
+          e.preventDefault();
+          this.navigate(link.href);
+        });
+      }
+
+      handlePopState() {
+        window.addEventListener('popstate', () => {
+          this.navigate(window.location.href, true);
+        });
+      }
+
+      async navigate(url, isPopState = false) {
+        this.loader.style.transform = 'scaleX(0.3)';
+
+        const transition = document.startViewTransition(async () => {
+          if (isPopState) {
+            document.documentElement.classList.add('back-transition');
+          }
+
+          try {
+            const response = await fetch(url, {
+              headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            });
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+
+            document.title = doc.title;
+            document.querySelector('[data-transition-wrapper]').innerHTML =
+              doc.querySelector('[data-transition-wrapper]').innerHTML;
+
+            this.loader.style.transform = 'scaleX(1)';
+            setTimeout(() => {
+              this.loader.style.transform = 'scaleX(0)';
+            }, 300);
+
+            if (!isPopState) {
+              window.history.pushState({}, '', url);
+            }
+          } catch (error) {
+            console.error('Navigation failed:', error);
+            window.location.href = url;
+          } finally {
+            if (isPopState) {
+              setTimeout(() => {
+                document.documentElement.classList.remove('back-transition');
+              }, 300);
+            }
+          }
+        });
+
+        await transition.ready;
+      }
+    }
+
+    // Initialize router
+    new Router();
+
+    // Scroll reveal animation for Contact section
+    function revealOnScroll() {
+      const contactContent = document.querySelector('.contact-content');
+
+      if (!contactContent) return;
+
+      const revealPoint = 150;
+      const contentPosition = contactContent.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+
+      if (contentPosition < windowHeight - revealPoint) {
+        contactContent.classList.add('visible');
+      }
+    }
+
+    // Add event listeners for scroll and initial load
+    document.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener('scroll', revealOnScroll);
+      window.addEventListener('load', revealOnScroll);
+      revealOnScroll();
+    });
+
+  document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.preventDefault(); // Prevent default form submit
+
+    emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", this)
+      .then(function(response) {
+        alert("Message sent successfully! ✨");
+        document.getElementById("contact-form").reset();
+      }, function(error) {
+        console.error("Email send failed:", error);
+        alert("Something went wrong. Please try again later.");
+      });
+  });
+  </script>
+</body>
+</html>

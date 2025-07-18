@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photos | With Love AJ</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    h1, h2, .gallery-heading {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+    p, li, .caption, .photo-description {
+      font-family: 'Open Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+
+    /* View Transitions API */
+    @supports (view-transition-name: none) {
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation: none;
+        mix-blend-mode: normal;
+      }
+      ::view-transition-old(root) { z-index: 1; }
+      ::view-transition-new(root) { z-index: 9999; }
+      .back-transition::view-transition-old(root) {
+        animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both fade-and-slide-out;
+      }
+      .back-transition::view-transition-new(root) {
+        animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both fade-and-slide-in reverse;
+      }
+    }
+
+    /* Fallback Animations */
+    @keyframes fade-and-slide-in {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fade-and-slide-out {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(20px); }
+    }
+
+    /* Shared Element Transitions */
+    .shared-element { view-transition-name: shared-element; }
+
+    /* Loading Indicator */
+    .route-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, #4f46e5, #ec4899);
+      z-index: 10000;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+      pointer-events: none;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 3px 50px;
+      position: sticky;
+      top: 0;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+    .logo-svg {
+      height: 90px;
+      width: auto;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+    }
+
+    nav {
+      flex: 1;
+      text-align: right;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    nav ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #f0f0f0;
+      font-weight: bold;
+      font-size: 1.1em;
+      transition: color 0.3s ease, transform 0.4s ease;
+    }
+    nav ul li a:hover {
+      color: #ff6f61;
+      transform: scale(1.2);
+    }
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      flex: 0 0 auto;
+    }
+    .social-icons img {
+      width: 30px;
+      filter: brightness(0) invert(1);
+      transition: transform 0.4s ease, filter 0.3s ease;
+    }
+    .social-icons img:hover {
+      transform: scale(1.2);
+      filter: brightness(1.5);
+    }
+
+    /* Hero Background */
+    .hero-background {
+      background: url('images/photos.jpg') center/cover no-repeat;
+      height: 100vh;
+      position: fixed;
+      width: 100%;
+      z-index: -1;
+      top: 0;
+      left: 0;
+    }
+    .hero-background::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      z-index: 2;
+      opacity: 1;
+      transition: opacity 0.5s ease-out;
+    }
+    .hero-content.scrolled { opacity: 0; }
+    .hero-content h1 {
+      font-size: 3em;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
+    }
+
+    /* Section Heading */
+    .section-heading {
+      display: block;
+      text-align: center;
+      margin: 20px 0 40px;
+      font-size: 2.5em;
+      color: #fce7e3;
+      position: relative;
+      z-index: 5;
+    }
+    .section-heading span {
+      position: relative;
+      display: inline-block;
+    }
+    .section-heading span::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: #ff6f61;
+      transition: width 0.3s ease;
+    }
+    .section-heading span:hover::after { width: 100px; }
+
+    /* Scroll Reveal Animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Photos Section */
+    .photos-section {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 80px 20px 100px;
+      position: relative;
+      z-index: 3;
+      min-height: calc(100vh - 80px);
+    }
+    .photos-container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Fade Carousel */
+    .carousel-container {
+      position: relative;
+      height: 400px;
+      margin: 60px auto;
+      width: 80%;
+      max-width: 800px;
+      overflow: hidden;
+      z-index: 4;
+    }
+    .carousel-track {
+      position: relative;
+      height: 100%;
+    }
+    .carousel-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .carousel-item.active { opacity: 1; }
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Photo Gallery */
+    .photo-collage {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: auto;
+      gap: 10px;
+      max-width: 90%;
+      margin: 0 auto;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .photo-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      aspect-ratio: 4 / 3;
+    }
+    .photo-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: pointer;
+      loading: lazy;
+    }
+    .photo-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      padding: 10px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    .photo-card:hover .photo-overlay { transform: translateY(0); }
+    .photo-overlay h3 {
+      font-size: 1em;
+      margin-bottom: 5px;
+    }
+    .photo-overlay p {
+      font-size: 0.8em;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 90%;
+      position: relative;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .lightbox-img {
+      width: 100%;
+      max-height: 70vh;
+      object-fit: contain;
+    }
+    .lightbox-caption {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+      text-align: center;
+    }
+    .lightbox-caption h3 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+    .lightbox-caption p {
+      font-size: 1em;
+      line-height: 1.6;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      font-size: 1.5em;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background 0.3s ease;
+    }
+    .lightbox-close:hover { background: #ff6f61; }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .section-heading {
+        font-size: 2em;
+      }
+      .hero-content h1 {
+        font-size: 2em;
+      }
+      .photos-section {
+        padding: 60px 15px 80px;
+      }
+      .carousel-container {
+        height: 300px;
+        width: 90%;
+      }
+      .photo-collage {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .lightbox-content {
+        max-width: 95%;
+      }
+    }
+
+    /* Section Spacer */
+    .section-spacer {
+      height: 80px;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #fff;
+      padding: 7px 50px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    footer .footer-logo {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    footer .social-icons {
+      display: flex;
+      gap: 20px;
+      flex: 0 0 auto;
+      justify-content: center;
+    }
+    footer .social-icons img {
+      width: 28px;
+      filter: brightness(0) invert(1);
+      transition: transform 0.4s ease, filter 0.3s ease;
+    }
+    footer .social-icons img:hover {
+      transform: scale(1.2);
+      filter: brightness(1.5);
+    }
+    footer p {
+      font-size: 0.9em;
+      color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <div class="route-loader"></div>
+  <div class="transition-overlay"></div>
+
+  <main id="main-content" data-transition-wrapper>
+    <header>
+      <div class="header-left">
+        <a href="index.html" style="text-decoration: none;">
+          <img src="images/logo.svg" alt="Ajay Ramineni Logo" class="logo-svg" />
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="photos.html">Photos</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="social-icons flex justify-center gap-6">
+        <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Ajay's Instagram Profile" class="icon hover:scale-110 transition">
+        </a>
+        <a href="https://x.com/withloveeajay?s=21" target="_blank" aria-label="X">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png" alt="Ajay's X Profile" class="icon hover:scale-110 transition">
+        </a>
+        <a href="https://www.linkedin.com/in/ajayramineni2808?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="Ajay's LinkedIn Profile" class="icon hover:scale-110 transition">
+        </a>
+        <a href="https://github.com/Ajayvarmaramineni" target="_blank" aria-label="GitHub">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="Ajay's GitHub Profile" class="icon hover:scale-110 transition">
+        </a>
+      </div>
+    </header>
+
+    <section id="home">
+      <div class="hero-background"></div>
+      <div class="hero-content">
+        <h1>Visual Stories</h1>
+      </div>
+    </section>
+
+    <section class="photos-section">
+      <div class="photos-container">
+        <h2 class="section-heading reveal"><span>Moments Through My Lens</span></h2>
+
+        <!-- Fade Carousel (Unchanged) -->
+        <div class="carousel-container reveal">
+          <div class="carousel-track" id="carousel">
+            <div class="carousel-item active" data-index="0">
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Sunset Beach" loading="lazy">
+            </div>
+            <div class="carousel-item" data-index="1">
+              <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206" alt="City Skyline" loading="lazy">
+            </div>
+            <div class="carousel-item" data-index="2">
+              <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e" alt="Mountain Path" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo Gallery -->
+        <div class="photo-collage reveal">
+  <div class="photo-card">
+    <img src="Photos/alone.jpg" alt="alone" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Alone</h3>
+      <p>Description for alone.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/archi.jpg" alt="arch" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Archi</h3>
+      <p>Description for arch.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/beach.jpg" alt="beach" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Beach</h3>
+      <p>Description for beach.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/beach2.jpg" alt="beach2" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Beach2</h3>
+      <p>Description for beach2.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/boat.jpg" alt="boat" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Boat</h3>
+      <p>Description for boat.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/boy.jpg" alt="boy" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Boy</h3>
+      <p>Description for boy.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/boy2.jpg" alt="boy2" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Boy2</h3>
+      <p>Description for boy2.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/chai.jpg" alt="chai" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Chai</h3>
+      <p>Description for chai.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/coffee.jpg" alt="coffee" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Coffee</h3>
+      <p>Description for coffee.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/corner.jpg" alt="corner" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Corner</h3>
+      <p>Description for corner.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/delhi.jpg" alt="delhi" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Delhi</h3>
+      <p>Description for delhi.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/dog.jpg" alt="dog" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Dog</h3>
+      <p>Description for dog.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/fly.jpg" alt="fly" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Fly</h3>
+      <p>Description for fly.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/lazors.jpg" alt="lazors" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Lazors</h3>
+      <p>Description for lazors.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/lazors1.jpg" alt="lazors1" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Lazors1</h3>
+      <p>Description for lazors1.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/moon.jpg" alt="moon" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Moon</h3>
+      <p>Description for moon.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/mumbai.jpg" alt="mumbai" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Mumbai</h3>
+      <p>Description for mumbai.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/nights.jpg" alt="nights" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Nights</h3>
+      <p>Description for nights.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/nights2.jpg" alt="nights2" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Nights2</h3>
+      <p>Description for nights2.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/palmtree.jpg" alt="palmtree" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Palmtree</h3>
+      <p>Description for palmtree.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/plane.jpg" alt="plane" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Plane</h3>
+      <p>Description for plane.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/raindrops.jpg" alt="raindrops" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Raindrops</h3>
+      <p>Description for raindrops.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/red.jpg" alt="red" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Red</h3>
+      <p>Description for red.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/starrynight.jpg" alt="starrynight" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Starrynight</h3>
+      <p>Description for starrynight.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/sunset.jpg" alt="sunset" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Sunset</h3>
+      <p>Description for sunset.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/taj.jpg" alt="taj" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Taj</h3>
+      <p>Description for taj.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/temple2.jpg" alt="temple2" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Temple2</h3>
+      <p>Description for temple2.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/temple3.jpg" alt="temple3" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Temple3</h3>
+      <p>Description for temple3.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/trees.jpg" alt="trees" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Trees</h3>
+      <p>Description for trees.</p>
+    </div>
+  </div>
+  <div class="photo-card">
+    <img src="Photos/wine.jpg" alt="wine" loading="lazy">
+    <div class="photo-overlay">
+      <h3>Wine</h3>
+      <p>Description for wine.</p>
+    </div>
+  </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <div class="lightbox-content">
+        <img class="lightbox-img" src="" alt="">
+        <div class="lightbox-caption">
+          <h3></h3>
+          <p></p>
+        </div>
+        <button class="lightbox-close">✕</button>
+      </div>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <footer>
+      <div class="footer-logo">Ajay Varma Ramineni</div>
+      <div class="social-icons flex justify-center gap-6">
+        <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Ajay's Instagram Profile" class="icon hover:scale-110 transition">
+        </a>
+        <a href="https://x.com/withloveeajay?s=21" target="_blank" aria-label="X">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png" alt="Ajay's X Profile" class="icon hover:scale-110 transition">
+        </a>
+        <a href="https://www.linkedin.com/in/ajayramineni2808?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="Ajay's LinkedIn Profile" class="icon hover:scale-110 transition">
+        </a>
+        <a href="https://github.com/Ajayvarmaramineni" target="_blank" aria-label="GitHub">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="Ajay's GitHub Profile" class="icon hover:scale-110 transition">
+        </a>
+      </div>
+      <p>© 2025 Ajay | Powered by Ajay Varma Ramineni</p>
+      <a href="#home" class="back-to-top">Back to Top</a>
+    </footer>
+  </main>
+
+  <script type="module">
+    // Modern View Transitions API with fallback
+    if (!document.startViewTransition) {
+      document.startViewTransition = (callback) => {
+        callback();
+        return {
+          ready: Promise.resolve(),
+          updateCallbackDone: Promise.resolve(),
+          finished: Promise.resolve()
+        };
+      };
+    }
+
+    // Route handling with transitions
+    class Router {
+      constructor() {
+        this.loader = document.querySelector('.route-loader');
+        this.init();
+      }
+      init() {
+        this.handleLinks();
+        this.handlePopState();
+      }
+      handleLinks() {
+        document.addEventListener('click', (e) => {
+          const link = e.target.closest('a');
+          if (!link || link.target === '_blank' || link.href.match(/^#|mailto:|tel:/)) return;
+          if (link.hostname !== window.location.hostname) return;
+          e.preventDefault();
+          this.navigate(link.href);
+        });
+      }
+      handlePopState() {
+        window.addEventListener('popstate', () => {
+          this.navigate(window.location.href, true);
+        });
+      }
+      async navigate(url, isPopState = false) {
+        this.loader.style.transform = 'scaleX(0.3)';
+        const transition = document.startViewTransition(async () => {
+          if (isPopState) {
+            document.documentElement.classList.add('back-transition');
+          }
+          try {
+            const response = await fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            document.title = doc.title;
+            document.querySelector('[data-transition-wrapper]').innerHTML =
+              doc.querySelector('[data-transition-wrapper]').innerHTML;
+            this.loader.style.transform = 'scaleX(1)';
+            setTimeout(() => { this.loader.style.transform = 'scaleX(0)'; }, 300);
+            if (!isPopState) { window.history.pushState({}, '', url); }
+          } catch (error) {
+            console.error('Navigation failed:', error);
+            window.location.href = url;
+          } finally {
+            if (isPopState) {
+              setTimeout(() => { document.documentElement.classList.remove('back-transition'); }, 300);
+            }
+          }
+        });
+        await transition.ready;
+      }
+    }
+
+    // Initialize router
+    new Router();
+
+    // Scroll reveal animation
+    function revealOnScroll() {
+      const revealElements = document.querySelectorAll('.reveal');
+      const heroContent = document.querySelector('.hero-content');
+      const revealPoint = 150;
+      const windowHeight = window.innerHeight;
+      revealElements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        if (elementPosition < windowHeight - revealPoint) {
+          element.classList.add('visible');
+        }
+      });
+      if (heroContent) {
+        const heroPosition = heroContent.getBoundingClientRect().top;
+        if (heroPosition < windowHeight - revealPoint) {
+          heroContent.classList.add('scrolled');
+        } else {
+          heroContent.classList.remove('scrolled');
+        }
+      }
+    }
+
+    // Fade Carousel Logic
+    function initCarousel() {
+      const carousel = document.getElementById('carousel');
+      const items = carousel.querySelectorAll('.carousel-item');
+      let currentIndex = 0;
+      function showNextImage() {
+        items[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % items.length;
+        items[currentIndex].classList.add('active');
+      }
+      items[currentIndex].classList.add('active');
+      setInterval(showNextImage, 5000);
+    }
+
+    // Lightbox Logic
+    function initLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = lightbox.querySelector('.lightbox-img');
+      const lightboxTitle = lightbox.querySelector('h3');
+      const lightboxCaption = lightbox.querySelector('p');
+      const closeBtn = lightbox.querySelector('.lightbox-close');
+      const photoCards = document.querySelectorAll('.photo-card');
+
+      function showLightbox(index) {
+        const card = photoCards[index];
+        lightboxImg.src = card.querySelector('img').src;
+        lightboxTitle.textContent = card.querySelector('h3').textContent;
+        lightboxCaption.textContent = card.querySelector('p').textContent;
+        lightbox.classList.add('active');
+      }
+
+      photoCards.forEach((card, index) => {
+        card.querySelector('img').addEventListener('click', () => showLightbox(index));
+      });
+
+      closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) lightbox.classList.remove('active');
+      });
+    }
+
+    // Initialize features
+    document.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener('scroll', revealOnScroll);
+      window.addEventListener('load', revealOnScroll);
+      revealOnScroll();
+      initCarousel();
+      initLightbox();
+    });
+  </script>
+</body>
+</html>

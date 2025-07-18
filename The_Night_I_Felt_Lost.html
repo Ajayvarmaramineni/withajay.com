@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Night I Felt Lost | With Love AJ</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #ffffff;
+      color: #333;
+      font-family: 'Open Sans', Arial, sans-serif;
+    }
+
+    /* Header */
+    header {
+      align-items: center;
+      background: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 50px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .header-left {
+      flex: 0 0 auto;
+      background: #f0f0f0; /* Light gray background to make logo stand out */
+      padding: 5px; /* Small padding for better appearance */
+      border-radius: 5px; /* Subtle rounding for aesthetics */
+    }
+    .logo-svg {
+      cursor: pointer;
+      height: 80px;
+      width: auto;
+    }
+    @media (prefers-color-scheme: dark) {
+      .header-left {
+        background: #333; /* Darker background for dark mode */
+      }
+    }
+    nav {
+      flex: 1;
+      text-align: center;
+    }
+    nav ul {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+      justify-content: center;
+    }
+    nav ul li a {
+      color: #333;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 1.1em;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: #ff6f61;
+    }
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      flex: 0 0 auto;
+    }
+    .social-icons img {
+      filter: none;
+      transition: filter 0.3s ease, transform 0.3s ease;
+      width: 25px;
+    }
+    .social-icons img:hover {
+      filter: brightness(0.8);
+      transform: scale(1.15);
+    }
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 10px 20px;
+      }
+      .header-left {
+        margin-bottom: 10px;
+      }
+      nav ul {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .social-icons {
+        margin-top: 10px;
+      }
+    }
+
+    /* Hero Section */
+    .hero-background {
+      background: #ffffff;
+      height: 100vh;
+      left: 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: -1;
+    }
+    .hero-content {
+      color: #333;
+      opacity: 1;
+      position: absolute;
+      text-align: center;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.5s ease-out;
+      z-index: 2;
+      left: 50%;
+    }
+    .hero-content.scrolled {
+      opacity: 0;
+    }
+    .hero-content h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 3.5em;
+      margin-bottom: 10px;
+      text-shadow: none;
+    }
+    .hero-content h2 {
+      color: #ff6f61;
+      font-size: 1.5em;
+      text-shadow: none;
+    }
+
+    /* Blog Content */
+    .blog-content {
+      align-items: center;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100vh - 160px);
+      padding: 80px 20px;
+      position: relative;
+      z-index: 3;
+    }
+    .blog-container {
+      color: #333;
+      margin: 0 auto;
+      max-width: 1000px;
+      padding: 20px;
+    }
+    .blog-container h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.2em;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+    .blog-container p {
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 1.1em;
+      line-height: 1.8;
+      margin-bottom: 10px;
+      text-align: justify;
+    }
+    .highlight-quote {
+      background: rgba(255, 111, 97, 0.1);
+      border-left: 4px solid #ff6f61;
+      border-radius: 5px;
+      clear: both;
+      color: #333;
+      font-size: 1.2em;
+      font-weight: bold;
+      margin: 30px 0;
+      padding: 15px;
+      text-align: center;
+    }
+
+    /* Top Image */
+    .top-image {
+      max-width: 1000px;
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+
+    /* Favorite Quote Card */
+    .favorite-quote-card {
+      background: rgba(255, 111, 97, 0.1);
+      border: 3px solid #ff6f61;
+      border-radius: 12px;
+      float: right;
+      margin: 20px 20px 20px 30px;
+      padding: 25px;
+      position: relative;
+      text-align: center;
+      width: 35%;
+      z-index: 4;
+    }
+    .favorite-quote-card p {
+      color: #333;
+      font-size: 1.3em;
+      font-style: italic;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .favorite-quote-card cite {
+      color: #666;
+      display: block;
+      font-size: 0.9em;
+      font-style: normal;
+      margin-top: 10px;
+    }
+    .favorite-quote-card::before {
+      color: #ff6f61;
+      content: '“';
+      font-size: 2.5em;
+      left: 15px;
+      opacity: 0.8;
+      position: absolute;
+      top: -15px;
+    }
+    .favorite-quote-card::after {
+      bottom: -15px;
+      color: #ff6f61;
+      content: '”';
+      font-size: 2.5em;
+      opacity: 0.8;
+      position: absolute;
+      right: 15px;
+    }
+    @media (max-width: 768px) {
+      .favorite-quote-card {
+        float: none;
+        max-width: 90%;
+        margin: 20px auto;
+        width: 100%;
+      }
+    }
+
+    /* Comments Section */
+    .comments-section {
+      color: #333;
+      margin: 0 auto;
+      max-width: 1000px;
+      padding: 20px;
+    }
+    .comments-section h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+    .comments-list {
+      margin-bottom: 20px;
+    }
+    .comment {
+      background: #f9f9f9;
+      border: 1px solid #e0e0e0;
+      border-radius: 5px;
+      margin: 15px 0;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .comment-meta {
+      color: #ff6f61;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 0.9em;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .comment p {
+      color: #333;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 1em;
+      line-height: 1.6;
+    }
+    .comment-box {
+      background: #f9f9f9;
+      border-radius: 5px;
+      min-height: 150px;
+      padding: 10px;
+      max-width: 1000px;
+      width: 100%;
+    }
+    .comment-box label {
+      display: block;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    .comment-box input,
+    .comment-box textarea {
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 3px;
+      color: #333;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 0.9em;
+      font-weight: 400;
+      margin-bottom: 5px;
+      padding: 5px;
+      width: 100%;
+    }
+    .comment-box textarea {
+      min-height: 100px;
+      resize: vertical;
+      overflow: auto;
+    }
+    .comment-box .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 5px;
+    }
+    .comment-box button[type="submit"] {
+      background: #ff6f61;
+      border: none;
+      border-radius: 3px;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 0.9em;
+      padding: 6px 12px;
+      transition: background 0.3s ease;
+    }
+    .comment-box button[type="submit"]:hover {
+      background: #e55a50;
+    }
+    .comment-box .message-icon {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    .comment-box .message-icon img {
+      filter: none;
+      height: 20px;
+      transition: filter 0.3s ease;
+      width: 20px;
+    }
+    .comment-box .message-icon img:hover {
+      filter: brightness(0.8);
+    }
+    .success-message {
+      background: rgba(255, 111, 97, 0.1);
+      border-radius: 3px;
+      color: #ff6f61;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 0.9em;
+      padding: 8px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    @media (max-width: 768px) {
+      .comment-box {
+        max-width: 100%;
+      }
+      .blog-container p {
+        font-size: 1.1em;
+      }
+    }
+
+    /* Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* With Love Signature */
+    .with-love-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 40px;
+    }
+    .with-love {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8em;
+      font-weight: 600;
+      color: #333;
+      margin: 0;
+      padding-right: 20px;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.2em;
+      }
+      .hero-content h2 {
+        font-size: 1.2em;
+      }
+      .blog-content {
+        padding: 60px 15px;
+      }
+      .blog-container {
+        max-width: 100%;
+      }
+      .blog-container h2 {
+        font-size: 1.8em;
+      }
+      .comments-section {
+        padding: 10px;
+      }
+      .with-love {
+        text-align: center;
+      }
+    }
+
+    /* Section Spacer */
+    .section-spacer {
+      height: 125px;
+    }
+    @media (max-width: 768px) {
+      .section-spacer {
+        height: 80px;
+      }
+    }
+
+    /* Footer */
+    footer {
+      align-items: center;
+      background: #ffffff;
+      border-top: 1px solid #e0e0e0;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding: 30px 50px;
+      text-align: center;
+    }
+    .footer-logo {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    .social-icons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+    .social-icons img {
+      filter: none;
+      transition: filter 0.3s ease, transform 0.4s ease;
+      width: 28px;
+    }
+    .social-icons img:hover {
+      filter: brightness(0.8);
+      transform: scale(1.2);
+    }
+    footer p {
+      color: #333;
+      font-size: 0.9em;
+    }
+
+    /* Toast Notification */
+    #toast {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ff6f61;
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-family: 'Open Sans', sans-serif;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 10000;
+      font-size: 0.95em;
+      transition: opacity 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <!-- Toast Notification -->
+  <div id="toast">Comment posted successfully!</div>
+
+  <div class="route-loader"></div>
+  <div class="transition-overlay"></div>
+
+  <main id="main-content" data-transition-wrapper>
+    <header>
+      <div class="header-left">
+        <a href="index.html" style="text-decoration: none;">
+          <img src="images/logo.svg" alt="Ajay Ramineni Logo" class="logo-svg" />
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="photos.html">Photos</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
+          <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Ajay's Instagram Profile" />
+        </a>
+        <a href="https://x.com/withloveeajay?s=21" target="_blank" aria-label="X">
+          <img src="https://img.icons8.com/ios-filled/50/000000/twitterx.png" alt="Ajay's X Profile" />
+        </a>
+        <a href="https://www.linkedin.com/in/ajayramineni2808?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
+          <img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png" alt="Ajay's LinkedIn Profile" />
+        </a>
+        <a href="https://github.com/Ajayvarmaramineni" target="_blank" aria-label="GitHub">
+          <img src="https://img.icons8.com/ios-filled/50/000000/github.png" alt="Ajay's GitHub Profile" />
+        </a>
+      </div>
+    </header>
+
+    <section id="home">
+      <div class="hero-background"></div>
+      <div class="hero-content">
+        <h1>The Night I Felt Lost</h1>
+        <h2>A Personal Reflection | June 15, 2025</h2>
+      </div>
+    </section>
+
+    <section class="blog-content reveal">
+      <div class="blog-container">
+        <img src="images/blog3.jpg" alt="Quiet nighttime street with oak tree" class="top-image" loading="lazy">
+        <h2 class="section-heading">The Night I Felt Lost</h2>
+        <p>The stars were out, but they offered no guidance. It was one of those nights where the world felt too big, and I felt impossibly small, adrift in a sea of my thoughts. The air was cool, heavy with the scent of earth, and the streets were eerily quiet except for the occasional sound of cars passing by. I wandered, my sneakers scuffing against the road, each step a question I couldn’t answer.</p>
+        <p>I don’t know exactly when the feeling started. Maybe it was earlier that day when a conversation with a friend left me questioning my choices. Or maybe it was the weight of a decision I’d been avoiding, pressing harder against my chest. But by nightfall, it was undeniable: I was lost. My purpose, my direction, my sense of self—they all felt like shadows slipping through my fingers.</p>
+        <div class="favorite-quote-card reveal">
+          <p>Being lost is not the end; it’s the beginning of finding a new path.</p>
+          <cite>— Unknown</cite>
+        </div>
+        <p>I passed by the street park and found a bench near an oak tree that’s probably seen more heartbreaks than I’ll ever know. I wondered if anyone else had ever felt this way, like they were standing at a crossroads with no signs to guide them. I thought about calling someone, but what would I say? “I’m lost, but I don’t know why”? It sounded ridiculous even in my head.</p>
+        <p>It felt like I was questioning every choice I’d made so far, every decision that brought me here. Saying “I have no regrets” would be a lie, but I’ve always tried to take responsibility for the paths I chose, whether they brought comfort or chaos. Moving to the USA was one of the biggest decisions of my life. At first, I believed it was just a new beginning for the same version of me. But I was wrong—it wasn’t a continuation, it was a complete restart. Everything I thought I knew, everything I’d learned, didn’t quite fit anymore. I had to unlearn and start over, learning the new place, the new culture, the silences between conversations.</p>
+        <div class="highlight-quote">I didn’t cross oceans and burn bridges behind me just to turn around. I may be lost right now, but I know I’m not broken.</div>
+        <p>Some nights, it all plays out in front of me in 4K—vivid, loud, and unskippable. And in those moments, I can’t help but wonder if I made a mistake. Leaving my job, my home, my friends, chasing a dream that now feels distant in a place that’s familiar on paper but foreign in spirit. Yet even in the uncertainty, there’s a strange kind of peace settling in. Like the storm isn’t over, but I’ve found a way to breathe inside it. Some part of me still believes there’s hope here, that this chaos is carving out something better, even if I can’t see it yet. I think I can feel it.</p>
+        <p>I sat there, letting the silence answer the questions I was too tired to ask. The bench felt cold beneath me, grounding in a way I hadn’t expected. I pulled out my AirPods and tuned into my “Nights” playlist. My thoughts still raced, sure, but I stopped trying to chase them. I just told myself, “Let them run.” Somewhere between the streetlight’s flicker and the distant hum of a car engine, I realized I wasn’t looking for answers anymore.</p>
+        <p>As I stood up to leave, I looked at that old oak tree one more time. It didn’t say anything, but something about its stillness made me feel less alone.</p>
+        <div class="with-love-wrapper">
+          <p class="with-love">- With Love, Aj✨</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="comments-section reveal">
+      <div class="blog-container">
+        <h2>Share your thoughts</h2>
+        <div class="comments-list"></div>
+        <form class="comment-box">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required placeholder="Your Name">
+          <label for="comment">Comment</label>
+          <textarea id="comment" name="comment" required placeholder="Your thoughts..."></textarea>
+          <div class="buttons">
+            <button type="submit">Post Comment</button>
+            <button type="button" class="message-icon">
+              <img src="https://img.icons8.com/ios-filled/50/000000/filled-message.png" alt="Message Icon">
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <div class="section-spacer"></div>
+
+    <footer>
+      <div class="footer-logo">Ajay Varma Ramineni</div>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
+          <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Ajay's Instagram Profile" class="icon hover:scale-110 transition">
+        </a>
+        <a href="https://x.com/withloveeajay?s=21" target="_blank" aria-label="X">
+          <img src="https://img.icons8.com/ios-filled/50/000000/twitterx.png" alt="Ajay's X Profile" class="icon hover:scale-110 transition">
+        </a>
+        <a href="https://www.linkedin.com/in/ajayramineni2808?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
+          <img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png" alt="Ajay's LinkedIn Profile" class="icon hover:scale-110 transition">
+        </a>
+        <a href="https://github.com/Ajayvarmaramineni" target="_blank" aria-label="GitHub">
+          <img src="https://img.icons8.com/ios-filled/50/000000/github.png" alt="Ajay's GitHub Profile" class="icon hover:scale-110 transition">
+        </a>
+      </div>
+      <p>© 2025 Ajay | Powered by Ajay Varma Ramineni</p>
+    </footer>
+  </main>
+
+  <script type="module">
+    // View Transitions API fallback
+    if (!document.startViewTransition) {
+      document.startViewTransition = (callback) => {
+        callback();
+        return {
+          ready: Promise.resolve(),
+          updateCallbackDone: Promise.resolve(),
+          finished: Promise.resolve()
+        };
+      };
+    }
+
+    // Router
+    class Router {
+      constructor() {
+        this.loader = document.querySelector('.route-loader');
+        this.init();
+      }
+      init() {
+        this.handleLinks();
+        this.handlePopState();
+      }
+      handleLinks() {
+        document.addEventListener('click', (e) => {
+          const link = e.target.closest('a');
+          if (!link || link.target === '_blank' || link.href.match(/^#|mailto:|tel:/)) return;
+          if (link.hostname !== window.location.hostname) return;
+          e.preventDefault();
+          this.navigate(link.href);
+        });
+      }
+      handlePopState() {
+        window.addEventListener('popstate', () => this.navigate(window.location.href, true));
+      }
+      async navigate(url, isPopState = false) {
+        this.loader.style.transform = 'scaleX(0.3)';
+        const transition = document.startViewTransition(async () => {
+          if (isPopState) document.documentElement.classList.add('back-transition');
+          try {
+            const response = await fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            document.title = doc.title;
+            document.querySelector('[data-transition-wrapper]').innerHTML = doc.querySelector('[data-transition-wrapper]').innerHTML;
+            this.loader.style.transform = 'scaleX(1)';
+            setTimeout(() => this.loader.style.transform = 'scaleX(0)', 300);
+            if (!isPopState) window.history.pushState({}, '', url);
+          } catch (error) {
+            console.error('Navigation failed:', error);
+            window.location.href = url;
+          } finally {
+            if (isPopState) setTimeout(() => document.documentElement.classList.remove('back-transition'), 300);
+          }
+        });
+        await transition.ready;
+      }
+    }
+
+    // Scroll Reveal
+    function revealOnScroll() {
+      const revealElements = document.querySelectorAll('.reveal');
+      const heroContent = document.querySelector('.hero-content');
+      const revealPoint = 150;
+      const windowHeight = window.innerHeight;
+      revealElements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        if (elementPosition < windowHeight - revealPoint) element.classList.add('visible');
+      });
+      if (heroContent) {
+        const heroPosition = heroContent.getBoundingClientRect().top;
+        if (heroPosition < windowHeight - revealPoint) heroContent.classList.add('scrolled');
+        else heroContent.classList.remove('scrolled');
+      }
+    }
+
+    // Comment Submission and Auto-Resize
+    function handleCommentSubmission() {
+      const form = document.querySelector('.comment-box');
+      const commentsList = document.querySelector('.comments-list');
+      const textarea = document.getElementById('comment');
+
+      // Auto-resize textarea
+      textarea.addEventListener('input', () => {
+        textarea.style.height = 'auto';
+        textarea.style.height = `${textarea.scrollHeight}px`;
+      });
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const commentText = document.getElementById('comment').value.trim();
+        if (name && commentText) {
+          const comment = document.createElement('div');
+          comment.classList.add('comment');
+          comment.innerHTML = `<div class="comment-meta">Posted by ${name} on ${new Date().toLocaleDateString()}</div><p>${commentText}</p>`;
+          commentsList.appendChild(comment);
+          const toast = document.getElementById('toast');
+          toast.style.display = 'block';
+          toast.style.opacity = '1';
+          setTimeout(() => {
+            toast.style.opacity = '0';
+          }, 2500);
+          setTimeout(() => {
+            toast.style.display = 'none';
+          }, 3000);
+          form.reset();
+          textarea.style.height = '100px';
+        }
+      });
+    }
+
+    // Event Listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener('scroll', revealOnScroll);
+      window.addEventListener('load', revealOnScroll);
+      revealOnScroll();
+      handleCommentSubmission();
+      new Router();
+    });
+  </script>
+</body>
+</html>
