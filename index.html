@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ajay Ramineni's personal blog and portfolio, sharing reflections on life, identity, and growth as a master’s student.">
   <title>With Love AJ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap&font-display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/styles.css">
-  <!-- Preload critical assets -->
   <link rel="preload" href="/images/hero.jpg" as="image">
   <link rel="preload" href="/images/logo.svg" as="image">
   <link rel="preload" href="/images/Aj.jpg" as="image">
@@ -14,10 +14,10 @@
 <body>
   <div class="route-loader"></div>
 
-  <main id="main-content" data-transition-wrapper>
+  <main id="main-content">
     <header>
       <div class="header-left">
-        <a href="#home" style="text-decoration: none;">
+        <a href="/index.html" style="text-decoration: none;">
           <img src="/images/logo.svg" alt="Ajay Ramineni Logo" class="logo-svg" />
         </a>
       </div>
@@ -59,7 +59,7 @@
     <section id="about" class="about-section">
       <div class="about-container reveal">
         <div class="about-photo-wrapper">
-          <img src="/images/Aj.jpg" alt="Portrait of Ajay Ramineni" class="about-photo">
+          <img src="/images/Aj.jpg" alt="Portrait of Ajay Ramineni" class="about-photo" loading="lazy">
         </div>
         <div class="about-text">
           <p>A business enthusiast with over two years of experience in business development and consulting. I’m passionate about helping organizations navigate complex challenges, drive growth, and deliver exceptional client experiences. Currently pursuing my Master’s in Business Analytics at WPI, I bring a blend of analytical rigor, team management skills, and a knack for building strong relationships.</p>
@@ -80,14 +80,14 @@
       </div>
     </section>
 
-    <div style="height: 125px;"></div>
+    <div style="height: 7.8125rem;"></div>
 
     <section id="blog" class="blog-section">
       <div class="blog-container">
         <h2 class="section-heading reveal"><span>My Personal Blogs</span></h2>
         <div class="blog-grid reveal">
           <div class="blog-card">
-            <img src="/images/night.jpg" alt="Blog Post 1">
+            <img src="/images/night.jpg" alt="Blog Post 1" loading="lazy">
             <div class="blog-card-content">
               <h3>The Night I Questioned Everything</h3>
               <p>It was 4 a.m., and I couldn’t sleep. I tried blasting my favorite Nights playlist...</p>
@@ -95,7 +95,7 @@
             </div>
           </div>
           <div class="blog-card">
-            <img src="/images/blog2.jpg" alt="Blog Post 2">
+            <img src="/images/blog2.jpg" alt="Blog Post 2" loading="lazy">
             <div class="blog-card-content">
               <h3>The Night I Started Accepting</h3>
               <p>It was past 1 a.m. when my best brother’s voice crackled through the call...</p>
@@ -103,7 +103,7 @@
             </div>
           </div>
           <div class="blog-card">
-            <img src="/images/blog3.jpg" alt="Blog Post 3">
+            <img src="/images/blog3.jpg" alt="Blog Post 3" loading="lazy">
             <div class="blog-card-content">
               <h3>The Night I Felt Lost</h3>
               <p>The stars were out, but they offered no guidance. It was one of those nights where the world felt...</p>
@@ -111,7 +111,7 @@
             </div>
           </div>
           <div class="blog-card">
-            <img src="/images/blog3.jpg" alt="Blog Post 4">
+            <img src="/images/blog3.jpg" alt="Blog Post 4" loading="lazy">
             <div class="blog-card-content">
               <h3>The Night I Realised</h3>
               <p>This is the night I started realising stuff that kept me thinking...</p>
@@ -123,7 +123,7 @@
       </div>
     </section>
 
-    <div style="height: 125px;"></div>
+    <div style="height: 7.8125rem;"></div>
 
     <section id="contact" class="contact-section">
       <div class="contact-content reveal">
@@ -155,133 +155,8 @@
     </footer>
   </main>
 
-  <script type="module">
-    // View Transitions API Fallback
-    if (!document.startViewTransition) {
-      document.startViewTransition = (callback) => {
-        callback();
-        return {
-          ready: Promise.resolve(),
-          updateCallbackDone: Promise.resolve(),
-          finished: Promise.resolve()
-        };
-      };
-    }
-
-    // Router Class
-    class Router {
-      constructor() {
-        this.loader = document.querySelector('.route-loader');
-        this.mainContent = document.querySelector('[data-transition-wrapper]');
-        this.init();
-      }
-
-      init() {
-        this.handleLinks();
-        this.handlePopState();
-      }
-
-      handleLinks() {
-        document.addEventListener('click', (e) => {
-          const link = e.target.closest('a');
-          if (!link || link.target === '_blank' || link.href.match(/^#|mailto:|tel:/)) return;
-          if (link.hostname !== window.location.hostname) return;
-
-          e.preventDefault();
-          this.navigate(link.href);
-        });
-      }
-
-      handlePopState() {
-        window.addEventListener('popstate', () => {
-          this.navigate(window.location.href, true);
-        });
-      }
-
-      async navigate(url, isPopState = false) {
-        this.loader.style.transform = 'scaleX(0.3)';
-
-        try {
-          const response = await fetch(url, {
-            headers: { 'X-Requested-With': 'XMLHttpRequest' }
-          });
-          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-
-          const html = await response.text();
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(html, 'text/html');
-
-          // Update title
-          document.title = doc.title;
-
-          // Update main content
-          const newContent = doc.querySelector('[data-transition-wrapper]');
-          if (!newContent) throw new Error('No [data-transition-wrapper] found in the fetched page');
-
-          const transition = document.startViewTransition(() => {
-            if (isPopState) {
-              document.documentElement.classList.add('back-transition');
-            }
-
-            this.mainContent.innerHTML = newContent.innerHTML;
-
-            // Re-apply scroll reveal for new content
-            this.reapplyScrollReveal();
-
-            // Ensure styles are applied
-            this.ensureStyles();
-
-            this.loader.style.transform = 'scaleX(1)';
-            setTimeout(() => {
-              this.loader.style.transform = 'scaleX(0)';
-            }, 300);
-          });
-
-          await transition.ready;
-
-          if (!isPopState) {
-            window.history.pushState({}, '', url);
-          }
-
-          if (isPopState) {
-            setTimeout(() => {
-              document.documentElement.classList.remove('back-transition');
-            }, 300);
-          }
-        } catch (error) {
-          console.error('Navigation failed:', error);
-          // Fallback to full page load
-          window.location.href = url;
-        }
-      }
-
-      ensureStyles() {
-        // Ensure the stylesheet is present
-        let stylesheet = document.querySelector('link[href="/css/styles.css"]');
-        if (!stylesheet) {
-          stylesheet = document.createElement('link');
-          stylesheet.rel = 'stylesheet';
-          stylesheet.href = '/css/styles.css';
-          document.head.appendChild(stylesheet);
-        }
-      }
-
-      reapplyScrollReveal() {
-        const revealElements = document.querySelectorAll('.reveal');
-        const windowHeight = window.innerHeight;
-        const revealPoint = 150;
-
-        revealElements.forEach(element => {
-          element.classList.remove('visible'); // Reset visibility
-          const elementPosition = element.getBoundingClientRect().top;
-          if (elementPosition < windowHeight - revealPoint) {
-            element.classList.add('visible');
-          }
-        });
-      }
-    }
-
-    // Scroll Reveal Function
+  <script>
+    // Scroll Reveal Animation
     function revealOnScroll() {
       const revealElements = document.querySelectorAll('.reveal');
       const windowHeight = window.innerHeight;
@@ -295,9 +170,7 @@
       });
     }
 
-    // Initialize Router and Scroll Reveal
     document.addEventListener('DOMContentLoaded', () => {
-      const router = new Router();
       window.addEventListener('scroll', revealOnScroll);
       window.addEventListener('load', revealOnScroll);
       revealOnScroll();
