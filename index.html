@@ -842,8 +842,17 @@ h1, h2, .section-heading {
       revealOnScroll();
     });
     document.addEventListener('DOMContentLoaded', function() {
-    document.body.style.opacity = '1';
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function() {
+            document.body.style.opacity = '1';
+        });
+    } else {
+        setTimeout(function() {
+            document.body.style.opacity = '1';
+        }, 500);
+    }
 });
+
   </script>
 </body>
 </html>
