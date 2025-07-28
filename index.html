@@ -587,7 +587,7 @@ h1, h2, .section-heading {
 
   </style>
 </head>
-<body>
+<body style="opacity:0;">
   <div class="route-loader"></div>
   <div class="transition-overlay"></div>
 
@@ -841,6 +841,9 @@ h1, h2, .section-heading {
       window.addEventListener('load', revealOnScroll);
       revealOnScroll();
     });
+    document.addEventListener('DOMContentLoaded', function() {
+    document.body.style.opacity = '1';
+});
   </script>
 </body>
 </html>
