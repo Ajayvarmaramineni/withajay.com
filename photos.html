@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans" rel="stylesheet">
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Photos | With Love AJ</title>
@@ -417,7 +418,8 @@
     }
   </style>
 </head>
-<body>
+<body style="opacity:0;">
+
   <div class="route-loader"></div>
   <div class="transition-overlay"></div>
 
@@ -872,6 +874,25 @@
       initCarousel();
       initLightbox();
     });
+    document.addEventListener('DOMContentLoaded', function() {
+    let pageShown = false;
+    
+    function showPage() {
+        if (!pageShown) {
+            pageShown = true;
+            document.body.style.opacity = '1';
+        }
+    }
+    
+    // Try document.fonts.ready first
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(showPage);
+    }
+    
+    // Always set a maximum timeout as backup
+    setTimeout(showPage, 1000);
+});
+
   </script>
 </body>
 </html>

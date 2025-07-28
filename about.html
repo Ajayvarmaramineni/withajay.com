@@ -784,12 +784,22 @@
       revealOnScroll();
     });
     document.addEventListener('DOMContentLoaded', function() {
-    if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(function() {
-            document.body.style.opacity = '(function() {
+    let pageShown = false;
+    
+    function showPage() {
+        if (!pageShown) {
+            pageShown = true;
             document.body.style.opacity = '1';
-        }, 500);
+        }
     }
+    
+    // Try document.fonts.ready first
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(showPage);
+    }
+    
+    // Always set a maximum timeout as backup
+    setTimeout(showPage, 1000);
 });
   </script>
 </body>
