@@ -1,39 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About | With Love AJ</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     /* Default fallback fonts - these will show while custom fonts are loading */
+/* Use standard web-safe fonts */
 h1, h2, .section-heading {
-  font-family: serif; /* Starts with a basic serif font */
+  font-family: 'Times New Roman', serif; /* A common system font */
   font-weight: 700;
 }
 p, li, a, button {
-  font-family: sans-serif; /* Starts with a basic sans-serif font */
+  font-family: Arial, sans-serif; /* A common system font */
 }
-
-/* These styles will apply ONLY when your custom fonts are fully loaded */
-.fonts-loaded h1,
-.fonts-loaded h2,
-.fonts-loaded .section-heading {
-  font-family: 'Playfair Display', serif; /* Switches to your custom Playfair Display */
-}
-.fonts-loaded p,
-.fonts-loaded li,
-.fonts-loaded a,
-.fonts-loaded button {
-  font-family: 'Open Sans', sans-serif; /* Switches to your custom Open Sans */
-}
-
 /* This hides the whole page initially to prevent any FOUC */
 body {
-  opacity: 0;
-  transition: opacity 0.5s ease-in; /* Makes the page fade in smoothly */
+  /* No opacity or transition here for now. Keep other body styles if you have them. */
 }
 
     /* View transitions API (modern browsers) */
@@ -685,32 +670,6 @@ body {
   </main>
 
   <script type="module">
-    // This function will make your page visible and apply your custom fonts
-function initializePage() {
-  // Adds a special class to the <body> when fonts are loaded
-  document.body.classList.add('fonts-loaded');
-  // Makes the entire page visible with a fade-in effect
-  document.body.style.opacity = '1';
-}
-
-// This checks if your custom fonts are ready
-if (document.fonts && document.fonts.ready) {
-  // If fonts are ready, then run the initializePage function
-  document.fonts.ready.then(function () {
-    initializePage();
-  }).catch(function (error) {
-    // If there's an error loading fonts, still show the page to prevent it from staying hidden
-    console.error("Font loading failed:", error);
-    initializePage();
-  });
-} else {
-  // This is a backup for older browsers or if the font loading check fails.
-  // It waits for the whole page to load, or a maximum of 1 second, then shows the page.
-  window.addEventListener('load', initializePage);
-  setTimeout(initializePage, 1000); // Ensures page appears even if fonts are stuck
-}
-
-// --- KEEP all your existing JavaScript code (Router, revealOnScroll, etc.) BELOW these new lines ---
     // Modern View Transitions API with fallback
     if (!document.startViewTransition) {
       document.startViewTransition = (callback) => {
