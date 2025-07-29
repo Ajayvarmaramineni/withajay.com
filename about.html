@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans" rel="stylesheet">
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About | With Love AJ</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    h1, h2, .section-heading {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-  }
-  p, li, .about-intro p, .timeline-content p, .about-quote blockquote, .about-quote footer {
-    font-family: 'Open Sans', sans-serif;
-  }
-    html { scroll-behavior: smooth; }
+    /* Default fallback fonts - these will show while custom fonts are loading */
+/* Use standard web-safe fonts */
+h1, h2, .section-heading {
+  font-family: 'Times New Roman', serif; /* A common system font */
+  font-weight: 700;
+}
+p, li, a, button {
+  font-family: Arial, sans-serif; /* A common system font */
+}
+/* This hides the whole page initially to prevent any FOUC */
+body {
+  /* No opacity or transition here for now. Keep other body styles if you have them. */
+}
 
     /* View transitions API (modern browsers) */
     @supports (view-transition-name: none) {
@@ -495,7 +500,7 @@
     }
   </style>
 </head>
-<body style="opacity:0;">
+<body>
   <div class="route-loader"></div>
   <div class="transition-overlay"></div>
   <main id="main-content" data-transition-wrapper>
@@ -783,24 +788,6 @@
       window.addEventListener('load', revealOnScroll);
       revealOnScroll();
     });
-    document.addEventListener('DOMContentLoaded', function() {
-    let pageShown = false;
-    
-    function showPage() {
-        if (!pageShown) {
-            pageShown = true;
-            document.body.style.opacity = '1';
-        }
-    }
-    
-    // Try document.fonts.ready first
-    if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(showPage);
-    }
-    
-    // Always set a maximum timeout as backup
-    setTimeout(showPage, 1000);
-});
   </script>
 </body>
 </html>
