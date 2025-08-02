@@ -593,127 +593,45 @@
     </footer>
   </main>
 
-  <script type="module">
-    // View Transitions API fallback
-    if (!document.startViewTransition) {
-      document.startViewTransition = (callback) => {
-        callback();
-        return {
-          ready: Promise.resolve(),
-          updateCallbackDone: Promise.resolve(),
-          finished: Promise.resolve()
-        };
-      };
-    }
-
-    // Router
-    class Router {
-      constructor() {
-        this.loader = document.querySelector('.route-loader');
-        this.init();
-      }
-      init() {
-        this.handleLinks();
-        this.handlePopState();
-      }
-      handleLinks() {
-        document.addEventListener('click', (e) => {
-          const link = e.target.closest('a');
-          if (!link || link.target === '_blank' || link.href.match(/^#|mailto:|tel:/)) return;
-          if (link.hostname !== window.location.hostname) return;
-          e.preventDefault();
-          this.navigate(link.href);
-        });
-      }
-      handlePopState() {
-        window.addEventListener('popstate', () => this.navigate(window.location.href, true));
-      }
-      async navigate(url, isPopState = false) {
-        this.loader.style.transform = 'scaleX(0.3)';
-        const transition = document.startViewTransition(async () => {
-          if (isPopState) document.documentElement.classList.add('back-transition');
-          try {
-            const response = await fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
-            const html = await response.text();
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            document.title = doc.title;
-            document.querySelector('[data-transition-wrapper]').innerHTML = doc.querySelector('[data-transition-wrapper]').innerHTML;
-            this.loader.style.transform = 'scaleX(1)';
-            setTimeout(() => this.loader.style.transform = 'scaleX(0)', 300);
-            if (!isPopState) window.history.pushState({}, '', url);
-          } catch (error) {
-            console.error('Navigation failed:', error);
-            window.location.href = url;
-          } finally {
-            if (isPopState) setTimeout(() => document.documentElement.classList.remove('back-transition'), 300);
-          }
-        });
-        await transition.ready;
-      }
-    }
-
-    // Scroll Reveal
+  <script>
+    // Scroll reveal animation for all sections
     function revealOnScroll() {
       const revealElements = document.querySelectorAll('.reveal');
-      const heroContent = document.querySelector('.hero-content');
       const revealPoint = 150;
       const windowHeight = window.innerHeight;
+
       revealElements.forEach(element => {
         const elementPosition = element.getBoundingClientRect().top;
-        if (elementPosition < windowHeight - revealPoint) element.classList.add('visible');
-      });
-      if (heroContent) {
-        const heroPosition = heroContent.getBoundingClientRect().top;
-        if (heroPosition < windowHeight - revealPoint) heroContent.classList.add('scrolled');
-        else heroContent.classList.remove('scrolled');
-      }
-    }
-
-    // Comment Submission and Auto-Resize
-    function handleCommentSubmission() {
-      const form = document.querySelector('.comment-box');
-      const commentsList = document.querySelector('.comments-list');
-      const textarea = document.getElementById('comment');
-
-      // Auto-resize textarea
-      textarea.addEventListener('input', () => {
-        textarea.style.height = 'auto';
-        textarea.style.height = `${textarea.scrollHeight}px`;
-      });
-
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('name').value.trim();
-        const commentText = document.getElementById('comment').value.trim();
-        if (name && commentText) {
-          const comment = document.createElement('div');
-          comment.classList.add('comment');
-          comment.innerHTML = `<div class="comment-meta">Posted by ${name} on ${new Date().toLocaleDateString()}</div><p>${commentText}</p>`;
-          commentsList.appendChild(comment);
-          const toast = document.getElementById('toast');
-          toast.style.display = 'block';
-          toast.style.opacity = '1';
-          setTimeout(() => {
-            toast.style.opacity = '0';
-          }, 2500);
-          setTimeout(() => {
-            toast.style.display = 'none';
-          }, 3000);
-          form.reset();
-          textarea.style.height = '100px';
+        if (elementPosition < windowHeight - revealPoint) {
+          element.classList.add('visible');
         }
       });
     }
 
-    // Event Listeners
+    // Add event listeners for scroll and initial load
     document.addEventListener('DOMContentLoaded', () => {
       window.addEventListener('scroll', revealOnScroll);
       window.addEventListener('load', revealOnScroll);
       revealOnScroll();
-      handleCommentSubmission();
-      new Router();
     });
+    document.addEventListener('DOMContentLoaded', function() {
+    let pageShown = false;
+    
+    function showPage() {
+        if (!pageShown) {
+            pageShown = true;
+            document.body.style.opacity = '1';
+        }
+    }
+    
+    // Try document.fonts.ready first
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(showPage);
+    }
+    
+    // Always set a maximum timeout as backup
+    setTimeout(showPage, 1000);
+});
   </script>
 </body>
 </html>

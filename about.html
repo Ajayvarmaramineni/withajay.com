@@ -671,99 +671,10 @@ body {
     </footer>
   </main>
 
-  <script type="module">
-    // Modern View Transitions API with fallback
-    if (!document.startViewTransition) {
-      document.startViewTransition = (callback) => {
-        callback();
-        return {
-          ready: Promise.resolve(),
-          updateCallbackDone: Promise.resolve(),
-          finished: Promise.resolve()
-        };
-      };
-    }
-
-    // Route handling with transitions
-    class Router {
-      constructor() {
-        this.loader = document.querySelector('.route-loader');
-        this.init();
-      }
-
-      init() {
-        this.handleLinks();
-        this.handlePopState();
-      }
-
-      handleLinks() {
-        document.addEventListener('click', (e) => {
-          const link = e.target.closest('a');
-          if (!link || link.target === '_blank' || link.href.match(/^#|mailto:|tel:/)) return;
-          if (link.hostname !== window.location.hostname) return;
-
-          e.preventDefault();
-          this.navigate(link.href);
-        });
-      }
-
-      handlePopState() {
-        window.addEventListener('popstate', () => {
-          this.navigate(window.location.href, true);
-        });
-      }
-
-      async navigate(url, isPopState = false) {
-        this.loader.style.transform = 'scaleX(0.3)';
-
-        const transition = document.startViewTransition(async () => {
-          if (isPopState) {
-            document.documentElement.classList.add('back-transition');
-          }
-
-          try {
-            const response = await fetch(url, {
-              headers: { 'X-Requested-With': 'XMLHttpRequest' }
-            });
-            const html = await response.text();
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-
-            document.title = doc.title;
-            document.querySelector('[data-transition-wrapper]').innerHTML =
-              doc.querySelector('[data-transition-wrapper]').innerHTML;
-
-            this.loader.style.transform = 'scaleX(1)';
-            setTimeout(() => {
-              this.loader.style.transform = 'scaleX(0)';
-            }, 300);
-
-            if (!isPopState) {
-              window.history.pushState({}, '', url);
-            }
-          } catch (error) {
-            console.error('Navigation failed:', error);
-            window.location.href = url;
-          } finally {
-            if (isPopState) {
-              setTimeout(() => {
-                document.documentElement.classList.remove('back-transition');
-              }, 300);
-            }
-          }
-        });
-
-        await transition.ready;
-      }
-    }
-
-    // Initialize router
-    new Router();
-
+  <script>
     // Scroll reveal animation for all sections
     function revealOnScroll() {
       const revealElements = document.querySelectorAll('.reveal');
-      const heroContent = document.querySelector('.hero-content');
       const revealPoint = 150;
       const windowHeight = window.innerHeight;
 
@@ -773,15 +684,6 @@ body {
           element.classList.add('visible');
         }
       });
-
-      if (heroContent) {
-        const heroPosition = heroContent.getBoundingClientRect().top;
-        if (heroPosition < windowHeight - revealPoint) {
-          heroContent.classList.add('scrolled');
-        } else {
-          heroContent.classList.remove('scrolled');
-        }
-      }
     }
 
     // Add event listeners for scroll and initial load
@@ -790,6 +692,24 @@ body {
       window.addEventListener('load', revealOnScroll);
       revealOnScroll();
     });
+    document.addEventListener('DOMContentLoaded', function() {
+    let pageShown = false;
+    
+    function showPage() {
+        if (!pageShown) {
+            pageShown = true;
+            document.body.style.opacity = '1';
+        }
+    }
+    
+    // Try document.fonts.ready first
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(showPage);
+    }
+    
+    // Always set a maximum timeout as backup
+    setTimeout(showPage, 1000);
+});
   </script>
 </body>
 </html>
