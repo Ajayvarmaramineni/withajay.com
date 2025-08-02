@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" media="print" onload="this.media='all'" />
-<noscript>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" />
-</noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact | With Love AJ</title>
@@ -398,7 +390,7 @@
     }
   </style>
 </head>
-<body style="opacity:0;">
+<body>
   <div class="route-loader"></div>
   <div class="transition-overlay"></div>
 
@@ -474,19 +466,24 @@
       <p>© 2025 Ajay | Powered by Ajay Varma Ramineni</p>
     </footer>
   </main>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
-    // Scroll reveal animation for all sections
+  (function() {
+    emailjs.init("service_syab98i"); // Replace with your EmailJS Public Key
+  })();
+    // Scroll reveal animation for Contact section
     function revealOnScroll() {
-      const revealElements = document.querySelectorAll('.reveal');
+      const contactContent = document.querySelector('.contact-content');
+
+      if (!contactContent) return;
+
       const revealPoint = 150;
+      const contentPosition = contactContent.getBoundingClientRect().top;
       const windowHeight = window.innerHeight;
 
-      revealElements.forEach(element => {
-        const elementPosition = element.getBoundingClientRect().top;
-        if (elementPosition < windowHeight - revealPoint) {
-          element.classList.add('visible');
-        }
-      });
+      if (contentPosition < windowHeight - revealPoint) {
+        contactContent.classList.add('visible');
+      }
     }
 
     // Add event listeners for scroll and initial load
@@ -495,24 +492,19 @@
       window.addEventListener('load', revealOnScroll);
       revealOnScroll();
     });
-    document.addEventListener('DOMContentLoaded', function() {
-    let pageShown = false;
-    
-    function showPage() {
-        if (!pageShown) {
-            pageShown = true;
-            document.body.style.opacity = '1';
-        }
-    }
-    
-    // Try document.fonts.ready first
-    if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(showPage);
-    }
-    
-    // Always set a maximum timeout as backup
-    setTimeout(showPage, 1000);
-});
+
+  document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.preventDefault(); // Prevent default form submit
+
+    emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", this)
+      .then(function(response) {
+        alert("Message sent successfully! ✨");
+        document.getElementById("contact-form").reset();
+      }, function(error) {
+        console.error("Email send failed:", error);
+        alert("Something went wrong. Please try again later.");
+      });
+  });
   </script>
 </body>
 </html>
