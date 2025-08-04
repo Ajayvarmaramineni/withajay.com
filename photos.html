@@ -740,26 +740,80 @@
     </footer>
   </main>
 
-  <script>
-    // Scroll reveal animation for all sections
+  <script >
+    
+            document.documentElement.classList.add('back-trans
+
+    // Scroll reveal animation
     function revealOnScroll() {
       const revealElements = document.querySelectorAll('.reveal');
+      const heroContent = document.querySelector('.hero-content');
       const revealPoint = 150;
       const windowHeight = window.innerHeight;
-
       revealElements.forEach(element => {
         const elementPosition = element.getBoundingClientRect().top;
         if (elementPosition < windowHeight - revealPoint) {
           element.classList.add('visible');
         }
       });
+      if (heroContent) {
+        const heroPosition = heroContent.getBoundingClientRect().top;
+        if (heroPosition < windowHeight - revealPoint) {
+          heroContent.classList.add('scrolled');
+        } else {
+          heroContent.classList.remove('scrolled');
+        }
+      }
     }
 
-    // Add event listeners for scroll and initial load
+    // Fade Carousel Logic
+    function initCarousel() {
+      const carousel = document.getElementById('carousel');
+      const items = carousel.querySelectorAll('.carousel-item');
+      let currentIndex = 0;
+      function showNextImage() {
+        items[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % items.length;
+        items[currentIndex].classList.add('active');
+      }
+      items[currentIndex].classList.add('active');
+      setInterval(showNextImage, 5000);
+    }
+
+    // Lightbox Logic
+    function initLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = lightbox.querySelector('.lightbox-img');
+      const lightboxTitle = lightbox.querySelector('h3');
+      const lightboxCaption = lightbox.querySelector('p');
+      const closeBtn = lightbox.querySelector('.lightbox-close');
+      const photoCards = document.querySelectorAll('.photo-card');
+
+      function showLightbox(index) {
+        const card = photoCards[index];
+        lightboxImg.src = card.querySelector('img').src;
+        lightboxTitle.textContent = card.querySelector('h3').textContent;
+        lightboxCaption.textContent = card.querySelector('p').textContent;
+        lightbox.classList.add('active');
+      }
+
+      photoCards.forEach((card, index) => {
+        card.querySelector('img').addEventListener('click', () => showLightbox(index));
+      });
+
+      closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) lightbox.classList.remove('active');
+      });
+    }
+
+    // Initialize features
     document.addEventListener('DOMContentLoaded', () => {
       window.addEventListener('scroll', revealOnScroll);
       window.addEventListener('load', revealOnScroll);
       revealOnScroll();
+      initCarousel();
+      initLightbox();
     });
     document.addEventListener('DOMContentLoaded', function() {
     let pageShown = false;
@@ -779,6 +833,7 @@
     // Always set a maximum timeout as backup
     setTimeout(showPage, 1000);
 });
+
   </script>
 </body>
 </html>
