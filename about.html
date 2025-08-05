@@ -285,18 +285,18 @@ body {
       font-weight: 700;
     }
 
-    /* General Section Heading - matching index.html style */
+    /* General Section Heading - left aligned with underline effect */
     .section-heading {
       display: block;
-      text-align: center;
-      margin-bottom: 50px;
-      font-size: 1.5em;
+      text-align: left;
+      margin-bottom: 40px;
+      font-size: 1.2em;
       color: #2c1810;
     }
 
     .section-heading h2 {
       color: #2c1810;
-      font-size: 2.2em;
+      font-size: 1.8em;
     }
 
     .section-heading span {
@@ -308,8 +308,8 @@ body {
       content: '';
       position: absolute;
       bottom: -5px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
+      transform: translateX(0);
       width: 50px;
       height: 3px;
       background: #ff6f61;
@@ -318,6 +318,18 @@ body {
 
     .section-heading span:hover::after {
       width: 100px;
+    }
+
+    /* Scroll Reveal Animation for Sections */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* Responsive Design */
@@ -503,7 +515,7 @@ body {
       <div class="about-container">
         
         <div class="section-heading">
-          <h2>About Me</h2>
+          <h2><span>About Me</span></h2>
         </div>
 
         <div class="about-main">
