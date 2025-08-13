@@ -1,393 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" media="print" onload="this.media='all'" />
-<noscript>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" />
-</noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Photos | With Love AJ</title>
   <style>
+    /* Base */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    h1, h2, .gallery-heading {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-    }
-    p, li, .caption, .photo-description {
-      font-family: 'Open Sans', sans-serif;
-    }
     html { scroll-behavior: smooth; }
+    body { background: #fff; color: #333; }
+    h1, h2, .gallery-heading { font-family: 'Playfair Display', serif; font-weight: 700; }
+    p, li, .caption, .photo-description { font-family: 'Open Sans', sans-serif; }
 
     /* View Transitions API */
     @supports (view-transition-name: none) {
       ::view-transition-old(root),
-      ::view-transition-new(root) {
-        animation: none;
-        mix-blend-mode: normal;
-      }
+      ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
       ::view-transition-old(root) { z-index: 1; }
       ::view-transition-new(root) { z-index: 9999; }
-      .back-transition::view-transition-old(root) {
-        animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both fade-and-slide-out;
-      }
-      .back-transition::view-transition-new(root) {
-        animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both fade-and-slide-in reverse;
-      }
+      .back-transition::view-transition-old(root) { animation: 300ms cubic-bezier(0.4,0,0.2,1) both fade-and-slide-out; }
+      .back-transition::view-transition-new(root) { animation: 300ms cubic-bezier(0.4,0,0.2,1) both fade-and-slide-in reverse; }
     }
+    @keyframes fade-and-slide-in { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
+    @keyframes fade-and-slide-out { from {opacity:1; transform:translateY(0);} to {opacity:0; transform:translateY(20px);} }
 
-    /* Fallback Animations */
-    @keyframes fade-and-slide-in {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fade-and-slide-out {
-      from { opacity: 1; transform: translateY(0); }
-      to { opacity: 0; transform: translateY(20px); }
-    }
-
-    /* Shared Element Transitions */
     .shared-element { view-transition-name: shared-element; }
 
-    /* Loading Indicator */
+    /* Top route loader (unchanged logic below) */
     .route-loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
+      position: fixed; top: 0; left: 0; width: 100%; height: 3px;
       background: linear-gradient(to right, #4f46e5, #ec4899);
-      z-index: 10000;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s ease;
-      pointer-events: none;
+      z-index: 10000; transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; pointer-events: none;
     }
 
-    /* Header */
+    /* ===== HEADER (kept from your original) ===== */
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 3px 50px;
-      position: sticky;
-      top: 0;
-      background: rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(10px);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 3px 50px; position: sticky; top: 0;
+      background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px);
       z-index: 1000;
     }
-    .logo-svg {
-      height: 90px;
-      width: auto;
-      transition: all 0.3s ease-in-out;
-      cursor: pointer;
-    }
+    .logo-svg { height: 90px; width: auto; transition: all 0.3s ease-in-out; cursor: pointer; }
+    nav { flex: 1; text-align: right; position: absolute; left: 50%; transform: translateX(-50%); }
+    nav ul { display: flex; gap: 20px; list-style: none; }
+    nav ul li a { text-decoration: none; color: #f0f0f0; font-weight: bold; font-size: 1.1em; transition: color 0.3s ease, transform 0.4s ease; }
+    nav ul li a:hover { color: #ff6f61; transform: scale(1.2); }
+    .social-icons { display: flex; gap: 15px; flex: 0 0 auto; }
+    .social-icons img { width: 30px; filter: brightness(0) invert(1); transition: transform 0.4s ease, filter 0.3s ease; }
+    .social-icons img:hover { transform: scale(1.2); filter: brightness(1.5); }
 
-    nav {
-      flex: 1;
-      text-align: right;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    nav ul {
-      display: flex;
-      gap: 20px;
-      list-style: none;
-    }
-    nav ul li a {
-      text-decoration: none;
-      color: #f0f0f0;
-      font-weight: bold;
-      font-size: 1.1em;
-      transition: color 0.3s ease, transform 0.4s ease;
-    }
-    nav ul li a:hover {
-      color: #ff6f61;
-      transform: scale(1.2);
-    }
-    .social-icons {
-      display: flex;
-      gap: 15px;
-      flex: 0 0 auto;
-    }
-    .social-icons img {
-      width: 30px;
-      filter: brightness(0) invert(1);
-      transition: transform 0.4s ease, filter 0.3s ease;
-    }
-    .social-icons img:hover {
-      transform: scale(1.2);
-      filter: brightness(1.5);
-    }
-
-    /* Hero Background */
-    .hero-background {
-      background: url('images/photos.jpg') center/cover no-repeat;
-      height: 100vh;
-      position: fixed;
-      width: 100%;
-      z-index: -1;
-      top: 0;
-      left: 0;
-    }
-    .hero-background::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-    }
-    .hero-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    /* ===== Minimal white page header (replaces dark hero) ===== */
+    .page-header {
+      max-width: 1200px; margin: 0 auto; padding: 60px 20px 30px;
       text-align: center;
-      color: white;
-      z-index: 2;
-      opacity: 1;
-      transition: opacity 0.5s ease-out;
     }
-    .hero-content.scrolled { opacity: 0; }
-    .hero-content h1 {
-      font-size: 3em;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-      margin-bottom: 20px;
-    }
+    .page-header h1 { font-size: 2.8rem; margin-bottom: 10px; color: #222; }
+    .page-header p { color: #666; font-size: 1.05rem; }
 
-    /* Section Heading */
-    .section-heading {
-      display: block;
-      text-align: center;
-      margin: 20px 0 40px;
-      font-size: 2.5em;
-      color: #fce7e3;
-      position: relative;
-      z-index: 5;
-    }
-    .section-heading span {
-      position: relative;
-      display: inline-block;
-    }
-    .section-heading span::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 50px;
-      height: 3px;
-      background: #ff6f61;
-      transition: width 0.3s ease;
-    }
-    .section-heading span:hover::after { width: 100px; }
-
-    /* Scroll Reveal Animation */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Photos Section */
+    /* ===== Photos Section (white, clean, focused) ===== */
     .photos-section {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
-      padding: 80px 20px 100px;
-      position: relative;
-      z-index: 3;
+      background: #fff; padding: 10px 0 90px; position: relative; z-index: 3;
       min-height: calc(100vh - 80px);
     }
-    .photos-container {
-      max-width: 100%;
-      margin: 0 auto;
-      padding: 20px;
-    }
+    .photos-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-    /* Fade Carousel */
-    .carousel-container {
-      position: relative;
-      height: 400px;
-      margin: 60px auto;
-      width: 80%;
-      max-width: 800px;
-      overflow: hidden;
-      z-index: 4;
+    /* Section title (kept, but lighter color) */
+    .section-heading {
+      display: block; text-align: center; margin: 10px 0 30px;
+      font-size: 2rem; color: #222; position: relative; z-index: 5;
     }
-    .carousel-track {
-      position: relative;
-      height: 100%;
+    .section-heading span { position: relative; display: inline-block; }
+    .section-heading span::after {
+      content: ''; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
+      width: 60px; height: 3px; background: #e5e7eb; transition: width 0.3s ease;
     }
-    .carousel-item {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-    .carousel-item.active { opacity: 1; }
-    .carousel-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 10px;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
+    .section-heading span:hover::after { width: 120px; }
 
-    /* Photo Gallery */
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== Gallery grid like TheWorldTravelGuy (rounded tiles, big gutters) ===== */
     .photo-collage {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: auto;
-      gap: 10px;
-      max-width: 90%;
-      margin: 0 auto;
-      padding: 20px;
-      box-sizing: border-box;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
     }
-    .photo-card {
-      position: relative;
-      overflow: hidden;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      background: rgba(255, 255, 255, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      aspect-ratio: 4 / 3;
-    }
-    .photo-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    }
-    .photo-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      cursor: pointer;
-      loading: lazy;
-    }
-    .photo-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      padding: 10px;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-    }
-    .photo-card:hover .photo-overlay { transform: translateY(0); }
-    .photo-overlay h3 {
-      font-size: 1em;
-      margin-bottom: 5px;
-    }
-    .photo-overlay p {
-      font-size: 0.8em;
-    }
+    @media (max-width: 1100px) { .photo-collage { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 768px)  { .photo-collage { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
+    @media (max-width: 480px)  { .photo-collage { grid-template-columns: 1fr; } }
 
-    /* Lightbox */
+    .photo-card {
+      background: #fff; border-radius: 12px; overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .photo-card:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,0.10); }
+
+    /* Uniform thumbnail aspect for tidy rows */
+    .photo-card img {
+      width: 100%; height: 0; padding-bottom: 66.666%; /* 3:2 aspect */
+      object-fit: cover; display: block; border: 0;
+      border-radius: 12px 12px 0 0;
+      transition: transform 0.35s ease;
+    }
+    .photo-card:hover img { transform: scale(1.03); }
+
+    /* Turn your old overlay into a clean caption block below the image */
+    .photo-overlay {
+      position: static; transform: none; width: 100%;
+      background: #fff; color: #333; padding: 14px 14px 18px;
+    }
+    .photo-overlay h3 { font-size: 1rem; margin-bottom: 6px; text-align: center; }
+    .photo-overlay p  { font-size: 0.9rem; color: #666; text-align: center; }
+
+    /* Lightbox (unchanged behavior) */
     .lightbox {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 10000;
+      position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+      display: none; justify-content: center; align-items: center; z-index: 10000;
     }
     .lightbox.active { display: flex; }
     .lightbox-content {
-      max-width: 90%;
-      max-height: 90%;
-      position: relative;
-      background: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      max-width: 90%; max-height: 90%; position: relative; background: #fff;
+      border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;
     }
-    .lightbox-img {
-      width: 100%;
-      max-height: 70vh;
-      object-fit: contain;
-    }
-    .lightbox-caption {
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.9);
-      color: #333;
-      text-align: center;
-    }
-    .lightbox-caption h3 {
-      font-size: 1.5em;
-      margin-bottom: 10px;
-    }
-    .lightbox-caption p {
-      font-size: 1em;
-      line-height: 1.6;
-    }
+    .lightbox-img { width: 100%; max-height: 70vh; object-fit: contain; }
+    .lightbox-caption { padding: 20px; background: rgba(255,255,255,0.95); color: #333; text-align: center; }
+    .lightbox-caption h3 { font-size: 1.3em; margin-bottom: 8px; }
+    .lightbox-caption p { font-size: 1em; line-height: 1.55; }
     .lightbox-close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      border: none;
-      font-size: 1.5em;
-      padding: 10px;
-      cursor: pointer;
-      border-radius: 50%;
+      position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.5);
+      color: #fff; border: none; font-size: 1.4em; padding: 8px; cursor: pointer; border-radius: 50%;
       transition: background 0.3s ease;
     }
     .lightbox-close:hover { background: #ff6f61; }
 
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      .section-heading {
-        font-size: 2em;
-      }
-      .hero-content h1 {
-        font-size: 2em;
-      }
-      .photos-section {
-        padding: 60px 15px 80px;
-      }
-      .carousel-container {
-        height: 300px;
-        width: 90%;
-      }
-      .photo-collage {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .lightbox-content {
-        max-width: 95%;
-      }
-    }
-
-    /* Section Spacer */
-    .section-spacer {
-      height: 80px;
-    }
-
-    /* Footer */
+    /* Footer (kept from your original) */
     footer {
       background: rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(10px);
@@ -400,37 +149,22 @@
       align-items: center;
       gap: 15px;
     }
-    footer .footer-logo {
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-    footer .social-icons {
-      display: flex;
-      gap: 20px;
-      flex: 0 0 auto;
-      justify-content: center;
-    }
-    footer .social-icons img {
-      width: 28px;
-      filter: brightness(0) invert(1);
-      transition: transform 0.4s ease, filter 0.3s ease;
-    }
-    footer .social-icons img:hover {
-      transform: scale(1.2);
-      filter: brightness(1.5);
-    }
-    footer p {
-      font-size: 0.9em;
-      color: #e0e0e0;
-    }
+    footer .footer-logo { font-size: 1.2em; font-weight: bold; }
+    footer .social-icons { display: flex; gap: 20px; flex: 0 0 auto; justify-content: center; }
+    footer .social-icons img { width: 28px; filter: brightness(0) invert(1); transition: transform 0.4s ease, filter 0.3s ease; }
+    footer .social-icons img:hover { transform: scale(1.2); filter: brightness(1.5); }
+    footer p { font-size: 0.9em; color: #e0e0e0; }
+
+    /* Spacer below grid if needed */
+    .section-spacer { height: 40px; }
   </style>
 </head>
-<body style="opacity:0;">
-
+<body>
   <div class="route-loader"></div>
   <div class="transition-overlay"></div>
 
   <main id="main-content" data-transition-wrapper>
+    <!-- ===== Header (unchanged) ===== -->
     <header>
       <div class="header-left">
         <a href="index.html" style="text-decoration: none;">
@@ -463,244 +197,258 @@
       </div>
     </header>
 
-    <section id="home">
-      <div class="hero-background"></div>
-      <div class="hero-content">
-        <h1>Visual Stories</h1>
-      </div>
-    </section>
+    <!-- ===== Minimal white page header ===== -->
+    <div class="page-header">
+      <h1>Moments Through My Lens</h1>
+      <p>Capturing stories from every corner of life</p>
+    </div>
 
+    <!-- ===== Gallery (carousel removed, clean grid) ===== -->
     <section class="photos-section">
       <div class="photos-container">
-        <h2 class="section-heading reveal"><span>Moments Through My Lens</span></h2>
+        <h2 class="section-heading reveal"><span>Gallery</span></h2>
 
-        <!-- Fade Carousel (Unchanged) -->
-        <div class="carousel-container reveal">
-          <div class="carousel-track" id="carousel">
-            <div class="carousel-item active" data-index="0">
-              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Sunset Beach" loading="lazy">
-            </div>
-            <div class="carousel-item" data-index="1">
-              <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206" alt="City Skyline" loading="lazy">
-            </div>
-            <div class="carousel-item" data-index="2">
-              <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e" alt="Mountain Path" loading="lazy">
+        <div class="photo-collage reveal">
+          <!-- Your photos preserved; captions moved below thumbs -->
+          <div class="photo-card">
+            <img src="Photos/alone.jpg" alt="alone" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Alone</h3>
+              <p>Description for alone.</p>
             </div>
           </div>
-        </div>
 
-        <!-- Photo Gallery -->
-        <div class="photo-collage reveal">
-  <div class="photo-card">
-    <img src="Photos/alone.jpg" alt="alone" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Alone</h3>
-      <p>Description for alone.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/archi.jpg" alt="arch" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Archi</h3>
-      <p>Description for arch.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/beach.jpg" alt="beach" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Beach</h3>
-      <p>Description for beach.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/beach2.jpg" alt="beach2" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Beach2</h3>
-      <p>Description for beach2.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/boat.jpg" alt="boat" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Boat</h3>
-      <p>Description for boat.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/boy.jpg" alt="boy" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Boy</h3>
-      <p>Description for boy.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/boy2.jpg" alt="boy2" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Boy2</h3>
-      <p>Description for boy2.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/chai.jpg" alt="chai" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Chai</h3>
-      <p>Description for chai.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/coffee.jpg" alt="coffee" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Coffee</h3>
-      <p>Description for coffee.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/corner.jpg" alt="corner" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Corner</h3>
-      <p>Description for corner.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/delhi.jpg" alt="delhi" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Delhi</h3>
-      <p>Description for delhi.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/dog.jpg" alt="dog" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Dog</h3>
-      <p>Description for dog.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/fly.jpg" alt="fly" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Fly</h3>
-      <p>Description for fly.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/lazors.jpg" alt="lazors" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Lazors</h3>
-      <p>Description for lazors.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/lazors1.jpg" alt="lazors1" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Lazors1</h3>
-      <p>Description for lazors1.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/moon.jpg" alt="moon" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Moon</h3>
-      <p>Description for moon.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/mumbai.jpg" alt="mumbai" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Mumbai</h3>
-      <p>Description for mumbai.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/nights.jpg" alt="nights" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Nights</h3>
-      <p>Description for nights.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/nights2.jpg" alt="nights2" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Nights2</h3>
-      <p>Description for nights2.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/palmtree.jpg" alt="palmtree" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Palmtree</h3>
-      <p>Description for palmtree.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/plane.jpg" alt="plane" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Plane</h3>
-      <p>Description for plane.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/raindrops.jpg" alt="raindrops" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Raindrops</h3>
-      <p>Description for raindrops.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/red.jpg" alt="red" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Red</h3>
-      <p>Description for red.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/starrynight.jpg" alt="starrynight" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Starrynight</h3>
-      <p>Description for starrynight.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/sunset.jpg" alt="sunset" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Sunset</h3>
-      <p>Description for sunset.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/taj.jpg" alt="taj" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Taj</h3>
-      <p>Description for taj.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/temple2.jpg" alt="temple2" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Temple2</h3>
-      <p>Description for temple2.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/temple3.jpg" alt="temple3" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Temple3</h3>
-      <p>Description for temple3.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/trees.jpg" alt="trees" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Trees</h3>
-      <p>Description for trees.</p>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="Photos/wine.jpg" alt="wine" loading="lazy">
-    <div class="photo-overlay">
-      <h3>Wine</h3>
-      <p>Description for wine.</p>
-    </div>
-  </div>
+          <div class="photo-card">
+            <img src="Photos/archi.jpg" alt="arch" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Archi</h3>
+              <p>Description for arch.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/beach.jpg" alt="beach" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Beach</h3>
+              <p>Description for beach.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/beach2.jpg" alt="beach2" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Beach2</h3>
+              <p>Description for beach2.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/boat.jpg" alt="boat" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Boat</h3>
+              <p>Description for boat.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/boy.jpg" alt="boy" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Boy</h3>
+              <p>Description for boy.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/boy2.jpg" alt="boy2" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Boy2</h3>
+              <p>Description for boy2.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/chai.jpg" alt="chai" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Chai</h3>
+              <p>Description for chai.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/coffee.jpg" alt="coffee" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Coffee</h3>
+              <p>Description for coffee.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/corner.jpg" alt="corner" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Corner</h3>
+              <p>Description for corner.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/delhi.jpg" alt="delhi" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Delhi</h3>
+              <p>Description for delhi.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/dog.jpg" alt="dog" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Dog</h3>
+              <p>Description for dog.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/fly.jpg" alt="fly" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Fly</h3>
+              <p>Description for fly.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/lazors.jpg" alt="lazors" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Lazors</h3>
+              <p>Description for lazors.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/lazors1.jpg" alt="lazors1" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Lazors1</h3>
+              <p>Description for lazors1.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/moon.jpg" alt="moon" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Moon</h3>
+              <p>Description for moon.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/mumbai.jpg" alt="mumbai" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Mumbai</h3>
+              <p>Description for mumbai.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/nights.jpg" alt="nights" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Nights</h3>
+              <p>Description for nights.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/nights2.jpg" alt="nights2" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Nights2</h3>
+              <p>Description for nights2.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/palmtree.jpg" alt="palmtree" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Palmtree</h3>
+              <p>Description for palmtree.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/plane.jpg" alt="plane" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Plane</h3>
+              <p>Description for plane.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/raindrops.jpg" alt="raindrops" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Raindrops</h3>
+              <p>Description for raindrops.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/red.jpg" alt="red" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Red</h3>
+              <p>Description for red.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/starrynight.jpg" alt="starrynight" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Starrynight</h3>
+              <p>Description for starrynight.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/sunset.jpg" alt="sunset" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Sunset</h3>
+              <p>Description for sunset.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/taj.jpg" alt="taj" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Taj</h3>
+              <p>Description for taj.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/temple2.jpg" alt="temple2" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Temple2</h3>
+              <p>Description for temple2.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/temple3.jpg" alt="temple3" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Temple3</h3>
+              <p>Description for temple3.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/trees.jpg" alt="trees" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Trees</h3>
+              <p>Description for trees.</p>
+            </div>
+          </div>
+
+          <div class="photo-card">
+            <img src="Photos/wine.jpg" alt="wine" loading="lazy">
+            <div class="photo-overlay">
+              <h3>Wine</h3>
+              <p>Description for wine.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -719,6 +467,7 @@
 
     <div class="section-spacer"></div>
 
+    <!-- ===== Footer (unchanged) ===== -->
     <footer>
       <div class="footer-logo">Ajay Varma Ramineni</div>
       <div class="social-icons flex justify-center gap-6">
@@ -740,100 +489,86 @@
     </footer>
   </main>
 
-  <script >
-    
-            document.documentElement.classList.add('back-trans
+  <script type="module">
+    // Polyfill for view transitions
+    if (!document.startViewTransition) {
+      document.startViewTransition = (callback) => {
+        callback();
+        return { ready: Promise.resolve(), updateCallbackDone: Promise.resolve(), finished: Promise.resolve() };
+      };
+    }
 
-    // Scroll reveal animation
+    class Router {
+      constructor() { this.loader = document.querySelector('.route-loader'); this.init(); }
+      init() { this.handleLinks(); this.handlePopState(); }
+      handleLinks() {
+        document.addEventListener('click', (e) => {
+          const link = e.target.closest('a');
+          if (!link || link.target === '_blank' || link.href.match(/^#|mailto:|tel:/)) return;
+          if (link.hostname !== window.location.hostname) return;
+          e.preventDefault(); this.navigate(link.href);
+        });
+      }
+      handlePopState() { window.addEventListener('popstate', () => { this.navigate(window.location.href, true); }); }
+      async navigate(url, isPopState = false) {
+        this.loader.style.transform = 'scaleX(0.3)';
+        const transition = document.startViewTransition(async () => {
+          if (isPopState) { document.documentElement.classList.add('back-transition'); }
+          try {
+            const response = await fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            document.title = doc.title;
+            document.querySelector('[data-transition-wrapper]').innerHTML =
+              doc.querySelector('[data-transition-wrapper]').innerHTML;
+            this.loader.style.transform = 'scaleX(1)';
+            setTimeout(() => { this.loader.style.transform = 'scaleX(0)'; }, 300);
+            if (!isPopState) { window.history.pushState({}, '', url); }
+          } catch (error) {
+            console.error('Navigation failed:', error); window.location.href = url;
+          } finally {
+            if (isPopState) { setTimeout(() => { document.documentElement.classList.remove('back-transition'); }, 300); }
+          }
+        });
+        await transition.ready;
+      }
+    }
+    new Router();
+
+    // Reveal on scroll
     function revealOnScroll() {
       const revealElements = document.querySelectorAll('.reveal');
-      const heroContent = document.querySelector('.hero-content');
-      const revealPoint = 150;
       const windowHeight = window.innerHeight;
+      const revealPoint = 120;
       revealElements.forEach(element => {
-        const elementPosition = element.getBoundingClientRect().top;
-        if (elementPosition < windowHeight - revealPoint) {
-          element.classList.add('visible');
-        }
+        const top = element.getBoundingClientRect().top;
+        if (top < windowHeight - revealPoint) element.classList.add('visible');
       });
-      if (heroContent) {
-        const heroPosition = heroContent.getBoundingClientRect().top;
-        if (heroPosition < windowHeight - revealPoint) {
-          heroContent.classList.add('scrolled');
-        } else {
-          heroContent.classList.remove('scrolled');
-        }
-      }
     }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
 
-    // Fade Carousel Logic
-    function initCarousel() {
-      const carousel = document.getElementById('carousel');
-      const items = carousel.querySelectorAll('.carousel-item');
-      let currentIndex = 0;
-      function showNextImage() {
-        items[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex + 1) % items.length;
-        items[currentIndex].classList.add('active');
-      }
-      items[currentIndex].classList.add('active');
-      setInterval(showNextImage, 5000);
-    }
-
-    // Lightbox Logic
-    function initLightbox() {
+    // Lightbox
+    (function initLightbox() {
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = lightbox.querySelector('.lightbox-img');
       const lightboxTitle = lightbox.querySelector('h3');
       const lightboxCaption = lightbox.querySelector('p');
       const closeBtn = lightbox.querySelector('.lightbox-close');
-      const photoCards = document.querySelectorAll('.photo-card');
+      const cards = document.querySelectorAll('.photo-card');
 
-      function showLightbox(index) {
-        const card = photoCards[index];
+      function show(index) {
+        const card = cards[index];
         lightboxImg.src = card.querySelector('img').src;
-        lightboxTitle.textContent = card.querySelector('h3').textContent;
-        lightboxCaption.textContent = card.querySelector('p').textContent;
+        lightboxTitle.textContent = card.querySelector('.photo-overlay h3').textContent;
+        lightboxCaption.textContent = card.querySelector('.photo-overlay p').textContent;
         lightbox.classList.add('active');
       }
-
-      photoCards.forEach((card, index) => {
-        card.querySelector('img').addEventListener('click', () => showLightbox(index));
-      });
-
+      cards.forEach((card, idx) => card.querySelector('img').addEventListener('click', () => show(idx)));
       closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) lightbox.classList.remove('active');
-      });
-    }
-
-    // Initialize features
-    document.addEventListener('DOMContentLoaded', () => {
-      window.addEventListener('scroll', revealOnScroll);
-      window.addEventListener('load', revealOnScroll);
-      revealOnScroll();
-      initCarousel();
-      initLightbox();
-    });
-    document.addEventListener('DOMContentLoaded', function() {
-    let pageShown = false;
-    
-    function showPage() {
-        if (!pageShown) {
-            pageShown = true;
-            document.body.style.opacity = '1';
-        }
-    }
-    
-    // Try document.fonts.ready first
-    if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(showPage);
-    }
-    
-    // Always set a maximum timeout as backup
-    setTimeout(showPage, 1000);
-});
-
+      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('active'); });
+    })();
   </script>
 </body>
 </html>
