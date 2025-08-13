@@ -9,7 +9,6 @@
     /* Base */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { background: #953d3d; color: #333; }
     h1, h2, .gallery-heading { font-family: 'Playfair Display', serif; font-weight: 700; }
     p, li, .caption, .photo-description { font-family: 'Open Sans', sans-serif; }
 
@@ -27,14 +26,23 @@
 
     .shared-element { view-transition-name: shared-element; }
 
-    /* Route loader (kept) */
-    .route-loader {
-      position: fixed; top: 0; left: 0; width: 100%; height: 3px;
-      background: linear-gradient(to right, #4f46e5, #ec4899);
-      z-index: 10000; transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; pointer-events: none;
-    }
-
     /* ===== Header (EXACTLY your original) ===== */
+    body {
+  background: url('Photos/background.jpg') center center / cover no-repeat fixed;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255,255,255,0.7); /* light fade overlay so gallery pops */
+  z-index: -1;
+}
+
     header {
       display: flex;
       justify-content: space-between;
