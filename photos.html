@@ -13,7 +13,7 @@
     h1, h2, .gallery-heading { font-family: 'Playfair Display', serif; font-weight: 700; }
     p, li, .caption, .photo-description { font-family: 'Open Sans', sans-serif; }
 
-    /* View Transitions API */
+    /* View Transitions (kept from your original) */
     @supports (view-transition-name: none) {
       ::view-transition-old(root),
       ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
@@ -27,52 +27,102 @@
 
     .shared-element { view-transition-name: shared-element; }
 
-    /* Top route loader (unchanged logic below) */
+    /* Route loader (kept) */
     .route-loader {
       position: fixed; top: 0; left: 0; width: 100%; height: 3px;
       background: linear-gradient(to right, #4f46e5, #ec4899);
       z-index: 10000; transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; pointer-events: none;
     }
 
-    /* ===== HEADER (kept from your original) ===== */
+    /* ===== Header (EXACTLY your original) ===== */
     header {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 3px 50px; position: sticky; top: 0;
-      background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 3px 50px;
+      position: sticky;
+      top: 0;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
       z-index: 1000;
     }
-    .logo-svg { height: 90px; width: auto; transition: all 0.3s ease-in-out; cursor: pointer; }
-    nav { flex: 1; text-align: right; position: absolute; left: 50%; transform: translateX(-50%); }
-    nav ul { display: flex; gap: 20px; list-style: none; }
-    nav ul li a { text-decoration: none; color: #f0f0f0; font-weight: bold; font-size: 1.1em; transition: color 0.3s ease, transform 0.4s ease; }
-    nav ul li a:hover { color: #ff6f61; transform: scale(1.2); }
-    .social-icons { display: flex; gap: 15px; flex: 0 0 auto; }
-    .social-icons img { width: 30px; filter: brightness(0) invert(1); transition: transform 0.4s ease, filter 0.3s ease; }
-    .social-icons img:hover { transform: scale(1.2); filter: brightness(1.5); }
+    .logo-svg {
+      height: 90px;
+      width: auto;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+    }
+    nav {
+      flex: 1;
+      text-align: right;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    nav ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #f0f0f0;
+      font-weight: bold;
+      font-size: 1.1em;
+      transition: color 0.3s ease, transform 0.4s ease;
+    }
+    nav ul li a:hover {
+      color: #ff6f61;
+      transform: scale(1.2);
+    }
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      flex: 0 0 auto;
+    }
+    .social-icons img {
+      width: 30px;
+      filter: brightness(0) invert(1);
+      transition: transform 0.4s ease, filter 0.3s ease;
+    }
+    .social-icons img:hover {
+      transform: scale(1.2);
+      filter: brightness(1.5);
+    }
 
-    /* ===== Minimal white page header (replaces dark hero) ===== */
+    /* ===== Minimal white page header ===== */
     .page-header {
-      max-width: 1200px; margin: 0 auto; padding: 60px 20px 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px 30px;
       text-align: center;
     }
     .page-header h1 { font-size: 2.8rem; margin-bottom: 10px; color: #222; }
-    .page-header p { color: #666; font-size: 1.05rem; }
+    .page-header p  { color: #666; font-size: 1.05rem; }
 
-    /* ===== Photos Section (white, clean, focused) ===== */
+    /* ===== Photos Section (white & clean) ===== */
     .photos-section {
-      background: #fff; padding: 10px 0 90px; position: relative; z-index: 3;
+      background: #fff;
+      padding: 10px 0 90px;
+      position: relative;
+      z-index: 3;
       min-height: calc(100vh - 80px);
     }
     .photos-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-    /* Section title (kept, but lighter color) */
     .section-heading {
-      display: block; text-align: center; margin: 10px 0 30px;
-      font-size: 2rem; color: #222; position: relative; z-index: 5;
+      display: block;
+      text-align: center;
+      margin: 10px 0 30px;
+      font-size: 2rem;
+      color: #222;
+      position: relative;
+      z-index: 5;
     }
     .section-heading span { position: relative; display: inline-block; }
     .section-heading span::after {
-      content: ''; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
+      content: '';
+      position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
       width: 60px; height: 3px; background: #e5e7eb; transition: width 0.3s ease;
     }
     .section-heading span:hover::after { width: 120px; }
@@ -81,7 +131,7 @@
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ===== Gallery grid like TheWorldTravelGuy (rounded tiles, big gutters) ===== */
+    /* ===== Gallery grid (like TheWorldTravelGuy) ===== */
     .photo-collage {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -92,51 +142,98 @@
     @media (max-width: 480px)  { .photo-collage { grid-template-columns: 1fr; } }
 
     .photo-card {
-      background: #fff; border-radius: 12px; overflow: hidden;
+      position: relative;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
       box-shadow: 0 4px 12px rgba(0,0,0,0.06);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
+      cursor: pointer;
     }
     .photo-card:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,0.10); }
 
-    /* Uniform thumbnail aspect for tidy rows */
+    /* Tidy uniform thumbnails (3:2) */
     .photo-card img {
-      width: 100%; height: 0; padding-bottom: 66.666%; /* 3:2 aspect */
+      width: 100%; height: 0; padding-bottom: 66.666%;
       object-fit: cover; display: block; border: 0;
       border-radius: 12px 12px 0 0;
       transition: transform 0.35s ease;
     }
     .photo-card:hover img { transform: scale(1.03); }
 
-    /* Turn your old overlay into a clean caption block below the image */
+    /* Hover magnifying glass overlay */
+    .hover-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.35);
+      opacity: 0; display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.25s ease;
+    }
+    .hover-overlay svg { width: 40px; height: 40px; fill: #fff; }
+    .photo-card:hover .hover-overlay { opacity: 1; }
+
+    /* Caption block (below image) */
     .photo-overlay {
       position: static; transform: none; width: 100%;
       background: #fff; color: #333; padding: 14px 14px 18px;
+      text-align: center;
     }
-    .photo-overlay h3 { font-size: 1rem; margin-bottom: 6px; text-align: center; }
-    .photo-overlay p  { font-size: 0.9rem; color: #666; text-align: center; }
+    .photo-overlay h3 { font-size: 1rem; margin-bottom: 6px; }
+    .photo-overlay p  { font-size: 0.9rem; color: #666; }
 
-    /* Lightbox (unchanged behavior) */
+    /* ===== Lightbox carousel ===== */
     .lightbox {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.9);
-      display: none; justify-content: center; align-items: center; z-index: 10000;
+      position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+      display: none; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 10000;
     }
     .lightbox.active { display: flex; }
-    .lightbox-content {
-      max-width: 90%; max-height: 90%; position: relative; background: #fff;
-      border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;
-    }
-    .lightbox-img { width: 100%; max-height: 70vh; object-fit: contain; }
-    .lightbox-caption { padding: 20px; background: rgba(255,255,255,0.95); color: #333; text-align: center; }
-    .lightbox-caption h3 { font-size: 1.3em; margin-bottom: 8px; }
-    .lightbox-caption p { font-size: 1em; line-height: 1.55; }
-    .lightbox-close {
-      position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.5);
-      color: #fff; border: none; font-size: 1.4em; padding: 8px; cursor: pointer; border-radius: 50%;
-      transition: background 0.3s ease;
-    }
-    .lightbox-close:hover { background: #ff6f61; }
 
-    /* Footer (kept from your original) */
+    .lightbox-stage {
+      position: relative; width: 100%; height: calc(100% - 120px);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .lightbox-img {
+      max-width: 90%; max-height: 85%; object-fit: contain;
+      opacity: 0; transform: translateX(0); transition: opacity 250ms ease, transform 250ms ease;
+      will-change: opacity, transform;
+    }
+    .lightbox-img.show { opacity: 1; }
+
+    /* Slide animations */
+    .slide-in-right { transform: translateX(20px); opacity: 0; }
+    .slide-in-left  { transform: translateX(-20px); opacity: 0; }
+    .slide-center   { transform: translateX(0); opacity: 1; }
+
+    /* Arrows */
+    .lightbox-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(0,0,0,0.5); border: none; color: #fff;
+      font-size: 2rem; padding: 10px 15px; cursor: pointer; border-radius: 6px;
+      z-index: 10001; transition: background 0.25s ease;
+    }
+    .lightbox-arrow:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-arrow.prev { left: 20px; }
+    .lightbox-arrow.next { right: 20px; }
+
+    /* Caption area */
+    .lightbox-caption {
+      color: #fff; text-align: center; margin-top: 12px; padding: 0 20px 24px;
+      max-width: 900px;
+    }
+    .lightbox-caption h3 { font-size: 1.25rem; margin-bottom: 6px; }
+    .lightbox-caption p  { font-size: 1rem; color: #ddd; }
+
+    /* Close button */
+    .lightbox-close {
+      position: absolute; top: 16px; right: 16px;
+      background: rgba(0,0,0,0.5); border: none; color: #fff;
+      font-size: 1.4rem; cursor: pointer; padding: 8px 12px; border-radius: 6px; z-index: 10002;
+      transition: background 0.25s ease;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+    /* Footer (EXACTLY your original) */
     footer {
       background: rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(10px);
@@ -155,7 +252,6 @@
     footer .social-icons img:hover { transform: scale(1.2); filter: brightness(1.5); }
     footer p { font-size: 0.9em; color: #e0e0e0; }
 
-    /* Spacer below grid if needed */
     .section-spacer { height: 40px; }
   </style>
 </head>
@@ -164,6 +260,9 @@
   <div class="transition-overlay"></div>
 
   <main id="main-content" data-transition-wrapper>
+    <!-- anchor for "Back to Top" -->
+    <div id="home"></div>
+
     <!-- ===== Header (unchanged) ===== -->
     <header>
       <div class="header-left">
@@ -197,271 +296,273 @@
       </div>
     </header>
 
-    <!-- ===== Minimal white page header ===== -->
+    <!-- Minimal white page header -->
     <div class="page-header">
       <h1>Moments Through My Lens</h1>
       <p>Capturing stories from every corner of life</p>
     </div>
 
-    <!-- ===== Gallery (carousel removed, clean grid) ===== -->
+    <!-- ===== Gallery ===== -->
     <section class="photos-section">
       <div class="photos-container">
         <h2 class="section-heading reveal"><span>Gallery</span></h2>
 
         <div class="photo-collage reveal">
-          <!-- Your photos preserved; captions moved below thumbs -->
-          <div class="photo-card">
+          <!-- CARDS with matching data-index 0..29 -->
+          <div class="photo-card" data-index="0">
             <img src="Photos/alone.jpg" alt="alone" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Alone</h3>
-              <p>Description for alone.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Alone</h3><p>Description for alone.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="1">
             <img src="Photos/archi.jpg" alt="arch" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Archi</h3>
-              <p>Description for arch.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Archi</h3><p>Description for arch.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="2">
             <img src="Photos/beach.jpg" alt="beach" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Beach</h3>
-              <p>Description for beach.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Beach</h3><p>Description for beach.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="3">
             <img src="Photos/beach2.jpg" alt="beach2" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Beach2</h3>
-              <p>Description for beach2.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Beach2</h3><p>Description for beach2.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="4">
             <img src="Photos/boat.jpg" alt="boat" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Boat</h3>
-              <p>Description for boat.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Boat</h3><p>Description for boat.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="5">
             <img src="Photos/boy.jpg" alt="boy" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Boy</h3>
-              <p>Description for boy.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Boy</h3><p>Description for boy.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="6">
             <img src="Photos/boy2.jpg" alt="boy2" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Boy2</h3>
-              <p>Description for boy2.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Boy2</h3><p>Description for boy2.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="7">
             <img src="Photos/chai.jpg" alt="chai" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Chai</h3>
-              <p>Description for chai.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Chai</h3><p>Description for chai.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="8">
             <img src="Photos/coffee.jpg" alt="coffee" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Coffee</h3>
-              <p>Description for coffee.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Coffee</h3><p>Description for coffee.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="9">
             <img src="Photos/corner.jpg" alt="corner" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Corner</h3>
-              <p>Description for corner.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Corner</h3><p>Description for corner.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="10">
             <img src="Photos/delhi.jpg" alt="delhi" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Delhi</h3>
-              <p>Description for delhi.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Delhi</h3><p>Description for delhi.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="11">
             <img src="Photos/dog.jpg" alt="dog" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Dog</h3>
-              <p>Description for dog.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Dog</h3><p>Description for dog.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="12">
             <img src="Photos/fly.jpg" alt="fly" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Fly</h3>
-              <p>Description for fly.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Fly</h3><p>Description for fly.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="13">
             <img src="Photos/lazors.jpg" alt="lazors" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Lazors</h3>
-              <p>Description for lazors.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Lazors</h3><p>Description for lazors.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="14">
             <img src="Photos/lazors1.jpg" alt="lazors1" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Lazors1</h3>
-              <p>Description for lazors1.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Lazors1</h3><p>Description for lazors1.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="15">
             <img src="Photos/moon.jpg" alt="moon" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Moon</h3>
-              <p>Description for moon.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Moon</h3><p>Description for moon.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="16">
             <img src="Photos/mumbai.jpg" alt="mumbai" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Mumbai</h3>
-              <p>Description for mumbai.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Mumbai</h3><p>Description for mumbai.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="17">
             <img src="Photos/nights.jpg" alt="nights" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Nights</h3>
-              <p>Description for nights.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Nights</h3><p>Description for nights.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="18">
             <img src="Photos/nights2.jpg" alt="nights2" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Nights2</h3>
-              <p>Description for nights2.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Nights2</h3><p>Description for nights2.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="19">
             <img src="Photos/palmtree.jpg" alt="palmtree" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Palmtree</h3>
-              <p>Description for palmtree.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Palmtree</h3><p>Description for palmtree.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="20">
             <img src="Photos/plane.jpg" alt="plane" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Plane</h3>
-              <p>Description for plane.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Plane</h3><p>Description for plane.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="21">
             <img src="Photos/raindrops.jpg" alt="raindrops" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Raindrops</h3>
-              <p>Description for raindrops.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Raindrops</h3><p>Description for raindrops.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="22">
             <img src="Photos/red.jpg" alt="red" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Red</h3>
-              <p>Description for red.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Red</h3><p>Description for red.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="23">
             <img src="Photos/starrynight.jpg" alt="starrynight" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Starrynight</h3>
-              <p>Description for starrynight.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Starrynight</h3><p>Description for starrynight.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="24">
             <img src="Photos/sunset.jpg" alt="sunset" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Sunset</h3>
-              <p>Description for sunset.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Sunset</h3><p>Description for sunset.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="25">
             <img src="Photos/taj.jpg" alt="taj" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Taj</h3>
-              <p>Description for taj.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Taj</h3><p>Description for taj.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="26">
             <img src="Photos/temple2.jpg" alt="temple2" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Temple2</h3>
-              <p>Description for temple2.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Temple2</h3><p>Description for temple2.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="27">
             <img src="Photos/temple3.jpg" alt="temple3" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Temple3</h3>
-              <p>Description for temple3.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Temple3</h3><p>Description for temple3.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="28">
             <img src="Photos/trees.jpg" alt="trees" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Trees</h3>
-              <p>Description for trees.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Trees</h3><p>Description for trees.</p></div>
           </div>
 
-          <div class="photo-card">
+          <div class="photo-card" data-index="29">
             <img src="Photos/wine.jpg" alt="wine" loading="lazy">
-            <div class="photo-overlay">
-              <h3>Wine</h3>
-              <p>Description for wine.</p>
+            <div class="hover-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19l-5.5-5.5a7 7 0 1 0-1.5 1.5L19 21zM5 10a5 5 0 1 1 10 0a5 5 0 0 1-10 0z"/></svg>
             </div>
+            <div class="photo-overlay"><h3>Wine</h3><p>Description for wine.</p></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-      <div class="lightbox-content">
+    <!-- Lightbox Carousel -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button class="lightbox-close" aria-label="Close">✕</button>
+      <div class="lightbox-stage">
+        <button class="lightbox-arrow prev" aria-label="Previous">❮</button>
         <img class="lightbox-img" src="" alt="">
-        <div class="lightbox-caption">
-          <h3></h3>
-          <p></p>
-        </div>
-        <button class="lightbox-close">✕</button>
+        <button class="lightbox-arrow next" aria-label="Next">❯</button>
+      </div>
+      <div class="lightbox-caption">
+        <h3></h3>
+        <p></p>
       </div>
     </div>
 
@@ -490,7 +591,7 @@
   </main>
 
   <script type="module">
-    // Polyfill for view transitions
+    /* View transition polyfill (kept) */
     if (!document.startViewTransition) {
       document.startViewTransition = (callback) => {
         callback();
@@ -498,45 +599,9 @@
       };
     }
 
-    class Router {
-      constructor() { this.loader = document.querySelector('.route-loader'); this.init(); }
-      init() { this.handleLinks(); this.handlePopState(); }
-      handleLinks() {
-        document.addEventListener('click', (e) => {
-          const link = e.target.closest('a');
-          if (!link || link.target === '_blank' || link.href.match(/^#|mailto:|tel:/)) return;
-          if (link.hostname !== window.location.hostname) return;
-          e.preventDefault(); this.navigate(link.href);
-        });
-      }
-      handlePopState() { window.addEventListener('popstate', () => { this.navigate(window.location.href, true); }); }
-      async navigate(url, isPopState = false) {
-        this.loader.style.transform = 'scaleX(0.3)';
-        const transition = document.startViewTransition(async () => {
-          if (isPopState) { document.documentElement.classList.add('back-transition'); }
-          try {
-            const response = await fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
-            const html = await response.text();
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            document.title = doc.title;
-            document.querySelector('[data-transition-wrapper]').innerHTML =
-              doc.querySelector('[data-transition-wrapper]').innerHTML;
-            this.loader.style.transform = 'scaleX(1)';
-            setTimeout(() => { this.loader.style.transform = 'scaleX(0)'; }, 300);
-            if (!isPopState) { window.history.pushState({}, '', url); }
-          } catch (error) {
-            console.error('Navigation failed:', error); window.location.href = url;
-          } finally {
-            if (isPopState) { setTimeout(() => { document.documentElement.classList.remove('back-transition'); }, 300); }
-          }
-        });
-        await transition.ready;
-      }
-    }
-    new Router();
+   
 
-    // Reveal on scroll
+    /* Reveal on scroll */
     function revealOnScroll() {
       const revealElements = document.querySelectorAll('.reveal');
       const windowHeight = window.innerHeight;
@@ -549,26 +614,130 @@
     window.addEventListener('scroll', revealOnScroll);
     window.addEventListener('load', revealOnScroll);
 
-    // Lightbox
-    (function initLightbox() {
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = lightbox.querySelector('.lightbox-img');
-      const lightboxTitle = lightbox.querySelector('h3');
-      const lightboxCaption = lightbox.querySelector('p');
-      const closeBtn = lightbox.querySelector('.lightbox-close');
-      const cards = document.querySelectorAll('.photo-card');
+    /* Lightbox Carousel Logic (exactly-like-theirs behavior) */
+    const images = [
+      {src:"Photos/alone.jpg", title:"Alone", desc:"Description for alone."},
+      {src:"Photos/archi.jpg", title:"Archi", desc:"Description for arch."},
+      {src:"Photos/beach.jpg", title:"Beach", desc:"Description for beach."},
+      {src:"Photos/beach2.jpg", title:"Beach2", desc:"Description for beach2."},
+      {src:"Photos/boat.jpg", title:"Boat", desc:"Description for boat."},
+      {src:"Photos/boy.jpg", title:"Boy", desc:"Description for boy."},
+      {src:"Photos/boy2.jpg", title:"Boy2", desc:"Description for boy2."},
+      {src:"Photos/chai.jpg", title:"Chai", desc:"Description for chai."},
+      {src:"Photos/coffee.jpg", title:"Coffee", desc:"Description for coffee."},
+      {src:"Photos/corner.jpg", title:"Corner", desc:"Description for corner."},
+      {src:"Photos/delhi.jpg", title:"Delhi", desc:"Description for delhi."},
+      {src:"Photos/dog.jpg", title:"Dog", desc:"Description for dog."},
+      {src:"Photos/fly.jpg", title:"Fly", desc:"Description for fly."},
+      {src:"Photos/lazors.jpg", title:"Lazors", desc:"Description for lazors."},
+      {src:"Photos/lazors1.jpg", title:"Lazors1", desc:"Description for lazors1."},
+      {src:"Photos/moon.jpg", title:"Moon", desc:"Description for moon."},
+      {src:"Photos/mumbai.jpg", title:"Mumbai", desc:"Description for mumbai."},
+      {src:"Photos/nights.jpg", title:"Nights", desc:"Description for nights."},
+      {src:"Photos/nights2.jpg", title:"Nights2", desc:"Description for nights2."},
+      {src:"Photos/palmtree.jpg", title:"Palmtree", desc:"Description for palmtree."},
+      {src:"Photos/plane.jpg", title:"Plane", desc:"Description for plane."},
+      {src:"Photos/raindrops.jpg", title:"Raindrops", desc:"Description for raindrops."},
+      {src:"Photos/red.jpg", title:"Red", desc:"Description for red."},
+      {src:"Photos/starrynight.jpg", title:"Starrynight", desc:"Description for starrynight."},
+      {src:"Photos/sunset.jpg", title:"Sunset", desc:"Description for sunset."},
+      {src:"Photos/taj.jpg", title:"Taj", desc:"Description for taj."},
+      {src:"Photos/temple2.jpg", title:"Temple2", desc:"Description for temple2."},
+      {src:"Photos/temple3.jpg", title:"Temple3", desc:"Description for temple3."},
+      {src:"Photos/trees.jpg", title:"Trees", desc:"Description for trees."},
+      {src:"Photos/wine.jpg", title:"Wine", desc:"Description for wine."}
+    ];
 
-      function show(index) {
-        const card = cards[index];
-        lightboxImg.src = card.querySelector('img').src;
-        lightboxTitle.textContent = card.querySelector('.photo-overlay h3').textContent;
-        lightboxCaption.textContent = card.querySelector('.photo-overlay p').textContent;
-        lightbox.classList.add('active');
+    const lightbox = document.getElementById('lightbox');
+    const stage = lightbox.querySelector('.lightbox-stage');
+    const imgEl = lightbox.querySelector('.lightbox-img');
+    const titleEl = lightbox.querySelector('.lightbox-caption h3');
+    const descEl = lightbox.querySelector('.lightbox-caption p');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+    const prevBtn = lightbox.querySelector('.lightbox-arrow.prev');
+    const nextBtn = lightbox.querySelector('.lightbox-arrow.next');
+
+    let currentIndex = 0;
+    let touchStartX = 0;
+
+    function applySlideAnimation(direction) {
+      imgEl.classList.remove('show', 'slide-in-left', 'slide-in-right', 'slide-center');
+      // Prep animation direction
+      if (direction === 'next') imgEl.classList.add('slide-in-right');
+      if (direction === 'prev') imgEl.classList.add('slide-in-left');
+      // Force reflow to restart animation
+      void imgEl.offsetWidth;
+      imgEl.classList.remove('slide-in-left', 'slide-in-right');
+      imgEl.classList.add('slide-center', 'show');
+    }
+
+    function showImage(idx, direction = 'next') {
+      currentIndex = (idx + images.length) % images.length;
+      const {src, title, desc} = images[currentIndex];
+      imgEl.style.opacity = 0;
+      setTimeout(() => {
+        imgEl.src = src;
+        titleEl.textContent = title;
+        descEl.textContent = desc;
+        imgEl.onload = () => {
+          imgEl.style.opacity = 1;
+          applySlideAnimation(direction);
+        };
+      }, 150);
+    }
+
+    function openLightbox(startIndex) {
+      showImage(startIndex, 'next');
+      lightbox.classList.add('active');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    // Bind cards
+    document.querySelectorAll('.photo-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const index = parseInt(card.dataset.index, 10);
+        openLightbox(index);
+      });
+    });
+
+    // Controls
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', () => showImage(currentIndex - 1, 'prev'));
+    nextBtn.addEventListener('click', () => showImage(currentIndex + 1, 'next'));
+
+    // Click outside (stage background)
+    lightbox.addEventListener('click', (e) => {
+      const clickedInsideStage = stage.contains(e.target);
+      const clickedButton = e.target.closest('button');
+      if (!clickedInsideStage && !clickedButton) closeLightbox();
+    });
+
+    // Keyboard nav
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showImage(currentIndex - 1, 'prev');
+      if (e.key === 'ArrowRight') showImage(currentIndex + 1, 'next');
+    });
+
+    // Touch swipe
+    stage.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true});
+    stage.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].screenX - touchStartX;
+      if (Math.abs(dx) > 40) {
+        if (dx > 0) showImage(currentIndex - 1, 'prev');
+        else showImage(currentIndex + 1, 'next');
       }
-      cards.forEach((card, idx) => card.querySelector('img').addEventListener('click', () => show(idx)));
-      closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
-      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('active'); });
-    })();
+    }, {passive: true});
   </script>
 </body>
 </html>
