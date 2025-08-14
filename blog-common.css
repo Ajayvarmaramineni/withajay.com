@@ -37,6 +37,15 @@ header {
   border: none;                 /* remove old border */
   transition: height 200ms ease, opacity 200ms ease, transform 200ms ease;
 }
+.logo-img {
+  height: 60px;
+  width: auto;
+  max-width: 220px;
+  margin-left: 32px;
+  background: transparent;
+  border: none;
+  display: block;
+}
 
 /* Center: nav */
 nav { flex: 1; text-align: center; }
@@ -409,4 +418,10 @@ footer p { font-size: 0.9em; color: #333; }
   .with-love { text-align: center; }
 
   .section-spacer { height: 80px; }
+}
+@media (max-width: 600px) {
+  .logo-img {
+    height: 40px;
+    margin-left: 12px;
+  }
 }
