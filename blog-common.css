@@ -10,22 +10,15 @@
        Layout: Header / Nav
        ========================= */
     header {
-      background: #111;
-      color: #fff;
-      position: fixed;
-      top: 0;
-      width: 100%;
+      position: relative;
       z-index: 1000;
-      padding: 18px 0 12px 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: padding 0.3s, box-shadow 0.3s;
-      box-shadow: 0 2px 8px rgba(30,34,40,0.03);
-    }
-    header.header-scrolled {
-      padding: 6px 0 4px 0;
-      box-shadow: 0 2px 16px rgba(30,34,40,0.07);
+      padding: 10px 50px;
+      background: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+      top: 0;
     }
     .header-left { flex: 0 0 auto; }
     .logo-svg {
@@ -43,7 +36,7 @@
       gap: 25px;
     }
     nav ul li a {
-      color: #fff;
+      color: #333;
       font: 600 1.1em 'Open Sans', Arial, sans-serif;
       text-decoration: none;
       transition: color 0.3s ease;
@@ -386,20 +379,9 @@
       }
 
       .comment-box { max-width: 100%; }
+      .comments-section { padding: 10px; }
 
+      .with-love { text-align: center; }
 
-
-
-
-
-    }      .section-spacer { height: 80px; }      .with-love { text-align: center; }      .comments-section { padding: 10px; }
-    /* Social icons in header */
-    .header-social-icons img {
-      filter: brightness(0) invert(1);
-      width: 25px;
-      transition: filter 0.3s, transform 0.3s;
-    }
-    .header-social-icons img:hover {
-      filter: brightness(0.7) invert(1);
-      transform: scale(1.13);
+      .section-spacer { height: 80px; }
     }
