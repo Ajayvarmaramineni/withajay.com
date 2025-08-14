@@ -4,15 +4,10 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" media="print" onload="this.media='all'" />
-<noscript>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" />
-</noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Night I Questioned Everything | With Love AJ</title>
+  <title>The Night I Realised | With Love AJ</title>
   <style>
     * {
       box-sizing: border-box;
@@ -34,26 +29,24 @@
       display: flex;
       justify-content: space-between;
       padding: 10px 50px;
-      position: relative;
+      position: sticky;
       top: 0;
       z-index: 1000;
     }
     .header-left {
       flex: 0 0 auto;
+      background: #f0f0f0; /* Light gray background to make logo stand out */
+      padding: 5px; /* Small padding for better appearance */
+      border-radius: 5px; /* Subtle rounding for aesthetics */
     }
     .logo-svg {
       cursor: pointer;
       height: 80px;
-      filter: brightness(0) invert(1); /* Makes white logo black for visibility */
-      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
       width: auto;
     }
-    .logo-svg:hover {
-      filter: brightness(0) invert(0.6); /* Slightly orange tint on hover to match #ff6f61 */
-    }
     @media (prefers-color-scheme: dark) {
-      .header-left img {
-        filter: brightness(0) invert(1); /* Ensure logo remains visible in dark mode */
+      .header-left {
+        background: #333; /* Darker background for dark mode */
       }
     }
     nav {
@@ -487,6 +480,25 @@
       font-size: 0.95em;
       transition: opacity 0.3s ease;
     }
+
+    /* Logo styles for all blog pages */
+.logo {
+  font-size: 3.2em;      /* Increased size */
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 8px;
+  margin-top: 32px;
+  font-family: 'Georgia', serif;
+}
+
+.subtitle {
+  font-size: 1.2em;
+  color: #666;
+  letter-spacing: 0.08em;
+  text-align: center;
+  margin-bottom: 24px;
+}
   </style>
 </head>
 <body>
@@ -532,26 +544,15 @@
     <section id="home">
       <div class="hero-background"></div>
       <div class="hero-content">
-        <h1>The Night I Questioned Everything</h1>
-        <h2>A Personal Reflection | June 8, 2025</h2>
+        <h1>The Night I Realised</h1>
+        <h2>A Personal Reflection | June 18, 2025</h2>
       </div>
     </section>
 
     <section class="blog-content reveal">
       <div class="blog-container">
-        <img src="images/night.jpg" alt="Nighttime porch with cloudy sky" class="top-image" loading="lazy">
-        <h2 class="section-heading">The Night I Questioned Everything</h2>
-        <p>It was 4 a.m., and I couldn’t sleep. I tried blasting my favorite "Nights" playlist and doing those slow breathing exercises, but my brain was like, “Nope, let’s overthink instead.” Desperate for calm, I stepped outside to find the moon. It was a chilly winter night, the sky glowing like a cloudy day, but the moon? Nowhere to be seen—not the right time to play hide-and-seek! Sitting on my porch, staring at the weirdly bright night, I started spiraling with my thoughts: What am I even doing? Why am I here in the USA? I didn’t want answers, but my mind wouldn’t quit. Note to self: 3 slices of pizza at midnight = deep thoughts I didn’t sign up for.</p>
-        <p>Ugh, why does my brain pick the worst timing possible to hold TED Talks with itself? I wrapped my sweater tighter and sank deeper into my chair, replaying the last month. Back in India, I’d be curled up in my room, probably watching something, arguing with my best friend about what happened at the office, or laughing with friends while sipping tea at our favorite spot. Here? I’m dodging people and their small talk.</p>
-        <div class="favorite-quote-card reveal">
-          <p>The only way to make sense out of change is to plunge into it, move with it, and join the dance.</p>
-          <cite>— Alan Watts</cite>
-        </div>
-        <p>The spiral got real when my mind gave me a reality check about my current semester and how I’m struggling to install <code>scikit-learn</code> in Python. I’m working my butt off, staying up late decoding lectures, and somehow on my way to pulling off good grades that I’m going to be proud of. But that night, all I could think was: Is it worth it? I missed my room, my freedom, the chaos in my apartment, and even my barber and tea wala bhaiya. Then I looked at my phone—a text from my best friend back home: “You’re living your American dream, doing your masters, making new friends. You’re set for life!” I laughed. I hoped she was right—that’s all I could think.</p>
-        <div class="highlight-quote">“Maybe I was expecting a tiny nudge from the universe to say, ‘You’re here for a reason, even if you can’t see it yet.’”</div>
-        <p>I looked up at the sky again, still no moon, but the clouds were shifting, letting me peek at a few stars. In addition to this drama, those stars were twinkling like they were winking at me, and for a second, I felt a little less lost. I took a deep breath, the cold air snapping me out of what my best friend said. Living the American dream, huh? Maybe not the Netflix version, but wrestling with Python code errors and acing my Canva and PowerPoint skills are my kind of epic right now. I’m not just surviving—I’m building something, even if it’s messy and exhausting. Back in India, I dreamt about studying abroad, imagining myself in some glossy campus brochure. Reality’s more like late-night coffee, error codes, and missing my chai sessions with my best friend, but it’s my reality.</p>
-        <p>I chuckled, thinking about my latest culture shock. Last week, I tried explaining the magic of ginger chai to a classmate. The next day, he saw me drinking coffee alone at Dunkin and said, “So this is how you fix your day, huh?” That took me back home. Back in India, my tea wala bhaiya decided what kind of tea I needed by looking at my face after a long day at work. It’s moments like these that make me miss the chaos of home. But then I remember the people I see here are different. Maybe I’m finding a new kind of temporary home, one error code at a time.</p>
-        <p>I shuffled back inside, my hoodie was still clinging to the winter chill. Back to that <code>scikit-learn</code> error, it didn’t feel like just a coding glitch—it felt like a metaphor for my whole semester. I’d spent hours debugging, asking ChatGPT, and cursing my laptop, only to realize I missed a single pip install. I wasn’t ready to give up, not on Python, not on my masters, not on this wild adventure. I added a reminder: Call Mom tomorrow. She’ll probably say, <em>Don’t lose sight of what I wanted to be and what I promised her.</em> Six months in, I’m learning that doubting myself is part of the deal—it doesn’t mean I’m failing. It means I’m trying. Amid all this, every time I crack a problem or run a successful code, I feel a spark of pride. That night, I wondered if the grind was worth it, but deep down, I know these battles are shaping me into someone stronger—someone my family and friends back home would root for and cheer.</p>
+        <img src="https://source.unsplash.com/random/1000x400/?night" alt="Random nighttime scene" class="top-image" loading="lazy">
+        <h2 class="section-heading">The Night I Realised</h2>
         <div class="with-love-wrapper">
           <p class="with-love">- With Love, Aj✨</p>
         </div>
