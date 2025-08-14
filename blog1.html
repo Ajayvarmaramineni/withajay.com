@@ -159,6 +159,14 @@
     // Always set a maximum timeout as backup
     setTimeout(showPage, 1000);
 });
+window.addEventListener('scroll', function() {
+  const header = document.querySelector('header');
+  if (window.scrollY > 40) {
+    header.classList.add('header-scrolled');
+  } else {
+    header.classList.remove('header-scrolled');
+  }
+});
   </script>
 </body>
 </html>
