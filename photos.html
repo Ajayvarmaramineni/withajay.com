@@ -569,6 +569,7 @@ body::before {
         <button class="lightbox-arrow next" aria-label="Next">❯</button>
       </div>
       <div class="lightbox-caption">
+        <div class="lightbox-counter" style="font-size:1rem; color:#bbb; margin-bottom:8px;"></div>
         <h3></h3>
         <p></p>
       </div>
@@ -664,6 +665,7 @@ body::before {
     const closeBtn = lightbox.querySelector('.lightbox-close');
     const prevBtn = lightbox.querySelector('.lightbox-arrow.prev');
     const nextBtn = lightbox.querySelector('.lightbox-arrow.next');
+    const counterEl = lightbox.querySelector('.lightbox-counter');
 
     let currentIndex = 0;
     let touchStartX = 0;
@@ -687,6 +689,7 @@ body::before {
         imgEl.src = src;
         titleEl.textContent = title;
         descEl.textContent = desc;
+        counterEl.textContent = `${currentIndex + 1} / ${images.length}`;
         imgEl.onload = () => {
           imgEl.style.opacity = 1;
           applySlideAnimation(direction);
