@@ -31,7 +31,7 @@ header {
 /* Left: logo */
 .header-left { flex: 0 0 auto; }
 .logo-svg {
-  height: 60px; width: auto;
+  height: 70px; width: auto;
   cursor: pointer;
   background: transparent;
   border: none;                 /* remove old border */
@@ -91,7 +91,7 @@ header.shrink {
   padding: 0 36px;
 }
 header.shrink .logo-svg {
-  height: 50px;
+  height: 60px;
   opacity: 0.95;
 }
 
