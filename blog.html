@@ -8,574 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog | With Love AJ</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <style>
-    /* =========================
-   Reset & Base
-   ========================= */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-img { max-width: 100%; display: block; }
-
-body {
-  background: #ffffff;
-  color: #333;
-  font-family: 'Open Sans', Arial, sans-serif;
-  padding-top: 88px;            /* match default header height */
-}
-
-/* =========================
-   Header / Nav (black + fixed + shrink)
-   ========================= */
-header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 88px;                 /* default height */
-  padding: 0 50px;
-  background: #000;             /* black bar */
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  transition: height 200ms ease, padding 200ms ease, background 200ms ease;
-}
-
-/* Left: logo */
-.header-left { flex: 0 0 auto; }
-.logo-svg {
-  height: 70px; width: auto;
-  cursor: pointer;
-  background: transparent;
-  border: none;                 /* remove old border */
-  transition: height 200ms ease, opacity 200ms ease, transform 200ms ease;
-}
-.logo-img {
-  height: 60px;
-  width: auto;
-  max-width: 220px;
-  margin-left: 32px;
-  background: transparent;
-  border: none;
-  display: block;
-}
-
-/* Center: nav */
-nav { flex: 1; text-align: center; }
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-}
-nav ul li a {
-  color: #fff;                  /* white links on black header */
-  font: 600 1.1em 'Open Sans', Arial, sans-serif;
-  text-decoration: none;
-  letter-spacing: 0.2px;
-  transition: opacity 150ms ease;
-}
-nav ul li a:hover,
-nav ul li a.active {
-  color: #ff6f61;               /* orange hover/active */
-}
-
-/* Right: social icons in white */
-header .social-icons {
-  display: flex;
-  gap: 15px;
-  flex: 0 0 auto;
-}
-header .social-icons img {
-  width: 22px;
-  height: 22px;
-  display: block;
-  opacity: 0.95;
-  transition: opacity 150ms ease, transform 150ms ease;
-}
-header .social-icons a:hover img {
-  opacity: 1;
-  transform: translateY(-1px);
-}
-
-/* Shrink state (JS will toggle .shrink on scroll) */
-header.shrink {
-  height: 64px;
-  padding: 0 36px;
-}
-header.shrink .logo-svg {
-  height: 60px;
-  opacity: 0.95;
-}
-
-/* =========================
-   Hero
-   ========================= */
-.hero-background {
-  position: fixed; inset: 0;
-  width: 100%; height: 100vh;
-  background: #ffffff;
-  z-index: -1;
-}
-.hero-content {
-  position: absolute; left: 50%; top: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: #333;
-  opacity: 1;
-  transition: opacity 0.5s ease-out;
-  z-index: 2;
-}
-.hero-content h1 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 3.5em;
-  margin-bottom: 10px;
-}
-.hero-content h2 {
-  font-size: 1.5em;
-  color: #ff6f61;
-}
-
-/* =========================
-   Blog Content
-   ========================= */
-.blog-content {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: calc(100vh - 160px);
-  padding: 80px 20px;
-  background: #ffffff;
-}
-.blog-container {
-  max-width: 1000px;
-  width: 100%;
-  padding: 20px;
-  color: #333;
-}
-.top-image {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  margin-bottom: 20px;
-  max-width: 1000px;
-}
-.blog-container h2.section-heading,
-.blog-container h2 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 2.2em;
-  margin-bottom: 20px;
-  line-height: 1.4;
-}
-.blog-container p {
-  font-size: 1.1em;
-  line-height: 1.8;
-  margin-bottom: 10px;
-  text-align: justify;
-  font-family: 'Open Sans', Arial, sans-serif;
-}
-
-/* Highlight + Favorite Quote Card */
-.highlight-quote {
-  margin: 30px 0;
-  padding: 15px;
-  text-align: center;
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #333;
-  background: rgba(255, 111, 97, 0.1);
-  border-left: 4px solid #ff6f61;
-  border-radius: 5px;
-  clear: both;
-}
-.favorite-quote-card {
-  float: right;
-  width: 35%;
-  margin: 20px 20px 20px 30px;
-  padding: 25px;
-  text-align: center;
-  position: relative;
-  z-index: 4;
-  background: rgba(255, 111, 97, 0.1);
-  border: 3px solid #ff6f61;
-  border-radius: 12px;
-}
-.favorite-quote-card p {
-  margin: 0;
-  font-size: 1.3em;
-  line-height: 1.6;
-  color: #333;
-  font-style: italic;
-}
-.favorite-quote-card cite {
-  display: block;
-  margin-top: 10px;
-  font-size: 0.9em;
-  color: #666;
-  font-style: normal;
-}
-.favorite-quote-card::before {
-  content: '“';
-  position: absolute; top: -15px; left: 15px;
-  font-size: 2.5em; color: #ff6f61; opacity: 0.8;
-}
-.favorite-quote-card::after {
-  content: '”';
-  position: absolute; right: 15px; bottom: -15px;
-  font-size: 2.5em; color: #ff6f61; opacity: 0.8;
-}
-
-/* With Love Signature */
-.with-love-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 40px;
-}
-.with-love {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.8em;
-  font-weight: 600;
-  color: #333;
-  margin: 0;
-  padding-right: 20px;
-}
-
-/* =========================
-   Comments Section
-   ========================= */
-.comments-section { max-width: 1000px; margin: 0 auto; padding: 20px; color: #333; }
-.comments-section h2 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
-.comments-list { margin-bottom: 20px; }
-.comment {
-  background: #f9f9f9;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
-  margin: 15px 0;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-.comment-meta {
-  color: #ff6f61;
-  font: 600 0.9em 'Open Sans', Arial, sans-serif;
-  margin-bottom: 8px;
-}
-.comment p {
-  color: #333;
-  font: 400 1em 'Open Sans', Arial, sans-serif;
-  line-height: 1.6;
-}
-.comment-box {
-  width: 100%;
-  max-width: 1000px;
-  background: #f9f9f9;
-  border-radius: 5px;
-  min-height: 150px;
-  padding: 10px;
-}
-.comment-box label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #333;
-  font-family: 'Open Sans', Arial, sans-serif;
-}
-.comment-box input,
-.comment-box textarea {
-  width: 100%;
-  padding: 5px;
-  margin-bottom: 5px;
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 3px;
-  color: #333;
-  font: 400 0.9em 'Open Sans', Arial, sans-serif;
-}
-.comment-box textarea { min-height: 100px; resize: vertical; overflow: auto; }
-.comment-box .buttons { display: flex; gap: 10px; margin-top: 5px; }
-.comment-box button[type="submit"] {
-  padding: 6px 12px;
-  background: #ff6f61;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  font: 0.9em 'Open Sans', Arial, sans-serif;
-  transition: background 0.3s ease;
-}
-.comment-box button[type="submit"]:hover { background: #e55a50; }
-.comment-box .message-icon { background: none; border: none; padding: 0; cursor: pointer; }
-.comment-box .message-icon img {
-  width: 20px; height: 20px;
-  filter: none; transition: filter 0.3s ease;
-}
-.comment-box .message-icon img:hover { filter: brightness(0.8); }
-.success-message {
-  display: none;
-  margin-bottom: 10px;
-  padding: 8px;
-  text-align: center;
-  font: 0.95em 'Open Sans', sans-serif;
-  color: #ff6f61;
-  background: rgba(255, 111, 97, 0.1);
-  border-radius: 3px;
-}
-
-/* =========================
-   Footer
-   ========================= */
-footer {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding: 30px 50px;
-  background: #ffffff;
-  border-top: 1px solid #e0e0e0;
-  color: #333;
-}
-.footer-logo { font-size: 1.2em; font-weight: bold; }
-footer .social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-footer .social-icons img {
-  width: 28px;
-  filter: none;
-  transition: filter 0.3s ease, transform 0.4s ease;
-}
-footer .social-icons img:hover {
-  filter: brightness(0.8);
-  transform: scale(1.2);
-}
-footer p { font-size: 0.9em; color: #333; }
-
-/* =========================
-   Utilities
-   ========================= */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
-
-.section-spacer { height: 125px; }
-
-/* Toast Notification */
-#toast {
-  display: none;
-  position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-  padding: 12px 25px;
-  font-size: 0.95em;
-  font-family: 'Open Sans', sans-serif;
-  color: #fff; background: #ff6f61;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  z-index: 10000;
-  transition: opacity 0.3s ease;
-}
-
-/* Blog page shared logo text (if used elsewhere) */
-.logo {
-  font-size: 3.2em;
-  letter-spacing: 0.1em;
-  font-weight: 700;
-  text-align: center;
-  margin: 32px 0 8px;
-  font-family: 'Georgia', serif;
-}
-.subtitle {
-  font-size: 1.2em;
-  color: #666;
-  letter-spacing: 0.08em;
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-/* =========================
-   Responsive (mobile)
-   ========================= */
-@media (max-width: 768px) {
-  body { padding-top: 64px; }         /* header shrinks faster on mobile */
-  header { height: 64px; padding: 0 16px; }
-  header.shrink { height: 56px; padding: 0 14px; }
-  .logo-svg { height: 34px; }
-  header.shrink .logo-svg { height: 30px; }
-
-  nav ul { gap: 12px; flex-wrap: wrap; }
-
-  .hero-content h1 { font-size: 2.2em; }
-  .hero-content h2 { font-size: 1.2em; }
-
-  .blog-content { padding: 60px 15px; }
-  .blog-container { max-width: 100%; }
-  .blog-container h2.section-heading { font-size: 1.8em; }
-  .blog-container p { font-size: 1.1em; }
-
-  .favorite-quote-card {
-    float: none; width: 100%; max-width: 90%;
-    margin: 20px auto;
-  }
-
-  .comment-box { max-width: 100%; }
-  .comments-section { padding: 10px; }
-
-  .with-love { text-align: center; }
-
-  .section-spacer { height: 80px; }
-}
-@media (max-width: 600px) {
-  .logo-img {
-    height: 40px;
-    margin-left: 12px;
-  }
-}
-
-    /* Page intro */
-    .archive-hero {
-      background: #fff;
-      text-align: center;
-      padding: 48px 16px 16px;
-    }
-    .archive-hero h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 2.6rem;
-      margin-bottom: 8px;
-    }
-    .archive-hero p {
-      color: #666;
-      font-size: 1rem;
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    /* Section wrapper (category blocks) */
-    .archive-section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 28px 16px 12px;
-    }
-    .section-head {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 14px;
-      gap: 16px;
-    }
-    .section-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.8rem;
-      line-height: 1.2;
-    }
-    .section-actions a {
-      color: #ff6f61;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .section-actions a:hover { text-decoration: underline; }
-
-    /* Posts grid */
-    .posts-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 28px;
-    }
-    @media (max-width: 1000px) {
-      .posts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-    @media (max-width: 640px) {
-      .posts-grid { grid-template-columns: 1fr; }
-    }
-
-    /* Post card */
-    .post-card {
-      display: flex;
-      flex-direction: column;
-      background: #fff;
-      border: 1px solid #e9e9e9;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .post-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    }
-
-    .post-thumb {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 16/10;
-      background: #f4f4f4;
-    }
-    .post-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.02);
-      transition: transform .35s ease;
-      display: block;
-    }
-    .post-card:hover .post-thumb img { transform: scale(1.06); }
-
-    .readmore-badge {
-      position: absolute;
-      right: 10px; bottom: 10px;
-      background: #000;
-      color: #fff;
-      font-size: .85rem;
-      padding: 6px 10px;
-      border-radius: 999px;
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity .2s ease, transform .2s ease;
-    }
-    .post-card:hover .readmore-badge { opacity: 0.95; transform: translateY(0); }
-
-    .post-body {
-      padding: 16px 16px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .post-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.25rem;
-      line-height: 1.35;
-    }
-    .post-title a { color: #111; text-decoration: none; }
-    .post-title a:hover { color: #ff6f61; }
-
-    .post-meta { color: #8a8a8a; font-size: .9rem; }
-    .post-excerpt { color: #333; font-size: .98rem; line-height: 1.6; }
-
-    .post-actions { margin-top: auto; }
-    .post-actions a {
-      display: inline-block;
-      margin-top: 6px;
-      font-weight: 600;
-      font-size: .95rem;
-      color: #ff6f61;
-      text-decoration: none;
-    }
-    .post-actions a:hover { text-decoration: underline; }
-
-    /* Spacing between sections */
-    .divide { height: 22px; }
-
-    /* Mobile tweaks */
-    @media (max-width: 640px) {
-      .archive-hero h1 { font-size: 2.2rem; }
-      .section-title { font-size: 1.5rem; }
-    }
-  </style>
+  <link rel="stylesheet" href="blog.css">
 </head>
 <body>
   <!-- Toast Notification -->
@@ -603,8 +36,6 @@ footer p { font-size: 0.9em; color: #333; }
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-
-      <!-- Native white SVG icons -->
       <div class="social-icons">
         <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
           <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Ajay's Instagram Profile" />
@@ -620,18 +51,15 @@ footer p { font-size: 0.9em; color: #333; }
         </a>
       </div>
     </header>
-
     <!-- Page intro -->
     <section class="archive-hero">
       <h1>Blog Posts</h1>
       <p>Browse by theme: late-night reflections, heartfelt letters, and adventures on the road.</p>
     </section>
-
-    <!-- ============ Nights (5) ============ -->
+    <!-- ============ Nights  ============ -->
     <section class="archive-section" id="nights">
       <div class="section-head">
         <h2 class="section-title">Nights</h2>
-        <div class="section-actions"><a href="nights.html">View all »</a></div>
       </div>
       <div class="posts-grid">
         <!-- 1 -->
@@ -650,7 +78,7 @@ footer p { font-size: 0.9em; color: #333; }
         <!-- 2 -->
         <article class="post-card">
           <a class="post-thumb" href="blog2.html" aria-label="Read: The Night I Started Accepting">
-            <img src="images/accepting.jpg" alt="City lights with calm night sky" loading="lazy">
+            <img src="images/blog2.jpg" alt="City lights with calm night sky" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
@@ -662,25 +90,25 @@ footer p { font-size: 0.9em; color: #333; }
         </article>
         <!-- 3 -->
         <article class="post-card">
-          <a class="post-thumb" href="blog3.html" aria-label="Read: The Night I Let Go">
-            <img src="images/night-let-go.jpg" alt="Soft city haze with distant lights" loading="lazy">
+          <a class="post-thumb" href="blog3.html" aria-label="Read: The Night I Felt Lost">
+            <img src="images/blog3.jpg" alt="Soft city haze with distant lights" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="blog3.html">The Night I Let Go</a></h3>
+            <h3 class="post-title"><a href="blog3.html">The Night I Felt Lost</a></h3>
             <div class="post-meta">By Ajay • Apr 27, 2025 • 5 min read</div>
-            <p class="post-excerpt">On loosening my grip on perfect plans and choosing presence instead.</p>
+            <p class="post-excerpt">The stars were out, but they offered no guidance. It was one of those nights where the world felt...
             <div class="post-actions"><a href="blog3.html">Read more »</a></div>
           </div>
         </article>
         <!-- 4 -->
         <article class="post-card">
-          <a class="post-thumb" href="blog4.html" aria-label="Read: The Night I Called Home">
-            <img src="images/night-called-home.jpg" alt="Phone lit up against a dark window" loading="lazy">
+          <a class="post-thumb" href="blog4.html" aria-label="Read: The Night I Realised">
+            <img src="images/blog4.jpg" alt="Phone lit up against a dark window" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="blog4.html">The Night I Called Home</a></h3>
+            <h3 class="post-title"><a href="blog4.html">The Night I Realised</a></h3>
             <div class="post-meta">By Ajay • Apr 10, 2025 • 4 min read</div>
             <p class="post-excerpt">One late call, one familiar voice, and a reminder of why I’m here.</p>
             <div class="post-actions"><a href="blog4.html">Read more »</a></div>
@@ -688,12 +116,12 @@ footer p { font-size: 0.9em; color: #333; }
         </article>
         <!-- 5 -->
         <article class="post-card">
-          <a class="post-thumb" href="blog5.html" aria-label="Read: The Night I Found My Pace">
-            <img src="images/night-pace.jpg" alt="Empty street under warm streetlights" loading="lazy">
+          <a class="post-thumb" href="blog5.html" aria-label="Read: The Night I Ran">
+            <img src="images/blog5.jpg" alt="Empty street under warm streetlights" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="blog5.html">The Night I Found My Pace</a></h3>
+            <h3 class="post-title"><a href="blog5.html">The Night I Ran</a></h3>
             <div class="post-meta">By Ajay • Mar 29, 2025 • 5 min read</div>
             <p class="post-excerpt">Learning to move slower so life doesn’t rush past me.</p>
             <div class="post-actions"><a href="blog5.html">Read more »</a></div>
@@ -714,7 +142,7 @@ footer p { font-size: 0.9em; color: #333; }
         <!-- 1 -->
         <article class="post-card">
           <a class="post-thumb" href="dear-stranger-you-are-not-late.html" aria-label="Read: Dear Stranger, You Are Not Late">
-            <img src="images/ds-not-late.jpg" alt="Sunrise through a window frame" loading="lazy">
+            <img src="Blog/stranger1.jpg"Sunrise through a window frame" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
@@ -727,7 +155,7 @@ footer p { font-size: 0.9em; color: #333; }
         <!-- 2 -->
         <article class="post-card">
           <a class="post-thumb" href="dear-stranger-please-be-softer.html" aria-label="Read: Dear Stranger, Please Be Softer">
-            <img src="images/ds-softer.jpg" alt="Soft light on a notebook page" loading="lazy">
+            <img src="Blog/stranger2.jpg" alt="Soft light on a notebook page" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
@@ -740,7 +168,7 @@ footer p { font-size: 0.9em; color: #333; }
         <!-- 3 -->
         <article class="post-card">
           <a class="post-thumb" href="dear-stranger-keep-the-small-promises.html" aria-label="Read: Dear Stranger, Keep the Small Promises">
-            <img src="images/ds-promises.jpg" alt="Tea cup and a folded note" loading="lazy">
+            <img src="Blog/stranger3.jpg" alt="Tea cup and a folded note" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
@@ -753,7 +181,7 @@ footer p { font-size: 0.9em; color: #333; }
         <!-- 4 -->
         <article class="post-card">
           <a class="post-thumb" href="dear-stranger-its-okay-to-start-again.html" aria-label="Read: Dear Stranger, It’s Okay to Start Again">
-            <img src="images/ds-start-again.jpg" alt="Clean page with a pencil" loading="lazy">
+            <img src="Blog/stranger4.jpg" alt="Clean page with a pencil" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
@@ -766,7 +194,7 @@ footer p { font-size: 0.9em; color: #333; }
         <!-- 5 -->
         <article class="post-card">
           <a class="post-thumb" href="dear-stranger-you-are-allowed-to-be-proud.html" aria-label="Read: Dear Stranger, You’re Allowed to Be Proud">
-            <img src="images/ds-proud.jpg" alt="Light falling across a desk and flowers" loading="lazy">
+            <img src="Blog/stranger5.jpg" alt="Light falling across a desk and flowers" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
@@ -791,7 +219,7 @@ footer p { font-size: 0.9em; color: #333; }
         <!-- 1 -->
         <article class="post-card">
           <a class="post-thumb" href="travel-dairies-niagara-mist.html" aria-label="Read: Niagara in the Mist">
-            <img src="images/travel-niagara.jpg" alt="Niagara Falls misty viewpoint" loading="lazy">
+            <img src="Blog/travel1.jpg" alt="Niagara Falls misty viewpoint" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
@@ -804,7 +232,7 @@ footer p { font-size: 0.9em; color: #333; }
         <!-- 2 -->
         <article class="post-card">
           <a class="post-thumb" href="travel-diaries-boston-weekend.html" aria-label="Read: A Quiet Weekend in Boston">
-            <img src="images/travel-boston.jpg" alt="Brick streets and brownstones in Boston" loading="lazy">
+            <img src="Blog/travel2.jpg" alt="Brick streets and brownstones in Boston" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
@@ -817,7 +245,7 @@ footer p { font-size: 0.9em; color: #333; }
         <!-- 3 -->
         <article class="post-card">
           <a class="post-thumb" href="travel-diaries-finger-lakes.html" aria-label="Read: Still Water at Finger Lakes">
-            <img src="images/travel-fingerlakes.jpg" alt="Still lake with soft hills in the distance" loading="lazy">
+            <img src="Blog/travel3.jpg" alt="Still lake with soft hills in the distance" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
@@ -830,7 +258,7 @@ footer p { font-size: 0.9em; color: #333; }
         <!-- 4 -->
         <article class="post-card">
           <a class="post-thumb" href="travel-diaries-chicago-lights.html" aria-label="Read: Chicago After the Rain">
-            <img src="images/travel-chicago.jpg" alt="City lights reflecting on wet streets" loading="lazy">
+            <img src="Blog/travel4.jpg" alt="City lights reflecting on wet streets" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
@@ -843,7 +271,7 @@ footer p { font-size: 0.9em; color: #333; }
         <!-- 5 -->
         <article class="post-card">
           <a class="post-thumb" href="travel-diaries-amtrak-window.html" aria-label="Read: Notes From an Amtrak Window">
-            <img src="images/travel-amtrak.jpg" alt="Countryside view from a train window" loading="lazy">
+            <img src="Blog/travel5.jpg" alt="Countryside view from a train window" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
