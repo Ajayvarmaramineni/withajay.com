@@ -2,518 +2,26 @@
 <html lang="en">
 <head>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Night I Started Accepting | With Love AJ</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background: #ffffff;
-      color: #333;
-      font-family: 'Open Sans', Arial, sans-serif;
-    }
-
-    /* Header */
-    header {
-      align-items: center;
-      background: #ffffff;
-      border-bottom: 1px solid #e0e0e0;
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 50px;
-      position: relative;
-      top: 0;
-      z-index: 1000;
-    }
-    .header-left {
-      flex: 0 0 auto;
-    }
-    .logo-svg {
-      cursor: pointer;
-      height: 80px;
-      width: auto;
-      background: transparent; /* Fallback to ensure no unintended background */
-      border: 1px solid #333; /* Subtle border for visibility if logo is transparent */
-    }
-    @media (prefers-color-scheme: dark) {
-      .header-left img {
-        border: 1px solid #fff; /* Adjust border for dark mode */
-      }
-    }
-    nav {
-      flex: 1;
-      text-align: center;
-    }
-    nav ul {
-      display: flex;
-      gap: 25px;
-      list-style: none;
-      justify-content: center;
-    }
-    nav ul li a {
-      color: #333;
-      font-family: 'Open Sans', Arial, sans-serif;
-      font-size: 1.1em;
-      font-weight: 600;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    nav ul li a:hover,
-    nav ul li a.active {
-      color: #ff6f61;
-    }
-    .social-icons {
-      display: flex;
-      gap: 15px;
-      flex: 0 0 auto;
-    }
-    .social-icons img {
-      filter: none;
-      transition: filter 0.3s ease, transform 0.3s ease;
-      width: 25px;
-    }
-    .social-icons img:hover {
-      filter: brightness(0.8);
-      transform: scale(1.15);
-    }
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        padding: 10px 20px;
-      }
-      .header-left {
-        margin-bottom: 10px;
-      }
-      nav ul {
-        flex-direction: column;
-        gap: 10px;
-      }
-      .social-icons {
-        margin-top: 10px;
-      }
-    }
-
-    /* Hero Section */
-    .hero-background {
-      background: #ffffff;
-      height: 100vh;
-      left: 0;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: -1;
-    }
-    .hero-content {
-      color: #333;
-      opacity: 1;
-      position: absolute;
-      text-align: center;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      transition: opacity 0.5s ease-out;
-      z-index: 2;
-      left: 50%;
-    }
-    .hero-content.scrolled {
-      opacity: 0;
-    }
-    .hero-content h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 3.5em;
-      margin-bottom: 10px;
-      text-shadow: none;
-    }
-    .hero-content h2 {
-      color: #ff6f61;
-      font-size: 1.5em;
-      text-shadow: none;
-    }
-
-    /* Blog Content */
-    .blog-content {
-      align-items: center;
-      background: #ffffff;
-      display: flex;
-      flex-direction: column;
-      min-height: calc(100vh - 160px);
-      padding: 80px 20px;
-      position: relative;
-      z-index: 3;
-    }
-    .blog-container {
-      color: #333;
-      margin: 0 auto;
-      max-width: 1000px;
-      padding: 20px;
-    }
-    .blog-container h2 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 2.2em;
-      margin-bottom: 20px;
-      line-height: 1.4;
-    }
-    .blog-container p {
-      font-family: 'Open Sans', Arial, sans-serif;
-      font-size: 1.1em;
-      line-height: 1.8;
-      margin-bottom: 10px;
-      text-align: justify;
-    }
-    .highlight-quote {
-      background: rgba(255, 111, 97, 0.1);
-      border-left: 4px solid #ff6f61;
-      border-radius: 5px;
-      clear: both;
-      color: #333;
-      font-size: 1.2em;
-      font-weight: bold;
-      margin: 30px 0;
-      padding: 15px;
-      text-align: center;
-    }
-
-    /* Top Image */
-    .top-image {
-      max-width: 1000px;
-      width: 100%;
-      height: 400px;
-      object-fit: cover;
-      margin-bottom: 20px;
-    }
-
-    /* Favorite Quote Card */
-    .favorite-quote-card {
-      background: rgba(255, 111, 97, 0.1);
-      border: 3px solid #ff6f61;
-      border-radius: 12px;
-      float: right;
-      margin: 20px 20px 20px 30px;
-      padding: 25px;
-      position: relative;
-      text-align: center;
-      width: 35%;
-      z-index: 4;
-    }
-    .favorite-quote-card p {
-      color: #333;
-      font-size: 1.3em;
-      font-style: italic;
-      line-height: 1.6;
-      margin: 0;
-    }
-    .favorite-quote-card cite {
-      color: #666;
-      display: block;
-      font-size: 0.9em;
-      font-style: normal;
-      margin-top: 10px;
-    }
-    .favorite-quote-card::before {
-      color: #ff6f61;
-      content: '“';
-      font-size: 2.5em;
-      left: 15px;
-      opacity: 0.8;
-      position: absolute;
-      top: -15px;
-    }
-    .favorite-quote-card::after {
-      bottom: -15px;
-      color: #ff6f61;
-      content: '”';
-      font-size: 2.5em;
-      opacity: 0.8;
-      position: absolute;
-      right: 15px;
-    }
-    @media (max-width: 768px) {
-      .favorite-quote-card {
-        float: none;
-        max-width: 90%;
-        margin: 20px auto;
-        width: 100%;
-      }
-    }
-
-    /* Comments Section */
-    .comments-section {
-      color: #333;
-      margin: 0 auto;
-      max-width: 1000px;
-      padding: 20px;
-    }
-    .comments-section h2 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.5em;
-      margin-bottom: 10px;
-    }
-    .comments-list {
-      margin-bottom: 20px;
-    }
-    .comment {
-      background: #f9f9f9;
-      border: 1px solid #e0e0e0;
-      border-radius: 5px;
-      margin: 15px 0;
-      padding: 20px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-    .comment-meta {
-      color: #ff6f61;
-      font-family: 'Open Sans', Arial, sans-serif;
-      font-size: 0.9em;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    .comment p {
-      color: #333;
-      font-family: 'Open Sans', Arial, sans-serif;
-      font-size: 1em;
-      line-height: 1.6;
-    }
-    .comment-box {
-      background: #f9f9f9;
-      border-radius: 5px;
-      min-height: 150px;
-      padding: 10px;
-      max-width: 1000px;
-      width: 100%;
-    }
-    .comment-box label {
-      display: block;
-      font-family: 'Open Sans', Arial, sans-serif;
-      font-weight: bold;
-      margin-bottom: 5px;
-      color: #333;
-    }
-    .comment-box input,
-    .comment-box textarea {
-      background: #ffffff;
-      border: 1px solid #e0e0e0;
-      border-radius: 3px;
-      color: #333;
-      font-family: 'Open Sans', Arial, sans-serif;
-      font-size: 0.9em;
-      font-weight: 400;
-      margin-bottom: 5px;
-      padding: 5px;
-      width: 100%;
-    }
-    .comment-box textarea {
-      min-height: 100px;
-      resize: vertical;
-      overflow: auto;
-    }
-    .comment-box .buttons {
-      display: flex;
-      gap: 10px;
-      margin-top: 5px;
-    }
-    .comment-box button[type="submit"] {
-      background: #ff6f61;
-      border: none;
-      border-radius: 3px;
-      color: #fff;
-      cursor: pointer;
-      font-family: 'Open Sans', Arial, sans-serif;
-      font-size: 0.9em;
-      padding: 6px 12px;
-      transition: background 0.3s ease;
-    }
-    .comment-box button[type="submit"]:hover {
-      background: #e55a50;
-    }
-    .comment-box .message-icon {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-    }
-    .comment-box .message-icon img {
-      filter: none;
-      height: 20px;
-      transition: filter 0.3s ease;
-      width: 20px;
-    }
-    .comment-box .message-icon img:hover {
-      filter: brightness(0.8);
-    }
-    .success-message {
-      background: rgba(255, 111, 97, 0.1);
-      border-radius: 3px;
-      color: #ff6f61;
-      font-family: 'Open Sans', Arial, sans-serif;
-      font-size: 0.9em;
-      padding: 8px;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-    @media (max-width: 768px) {
-      .comment-box {
-        max-width: 100%;
-      }
-      .blog-container p {
-        font-size: 1.1em;
-      }
-    }
-
-    /* Scroll Reveal */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* With Love Signature */
-    .with-love-wrapper {
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 40px;
-    }
-    .with-love {
-      font-family: 'Dancing Script', cursive;
-      font-size: 1.8em;
-      font-weight: 600;
-      color: #333;
-      margin: 0;
-      padding-right: 20px;
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      .hero-content h1 {
-        font-size: 2.2em;
-      }
-      .hero-content h2 {
-        font-size: 1.2em;
-      }
-      .blog-content {
-        padding: 60px 15px;
-      }
-      .blog-container {
-        max-width: 100%;
-      }
-      .blog-container h2 {
-        font-size: 1.8em;
-      }
-      .comments-section {
-        padding: 10px;
-      }
-      .with-love {
-        text-align: center;
-      }
-    }
-
-    /* Section Spacer */
-    .section-spacer {
-      height: 125px;
-    }
-    @media (max-width: 768px) {
-      .section-spacer {
-        height: 80px;
-      }
-    }
-
-    /* Footer */
-    footer {
-      align-items: center;
-      background: #ffffff;
-      border-top: 1 overdue solid #e0e0e0;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      padding: 30px 50px;
-      text-align: center;
-    }
-    .footer-logo {
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-    .social-icons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-    }
-    .social-icons img {
-      filter: none;
-      transition: filter 0.3s ease, transform 0.4s ease;
-      width: 28px;
-    }
-    .social-icons img:hover {
-      filter: brightness(0.8);
-      transform: scale(1.2);
-    }
-    footer p {
-      color: #333;
-      font-size: 0.9em;
-    }
-
-    /* Toast Notification */
-    #toast {
-      display: none;
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #ff6f61;
-      color: #fff;
-      padding: 12px 25px;
-      border-radius: 8px;
-      font-family: 'Open Sans', sans-serif;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      z-index: 10000;
-      font-size: 0.95em;
-      transition: opacity 0.3s ease;
-    }
-
-    /* Logo styles for all blog pages */
-.logo {
-  font-size: 3.2em;      /* Increased size */
-  letter-spacing: 0.1em;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 8px;
-  margin-top: 32px;
-  font-family: 'Georgia', serif;
-}
-
-.subtitle {
-  font-size: 1.2em;
-  color: #666;
-  letter-spacing: 0.08em;
-  text-align: center;
-  margin-bottom: 24px;
-}
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="blog-common.css">
 </head>
 <body>
   <!-- Toast Notification -->
   <div id="toast">Comment posted successfully!</div>
 
-  <div class="route-loader"></div>
-  <div class="transition-overlay"></div>
-
-  <main id="main-content" data-transition-wrapper>
+  <main id="main-content">
     <header>
       <div class="header-left">
         <a href="index.html" style="text-decoration: none;">
           <img src="images/Black.png" alt="Ajay Ramineni Logo" class="logo-svg" />
         </a>
       </div>
+
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -524,6 +32,7 @@
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
+
       <div class="social-icons">
         <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
           <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Ajay's Instagram Profile" />
@@ -552,20 +61,26 @@
       <div class="blog-container">
         <img src="images/blog2.jpg" alt="Nighttime street with stars" class="top-image" loading="lazy">
         <h2 class="section-heading">The Night I Started Accepting</h2>
+
         <p>It was past 1 a.m. when my brother’s voice crackled through the call, laughing about a party I’d missed back home. I stared at the empty ceiling, the silence heavy, until I realized that night was about letting go and holding on in a new way.</p>
         <p>The room was dark, except for the faint light coming from my laptop screen, still open to Python with half-written code. My brain, as usual, decided this was the perfect time to get into a full-on existential debate.</p>
         <p>“So what is acceptance? And why do I need it?” were the first thoughts that hijacked my head. The call still echoing in my head, I pulled my sheets up. Back in India, I’d be at home, having fun with my brother and friends at my apartment, probably arguing over who gets the leg piece in the biryani that we ordered, dancing like nobody’s watching, or going on a night ride on our bikes. Here in the USA, I’m wrestling with pandas DataFrames and dodging awkward “So, where are you <em>really</em> from?” conversations. Acceptance? It reminds me of when I burned the rice, blamed the stove, and my mom just said, “Maybe next time, add water.”</p>
+
         <div class="favorite-quote-card reveal">
           <p>The art of acceptance is the art of making peace with what is, while still holding space for what could be.</p>
           <cite>— Unknown</cite>
         </div>
+
         <p>I got up and went into the kitchen to get something to eat; stress eating helps most of the time. I made myself some instant coffee because tea takes time. As the microwave hummed, I thought about the last couple of months. I’d been so focused on proving I could “make it” here—acing my master’s, debugging code like a pro, and trying to fit into a world that felt like it was moving at a different speed. But that night, my brother’s call reminded me of what I’d left behind: late-night chats, the chaos of home, the fights I had with my best friend when I managed to piss her off most of the time.</p>
+
         <div class="highlight-quote">Acceptance, I realized, wasn’t about giving up or settling. It was about making peace with the messiness of life.</div>
+
         <p>Like when I finally got <code>scikit-learn</code> to work after three hours of Stack Overflow and a near meltdown, only to realize I’d been using the wrong Python environment. Or when I stopped trying to explain chai to my classmates and just offered them a sip instead. They didn’t get it, but their confused smiles were enough. I’m not living the glossy “American dream” I imagined back in India, but all I’m doing is trying to build something real—one late-night coding session, one hesitant friendship, one homesick moment, and one “I wish you would’ve been here” moment at a time.</p>
         <p>I looked out the window, the streetlights casting a soft glow on the empty road. No moon tonight either, but the stars were out, faint but stubborn, like they were daring me to keep going. I thought about my brother’s words: “You’re out there doing big things!” He’s half-right. The “big things” are less glamorous than I expected, more like surviving a group project with teammates who don’t know what GitHub is or figuring out how to make rice without a rice cooker. But they’re mine. And maybe accepting that is what keeps me grounded.</p>
         <p>Last week, I had another culture shock moment. I was at a coffee shop, trying to explain to a lady why I’d rather have a masala chai than a Pumpkin Spice Matcha Latte. She looked at me like I’d asked for a spaceship. I laughed it off, but it hit me: I don’t need everyone to understand my world. I just need to carry it with me. Like the playlist I blast when I’m working on my assignments or cooking, full of Tollywood bangers and Sid Sriram’s tracks that make my roommate raise an eyebrow. Or the way I still call my mom every Sunday, her voice pulling me back to the kitchen table in Hyderabad, even if I’m 8,000 miles away.</p>
         <p>Back in my room, I opened my laptop again. That Python code was still mocking me, but I didn’t curse this time. I took a sip of my sad coffee, cracked my knuckles, and started typing. One line of code at a time. One step toward accepting that I’m not just chasing a degree or a dream; I’m learning to live in the in-between, where homesickness and hope coexist. I added a reminder to my phone: Text bro back. Tell him I’m okay. And maybe, for the first time in a while, I actually believed it.</p>
         <p>Two months ago, I was questioning everything. Now, I’m starting to accept that the doubts, the distance from loved ones, the struggles, and the tiny wins are all part of the story. I’m not there yet, wherever “there” is, but I’m here. And that’s enough for tonight.</p>
+
         <div class="with-love-wrapper">
           <p class="with-love">- With Love, Aj✨</p>
         </div>
@@ -579,8 +94,10 @@
         <form class="comment-box">
           <label for="name">Name</label>
           <input type="text" id="name" name="name" required placeholder="Your Name">
+
           <label for="comment">Comment</label>
           <textarea id="comment" name="comment" required placeholder="Your thoughts..."></textarea>
+
           <div class="buttons">
             <button type="submit">Post Comment</button>
             <button type="button" class="message-icon">
@@ -614,44 +131,33 @@
   </main>
 
   <script>
-    // Scroll reveal animation for all sections
+    // Reveal-on-scroll for .reveal blocks
     function revealOnScroll() {
       const revealElements = document.querySelectorAll('.reveal');
       const revealPoint = 150;
       const windowHeight = window.innerHeight;
 
-      revealElements.forEach(element => {
-        const elementPosition = element.getBoundingClientRect().top;
-        if (elementPosition < windowHeight - revealPoint) {
-          element.classList.add('visible');
-        }
+      revealElements.forEach(el => {
+        const pos = el.getBoundingClientRect().top;
+        if (pos < windowHeight - revealPoint) el.classList.add('visible');
       });
     }
 
-    // Add event listeners for scroll and initial load
     document.addEventListener('DOMContentLoaded', () => {
+      // initial + on scroll/load
+      revealOnScroll();
       window.addEventListener('scroll', revealOnScroll);
       window.addEventListener('load', revealOnScroll);
-      revealOnScroll();
+
+      // Optional: ensure fonts are ready before any potential visual shift
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => { document.body.style.opacity = '1'; });
+      } else {
+        document.body.style.opacity = '1';
+      }
+      // Fallback
+      setTimeout(() => { document.body.style.opacity = '1'; }, 1000);
     });
-    document.addEventListener('DOMContentLoaded', function() {
-    let pageShown = false;
-    
-    function showPage() {
-        if (!pageShown) {
-            pageShown = true;
-            document.body.style.opacity = '1';
-        }
-    }
-    
-    // Try document.fonts.ready first
-    if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(showPage);
-    }
-    
-    // Always set a maximum timeout as backup
-    setTimeout(showPage, 1000);
-});
   </script>
 </body>
 </html>
