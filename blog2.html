@@ -18,7 +18,7 @@
     <header>
       <div class="header-left">
         <a href="index.html" style="text-decoration: none;">
-          <img src="images/Black.png" alt="Ajay Ramineni Logo" class="logo-svg" />
+          <img src="images/white.png" alt="Ajay Ramineni Logo" class="logo-svg" />
         </a>
       </div>
 
@@ -32,21 +32,20 @@
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-
       <div class="social-icons">
-        <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
-          <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Ajay's Instagram Profile" />
-        </a>
-        <a href="https://x.com/withloveeajay?s=21" target="_blank" aria-label="X">
-          <img src="https://img.icons8.com/ios-filled/50/000000/twitterx.png" alt="Ajay's X Profile" />
-        </a>
-        <a href="https://www.linkedin.com/in/ajayramineni2808?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
-          <img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png" alt="Ajay's LinkedIn Profile" />
-        </a>
-        <a href="https://github.com/Ajayvarmaramineni" target="_blank" aria-label="GitHub">
-          <img src="https://img.icons8.com/ios-filled/50/000000/github.png" alt="Ajay's GitHub Profile" />
-        </a>
-      </div>
+  <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Ajay's Instagram Profile" />
+  </a>
+  <a href="https://x.com/withloveeajay?s=21" target="_blank" aria-label="X">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png" alt="Ajay's X Profile" />
+  </a>
+  <a href="https://www.linkedin.com/in/ajayramineni2808?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="Ajay's LinkedIn Profile" />
+  </a>
+  <a href="https://github.com/Ajayvarmaramineni" target="_blank" aria-label="GitHub">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="Ajay's GitHub Profile" />
+  </a>
+</div>
     </header>
 
     <section id="home">
@@ -167,6 +166,30 @@
         header.classList.remove('header-scrolled');
       }
     });
+  // --- Sticky header shrink on scroll ---
+  (function () {
+    const header = document.querySelector('header');
+    let lastY = window.scrollY;
+
+    function updateHeader() {
+      const y = window.scrollY;
+
+      // Shrink as soon as the user scrolls down a bit
+      if (y > 10) {
+        header.classList.add('shrink');
+      } else {
+        header.classList.remove('shrink');
+      }
+
+      lastY = y;
+    }
+
+    // Run on load and on scroll
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    window.addEventListener('load', updateHeader);
+    updateHeader();
+  })();
+
   </script>
 </body>
 </html>

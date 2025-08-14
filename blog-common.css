@@ -54,7 +54,9 @@ nav ul li a {
   transition: opacity 150ms ease;
 }
 nav ul li a:hover,
-nav ul li a.active { opacity: 0.8; }
+nav ul li a.active {
+  color: #ff6f61;               /* orange hover/active */
+}
 
 /* Right: social icons in white */
 header .social-icons {
