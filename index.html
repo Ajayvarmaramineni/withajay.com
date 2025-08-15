@@ -153,10 +153,13 @@
       }
     }
 
-    /* Hide header social icons on mobile */
+    /* Hide header social icons on mobile, but keep in footer */
     @media (max-width: 900px) {
-      .social-icons {
+      header .social-icons {
         display: none !important;
+      }
+      footer .social-icons {
+        display: flex !important;
       }
     }
 
