@@ -28,7 +28,7 @@
       padding: 3px 50px;
       position: sticky;
       top: 0;
-      background: rgba(0, 0, 0, 0.92);
+      background: rgba(0, 0, 0, 0.2); /* Changed from 0.92 to 0.2 for more transparency */
       backdrop-filter: blur(10px);
       z-index: 1000;
       transition: padding 0.3s ease;
@@ -150,6 +150,13 @@
       }
       header {
         flex-wrap: wrap;
+      }
+    }
+
+    /* Hide header social icons on mobile */
+    @media (max-width: 900px) {
+      .social-icons {
+        display: none !important;
       }
     }
 
@@ -277,6 +284,34 @@
     .cta-btn:hover {
       background: #e55a50;
       transform: translateY(-2px);
+    }
+
+    /* About section: stack image and text, center on mobile */
+    @media (max-width: 900px) {
+      .about-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 24px;
+      }
+      .about-photo-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+      .about-photo {
+        max-width: 180px;
+        width: 100%;
+        aspect-ratio: 1 / 1; /* Makes it square */
+        object-fit: cover;
+        border-radius: 12px;
+        margin: 0 auto;
+      }
+      .about-text {
+        flex: unset;
+        text-align: center;
+        padding: 0 8px;
+      }
     }
 
     /* Quote Section */
