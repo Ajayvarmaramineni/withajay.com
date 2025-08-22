@@ -10,10 +10,9 @@
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{font-family:'Open Sans',sans-serif;color:#111;background:#f7f7f7}
+    h1,h2,.gallery-hero-title{font-family:'Playfair Display',serif;font-weight:700}
 
-    h1,h2{font-family:'Playfair Display',serif;font-weight:700}
-
-    /* ========= Header (yours, translucent like ref) ========= */
+    /* ========= Header (yours) ========= */
     header{
       position:sticky;top:0;z-index:1000;
       display:flex;align-items:center;justify-content:space-between;
@@ -27,115 +26,75 @@
     .social-icons{display:flex;gap:14px}
     .social-icons img{width:28px;filter:invert(1)}
 
-    /* ========= Hero with torn edge ========= */
+    /* ========= Hero ========= */
     .gallery-hero{
       position:relative;min-height:320px;
       background:url('Photos/hero.jpg') center/cover no-repeat;
       display:flex;align-items:center;justify-content:center;color:#fff;text-align:center
     }
-    .gallery-hero::before{ /* dark veil */
-      content:"";position:absolute;inset:0;background:rgba(0,0,0,.35)
-    }
+    .gallery-hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.35)}
     .gallery-hero-content{position:relative;z-index:1}
     .gallery-hero-title{font-size:2.8rem;letter-spacing:.5px;text-shadow:0 2px 8px rgba(0,0,0,.25)}
     .gallery-hero-desc{opacity:.95}
 
-    /* Torn paper edge (light, like ref) */
-    .torn-edge{
-      position:relative;height:38px;background:#fff
-    }
-    .torn-edge::before{
-      content:"";position:absolute;inset:-18px 0 0 0;
-      /* inline SVG that mimics a torn paper wave */
-      background:
-        url("data:image/svg+xml;utf8,\
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 200' preserveAspectRatio='none'>\
-        <path d='M0,120 C150,170 300,70 450,120 C600,170 750,70 900,120 C1050,170 1125,120 1200,150 L1200,200 L0,200 Z' fill='%23ffffff'/>\
-        </svg>") center/cover no-repeat;
-    }
+    /* ========= Torn paper edge (inline SVG to ensure it always renders) ========= */
+    .torn-edge{background:#fff}
+    .torn-edge svg{display:block;width:100%;height:42px}
 
-    /* ========= Gallery grid (4 per row) ========= */
+    /* ========= Gallery grid (4 per row, tight spacing, no captions) ========= */
     .photos-section{background:#fff}
     .photos-container{max-width:1280px;margin:0 auto;padding:28px 22px 80px}
     .photo-collage{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px; /* tight like ref */
+      display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
     }
     @media (max-width:1100px){ .photo-collage{grid-template-columns:repeat(3,1fr);} }
-    @media (max-width:780px){ .photo-collage{grid-template-columns:repeat(2,1fr);} }
-    @media (max-width:520px){ .photo-collage{grid-template-columns:1fr;} }
+    @media (max-width:780px){  .photo-collage{grid-template-columns:repeat(2,1fr);} }
+    @media (max-width:520px){  .photo-collage{grid-template-columns:1fr;} }
 
     .photo-card{position:relative;border-radius:10px;overflow:hidden;cursor:pointer;background:#eee}
     .photo-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .3s}
     .photo-card:hover img{transform:scale(1.03)}
-
-    /* No caption on grid; show hover veil + fullscreen icon only */
+    /* Hover veil + fullscreen icon (grid only) */
     .hover-overlay{
       position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
       background:rgba(255,120,80,.42);opacity:0;transition:opacity .2s
     }
     .photo-card:hover .hover-overlay{opacity:1}
-
-    /* diagonal “expand” arrows icon (exact vibe) */
-    .expand-icon{
-      width:48px;height:48px;opacity:.95
-    }
+    .expand-icon{width:48px;height:48px;opacity:.95}
 
     /* ========= Lightbox ========= */
-    .lightbox{
-      position:fixed;inset:0;background:rgba(10,10,10,.97);
-      display:none;z-index:10000
-    }
+    .lightbox{position:fixed;inset:0;background:rgba(10,10,10,.97);display:none}
     .lightbox.active{display:block}
 
-    /* edge arrows – triangles placed near edges like ref */
+    /* z-index ladder so controls are always clickable */
+    .lb-stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;z-index:10001}
+    .lb-img{
+      background:#111;border-radius:12px;box-shadow:0 10px 36px rgba(0,0,0,.35);
+      max-width:94vw;max-height:86vh;object-fit:contain;display:block
+    }
+    .lb-caption{position:fixed;left:28px;bottom:20px;color:#fff;background:rgba(0,0,0,.55);
+      padding:10px 14px;border-radius:8px;font-size:.98rem;max-width:60vw;z-index:10002}
+    .lb-counter{position:fixed;right:28px;bottom:20px;color:#cfcfcf;font-weight:600;z-index:10002}
+
+    /* edge arrows – triangles (now on top + pointer-enabled) */
     .lb-arrow{
       position:fixed;top:50%;transform:translateY(-50%);
-      width:0;height:0;border-style:solid;opacity:.8;cursor:pointer;
+      width:0;height:0;border-style:solid;opacity:.85;cursor:pointer;
       filter:drop-shadow(0 0 2px rgba(0,0,0,.6));
-      transition:opacity .15s
+      transition:opacity .15s;z-index:10003;pointer-events:auto
     }
     .lb-arrow:hover{opacity:1}
-    .lb-prev{
-      left:22px;
-      border-width:18px 22px 18px 0;          /* triangle */
-      border-color:transparent #cfcfcf transparent transparent; /* grey */
-    }
-    .lb-next{
-      right:22px;
-      border-width:18px 0 18px 22px;
-      border-color:transparent transparent transparent #cfcfcf;
-    }
+    .lb-prev{left:22px;border-width:18px 22px 18px 0;border-color:transparent #cfcfcf transparent transparent}
+    .lb-next{right:22px;border-width:18px 0 18px 22px;border-color:transparent transparent transparent #cfcfcf}
     .lb-prev:hover{border-right-color:#fff}
     .lb-next:hover{border-left-color:#fff}
 
-    /* close X – grey → white */
+    /* close X – grey → white (on top) */
     .lb-close{
       position:fixed;top:18px;right:28px;font-size:28px;line-height:1;color:#cfcfcf;
-      background:none;border:none;cursor:pointer
+      background:none;border:none;cursor:pointer;z-index:10004;pointer-events:auto
     }
     .lb-close:hover{color:#fff}
-
-    /* stage centers the image; we size to an elegant 3:2 that fills screen */
-    .lb-stage{
-      position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
-      padding:16px
-    }
-    .lb-img{
-      background:#111;border-radius:12px;box-shadow:0 10px 36px rgba(0,0,0,.35);
-      max-width:94vw;max-height:86vh;object-fit:contain; /* safety */
-      display:block
-    }
-
-    /* bottom-left caption, bottom-right counter */
-    .lb-caption{
-      position:fixed;left:28px;bottom:20px;color:#fff;background:rgba(0,0,0,.55);
-      padding:10px 14px;border-radius:8px;font-size:.98rem;max-width:60vw
-    }
-    .lb-counter{
-      position:fixed;right:28px;bottom:20px;color:#cfcfcf;font-weight:600
-    }
 
     /* ========= Footer (yours) ========= */
     footer{
@@ -148,7 +107,7 @@
   </style>
 </head>
 <body>
-  <!-- Header (yours) -->
+  <!-- Header -->
   <header>
     <div class="header-left">
       <a href="index.html" style="text-decoration:none">
@@ -188,178 +147,58 @@
       <div class="gallery-hero-desc">Some favorite moments from my travels</div>
     </div>
   </section>
-  <div class="torn-edge"></div>
+  <div class="torn-edge">
+    <!-- inline SVG “torn” strip -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,60 C150,110 300,10 450,60 C600,110 750,10 900,60 C1050,110 1125,60 1200,90 L1200,120 L0,120 Z" fill="#ffffff"/>
+    </svg>
+  </div>
 
   <!-- Gallery -->
   <section class="photos-section">
     <div class="photos-container">
       <div class="photo-collage">
-        <!-- 30 cards — no titles shown in grid (only on hover & lightbox) -->
-        <!-- data-index must match the JS images[] order -->
-        <div class="photo-card" data-index="0">
-          <img src="Photos/birds.jpg" alt="Birds">
-          <div class="hover-overlay">
-            <svg class="expand-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/>
-            </svg>
-          </div>
-        </div>
-
-        <div class="photo-card" data-index="1">
-          <img src="Photos/blur.jpg" alt="Blur">
-          <div class="hover-overlay">
-            <svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg>
-          </div>
-        </div>
-
-        <div class="photo-card" data-index="2">
-          <img src="Photos/boat.jpeg" alt="Boat">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="3">
-          <img src="Photos/boatman.jpg" alt="Boatman">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="4">
-          <img src="Photos/cat.jpg" alt="Cat">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="5">
-          <img src="Photos/dad.jpg" alt="Dad">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="6">
-          <img src="Photos/dome.jpg" alt="Dome">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="7">
-          <img src="Photos/fort.jpg" alt="Fort">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="8">
-          <img src="Photos/fort1.jpg" alt="Fort1">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="9">
-          <img src="Photos/freedom.jpg" alt="Freedom">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="10">
-          <img src="Photos/friends.jpg" alt="Friends">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="11">
-          <img src="Photos/her.jpeg" alt="Her">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="12">
-          <img src="Photos/her1.jpeg" alt="Her1">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="13">
-          <img src="Photos/mono.jpg" alt="Mono">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="14">
-          <img src="Photos/pillars.jpg" alt="Pillars">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="15">
-          <img src="Photos/shadow.jpeg" alt="Shadow">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="16">
-          <img src="Photos/shadows.jpeg" alt="Shadows">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="17">
-          <img src="Photos/sil.jpeg" alt="Silhouette">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="18">
-          <img src="Photos/squirrel.jpg" alt="Squirrel">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="19">
-          <img src="Photos/sunset.jpeg" alt="Sunset">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="20">
-          <img src="Photos/temple.jpg" alt="Temple">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="21">
-          <img src="Photos/them.jpeg" alt="Comrades">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="22">
-          <img src="Photos/well.jpeg" alt="Well">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="23">
-          <img src="Photos/starrynight.jpg" alt="Starrynight">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="24">
-          <img src="Photos/sunset.jpg" alt="Sunset 2">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="25">
-          <img src="Photos/taj.jpg" alt="Taj">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="26">
-          <img src="Photos/temple2.jpg" alt="Temple2">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="27">
-          <img src="Photos/temple3.jpg" alt="Temple3">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="28">
-          <img src="Photos/trees.jpg" alt="Trees">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
-
-        <div class="photo-card" data-index="29">
-          <img src="Photos/wine.jpg" alt="Wine">
-          <div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div>
-        </div>
+        <!-- Grid: 30 cards (no text on grid) -->
+        <!-- data-index matches images[] below -->
+        <div class="photo-card" data-index="0"><img src="Photos/birds.jpg" alt="Birds"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="1"><img src="Photos/blur.jpg" alt="Blur"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="2"><img src="Photos/boat.jpeg" alt="Boat"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="3"><img src="Photos/boatman.jpg" alt="Boatman"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="4"><img src="Photos/cat.jpg" alt="Cat"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="5"><img src="Photos/dad.jpg" alt="Dad"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="6"><img src="Photos/dome.jpg" alt="Dome"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="7"><img src="Photos/fort.jpg" alt="Fort"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="8"><img src="Photos/fort1.jpg" alt="Fort1"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="9"><img src="Photos/freedom.jpg" alt="Freedom"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="10"><img src="Photos/friends.jpg" alt="Friends"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="11"><img src="Photos/her.jpeg" alt="Her"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="12"><img src="Photos/her1.jpeg" alt="Her1"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="13"><img src="Photos/mono.jpg" alt="Mono"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="14"><img src="Photos/pillars.jpg" alt="Pillars"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="15"><img src="Photos/shadow.jpeg" alt="Shadow"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="16"><img src="Photos/shadows.jpeg" alt="Shadows"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="17"><img src="Photos/sil.jpeg" alt="Silhouette"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="18"><img src="Photos/squirrel.jpg" alt="Squirrel"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="19"><img src="Photos/sunset.jpeg" alt="Sunset"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="20"><img src="Photos/temple.jpg" alt="Temple"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="21"><img src="Photos/them.jpeg" alt="Comrades"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="22"><img src="Photos/well.jpeg" alt="Well"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="23"><img src="Photos/starrynight.jpg" alt="Starrynight"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="24"><img src="Photos/sunset.jpg" alt="Sunset 2"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="25"><img src="Photos/taj.jpg" alt="Taj"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="26"><img src="Photos/temple2.jpg" alt="Temple2"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="27"><img src="Photos/temple3.jpg" alt="Temple3"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="28"><img src="Photos/trees.jpg" alt="Trees"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="29"><img src="Photos/wine.jpg" alt="Wine"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
       </div>
     </div>
   </section>
 
   <!-- Lightbox -->
   <div id="lightbox" class="lightbox" aria-hidden="true">
-    <button class="lb-close" aria-label="Close">&times;</button>
-    <div class="lb-prev lb-arrow" aria-label="Previous"></div>
-    <div class="lb-next lb-arrow" aria-label="Next"></div>
+    <button class="lb-close" aria-label="Close" tabindex="0">&times;</button>
+    <div class="lb-prev lb-arrow" role="button" aria-label="Previous" tabindex="0"></div>
+    <div class="lb-next lb-arrow" role="button" aria-label="Next" tabindex="0"></div>
 
     <div class="lb-stage">
       <img class="lb-img" alt="">
@@ -369,7 +208,7 @@
     <div class="lb-counter"></div>
   </div>
 
-  <!-- Footer (yours) -->
+  <!-- Footer -->
   <footer>
     <div class="footer-logo">Ajay Varma Ramineni</div>
     <div class="social-icons">
@@ -391,7 +230,7 @@
   </footer>
 
   <script>
-    /* Lightbox data (titles/descriptions used in the viewer) */
+    /* Lightbox data */
     const images = [
       {src:"Photos/birds.jpg",  title:"Freedom",  desc:"A flock of birds soaring high, embodying the essence of freedom and the boundless sky."},
       {src:"Photos/blur.jpg",   title:"Riders",   desc:"A dynamic shot capturing the energy and motion of riders in action."},
@@ -425,35 +264,43 @@
       {src:"Photos/wine.jpg",   title:"Wine",     desc:"Description for wine."}
     ];
 
-    const lightbox   = document.getElementById('lightbox');
-    const imgEl      = document.querySelector('.lb-img');
-    const captionEl  = document.querySelector('.lb-caption');
-    const counterEl  = document.querySelector('.lb-counter');
-    const btnPrev    = document.querySelector('.lb-prev');
-    const btnNext    = document.querySelector('.lb-next');
-    const btnClose   = document.querySelector('.lb-close');
-    const stage      = document.querySelector('.lb-stage');
+    const lightbox  = document.getElementById('lightbox');
+    const imgEl     = document.querySelector('.lb-img');
+    const captionEl = document.querySelector('.lb-caption');
+    const counterEl = document.querySelector('.lb-counter');
+    const prevEl    = document.querySelector('.lb-prev');
+    const nextEl    = document.querySelector('.lb-next');
+    const closeEl   = document.querySelector('.lb-close');
+    const stage     = document.querySelector('.lb-stage');
 
     let current = 0, touchStartX = 0;
 
     function fitImage32(){
-      // Force a 3:2 rectangle that fits viewport with small margins
       const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
       const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-      const marginW = 48, marginH = 160; // breathing room (arrows/captions)
+      const marginW = 48, marginH = 160;
       const maxW = vw - marginW, maxH = vh - marginH;
-
-      // We want width/height = 3/2 and fit inside maxW x maxH
       let w = Math.min(maxW, (3/2)*maxH);
       let h = (2/3)*w;
-
       imgEl.style.width  = Math.round(w) + 'px';
       imgEl.style.height = Math.round(h) + 'px';
     }
 
-    function openLightbox(index){
-      current = index;
-      show();
+    function show(){
+      const item = images[(current+images.length)%images.length];
+      fitImage32();
+      imgEl.style.opacity = 0;
+      setTimeout(()=>{
+        imgEl.src = item.src;
+        imgEl.alt = item.title;
+        captionEl.textContent = item.desc ? `${item.title} — ${item.desc}` : item.title;
+        counterEl.textContent = `${current+1} of ${images.length}`;
+        imgEl.onload = ()=> imgEl.style.opacity = 1;
+      },100);
+    }
+
+    function openLightbox(i){
+      current = i; show();
       lightbox.classList.add('active');
       lightbox.setAttribute('aria-hidden','false');
       document.body.style.overflow='hidden';
@@ -464,52 +311,49 @@
       document.body.style.overflow='';
     }
 
-    function show(){
-      const {src,title,desc} = images[(current+images.length)%images.length];
-      fitImage32();
-      imgEl.style.opacity = 0;
-      setTimeout(()=>{
-        imgEl.src = src;
-        imgEl.alt = title;
-        captionEl.textContent = `${title}${desc ? ' — ' + desc : ''}`;
-        counterEl.textContent = `${current+1} of ${images.length}`;
-        imgEl.onload = ()=>{ imgEl.style.opacity = 1; };
-      },100);
-    }
-
-    // Grid click handlers
+    // Grid -> open
     document.querySelectorAll('.photo-card').forEach(card=>{
-      card.addEventListener('click', ()=>{
-        openLightbox(parseInt(card.dataset.index,10));
+      card.addEventListener('click', ()=> openLightbox(parseInt(card.dataset.index,10)));
+    });
+
+    // Controls (click + keyboard)
+    function prev(){ current=(current-1+images.length)%images.length; show(); }
+    function next(){ current=(current+1)%images.length; show(); }
+
+    prevEl.addEventListener('click', prev);
+    nextEl.addEventListener('click', next);
+    closeEl.addEventListener('click', closeLightbox);
+
+    [prevEl,nextEl,closeEl].forEach(el=>{
+      el.addEventListener('keydown', (e)=>{
+        if(e.key==='Enter' || e.key===' '){
+          e.preventDefault();
+          el===prevEl ? prev() : el===nextEl ? next() : closeLightbox();
+        }
       });
     });
 
-    // Controls
-    btnPrev.addEventListener('click', ()=>{ current=(current-1+images.length)%images.length; show(); });
-    btnNext.addEventListener('click', ()=>{ current=(current+1)%images.length; show(); });
-    btnClose.addEventListener('click', closeLightbox);
-
-    // Click outside image closes
-    lightbox.addEventListener('click', (e)=>{
-      if (!stage.contains(e.target) && !e.target.classList.contains('lb-arrow')) closeLightbox();
+    // Click outside the image closes (stage is full-screen; only close if the background itself is clicked)
+    stage.addEventListener('click', (e)=>{
+      if (e.target === stage) closeLightbox();
     });
 
-    // Keyboard
+    // Keyboard shortcuts
     document.addEventListener('keydown',(e)=>{
       if(!lightbox.classList.contains('active')) return;
       if(e.key==='Escape') closeLightbox();
-      if(e.key==='ArrowLeft') btnPrev.click();
-      if(e.key==='ArrowRight') btnNext.click();
+      if(e.key==='ArrowLeft') prev();
+      if(e.key==='ArrowRight') next();
     });
 
     // Swipe
     stage.addEventListener('touchstart', e=>{ touchStartX = e.changedTouches[0].screenX; }, {passive:true});
     stage.addEventListener('touchend', e=>{
       const dx = e.changedTouches[0].screenX - touchStartX;
-      if (Math.abs(dx) > 40){ dx>0 ? btnPrev.click() : btnNext.click(); }
+      if (Math.abs(dx) > 40){ dx>0 ? prev() : next(); }
     }, {passive:true});
 
-    // Resize keeps 3:2 nicely fitted
+    // Keep aspect on resize
     window.addEventListener('resize', ()=>{ if(lightbox.classList.contains('active')) fitImage32(); });
   </script>
 </body>
