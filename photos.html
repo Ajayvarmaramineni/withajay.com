@@ -6,42 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Photos | With Love AJ</title>
   <style>
-    /* Base */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     h1, h2, .gallery-heading { font-family: 'Playfair Display', serif; font-weight: 700; }
     p, li, .caption, .photo-description { font-family: 'Open Sans', sans-serif; }
 
-    /* View Transitions (kept from your original) */
-    @supports (view-transition-name: none) {
-      ::view-transition-old(root),
-      ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
-      ::view-transition-old(root) { z-index: 1; }
-      ::view-transition-new(root) { z-index: 9999; }
-      .back-transition::view-transition-old(root) { animation: 300ms cubic-bezier(0.4,0,0.2,1) both fade-and-slide-out; }
-      .back-transition::view-transition-new(root) { animation: 300ms cubic-bezier(0.4,0,0.2,1) both fade-and-slide-in reverse; }
-    }
-    @keyframes fade-and-slide-in { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
-    @keyframes fade-and-slide-out { from {opacity:1; transform:translateY(0);} to {opacity:0; transform:translateY(20px);} }
-
-    .shared-element { view-transition-name: shared-element; }
-
-    /* ===== Header (EXACTLY your original) ===== */
     body {
-  background: url('images/photos.jpg') center center / cover no-repeat fixed;
-  position: relative;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255,255,255,0.7); /* light fade overlay so gallery pops */
-  z-index: -1;
-}
+      background: url('images/photos.jpg') center center / cover no-repeat fixed;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255,255,255,0.7);
+      z-index: -1;
+    }
 
     header {
       display: flex;
@@ -98,17 +81,46 @@ body::before {
       filter: brightness(1.5);
     }
 
-    /* ===== Minimal white page header ===== */
-    .page-header {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 60px 20px 30px;
-      text-align: center;
+    /* ===== HERO SECTION ===== */
+    .gallery-hero {
+      width: 100%;
+      min-height: 340px;
+      background: url('Photos/hero.jpg') center center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 0;
     }
-    .page-header h1 { font-size: 2.8rem; margin-bottom: 10px; color: #222; }
-    .page-header p  { color: #666; font-size: 1.05rem; }
+    .gallery-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 1;
+    }
+    .gallery-hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+    }
+    .gallery-hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+    .gallery-hero-desc {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
 
-    /* ===== Photos Section (white & clean) ===== */
+    /* ===== Photos Section ===== */
     .photos-section {
       background: #fff;
       padding: 10px 0 90px;
@@ -135,113 +147,179 @@ body::before {
     }
     .section-heading span:hover::after { width: 120px; }
 
-    /* Scroll reveal */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
     /* ===== Gallery grid (like TheWorldTravelGuy) ===== */
     .photo-collage {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+      margin-top: 0;
     }
-    @media (max-width: 1100px) { .photo-collage { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 768px)  { .photo-collage { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
-    @media (max-width: 480px)  { .photo-collage { grid-template-columns: 1fr; } }
-
     .photo-card {
-      position: relative;
-      background: #fff;
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+      background: #fff;
+      position: relative;
       cursor: pointer;
+      transition: box-shadow 0.25s;
     }
-    .photo-card:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,0.10); }
-
-    /* Tidy uniform thumbnails (3:2) */
     .photo-card img {
-      width: 100%; height: 0; padding-bottom: 66.666%;
-      object-fit: cover; display: block; border: 0;
-      border-radius: 12px 12px 0 0;
-      transition: transform 0.35s ease;
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s;
+      border-radius: 0;
     }
-    .photo-card:hover img { transform: scale(1.03); }
-
-    /* Hover magnifying glass overlay */
+    .photo-card:hover img {
+      transform: scale(1.04);
+    }
     .hover-overlay {
-      position: absolute; inset: 0;
-      background: rgba(0,0,0,0.35);
-      opacity: 0; display: flex; align-items: center; justify-content: center;
-      transition: opacity 0.25s ease;
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 120, 80, 0.45);
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.25s;
+      z-index: 2;
     }
-    .hover-overlay svg { width: 40px; height: 40px; fill: #fff; }
-    .photo-card:hover .hover-overlay { opacity: 1; }
-
-    /* Caption block (below image) */
+    .photo-card:hover .hover-overlay {
+      opacity: 1;
+    }
+    .hover-overlay svg {
+      width: 48px;
+      height: 48px;
+      fill: #fff;
+      opacity: 0.9;
+    }
     .photo-overlay {
-      position: static; transform: none; width: 100%;
-      background: #fff; color: #333; padding: 14px 14px 18px;
-      text-align: center;
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      padding: 14px 10px 12px;
+      text-align: left;
+      z-index: 3;
+      border-radius: 0 0 16px 16px;
+      min-height: 54px;
+      transition: background 0.2s;
     }
-    .photo-overlay h3 { font-size: 1rem; margin-bottom: 6px; }
-    .photo-overlay p  { font-size: 0.9rem; color: #666; }
+    .photo-overlay h3 {
+      font-size: 1.08rem;
+      margin-bottom: 2px;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+    .photo-overlay p {
+      font-size: 0.97rem;
+      color: #f0e9e9;
+      margin: 0;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.13);
+    }
 
     /* ===== Lightbox carousel ===== */
     .lightbox {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+      background: rgba(0,0,0,0.97);
+      position: fixed; inset: 0;
       display: none; flex-direction: column; align-items: center; justify-content: center;
       z-index: 10000;
     }
-    .lightbox.active { display: flex; }
-
+    .lightbox.active {
+      display: flex;
+    }
     .lightbox-stage {
-      position: relative; width: 100%; height: calc(100% - 120px);
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      position: relative;
     }
     .lightbox-img {
-      max-width: 90%; max-height: 85%; object-fit: contain;
-      opacity: 0; transform: translateX(0); transition: opacity 250ms ease, transform 250ms ease;
-      will-change: opacity, transform;
+      max-width: 92vw;
+      max-height: 78vh;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      background: #222;
+      margin: 0 auto;
+      display: block;
     }
-    .lightbox-img.show { opacity: 1; }
-
-    /* Slide animations */
-    .slide-in-right { transform: translateX(20px); opacity: 0; }
-    .slide-in-left  { transform: translateX(-20px); opacity: 0; }
-    .slide-center   { transform: translateX(0); opacity: 1; }
-
-    /* Arrows */
-    .lightbox-arrow {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      background: rgba(0,0,0,0.5); border: none; color: #fff;
-      font-size: 2rem; padding: 10px 15px; cursor: pointer; border-radius: 6px;
-      z-index: 10001; transition: background 0.25s ease;
-    }
-    .lightbox-arrow:hover { background: rgba(255,255,255,0.2); }
-    .lightbox-arrow.prev { left: 20px; }
-    .lightbox-arrow.next { right: 20px; }
-
-    /* Caption area */
     .lightbox-caption {
-      color: #fff; text-align: center; margin-top: 12px; padding: 0 20px 24px;
+      background: rgba(0,0,0,0.82);
+      color: #fff;
+      width: 100%;
       max-width: 900px;
+      margin: 0 auto;
+      border-radius: 0 0 12px 12px;
+      padding: 18px 24px 18px;
+      text-align: left;
+      position: relative;
+      top: -18px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.13);
     }
-    .lightbox-caption h3 { font-size: 1.25rem; margin-bottom: 6px; }
-    .lightbox-caption p  { font-size: 1rem; color: #ddd; }
-
-    /* Close button */
+    .lightbox-caption h3 {
+      font-size: 1.18rem;
+      margin-bottom: 4px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .lightbox-caption p {
+      font-size: 1.01rem;
+      color: #e0e0e0;
+      margin: 0;
+    }
+    .lightbox-counter {
+      font-size: 1rem;
+      color: #ffbfae;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    .lightbox-arrow {
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      font-size: 2.2rem;
+      border-radius: 50%;
+      border: none;
+      padding: 10px 16px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10001;
+      transition: background 0.2s;
+    }
+    .lightbox-arrow.prev { left: 18vw; }
+    .lightbox-arrow.next { right: 18vw; }
+    .lightbox-arrow:hover { background: rgba(255,120,80,0.7); }
     .lightbox-close {
-      position: absolute; top: 16px; right: 16px;
-      background: rgba(0,0,0,0.5); border: none; color: #fff;
-      font-size: 1.4rem; cursor: pointer; padding: 8px 12px; border-radius: 6px; z-index: 10002;
-      transition: background 0.25s ease;
+      top: 24px;
+      right: 32px;
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      font-size: 1.7rem;
+      border-radius: 50%;
+      border: none;
+      padding: 8px 13px;
+      position: absolute;
+      z-index: 10002;
+      transition: background 0.2s;
     }
-    .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-close:hover { background: rgba(255,120,80,0.7); }
+    @media (max-width: 900px) {
+      .lightbox-arrow.prev { left: 2vw; }
+      .lightbox-arrow.next { right: 2vw; }
+    }
+    @media (max-width: 600px) {
+      .gallery-hero { min-height: 180px; }
+      .gallery-hero-title { font-size: 1.5rem; }
+      .gallery-hero-desc { font-size: 1rem; }
+      .lightbox-caption { padding: 12px 8px 12px; }
+    }
 
-    /* Footer (EXACTLY your original) */
+    /* Footer */
     footer {
       background: rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(10px);
@@ -268,7 +346,6 @@ body::before {
   <div class="transition-overlay"></div>
 
   <main id="main-content" data-transition-wrapper>
-    <!-- anchor for "Back to Top" -->
     <div id="home"></div>
 
     <!-- ===== Header (unchanged) ===== -->
@@ -304,17 +381,18 @@ body::before {
       </div>
     </header>
 
-    <!-- Minimal white page header -->
-    <div class="page-header">
-      <h1>Moments Through My Lens</h1>
-      <p>Capturing stories from every corner of life</p>
-    </div>
+    <!-- ===== HERO SECTION ===== -->
+    <section class="gallery-hero">
+      <div class="gallery-hero-content">
+        <div class="gallery-hero-title">GALLERY</div>
+        <div class="gallery-hero-desc">Some favorite moments from my travels</div>
+      </div>
+    </section>
 
     <!-- ===== Gallery ===== -->
     <section class="photos-section">
       <div class="photos-container">
         <h2 class="section-heading reveal"><span>Gallery</span></h2>
-
         <div class="photo-collage reveal">
           <!-- CARDS with matching data-index 0..29 -->
           <div class="photo-card" data-index="0">
@@ -600,16 +678,6 @@ body::before {
   </main>
 
   <script type="module">
-    /* View transition polyfill (kept) */
-    if (!document.startViewTransition) {
-      document.startViewTransition = (callback) => {
-        callback();
-        return { ready: Promise.resolve(), updateCallbackDone: Promise.resolve(), finished: Promise.resolve() };
-      };
-    }
-
-   
-
     /* Reveal on scroll */
     function revealOnScroll() {
       const revealElements = document.querySelectorAll('.reveal');
@@ -623,7 +691,7 @@ body::before {
     window.addEventListener('scroll', revealOnScroll);
     window.addEventListener('load', revealOnScroll);
 
-    /* Lightbox Carousel Logic (exactly-like-theirs behavior) */
+    /* Lightbox Carousel Logic */
     const images = [
       {src:"Photos/birds.jpg", title:"Birds", desc:"A flock of birds taking flight against a vibrant sky."},
       {src:"Photos/blur.jpg", title:"Blur", desc:"An artistic blur capturing the essence of motion and light."},
@@ -670,17 +738,6 @@ body::before {
     let currentIndex = 0;
     let touchStartX = 0;
 
-    function applySlideAnimation(direction) {
-      imgEl.classList.remove('show', 'slide-in-left', 'slide-in-right', 'slide-center');
-      // Prep animation direction
-      if (direction === 'next') imgEl.classList.add('slide-in-right');
-      if (direction === 'prev') imgEl.classList.add('slide-in-left');
-      // Force reflow to restart animation
-      void imgEl.offsetWidth;
-      imgEl.classList.remove('slide-in-left', 'slide-in-right');
-      imgEl.classList.add('slide-center', 'show');
-    }
-
     function showImage(idx, direction = 'next') {
       currentIndex = (idx + images.length) % images.length;
       const {src, title, desc} = images[currentIndex];
@@ -692,7 +749,6 @@ body::before {
         counterEl.textContent = `${currentIndex + 1} / ${images.length}`;
         imgEl.onload = () => {
           imgEl.style.opacity = 1;
-          applySlideAnimation(direction);
         };
       }, 150);
     }
@@ -710,7 +766,6 @@ body::before {
       document.body.style.overflow = '';
     }
 
-    // Bind cards
     document.querySelectorAll('.photo-card').forEach(card => {
       card.addEventListener('click', () => {
         const index = parseInt(card.dataset.index, 10);
@@ -718,19 +773,16 @@ body::before {
       });
     });
 
-    // Controls
     closeBtn.addEventListener('click', closeLightbox);
     prevBtn.addEventListener('click', () => showImage(currentIndex - 1, 'prev'));
     nextBtn.addEventListener('click', () => showImage(currentIndex + 1, 'next'));
 
-    // Click outside (stage background)
     lightbox.addEventListener('click', (e) => {
       const clickedInsideStage = stage.contains(e.target);
       const clickedButton = e.target.closest('button');
       if (!clickedInsideStage && !clickedButton) closeLightbox();
     });
 
-    // Keyboard nav
     document.addEventListener('keydown', (e) => {
       if (!lightbox.classList.contains('active')) return;
       if (e.key === 'Escape') closeLightbox();
@@ -738,7 +790,6 @@ body::before {
       if (e.key === 'ArrowRight') showImage(currentIndex + 1, 'next');
     });
 
-    // Touch swipe
     stage.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
     }, {passive: true});
