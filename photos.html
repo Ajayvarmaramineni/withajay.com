@@ -106,7 +106,7 @@
     .back-to-top{color:#fff}
   </style>
 </head>
-<body>
+<body style="opacity:0; transition:opacity 0.8s;">
   <!-- Header -->
   <header>
     <div class="header-left">
@@ -175,7 +175,7 @@
         <div class="photo-card" data-index="12"><img src="Photos/her1.JPEG" alt="Her1"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
         <div class="photo-card" data-index="13"><img src="Photos/mono.JPG" alt="Mono"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
         <div class="photo-card" data-index="14"><img src="Photos/pillars.JPG" alt="Pillars"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-card" data-index="15"><img src="Photos/shadow.JPEG" alt="Shadow"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="photo-card" data-index="15"><img src="Photos/shadow.JPEG" alt="Shadow"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
         <div class="photo-card" data-index="16"><img src="Photos/shadows.JPEG" alt="Shadows"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
         <div class="photo-card" data-index="17"><img src="Photos/sil.JPEG" alt="Silhouette"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
         <div class="photo-card" data-index="18"><img src="Photos/squirrel.JPG" alt="Squirrel"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
@@ -230,6 +230,40 @@
   </footer>
 
   <script>
+  // Smooth page fade-in after fonts and images load
+  document.addEventListener('DOMContentLoaded', function() {
+    function showPage() {
+      document.body.style.opacity = '1';
+    }
+    // Wait for fonts
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        // Wait for all images in the grid to load
+        const imgs = Array.from(document.querySelectorAll('.photo-card img'));
+        let loaded = 0;
+        if (imgs.length === 0) showPage();
+        imgs.forEach(img => {
+          if (img.complete) {
+            loaded++;
+            if (loaded === imgs.length) showPage();
+          } else {
+            img.addEventListener('load', () => {
+              loaded++;
+              if (loaded === imgs.length) showPage();
+            });
+            img.addEventListener('error', () => {
+              loaded++;
+              if (loaded === imgs.length) showPage();
+            });
+          }
+        });
+      });
+    } else {
+      // Fallback: just fade in after 1s
+      setTimeout(showPage, 1000);
+    }
+  });
+
   /* Lightbox data */
   const images = [
     {src:"Photos/birds.JPG",  title:"Freedom",  desc:"A flock of birds soaring high, embodying the essence of freedom and the boundless sky."},
