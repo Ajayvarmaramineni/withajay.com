@@ -1,0 +1,24 @@
+.blog {
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.blog h1 {
+    color: #333;
+}
+
+.blog p {
+    line-height: 1.6;
+    color: #666;
+}
+
+.blog a {
+    color: #2a7ae2;
+    text-decoration: none;
+}
+
+.blog a:hover {
+    text-decoration: underline;
+}
