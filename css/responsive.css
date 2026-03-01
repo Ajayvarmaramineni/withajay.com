@@ -1,0 +1,33 @@
+/* Base styles */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    /* Styles for tablets */
+    body {
+        background-color: lightblue;
+    }
+}
+
+@media (max-width: 992px) {
+    /* Styles for large tablets */
+    body {
+        background-color: lightgreen;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Styles for small tablets and large phones */
+    body {
+        background-color: lightcoral;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Styles for extra small devices (phones) */
+    body {
+        background-color: lightyellow;
+    }
+}
