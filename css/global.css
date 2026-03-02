@@ -213,9 +213,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .page-header .header-logo {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   text-align: center;
 }
 
@@ -224,8 +221,6 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.9rem;
   letter-spacing: 0.12em;
   color: var(--white);
-  display: block;
-  text-align: center;
   line-height: 1.3;
 }
 
