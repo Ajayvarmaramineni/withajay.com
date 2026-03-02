@@ -1,0 +1,73 @@
+/* =========================================================
+   photos.css — Masonry layout and photo page styles
+   ========================================================= */
+
+/* --- Page header override for photos page --- */
+.photos-page-header {
+  background: var(--black);
+}
+
+/* --- Masonry grid --- */
+.masonry-grid {
+  columns: 4;
+  column-gap: 12px;
+  padding: 24px 24px 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 12px;
+  position: relative;
+  cursor: pointer;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #eee;
+}
+
+.masonry-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.masonry-item:hover img {
+  transform: scale(1.03);
+}
+
+/* Hover veil */
+.masonry-item .hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.masonry-item:hover .hover-overlay {
+  opacity: 1;
+}
+
+.expand-icon {
+  width: 40px;
+  height: 40px;
+  opacity: 0.9;
+}
+
+/* --- Responsive columns --- */
+@media (max-width: 1100px) {
+  .masonry-grid { columns: 3; }
+}
+
+@media (max-width: 780px) {
+  .masonry-grid { columns: 2; }
+}
+
+@media (max-width: 520px) {
+  .masonry-grid { columns: 1; }
+}
