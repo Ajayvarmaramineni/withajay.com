@@ -390,19 +390,20 @@ body {
 <body>
 
   <!-- Hamburger -->
-  <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false" style="color:#111;background:rgba(0,0,0,0.07);">
-    <span>&#9776;</span>
+  <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
+    <span class="line"></span><span class="line"></span><span class="line"></span>
   </button>
 
   <!-- Nav overlay -->
   <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
     <button class="nav-close" id="navClose" aria-label="Close navigation">&times;</button>
     <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="photos.html">Photos</a></li>
+      <li><a href="photography.html">Photography</a></li>
       <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="contact.html">Contact</a></li>
       <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="nav-social">
       <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
@@ -412,31 +413,7 @@ body {
     </div>
   </nav>
 
-  <div class="route-loader"></div>
-  <div class="transition-overlay"></div>
   <main id="main-content" data-transition-wrapper>
-    <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
-      <span class="line"></span><span class="line"></span><span class="line"></span>
-    </button>
-
-    <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
-      <button class="nav-close" id="navClose" aria-label="Close navigation">&times;</button>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="photography.html">Photography</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <div class="nav-social">
-        <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-        <a href="https://x.com/withloveeajay" target="_blank" rel="noopener" aria-label="X">X</a>
-        <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
-        <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
-      </div>
-    </nav>
-
     <header class="page-header">
       <div class="header-logo">
         <a href="index.html">AJAY<br>RAMINENI</a>
@@ -539,6 +516,5 @@ body {
       revealOnScroll();
     });
   </script>
-  <script src="js/navigation.js"></script>
 </body>
 </html>
