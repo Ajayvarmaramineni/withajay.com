@@ -11,8 +11,8 @@
     var match = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/);
     if (match) {
       match[1].split('\n').forEach(function (line) {
-        var kv = line.match(/^(\w+):\s*(.+)$/);
-        if (kv) meta[kv[1].trim()] = kv[2].trim();
+        var keyValuePair = line.match(/^(\w+):\s*(.+)$/);
+        if (keyValuePair) meta[keyValuePair[1].trim()] = keyValuePair[2].trim();
       });
       body = match[2];
     }

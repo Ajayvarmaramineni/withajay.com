@@ -79,6 +79,8 @@
     left: 12px;
   }
 
+  /* 45vh (slightly less than 50vh) leaves space for the stacked
+     center-text overlay without clipping on very short screens */
   .panel {
     height: 45vh;
   }

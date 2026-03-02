@@ -352,8 +352,8 @@
     }
 
     // Grid -> open
-    document.querySelectorAll('.masonry-item').forEach(card=>{
-      card.addEventListener('click', ()=> openLightbox(parseInt(card.dataset.index,10)));
+    document.querySelectorAll('.masonry-item').forEach(item=>{
+      item.addEventListener('click', ()=> openLightbox(parseInt(item.dataset.index,10)));
     });
 
     // Controls (click + keyboard)
