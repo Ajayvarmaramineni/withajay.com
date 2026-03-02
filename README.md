@@ -1,63 +1,76 @@
 # withajay.com
 
-## Project Documentation
+Personal website of **Ajay Ramineni** — Analytics, Photography & Storytelling.
 
-Welcome to the **withajay.com** repository! This project is designed to provide insights and information about our services, and features blogs, portfolios, and more.
-
-## File Structure
+## Site Structure
 
 ```
 withajay.com/
 │
-├── src/                # Source files
-│   ├── components/     # Reusable components
-│   ├── pages/          # Page components
-│   ├── assets/         # Images, fonts, and other assets
-│   └── styles/         # CSS stylesheets
+├── index.html              # Split-screen homepage
+├── about.html              # About page
+├── photos.html             # Photography gallery (masonry layout)
+├── portfolio.html          # Portfolio & resume
+├── blog.html               # Blog listing
+├── blog-post.html          # Markdown blog post renderer
+├── contact.html            # Contact form
 │
-├── public/             # Static files
-├── package.json         # NPM package file
-├── README.md            # Project documentation
-└── ...                  # Other configuration files
+├── blog/                   # Markdown blog posts
+│   ├── the-night-i-questioned-everything.md
+│   ├── the-night-i-started-accepting.md
+│   └── niagara-in-the-mist.md
+│
+├── css/
+│   ├── global.css          # Reset, variables, shared components
+│   ├── home.css            # Split-screen homepage styles
+│   ├── blog.css            # Blog listing styles
+│   ├── photos.css          # Masonry gallery styles
+│   ├── portfolio.css       # Portfolio page styles
+│   └── responsive.css      # Mobile-first breakpoints
+│
+├── js/
+│   ├── navigation.js       # Hamburger menu toggle
+│   ├── blog-renderer.js    # Markdown → HTML renderer
+│   ├── masonry.js          # Photo reveal after load
+│   └── app.js              # Page fade-in, smooth scroll
+│
+├── Photos/                 # Photography images
+├── Blog/                   # Blog images
+└── images/                 # Site assets
 ```
 
 ## Features
-- **Responsive Design**: The site is built to provide an optimal viewing experience across different devices.
-- **Content Management**: Easily manage content through a user-friendly interface.
-- **SEO Optimization**: Built with SEO best practices in mind to enhance visibility.
 
-## Setup Instructions
+- **Split-screen homepage** with dark/light panels linking to Photos and Portfolio
+- **Hamburger navigation overlay** with slide-in panel (all pages)
+- **Masonry photo gallery** using CSS columns with lightbox
+- **Markdown blog system** — posts written in `.md`, rendered via `blog-renderer.js`
+- **Minimalist portfolio** — clean white/black card layout
+- **Responsive design** — mobile-first, breakpoints at 1200px and 768px
+- **Google Fonts**: Playfair Display (headings) + Open Sans (body)
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/Ajayvarmaramineni/withajay.com.git
-   ```
-2. **Navigate into the project directory**:
-   ```bash
-   cd withajay.com
-   ```
-3. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-4. **Run the development server**:
-   ```bash
-   npm start
-   ```
-5. **Open your browser** and go to `http://localhost:3000` to view the project.
+## Blog Posts
 
-## Customization Guide
+Blog posts live in the `blog/` directory as Markdown files with YAML frontmatter:
 
-To customize your site:
-- Update the content in the `src/pages` folder to modify the page contents.
-- Add assets to the `src/assets` folder for images and other multimedia.
-- Modify styles in the `src/styles` directory to change the look and feel of your site.
+```markdown
+---
+title: Post Title
+date: Month DD, YYYY
+readTime: N min read
+category: Category
+image: ../Blog/image.jpg
+---
 
-## Contact Information
+Post content here...
+```
 
-For inquiries or feedback, please reach out to:
-- **Ajay Varma Ramineni**  
-  Email: ajay@example.com  
-  GitHub: [Ajayvarmaramineni](https://github.com/Ajayvarmaramineni)  
+Access any post at: `blog-post.html?post=blog/filename.md`
 
-Thank you for visiting the **withajay.com** project!
+## Contact
+
+**Ajay Varma Ramineni**
+- Instagram: [@ajayvarmaramineni](https://www.instagram.com/ajayvarmaramineni)
+- X: [@withloveeajay](https://x.com/withloveeajay)
+- LinkedIn: [ajayramineni2808](https://www.linkedin.com/in/ajayramineni2808)
+- GitHub: [Ajayvarmaramineni](https://github.com/Ajayvarmaramineni)

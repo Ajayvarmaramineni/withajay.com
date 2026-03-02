@@ -1,0 +1,118 @@
+/* =========================================================
+   home.css — Split-screen homepage styles
+   ========================================================= */
+
+/* --- Split screen container --- */
+.split-screen {
+  position: relative;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* --- Panels --- */
+.panel {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 48px;
+  overflow: hidden;
+  transition: flex 0.5s ease;
+  text-decoration: none;
+}
+
+.panel:hover {
+  flex: 1.08;
+}
+
+/* Left panel — dark image side */
+.panel-left {
+  background: var(--black);
+}
+
+.panel-left .panel-bg {
+  position: absolute;
+  inset: 0;
+  background: url('../images/hero.jpg') center / cover no-repeat;
+  filter: brightness(0.55);
+  transition: filter 0.4s ease;
+}
+
+.panel-left:hover .panel-bg {
+  filter: brightness(0.75);
+}
+
+/* Right panel — light side */
+.panel-right {
+  background: var(--gray-light);
+}
+
+.panel-right:hover {
+  background: #ebebeb;
+}
+
+/* --- Panel labels --- */
+.panel-label {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: opacity var(--transition);
+}
+
+.panel-left .panel-label {
+  color: rgba(255,255,255,0.7);
+}
+
+.panel-right .panel-label {
+  color: rgba(17,17,17,0.55);
+}
+
+/* --- Center overlay text --- */
+.center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  text-align: center;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.split-screen:hover .center-text {
+  opacity: 0;
+}
+
+.name-text {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 5.5vw, 5rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--white);
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  white-space: nowrap;
+}
+
+.tagline {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: clamp(0.75rem, 1.4vw, 1rem);
+  letter-spacing: 0.3em;
+  color: rgba(255,255,255,0.75);
+  margin-top: 10px;
+  text-transform: lowercase;
+}
+
+/* --- Homepage hamburger override (white bg) --- */
+body.home-page .hamburger {
+  background: rgba(0,0,0,0.3);
+  color: var(--white);
+}
