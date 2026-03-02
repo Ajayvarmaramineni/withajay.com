@@ -212,6 +212,10 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--black);
 }
 
+.page-header .header-logo {
+  margin-left: 52px;
+}
+
 .page-header .header-logo a {
   font-family: var(--font-serif);
   font-size: 1.1rem;
