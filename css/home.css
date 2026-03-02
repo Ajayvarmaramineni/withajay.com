@@ -82,11 +82,15 @@
   transform: translate(-50%, -50%);
   z-index: 100;
   text-align: center;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
+  pointer-events: auto;
+  transition: opacity 0.5s ease;
+  border: 1.5px solid rgba(90, 150, 90, 0.55);
+  border-radius: 50%;
+  padding: 52px 68px;
+  cursor: pointer;
 }
 
-.split-screen:hover .center-text {
+.center-text:hover {
   opacity: 0;
 }
 
