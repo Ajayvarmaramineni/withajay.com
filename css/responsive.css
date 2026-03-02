@@ -76,7 +76,7 @@
 @media (max-width: 480px) {
   .hamburger {
     top: 12px;
-    left: 12px;
+    right: 12px;
   }
 
   /* 45vh (slightly less than 50vh) leaves space for the stacked

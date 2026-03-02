@@ -28,23 +28,45 @@
         ac.resume();
       }
 
-      var oscillator = ac.createOscillator();
-      var gainNode = ac.createGain();
+      var now = ac.currentTime;
 
-      oscillator.connect(gainNode);
-      gainNode.connect(ac.destination);
+      // Noise burst — the shutter "click" texture
+      var bufferSize = Math.floor(ac.sampleRate * 0.07);
+      var buffer = ac.createBuffer(1, bufferSize, ac.sampleRate);
+      var data = buffer.getChannelData(0);
+      for (var i = 0; i < bufferSize; i++) {
+        data[i] = Math.random() * 2 - 1;
+      }
+      var noise = ac.createBufferSource();
+      noise.buffer = buffer;
 
-      // Short tick-like click: high frequency, very brief
-      oscillator.type = 'sine';
-      oscillator.frequency.setValueAtTime(1200, ac.currentTime);
-      oscillator.frequency.exponentialRampToValueAtTime(600, ac.currentTime + 0.05);
+      var bandpass = ac.createBiquadFilter();
+      bandpass.type = 'bandpass';
+      bandpass.frequency.value = 4000;
+      bandpass.Q.value = 0.8;
 
-      gainNode.gain.setValueAtTime(0, ac.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.35, ac.currentTime + 0.005);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.12);
+      var noiseGain = ac.createGain();
+      noiseGain.gain.setValueAtTime(0.35, now);
+      noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
 
-      oscillator.start(ac.currentTime);
-      oscillator.stop(ac.currentTime + 0.15);
+      noise.connect(bandpass);
+      bandpass.connect(noiseGain);
+      noiseGain.connect(ac.destination);
+      noise.start(now);
+      noise.stop(now + 0.07);
+
+      // Low-frequency thunk — mechanical body of the shutter
+      var osc = ac.createOscillator();
+      var oscGain = ac.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(180, now);
+      osc.frequency.exponentialRampToValueAtTime(55, now + 0.05);
+      oscGain.gain.setValueAtTime(0.4, now);
+      oscGain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+      osc.connect(oscGain);
+      oscGain.connect(ac.destination);
+      osc.start(now);
+      osc.stop(now + 0.1);
     } catch (e) {
       // Silently fail — audio is non-critical
     }
