@@ -3,7 +3,7 @@ title: Niagara in the Mist
 date: July 7, 2025
 readTime: 4 min read
 category: Travel Diaries
-image: ../Blog/travel1.jpg
+image: images/blog/travel1.jpg
 ---
 
 Nobody warns you about the sound. You see the pictures—the wide sweep of water, the arc of the falls, the mist that softens everything into a kind of dream—but the pictures are silent. In person, Niagara hits you with noise first, a low continuous roar that you feel before you fully hear it, like standing next to a subwoofer at a concert except the subwoofer is the size of a river.
