@@ -246,7 +246,7 @@
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(() => {
         // Wait for all images in the grid to load
-        const imgs = Array.from(document.querySelectorAll('.photo-card img'));
+        const imgs = Array.from(document.querySelectorAll('.masonry-item img'));
         let loaded = 0;
         if (imgs.length === 0) showPage();
         imgs.forEach(img => {
@@ -296,13 +296,13 @@
     {src:"Photos/temple.JPG", title:"Temple",   desc:"A serene temple nestled amidst nature, a place of peace and reflection."},
     {src:"Photos/them.JPEG",  title:"Comrades", desc:"A heartfelt moment shared between friends, captured in a single frame."},
     {src:"Photos/well.JPG",  title:"Well",     desc:"A rustic well standing as a testament to simpler times, nature’s embrace all around."},
-    {src:"Photos/starrynight.JPG", title:"Starrynight", desc:"Description for starrynight."},
-    {src:"Photos/sunset.JPG", title:"Sunset",   desc:"Description for sunset."},
-    {src:"Photos/taj.JPG",    title:"Taj",      desc:"Description for taj."},
-    {src:"Photos/temple2.JPG",title:"Temple2",  desc:"Description for temple2."},
-    {src:"Photos/temple3.JPG",title:"Temple3",  desc:"Description for temple3."},
-    {src:"Photos/trees.JPG",  title:"Trees",    desc:"Description for trees."},
-    {src:"Photos/wine.jpg",   title:"Wine",     desc:"Description for wine."}
+    {src:"Photos/starrynight.JPG", title:"Starry Night", desc:"A mesmerizing night sky, stars scattered across the darkness like scattered dreams."},
+    {src:"Photos/sunset.JPG", title:"Golden Hour",   desc:"The sky ablaze in warm gold, a fleeting moment between day and dusk."},
+    {src:"Photos/taj.JPG",    title:"Taj Mahal",      desc:"An eternal monument to love, standing in timeless marble against the sky."},
+    {src:"Photos/temple2.JPG",title:"Temple Carvings",  desc:"Intricate stone carvings telling centuries-old stories of devotion and craft."},
+    {src:"Photos/temple3.JPG",title:"Temple Pillars",  desc:"Rows of ancient pillars, each a silent witness to history and faith."},
+    {src:"Photos/trees.JPG",  title:"Into the Trees",    desc:"A canopy of green, where sunlight filters through in quiet golden streams."},
+    {src:"Photos/wine.jpg",   title:"Still Life",     desc:"A quiet moment of warmth and reflection, life's simple pleasures captured."}
   ];
 
     const lightbox  = document.getElementById('lightbox');

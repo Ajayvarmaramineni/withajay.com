@@ -5,7 +5,7 @@ body {
   background: #ffffff;
   color: #333;
   font-family: 'Open Sans', Arial, sans-serif;
-  padding-top: 88px;            /* match default header height */
+  padding-top: 0;                /* page-header is sticky, no offset needed */
 }
 
 /* =========================
