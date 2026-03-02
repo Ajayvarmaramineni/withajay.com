@@ -1,0 +1,142 @@
+/* photography.css — Photography gallery page specific styles */
+
+/* ========= Hero ========= */
+.gallery-hero {
+  position: relative;
+  min-height: 320px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+}
+
+.gallery-hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url('../images/photos/hero.jpg') center/cover no-repeat;
+  transform: scale(1);
+  transition: transform 0.6s ease-out;
+  will-change: transform;
+}
+
+.gallery-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.35);
+  z-index: 1;
+}
+
+.gallery-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.gallery-hero-title {
+  font-size: 2.8rem;
+  letter-spacing: .5px;
+  text-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+
+.gallery-hero-desc {
+  opacity: .95;
+}
+
+/* ========= Torn paper edge ========= */
+.torn-edge { background: #fff; }
+.torn-edge svg { display: block; width: 100%; height: 42px; }
+
+/* ========= Gallery section ========= */
+.photos-section { background: #fff; }
+.photos-container { max-width: 1280px; margin: 0 auto; padding: 28px 22px 80px; }
+
+/* ========= Lightbox ========= */
+.lightbox { position: fixed; inset: 0; background: rgba(10,10,10,.97); display: none; }
+.lightbox.active { display: block; }
+
+/* z-index ladder so controls are always clickable */
+.lb-stage {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 10001;
+}
+
+.lb-img {
+  background: #111;
+  border-radius: 12px;
+  box-shadow: 0 10px 36px rgba(0,0,0,.35);
+  max-width: 94vw;
+  max-height: 86vh;
+  object-fit: contain;
+  display: block;
+}
+
+.lb-caption {
+  position: fixed;
+  left: 28px;
+  bottom: 20px;
+  color: #fff;
+  background: rgba(0,0,0,.55);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: .98rem;
+  max-width: 60vw;
+  z-index: 10002;
+}
+
+.lb-counter {
+  position: fixed;
+  right: 28px;
+  bottom: 20px;
+  color: #cfcfcf;
+  font-weight: 600;
+  z-index: 10002;
+}
+
+/* Edge arrows */
+.lb-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  opacity: .85;
+  cursor: pointer;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,.6));
+  transition: opacity .15s;
+  z-index: 10003;
+  pointer-events: auto;
+}
+
+.lb-arrow:hover { opacity: 1; }
+.lb-prev { left: 22px; border-width: 18px 22px 18px 0; border-color: transparent #cfcfcf transparent transparent; }
+.lb-next { right: 22px; border-width: 18px 0 18px 22px; border-color: transparent transparent transparent #cfcfcf; }
+.lb-prev:hover { border-right-color: #fff; }
+.lb-next:hover { border-left-color: #fff; }
+
+/* Close button */
+.lb-close {
+  position: fixed;
+  top: 18px;
+  right: 28px;
+  font-size: 28px;
+  line-height: 1;
+  color: #cfcfcf;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10004;
+  pointer-events: auto;
+}
+
+.lb-close:hover { color: #fff; }
+
+/* ========= Back to top ========= */
+.back-to-top { color: #111; }
