@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/blog.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
   <!-- Toast Notification -->
@@ -24,11 +25,12 @@
   <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
     <button class="nav-close" id="navClose" aria-label="Close navigation">&times;</button>
     <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="photos.html">Photos</a></li>
+      <li><a href="photography.html">Photography</a></li>
       <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="contact.html">Contact</a></li>
       <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="nav-social">
       <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
@@ -46,7 +48,7 @@
       </div>
     </header>
     <!-- Page intro -->
-    <section class="archive-hero">
+    <section class="archive-hero blog-hero">
       <h1>Blog Posts</h1>
       <p>Browse by theme: late-night reflections, heartfelt letters, and adventures on the road.</p>
     </section>
@@ -84,41 +86,41 @@
         </article>
         <!-- 3 -->
         <article class="post-card">
-          <a class="post-thumb" href="blog3.html" aria-label="Read: The Night I Felt Lost">
+          <a class="post-thumb" href="blog-post.html?post=blog/the-night-i-felt-lost.md" aria-label="Read: The Night I Felt Lost">
             <img src="Blog/blog3.jpg" alt="Soft city haze with distant lights" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="blog3.html">The Night I Felt Lost</a></h3>
+            <h3 class="post-title"><a href="blog-post.html?post=blog/the-night-i-felt-lost.md">The Night I Felt Lost</a></h3>
             <div class="post-meta">By Ajay • Apr 27, 2025 • 5 min read</div>
-            <p class="post-excerpt">The stars were out, but they offered no guidance. It was one of those nights where the world felt...
-            <div class="post-actions"><a href="blog3.html">Read more »</a></div>
+            <p class="post-excerpt">The stars were out, but they offered no guidance. It was one of those nights where the world felt too wide to navigate.</p>
+            <div class="post-actions"><a href="blog-post.html?post=blog/the-night-i-felt-lost.md">Read more »</a></div>
           </div>
         </article>
         <!-- 4 -->
         <article class="post-card">
-          <a class="post-thumb" href="blog4.html" aria-label="Read: The Night I Realised">
+          <a class="post-thumb" href="blog-post.html?post=blog/the-night-i-realised.md" aria-label="Read: The Night I Realised">
             <img src="Blog/blog4.jpg" alt="Phone lit up against a dark window" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="blog4.html">The Night I Realised</a></h3>
+            <h3 class="post-title"><a href="blog-post.html?post=blog/the-night-i-realised.md">The Night I Realised</a></h3>
             <div class="post-meta">By Ajay • Apr 10, 2025 • 4 min read</div>
             <p class="post-excerpt">One late call, one familiar voice, and a reminder of why I’m here.</p>
-            <div class="post-actions"><a href="blog4.html">Read more »</a></div>
+            <div class="post-actions"><a href="blog-post.html?post=blog/the-night-i-realised.md">Read more »</a></div>
           </div>
         </article>
         <!-- 5 -->
         <article class="post-card">
-          <a class="post-thumb" href="blog5.html" aria-label="Read: The Night I Ran">
+          <a class="post-thumb" href="blog-post.html?post=blog/the-night-i-ran.md" aria-label="Read: The Night I Ran">
             <img src="Blog/blog5.jpg" alt="Empty street under warm streetlights" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="blog5.html">The Night I Ran</a></h3>
+            <h3 class="post-title"><a href="blog-post.html?post=blog/the-night-i-ran.md">The Night I Ran</a></h3>
             <div class="post-meta">By Ajay • Mar 29, 2025 • 5 min read</div>
             <p class="post-excerpt">Learning to move slower so life doesn’t rush past me.</p>
-            <div class="post-actions"><a href="blog5.html">Read more »</a></div>
+            <div class="post-actions"><a href="blog-post.html?post=blog/the-night-i-ran.md">Read more »</a></div>
           </div>
         </article>
       </div>
@@ -196,6 +198,56 @@
             <div class="post-meta">By Ajay • May 5, 2025 • 3 min read</div>
             <p class="post-excerpt">Progress counts even when no one else sees it.</p>
             <div class="post-actions"><a href="dear-stranger-you-are-allowed-to-be-proud.html">Read more »</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="divide"></div>
+
+    <!-- ============ Design & Life (3) ============ -->
+    <section class="archive-section" id="design-life">
+      <div class="section-head">
+        <h2 class="section-title">Design &amp; Life</h2>
+      </div>
+      <div class="posts-grid">
+        <!-- 1 -->
+        <article class="post-card">
+          <a class="post-thumb" href="blog-post.html?post=blog/design-philosophy.md" aria-label="Read: Design Philosophy">
+            <img src="Blog/blog.jpg" alt="Minimalist design composition" loading="lazy">
+            <span class="readmore-badge">Read more</span>
+          </a>
+          <div class="post-body">
+            <h3 class="post-title"><a href="blog-post.html?post=blog/design-philosophy.md">Design Philosophy</a></h3>
+            <div class="post-meta">By Ajay • Sep 3, 2025 • 5 min read</div>
+            <p class="post-excerpt">Good design is almost invisible. It took enormous effort to produce something that looks effortless.</p>
+            <div class="post-actions"><a href="blog-post.html?post=blog/design-philosophy.md">Read more »</a></div>
+          </div>
+        </article>
+        <!-- 2 -->
+        <article class="post-card">
+          <a class="post-thumb" href="blog-post.html?post=blog/digital-minimalism-journey.md" aria-label="Read: Digital Minimalism Journey">
+            <img src="Blog/blog.jpg" alt="Phone on a quiet desk" loading="lazy">
+            <span class="readmore-badge">Read more</span>
+          </a>
+          <div class="post-body">
+            <h3 class="post-title"><a href="blog-post.html?post=blog/digital-minimalism-journey.md">Digital Minimalism Journey</a></h3>
+            <div class="post-meta">By Ajay • Aug 28, 2025 • 6 min read</div>
+            <p class="post-excerpt">Your attention is the product. Using these tools requires intentionality.</p>
+            <div class="post-actions"><a href="blog-post.html?post=blog/digital-minimalism-journey.md">Read more »</a></div>
+          </div>
+        </article>
+        <!-- 3 -->
+        <article class="post-card">
+          <a class="post-thumb" href="blog-post.html?post=blog/understanding-minimalism.md" aria-label="Read: Understanding Minimalism">
+            <img src="Blog/blog.jpg" alt="Empty, clean space" loading="lazy">
+            <span class="readmore-badge">Read more</span>
+          </a>
+          <div class="post-body">
+            <h3 class="post-title"><a href="blog-post.html?post=blog/understanding-minimalism.md">Understanding Minimalism</a></h3>
+            <div class="post-meta">By Ajay • Aug 12, 2025 • 5 min read</div>
+            <p class="post-excerpt">Minimalism isn’t about owning fewer things. It’s about owning things that earn their place.</p>
+            <div class="post-actions"><a href="blog-post.html?post=blog/understanding-minimalism.md">Read more »</a></div>
           </div>
         </article>
       </div>
@@ -281,8 +333,15 @@
     <div class="section-spacer"></div>
 
     <!-- Footer -->
-    <footer>
-    <p>© 2025 Ajay | Powered by Ajay Varma Ramineni</p>
+    <footer class="site-footer">
+      <div class="footer-logo">AJAY RAMINENI</div>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener">IG</a>
+        <a href="https://x.com/withloveeajay" target="_blank" rel="noopener">X</a>
+        <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a>
+        <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a>
+      </div>
+      <p>© 2025 Ajay Varma Ramineni</p>
     </footer>
   </main>
 
