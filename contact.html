@@ -7,6 +7,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact | With Love AJ</title>
+  <link rel="stylesheet" href="css/global.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     h1, h2, .contact-heading {
@@ -80,81 +81,6 @@
       transform-origin: left;
       transition: transform 0.4s ease;
       pointer-events: none;
-    }
-
-    /* 🌸 Header */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 3px 50px;
-      position: relative;
-      position: sticky;
-      top: 0;
-      background: rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-    }
-    .logo-svg {
-      height: 90px;
-      width: auto;
-      transition: all 0.3s ease-in-out;
-      cursor: pointer;
-    }
-
-    @keyframes fadeInSlide {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    @media (prefers-color-scheme: dark) {
-      .header-left img {
-        filter: brightness(1.2) contrast(1.1);
-      }
-    }
-
-    nav {
-      flex: 1;
-      text-align: right;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    nav ul {
-      display: flex;
-      gap: 20px;
-      list-style: none;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      color: #f0f0f0;
-      font-weight: bold;
-      font-size: 1.1em;
-      transition: color 0.3s ease, transform 0.4s ease;
-    }
-
-    nav ul li a:hover {
-      color: #ff6f61;
-      transform: scale(1.2);
-    }
-    .social-icons {
-      display: flex;
-      gap: 15px;
-      flex: 0 0 auto;
-    }
-
-    .social-icons img {
-      width: 30px;
-      filter: brightness(0) invert(1);
-      transition: transform 0.4s ease, filter 0.3s ease;
-    }
-
-    .social-icons img:hover {
-      transform: scale(1.2);
-      filter: brightness(1.5);
     }
 
     /* 🌸 Hero Background */
@@ -393,43 +319,37 @@
   </style>
 </head>
 <body>
+  <div class="route-loader"></div>
+  <div class="transition-overlay"></div>
 
-  <!-- Hamburger -->
-  <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
-    <span>&#9776;</span>
-  </button>
+  <main id="main-content" data-transition-wrapper>
+    <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
+      <span>&#9776;</span>
+    </button>
 
-  <!-- Nav overlay -->
-  <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
-    <button class="nav-close" id="navClose" aria-label="Close navigation">&times;</button>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="photography.html">Photography</a></li>
-      <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <div class="nav-social">
-      <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-      <a href="https://x.com/withloveeajay" target="_blank" rel="noopener" aria-label="X">X</a>
-      <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
-      <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
-    </div>
-  </nav>
+    <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
+      <button class="nav-close" id="navClose" aria-label="Close navigation">&times;</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="photography.html">Photography</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-social">
+        <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+        <a href="https://x.com/withloveeajay" target="_blank" rel="noopener" aria-label="X">X</a>
+        <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
+        <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+      </div>
+    </nav>
 
-  <!-- Page header -->
-  <header class="page-header">
-    <div class="header-logo" style="margin-left:52px;">
-      <a href="index.html">AJAY RAMINENI</a>
-    </div>
-    <div class="header-social">
-      <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener">IG</a>
-      <a href="https://x.com/withloveeajay" target="_blank" rel="noopener">X</a>
-      <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a>
-      <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a>
-    </div>
-  </header>
+    <header class="page-header">
+      <div class="header-logo">
+        <a href="index.html">AJAY<br>RAMINENI</a>
+      </div>
+    </header>
 
   <section id="home">
     <div class="hero-background"></div>
@@ -469,6 +389,9 @@
 </div>
       <p>© 2025 Ajay | Powered by Ajay Varma Ramineni</p>
     </footer>
+  </main>
+  <script src="js/navigation.js"></script>
+  <script src="js/app.js"></script>
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
     // Scroll reveal animation for Contact section

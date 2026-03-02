@@ -7,36 +7,36 @@ Personal website of **Ajay Ramineni** — Analytics, Photography & Storytelling.
 ```
 withajay.com/
 │
-├── index.html              # Split-screen homepage
-├── about.html              # About page
-├── photos.html             # Photography gallery (masonry layout)
-├── portfolio.html          # Portfolio & resume
-├── blog.html               # Blog listing
-├── blog-post.html          # Markdown blog post renderer
-├── contact.html            # Contact form
+├── index.html             
+├── about.html              
+├── photos.html             
+├── portfolio.html          
+├── blog.html               
+├── blog-post.html          
+├── contact.html            
 │
-├── blog/                   # Markdown blog posts
+├── blog/                   
 │   ├── the-night-i-questioned-everything.md
 │   ├── the-night-i-started-accepting.md
 │   └── niagara-in-the-mist.md
 │
 ├── css/
-│   ├── global.css          # Reset, variables, shared components
-│   ├── home.css            # Split-screen homepage styles
-│   ├── blog.css            # Blog listing styles
-│   ├── photos.css          # Masonry gallery styles
-│   ├── portfolio.css       # Portfolio page styles
-│   └── responsive.css      # Mobile-first breakpoints
+│   ├── global.css          
+│   ├── home.css            
+│   ├── blog.css            
+│   ├── photos.css          
+│   ├── portfolio.css       
+│   └── responsive.css      
 │
 ├── js/
-│   ├── navigation.js       # Hamburger menu toggle
-│   ├── blog-renderer.js    # Markdown → HTML renderer
-│   ├── masonry.js          # Photo reveal after load
-│   └── app.js              # Page fade-in, smooth scroll
+│   ├── navigation.js       
+│   ├── blog-renderer.js    
+│   ├── masonry.js          
+│   └── app.js             
 │
-├── Photos/                 # Photography images
-├── Blog/                   # Blog images
-└── images/                 # Site assets
+├── Photos/                 
+├── Blog/                   
+└── images/                 
 ```
 
 ## Features
