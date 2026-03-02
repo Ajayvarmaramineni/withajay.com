@@ -6,6 +6,8 @@
   <title>Photos | With Love AJ</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/photos.css">
   <link rel="stylesheet" href="css/responsive.css">
   <style>
@@ -15,24 +17,10 @@
     body{font-family:'Open Sans',sans-serif;color:#111;background:#f7f7f7}
     h1,h2,.gallery-hero-title{font-family:'Playfair Display',serif;font-weight:700}
 
-    /* ========= Header (yours) ========= */
-    header{
-      position:sticky;top:0;z-index:1000;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:6px 50px;background:rgba(0,0,0,.22);backdrop-filter:blur(10px)
-    }
-    .logo-svg{height:90px}
-    nav{position:absolute;left:50%;transform:translateX(-50%)}
-    nav ul{list-style:none;display:flex;gap:20px}
-    nav a{color:#f0f0f0;text-decoration:none;font-weight:600}
-    nav a:hover{color:#ff6f61}
-    .social-icons{display:flex;gap:14px}
-    .social-icons img{width:28px;filter:invert(1)}
-
     /* ========= Hero ========= */
     .gallery-hero{
       position:relative;min-height:320px;
-      background:url('Photos/hero.jpg') center/cover no-repeat;
+      background:url('images/photos/hero.jpg') center/cover no-repeat;
       display:flex;align-items:center;justify-content:center;color:#fff;text-align:center
     }
     .gallery-hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.35)}
@@ -113,18 +101,19 @@
 
   <!-- Hamburger -->
   <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
-    <span>&#9776;</span>
+    <span class="line"></span><span class="line"></span><span class="line"></span>
   </button>
 
   <!-- Nav overlay -->
   <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
     <button class="nav-close" id="navClose" aria-label="Close navigation">&times;</button>
     <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="photos.html">Photos</a></li>
+      <li><a href="photography.html">Photography</a></li>
       <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="contact.html">Contact</a></li>
       <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="nav-social">
       <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
@@ -137,13 +126,7 @@
   <!-- Header -->
   <header class="page-header">
     <div class="header-logo">
-      <a href="index.html">AJAY RAMINENI</a>
-    </div>
-    <div class="header-social">
-      <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener">IG</a>
-      <a href="https://x.com/withloveeajay" target="_blank" rel="noopener">X</a>
-      <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a>
-      <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a>
+      <a href="index.html">AJAY<br>RAMINENI</a>
     </div>
   </header>
 
@@ -166,36 +149,36 @@
     <div class="photos-container">
       <div class="masonry-grid">
         <!-- Masonry items — data-index matches images[] below -->
-        <div class="masonry-item" data-index="0"><img src="Photos/birds.JPG" alt="Birds" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="1"><img src="Photos/blur.JPG" alt="Blur" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="2"><img src="Photos/boat.JPEG" alt="Boat" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="3"><img src="Photos/boatman.JPG" alt="Boatman" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="4"><img src="Photos/cat.JPG" alt="Cat" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="5"><img src="Photos/dad.JPG" alt="Dad" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="6"><img src="Photos/dome.JPG" alt="Dome" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="7"><img src="Photos/fort.JPG" alt="Fort" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="8"><img src="Photos/fort1.JPG" alt="Fort1" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="9"><img src="Photos/freedom.JPG" alt="Freedom" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="10"><img src="Photos/friends.JPG" alt="Friends" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="11"><img src="Photos/her.JPEG" alt="Her" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="12"><img src="Photos/her1.JPEG" alt="Her1" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="13"><img src="Photos/mono.JPG" alt="Mono" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="14"><img src="Photos/pillars.JPG" alt="Pillars" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="15"><img src="Photos/shadow.JPEG" alt="Shadow" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="16"><img src="Photos/shadows.JPEG" alt="Shadows" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="17"><img src="Photos/sil.JPEG" alt="Silhouette" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="18"><img src="Photos/squirrel.JPG" alt="Squirrel" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="19"><img src="Photos/sunset.JPEG" alt="Sunset" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="20"><img src="Photos/temple.JPG" alt="Temple" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="21"><img src="Photos/them.JPEG" alt="Comrades" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="22"><img src="Photos/well.JPG" alt="Well" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="23"><img src="Photos/starrynight.JPG" alt="Starrynight" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="24"><img src="Photos/sunset.JPG" alt="Sunset 2" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="25"><img src="Photos/taj.JPG" alt="Taj" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="26"><img src="Photos/temple2.JPG" alt="Temple2" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="27"><img src="Photos/temple3.JPG" alt="Temple3" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="28"><img src="Photos/trees.jpg" alt="Trees" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="masonry-item" data-index="29"><img src="Photos/wine.jpg" alt="Wine" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="0"><img src="images/photos/birds.JPG" alt="Birds" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="1"><img src="images/photos/blur.JPG" alt="Blur" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="2"><img src="images/photos/boat.JPEG" alt="Boat" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="3"><img src="images/photos/boatman.JPG" alt="Boatman" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="4"><img src="images/photos/cat.JPG" alt="Cat" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="5"><img src="images/photos/dad.JPG" alt="Dad" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="6"><img src="images/photos/dome.JPG" alt="Dome" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="7"><img src="images/photos/fort.JPG" alt="Fort" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="8"><img src="images/photos/fort1.JPG" alt="Fort1" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="9"><img src="images/photos/freedom.JPG" alt="Freedom" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="10"><img src="images/photos/friends.JPG" alt="Friends" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="11"><img src="images/photos/her.JPEG" alt="Her" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="12"><img src="images/photos/her1.JPEG" alt="Her1" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="13"><img src="images/photos/mono.JPG" alt="Mono" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="14"><img src="images/photos/pillars.JPG" alt="Pillars" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="15"><img src="images/photos/shadow.JPEG" alt="Shadow" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="16"><img src="images/photos/shadows.JPEG" alt="Shadows" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="17"><img src="images/photos/sil.JPEG" alt="Silhouette" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="18"><img src="images/photos/squirrel.JPG" alt="Squirrel" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="19"><img src="images/photos/sunset.JPEG" alt="Sunset" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="20"><img src="images/photos/temple.JPG" alt="Temple" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="21"><img src="images/photos/them.JPEG" alt="Comrades" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="22"><img src="images/photos/well.JPG" alt="Well" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="23"><img src="images/photos/starrynight.JPG" alt="Starrynight" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="24"><img src="images/photos/sunset.JPG" alt="Sunset 2" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="25"><img src="images/photos/taj.JPG" alt="Taj" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="26"><img src="images/photos/temple2.JPG" alt="Temple2" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="27"><img src="images/photos/temple3.JPG" alt="Temple3" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="28"><img src="images/photos/trees.jpg" alt="Trees" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+        <div class="masonry-item" data-index="29"><img src="images/photos/wine.jpg" alt="Wine" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
       </div>
     </div>
   </section>
@@ -231,7 +214,7 @@
         <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub">
       </a>
     </div>
-    <p>© 2025 Ajay | Powered by Ajay Varma Ramineni</p>
+    <p>© 2026 Ajay | Powered by Ajay Varma Ramineni</p>
     <a href="#top" class="back-to-top">Back to Top</a>
   </footer>
 
@@ -245,7 +228,7 @@
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(() => {
         // Wait for all images in the grid to load
-        const imgs = Array.from(document.querySelectorAll('.photo-card img'));
+        const imgs = Array.from(document.querySelectorAll('.masonry-item img'));
         let loaded = 0;
         if (imgs.length === 0) showPage();
         imgs.forEach(img => {
@@ -272,36 +255,36 @@
 
   /* Lightbox data */
   const images = [
-    {src:"Photos/birds.JPG",  title:"Freedom",  desc:"A flock of birds soaring high, embodying the essence of freedom and the boundless sky."},
-    {src:"Photos/blur.JPG",   title:"Riders",   desc:"A dynamic shot capturing the energy and motion of riders in action."},
-    {src:"Photos/boat.JPEG",  title:"Boat",     desc:"Delicate ripples on the water as a solitary boat drifts, capturing a moment of serene isolation."},
-    {src:"Photos/boatman.JPG",title:"Boatman",  desc:"A solitary boatman navigating the calm waters, embodying peace and resilience."},
-    {src:"Photos/cat.JPG",    title:"Cat",      desc:"A curious cat peering through the foliage, its eyes reflecting the mysteries of the wild."},
-    {src:"Photos/dad.JPG",    title:"Dad",      desc:"A portrait capturing the warmth and strength of a father figure."},
-    {src:"Photos/dome.JPG",   title:"Dome",     desc:"A majestic dome rising against the sky, a testament to architectural brilliance."},
-    {src:"Photos/fort.JPG",   title:"Fort",     desc:"A historic fort standing tall, echoing tales of valor and heritage."},
-    {src:"Photos/fort1.JPG",  title:"Fort1",    desc:"A different perspective of the historic fort, highlighting its architectural details."},
-    {src:"Photos/freedom.JPG",title:"Freedom",  desc:"A powerful image symbolizing liberty and the human spirit's unyielding quest for justice."},
-    {src:"Photos/friends.JPG",title:"Friends",  desc:"A candid moment shared among friends, capturing the essence of camaraderie and joy."},
-    {src:"Photos/her.JPEG",   title:"Her",      desc:"Lost in the sunset, her silhouette whispers serenity to the sea."},
-    {src:"Photos/her1.JPEG",  title:"Her1",     desc:"Lost in the sunset, her silhouette whispers serenity to the sea."},
-    {src:"Photos/mono.JPG",   title:"Mono",     desc:"A monochromatic study in light and shadow, emphasizing form and texture."},
-    {src:"Photos/pillars.JPG",title:"Pillars",  desc:"A series of ancient pillars standing tall, echoing stories of a bygone era."},
-    {src:"Photos/shadow.JPEG",title:"Shadow",   desc:"A play of light and darkness, creating mysterious and intriguing shapes."},
-    {src:"Photos/shadows.JPEG",title:"Shadows", desc:"A dance of light and form, where shadows tell their own stories."},
-    {src:"Photos/sil.JPEG",   title:"Silhouette",desc:"A moment of stillness painted in golden light."},
-    {src:"Photos/squirrel.JPG",title:"Squirrel",desc:"A quick glimpse of a squirrel in its natural habitat, full of life and curiosity."},
-    {src:"Photos/sunset.JPEG",title:"Sunset",   desc:"A breathtaking view of the sun dipping below the horizon, painting the sky with orange and pink."},
-    {src:"Photos/temple.JPG", title:"Temple",   desc:"A serene temple nestled amidst nature, a place of peace and reflection."},
-    {src:"Photos/them.JPEG",  title:"Comrades", desc:"A heartfelt moment shared between friends, captured in a single frame."},
-    {src:"Photos/well.JPG",  title:"Well",     desc:"A rustic well standing as a testament to simpler times, nature’s embrace all around."},
-    {src:"Photos/starrynight.JPG", title:"Starrynight", desc:"Description for starrynight."},
-    {src:"Photos/sunset.JPG", title:"Sunset",   desc:"Description for sunset."},
-    {src:"Photos/taj.JPG",    title:"Taj",      desc:"Description for taj."},
-    {src:"Photos/temple2.JPG",title:"Temple2",  desc:"Description for temple2."},
-    {src:"Photos/temple3.JPG",title:"Temple3",  desc:"Description for temple3."},
-    {src:"Photos/trees.JPG",  title:"Trees",    desc:"Description for trees."},
-    {src:"Photos/wine.jpg",   title:"Wine",     desc:"Description for wine."}
+    {src:"images/photos/birds.JPG",  title:"Freedom",  desc:"A flock of birds soaring high, embodying the essence of freedom and the boundless sky."},
+    {src:"images/photos/blur.JPG",   title:"Riders",   desc:"A dynamic shot capturing the energy and motion of riders in action."},
+    {src:"images/photos/boat.JPEG",  title:"Boat",     desc:"Delicate ripples on the water as a solitary boat drifts, capturing a moment of serene isolation."},
+    {src:"images/photos/boatman.JPG",title:"Boatman",  desc:"A solitary boatman navigating the calm waters, embodying peace and resilience."},
+    {src:"images/photos/cat.JPG",    title:"Cat",      desc:"A curious cat peering through the foliage, its eyes reflecting the mysteries of the wild."},
+    {src:"images/photos/dad.JPG",    title:"Dad",      desc:"A portrait capturing the warmth and strength of a father figure."},
+    {src:"images/photos/dome.JPG",   title:"Dome",     desc:"A majestic dome rising against the sky, a testament to architectural brilliance."},
+    {src:"images/photos/fort.JPG",   title:"Fort",     desc:"A historic fort standing tall, echoing tales of valor and heritage."},
+    {src:"images/photos/fort1.JPG",  title:"Fort1",    desc:"A different perspective of the historic fort, highlighting its architectural details."},
+    {src:"images/photos/freedom.JPG",title:"Freedom",  desc:"A powerful image symbolizing liberty and the human spirit's unyielding quest for justice."},
+    {src:"images/photos/friends.JPG",title:"Friends",  desc:"A candid moment shared among friends, capturing the essence of camaraderie and joy."},
+    {src:"images/photos/her.JPEG",   title:"Her",      desc:"Lost in the sunset, her silhouette whispers serenity to the sea."},
+    {src:"images/photos/her1.JPEG",  title:"Her1",     desc:"Lost in the sunset, her silhouette whispers serenity to the sea."},
+    {src:"images/photos/mono.JPG",   title:"Mono",     desc:"A monochromatic study in light and shadow, emphasizing form and texture."},
+    {src:"images/photos/pillars.JPG",title:"Pillars",  desc:"A series of ancient pillars standing tall, echoing stories of a bygone era."},
+    {src:"images/photos/shadow.JPEG",title:"Shadow",   desc:"A play of light and darkness, creating mysterious and intriguing shapes."},
+    {src:"images/photos/shadows.JPEG",title:"Shadows", desc:"A dance of light and form, where shadows tell their own stories."},
+    {src:"images/photos/sil.JPEG",   title:"Silhouette",desc:"A moment of stillness painted in golden light."},
+    {src:"images/photos/squirrel.JPG",title:"Squirrel",desc:"A quick glimpse of a squirrel in its natural habitat, full of life and curiosity."},
+    {src:"images/photos/sunset.JPEG",title:"Sunset",   desc:"A breathtaking view of the sun dipping below the horizon, painting the sky with orange and pink."},
+    {src:"images/photos/temple.JPG", title:"Temple",   desc:"A serene temple nestled amidst nature, a place of peace and reflection."},
+    {src:"images/photos/them.JPEG",  title:"Comrades", desc:"A heartfelt moment shared between friends, captured in a single frame."},
+    {src:"images/photos/well.JPG",  title:"Well",     desc:"A rustic well standing as a testament to simpler times, nature’s embrace all around."},
+    {src:"images/photos/starrynight.JPG", title:"Starrynight", desc:"Description for starrynight."},
+    {src:"images/photos/sunset.JPG", title:"Sunset",   desc:"Description for sunset."},
+    {src:"images/photos/taj.JPG",    title:"Taj",      desc:"Description for taj."},
+    {src:"images/photos/temple2.JPG",title:"Temple2",  desc:"Description for temple2."},
+    {src:"images/photos/temple3.JPG",title:"Temple3",  desc:"Description for temple3."},
+    {src:"images/photos/trees.JPG",  title:"Trees",    desc:"Description for trees."},
+    {src:"images/photos/wine.jpg",   title:"Wine",     desc:"Description for wine."}
   ];
 
     const lightbox  = document.getElementById('lightbox');
@@ -397,5 +380,6 @@
     window.addEventListener('resize', ()=>{ if(lightbox.classList.contains('active')) fitImage32(); });
   </script>
   <script src="js/navigation.js"></script>
+  <script src="js/click-sound.js"></script>
 </body>
 </html>

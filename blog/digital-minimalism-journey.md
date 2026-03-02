@@ -3,7 +3,7 @@ title: Digital Minimalism Journey
 date: August 28, 2025
 readTime: 6 min read
 category: Design & Life
-image: ../Blog/blog.jpg
+image: images/blog/blog.jpg
 ---
 
 Last year I deleted Instagram off my phone for thirty days. Not the account — just the app. And for the first week, I kept reaching for it reflexively, several times a day, opening the spot where it used to be before remembering it wasn't there anymore.

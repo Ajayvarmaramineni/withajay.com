@@ -3,7 +3,7 @@ title: Understanding Minimalism
 date: August 12, 2025
 readTime: 5 min read
 category: Design & Life
-image: ../Blog/blog.jpg
+image: images/blog/blog.jpg
 ---
 
 Minimalism is often misunderstood as a visual style — white walls, empty shelves, a single succulent in a ceramic pot. That version exists, and it photographs beautifully, but it misses the point.

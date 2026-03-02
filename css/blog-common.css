@@ -1,3 +1,6 @@
+/* =========================
+   Reset & Base
+   ========================= */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 img { max-width: 100%; display: block; }
 
@@ -5,6 +8,7 @@ body {
   background: #ffffff;
   color: #333;
   font-family: 'Open Sans', Arial, sans-serif;
+  padding-top: 88px;            /* match default header height */
 }
 
 /* =========================
@@ -421,142 +425,3 @@ footer p { font-size: 0.9em; color: #333; }
     margin-left: 12px;
   }
 }
-
-    /* Page intro */
-    .archive-hero {
-      background: #fff;
-      text-align: center;
-      padding: 48px 16px 16px;
-    }
-    .archive-hero h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 2.6rem;
-      margin-bottom: 8px;
-    }
-    .archive-hero p {
-      color: #666;
-      font-size: 1rem;
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    /* Section wrapper (category blocks) */
-    .archive-section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 28px 16px 12px;
-    }
-    .section-head {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 14px;
-      gap: 16px;
-    }
-    .section-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.8rem;
-      line-height: 1.2;
-    }
-    .section-actions a {
-      color: #ff6f61;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .section-actions a:hover { text-decoration: underline; }
-
-    /* Posts grid */
-    .posts-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 28px;
-    }
-    @media (max-width: 1000px) {
-      .posts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-    @media (max-width: 640px) {
-      .posts-grid { grid-template-columns: 1fr; }
-    }
-
-    /* Post card */
-    .post-card {
-      display: flex;
-      flex-direction: column;
-      background: #fff;
-      border: 1px solid #e9e9e9;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .post-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    }
-
-    .post-thumb {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 16/10;
-      background: #f4f4f4;
-    }
-    .post-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.02);
-      transition: transform .35s ease;
-      display: block;
-    }
-    .post-card:hover .post-thumb img { transform: scale(1.06); }
-
-    .readmore-badge {
-      position: absolute;
-      right: 10px; bottom: 10px;
-      background: #000;
-      color: #fff;
-      font-size: .85rem;
-      padding: 6px 10px;
-      border-radius: 999px;
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity .2s ease, transform .2s ease;
-    }
-    .post-card:hover .readmore-badge { opacity: 0.95; transform: translateY(0); }
-
-    .post-body {
-      padding: 16px 16px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .post-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.25rem;
-      line-height: 1.35;
-    }
-    .post-title a { color: #111; text-decoration: none; }
-    .post-title a:hover { color: #ff6f61; }
-
-    .post-meta { color: #8a8a8a; font-size: .9rem; }
-    .post-excerpt { color: #333; font-size: .98rem; line-height: 1.6; }
-
-    .post-actions { margin-top: auto; }
-    .post-actions a {
-      display: inline-block;
-      margin-top: 6px;
-      font-weight: 600;
-      font-size: .95rem;
-      color: #ff6f61;
-      text-decoration: none;
-    }
-    .post-actions a:hover { text-decoration: underline; }
-
-    /* Spacing between sections */
-    .divide { height: 22px; }
-
-    /* Mobile tweaks */
-    @media (max-width: 640px) {
-      .archive-hero h1 { font-size: 2.2rem; }
-      .section-title { font-size: 1.5rem; }
-    }

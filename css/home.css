@@ -90,6 +90,31 @@
   opacity: 0;
 }
 
+/* Editorial name layout: AJAY smaller above RAMINENI */
+.name-first {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 2.5vw, 2.2rem);
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  color: var(--white);
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  white-space: nowrap;
+  margin-bottom: 2px;
+}
+
+.name-last {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 5.5vw, 5rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--white);
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  white-space: nowrap;
+}
+
+/* Keep legacy .name-text selector working */
 .name-text {
   display: block;
   font-family: var(--font-serif);
@@ -111,8 +136,60 @@
   text-transform: lowercase;
 }
 
+/* --- Homepage footer (bottom-left overlay) --- */
+.home-footer {
+  position: fixed;
+  bottom: 28px;
+  left: 32px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 18px;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 8px;
+  color: var(--white);
+  pointer-events: auto;
+}
+
+.home-footer__name {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.9);
+}
+
+.home-footer__social {
+  display: flex;
+  gap: 14px;
+}
+
+.home-footer__social a {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.7);
+  transition: color var(--transition);
+}
+
+.home-footer__social a:hover {
+  color: var(--white);
+}
+
+.home-footer__copy {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.5);
+}
+
 /* --- Homepage hamburger override (white bg) --- */
 body.home-page .hamburger {
   background: rgba(0,0,0,0.3);
-  color: var(--white);
+}
+
+body.home-page .hamburger .line {
+  background: var(--white);
 }
