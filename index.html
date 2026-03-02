@@ -7,6 +7,8 @@
   <meta name="description" content="Ajay Ramineni — Analytics, Photography &amp; Storytelling">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/responsive.css">
   <style>
@@ -17,7 +19,7 @@
 
   <!-- Hamburger -->
   <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
-    <span>&#9776;</span>
+    <span class="line"></span><span class="line"></span><span class="line"></span>
   </button>
 
   <!-- Nav overlay -->
@@ -52,12 +54,26 @@
     </a>
     <!-- Center overlay text -->
     <div class="center-text" id="centerText">
-      <span class="name-text">AJAY RAMINENI</span>
+      <span class="name-first">AJAY</span>
+      <span class="name-last">RAMINENI</span>
       <span class="tagline">with love, aj</span>
     </div>
   </main>
 
+  <!-- Homepage footer — bottom-left overlay -->
+  <footer class="home-footer">
+    <span class="home-footer__name">Ajay Ramineni</span>
+    <div class="home-footer__social">
+      <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+      <a href="https://x.com/withloveeajay" target="_blank" rel="noopener" aria-label="X">X</a>
+      <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
+      <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+    </div>
+    <span class="home-footer__copy">© 2026 Ajay Ramineni</span>
+  </footer>
+
   <script src="js/navigation.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/click-sound.js"></script>
 </body>
 </html>

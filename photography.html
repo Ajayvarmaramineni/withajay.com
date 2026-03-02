@@ -6,6 +6,8 @@
   <title>Photography | With Love AJ</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/photos.css">
   <link rel="stylesheet" href="css/responsive.css">
   <style>
@@ -99,7 +101,7 @@
 
   <!-- Hamburger -->
   <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
-    <span>&#9776;</span>
+    <span class="line"></span><span class="line"></span><span class="line"></span>
   </button>
 
   <!-- Nav overlay -->
@@ -212,7 +214,7 @@
         <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub">
       </a>
     </div>
-    <p>© 2025 Ajay | Powered by Ajay Varma Ramineni</p>
+    <p>© 2026 Ajay | Powered by Ajay Varma Ramineni</p>
     <a href="#top" class="back-to-top">Back to Top</a>
   </footer>
 
@@ -378,5 +380,6 @@
     window.addEventListener('resize', ()=>{ if(lightbox.classList.contains('active')) fitImage32(); });
   </script>
   <script src="js/navigation.js"></script>
+  <script src="js/click-sound.js"></script>
 </body>
 </html>
