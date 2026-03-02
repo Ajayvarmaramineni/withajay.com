@@ -4,12 +4,72 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About | With Love AJ</title>
-  <meta name="description" content="About Ajay Ramineni — Analytics, Photography &amp; Storytelling">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/animations.css">
   <style>
-    body { opacity: 0; transition: opacity 0.5s ease; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* Google Fonts */
+    h1, h2, .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+    p, li, a, button {
+      font-family: 'Open Sans', sans-serif;
+    }
+/* This hides the whole page initially to prevent any FOUC */
+body {
+  /* No opacity or transition here for now. Keep other body styles if you have them. */
+}
+
+    /* View transitions API (modern browsers) */
+    @supports (view-transition-name: none) {
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation: none;
+        mix-blend-mode: normal;
+      }
+      ::view-transition-old(root) {
+        z-index: 1;
+      }
+      ::view-transition-new(root) {
+        z-index: 9999;
+      }
+      .back-transition::view-transition-old(root) {
+        animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both fade-and-slide-out;
+      }
+      .back-transition::view-transition-new(root) {
+        animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both fade-and-slide-in reverse;
+      }
+    }
+
+    /* Fallback for older browsers */
+    @keyframes fade-and-slide-in {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fade-and-slide-out {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+    }
+
+    /* Shared element transitions */
+    .shared-element {
+      view-transition-name: shared-element;
+    }
 
     /* 🌸 Hero Background */
     .hero-background {
@@ -330,7 +390,7 @@
 <body>
 
   <!-- Hamburger -->
-  <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
+  <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false" style="color:#111;background:rgba(0,0,0,0.07);">
     <span>&#9776;</span>
   </button>
 
@@ -352,18 +412,36 @@
     </div>
   </nav>
 
-  <!-- Page header -->
-  <header class="page-header">
-    <div class="header-logo">
-      <a href="index.html">AJAY RAMINENI</a>
-    </div>
-    <div class="header-social">
-      <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener">IG</a>
-      <a href="https://x.com/withloveeajay" target="_blank" rel="noopener">X</a>
-      <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a>
-      <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a>
-    </div>
-  </header>
+  <div class="route-loader"></div>
+  <div class="transition-overlay"></div>
+  <main id="main-content" data-transition-wrapper>
+    <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
+      <span class="line"></span><span class="line"></span><span class="line"></span>
+    </button>
+
+    <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
+      <button class="nav-close" id="navClose" aria-label="Close navigation">&times;</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="photography.html">Photography</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-social">
+        <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+        <a href="https://x.com/withloveeajay" target="_blank" rel="noopener" aria-label="X">X</a>
+        <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
+        <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+      </div>
+    </nav>
+
+    <header class="page-header">
+      <div class="header-logo">
+        <a href="index.html">AJAY<br>RAMINENI</a>
+      </div>
+    </header>
 
     <section id="home">
       <div class="hero-background"></div>
@@ -435,9 +513,12 @@
         <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a>
         <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a>
       </div>
-      <p>© 2025 Ajay Varma Ramineni</p>
+      <p>© 2026 Ajay | Powered by Ajay Varma Ramineni</p>
     </footer>
 
+  <script src="js/navigation.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/click-sound.js"></script>
   <script>
     // Scroll reveal animation for all sections
     function revealOnScroll() {
@@ -459,6 +540,5 @@
     });
   </script>
   <script src="js/navigation.js"></script>
-  <script src="js/app.js"></script>
 </body>
 </html>
