@@ -206,17 +206,27 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 900;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 24px;
   height: 60px;
   background: var(--black);
 }
 
+.page-header .header-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
 .page-header .header-logo a {
   font-family: var(--font-serif);
-  font-size: 1.1rem;
-  letter-spacing: 0.08em;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
   color: var(--white);
+  display: block;
+  text-align: center;
+  line-height: 1.3;
 }
 
 .page-header .header-social {
