@@ -311,36 +311,6 @@ header.shrink .logo-svg {
 }
 
 /* =========================
-   Footer
-   ========================= */
-footer {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding: 30px 50px;
-  background: #ffffff;
-  border-top: 1px solid #e0e0e0;
-  color: #333;
-}
-.footer-logo { font-size: 1.2em; font-weight: bold; }
-footer .social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-footer .social-icons img {
-  width: 28px;
-  filter: none;
-  transition: filter 0.3s ease, transform 0.4s ease;
-}
-footer .social-icons img:hover {
-  filter: brightness(0.8);
-  transform: scale(1.2);
-}
-footer p { font-size: 0.9em; color: #333; }
-
-/* =========================
    Utilities
    ========================= */
 .reveal {
@@ -468,13 +438,19 @@ footer p { font-size: 0.9em; color: #333; }
     /* Posts grid */
     .posts-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 28px;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 20px;
+    }
+    @media (max-width: 1400px) {
+      .posts-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
     }
     @media (max-width: 1000px) {
-      .posts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .posts-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
     @media (max-width: 640px) {
+      .posts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 420px) {
       .posts-grid { grid-template-columns: 1fr; }
     }
 
@@ -488,10 +464,25 @@ footer p { font-size: 0.9em; color: #333; }
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0,0,0,0.04);
       transition: transform .2s ease, box-shadow .2s ease;
+      position: relative;
+      cursor: pointer;
     }
     .post-card:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    /* Card overlay link makes entire card clickable (z-index:1) */
+    .post-card-link {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+    /* Thumbnail and body links sit above the overlay so they remain independently clickable */
+    .post-card .post-thumb,
+    .post-card .post-body a {
+      position: relative;
+      z-index: 2;
     }
 
     .post-thumb {

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title id="page-title">Blog Post | With Love AJ</title>
   <meta name="description" content="A blog post by Ajay Ramineni">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/typography.css">
   <link rel="stylesheet" href="css/animations.css">
@@ -150,6 +150,17 @@
       text-underline-offset: 3px;
     }
     #post-body a:hover { color: #888; }
+
+    /* "With Love, Aj" cursive ending — targets a paragraph that contains only an <em> */
+    #post-body p:last-of-type > em:only-child {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.3em;
+      font-style: normal;
+      color: #555;
+      display: block;
+      text-align: right;
+      margin-top: 32px;
+    }
 
     /* Post footer */
     .post-footer {
