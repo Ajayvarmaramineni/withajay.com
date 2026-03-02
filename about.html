@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" media="print" onload="this.media='all'" />
-<noscript>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" />
-</noscript>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About | With Love AJ</title>
@@ -514,24 +505,16 @@ body {
       </div>
     </section>
 
-    <footer>
-      <div class="social-icons flex justify-center gap-6">
-        <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Ajay's Instagram Profile" class="icon hover:scale-110 transition">
-        </a>
-        <a href="https://x.com/withloveeajay?s=21" target="_blank" aria-label="X">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png" alt="Ajay's X Profile" class="icon hover:scale-110 transition">
-        </a>
-        <a href="https://www.linkedin.com/in/ajayramineni2808?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="Ajay's LinkedIn Profile" class="icon hover:scale-110 transition">
-        </a>
-        <a href="https://github.com/Ajayvarmaramineni" target="_blank" aria-label="GitHub">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="Ajay's GitHub Profile" class="icon hover:scale-110 transition">
-        </a>
+    <footer class="site-footer">
+      <div class="footer-logo">AJAY RAMINENI</div>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener">IG</a>
+        <a href="https://x.com/withloveeajay" target="_blank" rel="noopener">X</a>
+        <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a>
+        <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a>
       </div>
       <p>© 2026 Ajay | Powered by Ajay Varma Ramineni</p>
     </footer>
-  </main>
 
   <script src="js/navigation.js"></script>
   <script src="js/app.js"></script>
@@ -553,7 +536,6 @@ body {
 
     document.addEventListener('DOMContentLoaded', () => {
       window.addEventListener('scroll', revealOnScroll);
-      window.addEventListener('load', revealOnScroll);
       revealOnScroll();
     });
   </script>
