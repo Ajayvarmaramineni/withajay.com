@@ -3,7 +3,7 @@ title: Design Philosophy
 date: September 3, 2025
 readTime: 5 min read
 category: Design & Life
-image: ../Blog/blog.jpg
+image: images/blog/blog.jpg
 ---
 
 I think about design a lot — not just as a professional discipline, but as a way of thinking about nearly everything. How things are arranged, what they communicate, what gets emphasized and what gets quietly removed.
