@@ -1,0 +1,26 @@
+.button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 16px;
+    margin: 16px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.ui-element {
+    margin: 10px;
+    padding: 5px;
+}
