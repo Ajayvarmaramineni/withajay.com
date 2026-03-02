@@ -19,12 +19,18 @@
 
     /* ========= Hero ========= */
     .gallery-hero{
-      position:relative;min-height:320px;
-      background:url('images/photos/hero.jpg') center/cover no-repeat;
+      position:relative;min-height:320px;overflow:hidden;
       display:flex;align-items:center;justify-content:center;color:#fff;text-align:center
     }
-    .gallery-hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.35)}
-    .gallery-hero-content{position:relative;z-index:1}
+    .gallery-hero-bg{
+      position:absolute;inset:0;
+      background:url('images/photos/hero.jpg') center/cover no-repeat;
+      transform:scale(1);
+      transition:transform 0.6s ease-out;
+      will-change:transform;
+    }
+    .gallery-hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.35);z-index:1}
+    .gallery-hero-content{position:relative;z-index:2}
     .gallery-hero-title{font-size:2.8rem;letter-spacing:.5px;text-shadow:0 2px 8px rgba(0,0,0,.25)}
     .gallery-hero-desc{opacity:.95}
 
@@ -87,14 +93,8 @@
     }
     .lb-close:hover{color:#fff}
 
-    /* ========= Footer (yours) ========= */
-    footer{
-      background:rgba(0,0,0,.2);backdrop-filter:blur(10px);color:#fff;
-      padding:10px 50px;text-align:center;display:flex;flex-direction:column;gap:12px
-    }
-    footer .footer-logo{font-weight:700}
-    footer .social-icons img{width:28px}
-    .back-to-top{color:#fff}
+    /* ========= Back to top ========= */
+    .back-to-top{color:#111}
   </style>
 </head>
 <body style="opacity:0; transition:opacity 0.8s;">
@@ -131,7 +131,8 @@
   </header>
 
   <!-- Hero + torn edge -->
-  <section class="gallery-hero">
+  <section class="gallery-hero" id="galleryHero">
+    <div class="gallery-hero-bg" id="heroBg"></div>
     <div class="gallery-hero-content">
       <div class="gallery-hero-title">PHOTOGRAPHY</div>
       <div class="gallery-hero-desc">A visual journey through landscapes, portraits, and everyday moments</div>
@@ -372,5 +373,20 @@
   </script>
   <script src="js/navigation.js"></script>
   <script src="js/click-sound.js"></script>
+  <script>
+  // Hero parallax scale on scroll
+  (function() {
+    var heroBg = document.getElementById('heroBg');
+    var hero   = document.getElementById('galleryHero');
+    if (!heroBg || !hero) return;
+    function onScroll() {
+      var scrollY = window.scrollY || window.pageYOffset;
+      var heroH   = hero.offsetHeight;
+      var progress = Math.min(scrollY / heroH, 1);
+      heroBg.style.transform = 'scale(' + (1 + progress * 0.12) + ')';
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+  </script>
 </body>
 </html>
