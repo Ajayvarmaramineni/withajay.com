@@ -10,6 +10,7 @@
     navOverlay.classList.add('open');
     navOverlay.setAttribute('aria-hidden', 'false');
     hamburger.setAttribute('aria-expanded', 'true');
+    hamburger.classList.add('is-active');
     document.body.style.overflow = 'hidden';
   }
 
@@ -17,6 +18,7 @@
     navOverlay.classList.remove('open');
     navOverlay.setAttribute('aria-hidden', 'true');
     hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.classList.remove('is-active');
     document.body.style.overflow = '';
   }
 
