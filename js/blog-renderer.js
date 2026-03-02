@@ -19,24 +19,80 @@
     return { meta: meta, body: body };
   }
 
+  /** Escape HTML special characters to prevent XSS */
+  function escapeHTML(text) {
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  /** Slugify a heading string for use as an anchor id */
+  function slugify(text) {
+    return text
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .trim()
+      .replace(/[\s_]+/g, '-');
+  }
+
+  /**
+   * Build a table of contents from heading tokens.
+   * headings: array of { level, text, id }
+   */
+  function buildTOC(headings) {
+    if (!headings.length) return '';
+    var html = '<nav class="toc" aria-label="Table of contents"><ul>\n';
+    headings.forEach(function (h) {
+      html += '<li class="toc-h' + h.level + '"><a href="#' + h.id + '">' + escapeHTML(h.text) + '</a></li>\n';
+    });
+    html += '</ul></nav>\n';
+    return html;
+  }
+
   /**
    * Minimal Markdown → HTML parser
-   * Supports: headings, paragraphs, bold, italic, inline code,
-   *           blockquotes, unordered lists, links, horizontal rules
+   * Supports: headings (with anchor ids), paragraphs, bold, italic,
+   *           inline code, fenced code blocks, blockquotes,
+   *           unordered lists, ordered lists, links, horizontal rules,
+   *           and auto-generated table of contents.
    */
   function parseMarkdown(md) {
     var lines = md.split('\n');
     var html = '';
     var i = 0;
+    var headings = [];
 
     while (i < lines.length) {
       var line = lines[i];
+
+      // Fenced code block (``` or ~~~)
+      var fenceMatch = line.match(/^(`{3}|~{3})(\S*)$/);
+      if (fenceMatch) {
+        var fence = fenceMatch[1];
+        var lang = fenceMatch[2] || '';
+        var codeContent = '';
+        i++;
+        while (i < lines.length && lines[i].indexOf(fence) !== 0) {
+          codeContent += lines[i] + '\n';
+          i++;
+        }
+        i++; // skip closing fence
+        var langAttr = lang ? ' class="language-' + escapeHTML(lang) + '"' : '';
+        html += '<pre><code' + langAttr + '>' + escapeHTML(codeContent) + '</code></pre>\n';
+        continue;
+      }
 
       // Heading
       var hMatch = line.match(/^(#{1,6})\s+(.+)$/);
       if (hMatch) {
         var level = hMatch[1].length;
-        html += '<h' + level + '>' + inlineMarkdown(hMatch[2]) + '</h' + level + '>\n';
+        var headingText = hMatch[2];
+        var id = slugify(headingText);
+        headings.push({ level: level, text: headingText, id: id });
+        html += '<h' + level + ' id="' + id + '">' + inlineMarkdown(headingText) + '</h' + level + '>\n';
         i++;
         continue;
       }
@@ -56,6 +112,17 @@
           i++;
         }
         html += '<blockquote>' + inlineMarkdown(bqContent.trim()) + '</blockquote>\n';
+        continue;
+      }
+
+      // Ordered list
+      if (/^\d+\.\s/.test(line)) {
+        html += '<ol>\n';
+        while (i < lines.length && /^\d+\.\s/.test(lines[i])) {
+          html += '<li>' + inlineMarkdown(lines[i].replace(/^\d+\.\s/, '')) + '</li>\n';
+          i++;
+        }
+        html += '</ol>\n';
         continue;
       }
 
@@ -84,7 +151,9 @@
         !/^#{1,6}\s/.test(lines[i]) &&
         !/^>\s/.test(lines[i]) &&
         !/^[-*+]\s/.test(lines[i]) &&
-        !/^[-*_]{3,}\s*$/.test(lines[i])
+        !/^\d+\.\s/.test(lines[i]) &&
+        !/^[-*_]{3,}\s*$/.test(lines[i]) &&
+        !/^(`{3}|~{3})/.test(lines[i])
       ) {
         pContent += (pContent ? ' ' : '') + lines[i];
         i++;
@@ -94,16 +163,18 @@
       }
     }
 
+    // Prepend table of contents if there are headings
+    if (headings.length) {
+      html = buildTOC(headings) + html;
+    }
+
     return html;
   }
 
   /** Inline markdown: bold, italic, inline code, links */
   function inlineMarkdown(text) {
     // Escape HTML first
-    text = text
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
+    text = escapeHTML(text);
 
     // Links: [text](url)
     text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
@@ -178,7 +249,7 @@
 
   function renderError(msg) {
     var bodyEl = document.getElementById('post-body');
-    if (bodyEl) bodyEl.innerHTML = '<p style="color:#888;">Error: ' + msg + '</p>';
+    if (bodyEl) bodyEl.innerHTML = '<p style="color:#888;">Error: ' + escapeHTML(msg) + '</p>';
   }
 
   document.addEventListener('DOMContentLoaded', loadPost);

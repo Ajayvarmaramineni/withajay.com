@@ -1,26 +1,88 @@
+/* --- Buttons --- */
 .button {
-    background-color: #007bff;
+    background-color: #111;
     border: none;
-    color: white;
+    color: #fff;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 0.9rem;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 4px;
+    transition: background 0.3s ease;
 }
 
+.button:hover {
+    background-color: #333;
+}
+
+/* --- Cards --- */
 .card {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 16px;
-    margin: 16px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 20px;
+    margin: 16px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: box-shadow 0.3s ease;
 }
 
-.ui-element {
-    margin: 10px;
-    padding: 5px;
+.card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+/* --- Badges --- */
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 20px;
+    background: #f0f0f0;
+    color: #555;
+}
+
+/* --- Forms --- */
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.form-field label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #555;
+}
+
+.form-field input,
+.form-field textarea {
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+    outline: none;
+    border-color: #111;
+}
+
+/* --- Reusable fade-up animation --- */
+.animate-fade-up {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.animate-fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
