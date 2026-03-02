@@ -219,6 +219,11 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--white);
 }
 
+/* Offset logo to clear the fixed hamburger button */
+.page-header .header-logo {
+  margin-left: 52px;
+}
+
 .page-header .header-social {
   display: flex;
   gap: 18px;
