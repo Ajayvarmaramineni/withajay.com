@@ -95,9 +95,9 @@
 /* --- Home name logo — Jimmy Nelson style --- */
 .home-name-logo {
   position: fixed;
-  top: 24px;
+  top: 22px;
   left: 50%;
-  transform: translateX(-48%);
+  transform: translateX(-50%);
   z-index: 1400;
   text-align: left;
   pointer-events: none;
@@ -113,27 +113,27 @@
 
 .home-name-logo .first {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-size: clamp(0.95rem, 1.4vw, 1.25rem);
   font-weight: 800;
-  letter-spacing: 0;
+  letter-spacing: 0.04em;
   color: #fff;
-  text-shadow: 0 2px 16px rgba(0,0,0,0.45);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
   display: block;
   text-transform: uppercase;
   margin-left: 0;
-  line-height: 1;
+  line-height: 1.05;
 }
 
 .home-name-logo .last {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(1.8rem, 3.8vw, 3.5rem);
+  font-size: clamp(0.95rem, 1.4vw, 1.25rem);
   font-weight: 800;
-  letter-spacing: 0;
+  letter-spacing: 0.04em;
   color: #fff;
-  text-shadow: 0 2px 16px rgba(0,0,0,0.45);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
   display: block;
   text-transform: uppercase;
-  line-height: 1;
+  line-height: 1.05;
 }
 
 body.is-hovering .home-name-logo {
