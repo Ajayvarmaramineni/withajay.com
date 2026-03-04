@@ -165,8 +165,31 @@
     if (bodyEl) bodyEl.innerHTML = bodyHTML;
     if (pageTitle) pageTitle.textContent = (meta.title || 'Post') + ' | With Love AJ';
 
-    // Hero image
+    // Update meta description and Open Graph tags dynamically
+    var postTitle = (meta.title || 'Post') + ' | With Love AJ';
+    var tempDiv = document.createElement('div');
+    tempDiv.innerHTML = bodyHTML;
+    var plainText = (tempDiv.textContent || tempDiv.innerText || '').trim();
+    var postDesc = meta.description ||
+      (plainText.split(/\s+/).slice(0, 30).join(' ') + '…');
+    var postUrl = window.location.href;
+
+    var descTag = document.querySelector('meta[name="description"]');
+    if (descTag) descTag.setAttribute('content', postDesc);
+
+    var ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', postTitle);
+
+    var ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', postDesc);
+
+    var ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) ogUrl.setAttribute('content', postUrl);
+
     if (meta.image) {
+      var ogImage = document.querySelector('meta[property="og:image"]');
+      if (ogImage) ogImage.setAttribute('content', meta.image);
+
       var heroImg = document.getElementById('post-hero-img');
       if (heroImg) {
         heroImg.src = meta.image;
