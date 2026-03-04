@@ -111,6 +111,7 @@ h1, h2, h3, h4, h5, h6 {
   position: fixed;
   top: 20px;
   left: 20px;
+  right: auto;
   z-index: 1100;
   width: 44px;
   height: 44px;
@@ -119,42 +120,29 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: space-between;
   align-items: center;
   padding: 11px 10px;
-  background: rgba(0,0,0,0.45);
-  border-radius: 4px;
+  background: none;
   border: none;
-  transition: background var(--transition);
+  border-radius: 0;
 }
 
 .hamburger:hover {
-  background: rgba(0,0,0,0.7);
+  background: none;
 }
 
-/* Hamburger 3 lines — always white (dark bg provides contrast) */
+/* Hamburger 3 lines */
 .hamburger .line {
   display: block;
   width: 22px;
   height: 2px;
-  background: #fff;
+  background: var(--black);
   border-radius: 2px;
   transform-origin: center;
-  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1), opacity 400ms ease;
-}
-
-/* Light-bg pages (portfolio, blog): dark hamburger with light background */
-body.light-bg .hamburger {
-  background: rgba(255,255,255,0.9);
-  border: 1px solid #ddd;
-}
-body.light-bg .hamburger:hover {
-  background: rgba(255,255,255,1);
-}
-body.light-bg .hamburger .line {
-  background: #111;
+  transition: transform 350ms ease-in-out, opacity 350ms ease-in-out;
 }
 
 /* Active (open) state: lines rotate into X */
 .hamburger.is-active .line:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
+  transform: translateY(7px) rotate(45deg);
 }
 
 .hamburger.is-active .line:nth-child(2) {
@@ -163,7 +151,13 @@ body.light-bg .hamburger .line {
 }
 
 .hamburger.is-active .line:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Dark-bg pages (about, contact, photography): white hamburger lines */
+body.dark-bg .hamburger .line,
+body.home-page .hamburger .line {
+  background: var(--white);
 }
 
 /* --- Nav overlay (shared) --- */
@@ -226,50 +220,6 @@ body.light-bg .hamburger .line {
   color: var(--white);
 }
 
-/* Nav close button (inside overlay) */
-.nav-close {
-  position: absolute;
-  top: 20px;
-  right: 28px;
-  font-size: 2.2rem;
-  color: #fff;
-  z-index: 10;
-  background: none;
-  border: none;
-  cursor: pointer;
-  line-height: 1;
-  transition: color 0.2s ease;
-}
-.nav-close:hover { color: rgba(255,255,255,0.5); }
-
-/* Nav brand (home link inside overlay) */
-.nav-brand {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  pointer-events: auto;
-}
-.nav-brand a { text-decoration: none; display: block; }
-.nav-brand-first {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(0.65rem, 1vw, 0.85rem);
-  letter-spacing: 0.35em;
-  color: rgba(255,255,255,0.75);
-  display: block;
-}
-.nav-brand-last {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(1.3rem, 2.5vw, 2rem);
-  letter-spacing: 0.15em;
-  color: #fff;
-  display: block;
-  line-height: 1;
-}
-.nav-brand a:hover .nav-brand-first,
-.nav-brand a:hover .nav-brand-last { color: rgba(255,255,255,0.6); }
-
 /* --- Fixed name logo — all pages (inner) --- */
 .page-name-logo {
   position: fixed;
@@ -278,8 +228,8 @@ body.light-bg .hamburger .line {
   transform: translateX(-48%);
   z-index: 1400;
   text-align: left;
-  pointer-events: auto;
-  transition: opacity 0.4s ease;
+  pointer-events: none;
+  transition: opacity 0.7s ease;
 }
 
 .page-name-logo a {
@@ -289,24 +239,26 @@ body.light-bg .hamburger .line {
 }
 
 .page-name-logo .first {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
-  letter-spacing: 0.35em;
-  color: #111;
+  font-family: var(--font-serif);
+  font-size: clamp(0.65rem, 1.2vw, 0.9rem);
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  color: var(--black);
   display: block;
+  text-transform: uppercase;
+  margin-left: 3px;
+  line-height: 1.4;
 }
 
 .page-name-logo .last {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(1.4rem, 3vw, 2.6rem);
-  letter-spacing: 0.15em;
-  color: #111;
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--black);
   display: block;
-  line-height: 1;
-}
-
-.page-name-logo:hover {
-  opacity: 0;
+  text-transform: uppercase;
+  line-height: 1.1;
 }
 
 /* Fade on scroll past 80px */
