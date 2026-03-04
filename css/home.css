@@ -64,6 +64,8 @@
 
 .panel-right .panel-label {
   color: rgba(255,255,255,0.75);
+  left: auto;
+  right: 48px;
 }
 
 /* --- Panel labels --- */
