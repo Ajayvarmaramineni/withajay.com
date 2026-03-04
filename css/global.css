@@ -65,8 +65,6 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
 }
 
-/* --- Consistent Footer --- */
-
 /* --- Inner-page single-line overlay footer --- */
 .page-footer-line {
   position: relative;
@@ -95,31 +93,33 @@ h1, h2, h3, h4, h5, h6 {
   color: #111;
 }
 
-/* For pages with dark/image backgrounds (about, contact, photography) */
+/* For pages with dark/image backgrounds */
 .dark-bg .page-footer-line span,
 .dark-bg .page-footer-line a {
   color: rgba(255,255,255,0.65);
   text-shadow: 0 1px 6px rgba(0,0,0,0.5);
 }
 
-.dark-bg .page-footer-line a:hover {
+dark-bg .page-footer-line a:hover {
   color: var(--white);
 }
 
 /* --- Hamburger button (shared) --- */
+/* Fixed top-right, z-index above nav overlay (1200) so it stays clickable */
 .hamburger {
   position: fixed;
   top: 24px;
   right: 28px;
   left: auto;
   z-index: 1500;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 11px 10px;
+  gap: 6px;
+  padding: 8px;
   background: none;
   border: none;
   border-radius: 0;
@@ -140,9 +140,10 @@ h1, h2, h3, h4, h5, h6 {
   transition: transform 350ms ease-in-out, opacity 350ms ease-in-out;
 }
 
-/* Active (open) state: lines rotate into X */
+/* Active (open) state: lines rotate into a clean X */
+/* gap between lines is 6px, line height 2px — center line offset = 6+2 = 8px */
 .hamburger.is-active .line:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
+  transform: translateY(8px) rotate(45deg);
 }
 
 .hamburger.is-active .line:nth-child(2) {
@@ -151,20 +152,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hamburger.is-active .line:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+  transform: translateY(-8px) rotate(-45deg);
 }
 
-/* Dark-bg pages (about, contact, photography): white hamburger lines */
+/* Dark-bg pages and homepage: white hamburger lines */
 body.dark-bg .hamburger .line,
 body.home-page .hamburger .line {
   background: var(--white);
 }
 
 /* --- Nav overlay (shared) --- */
+/* Slides down from the top */
 .nav-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(14, 16, 22, 0.98);
+  background: rgba(10, 11, 15, 0.98);
   z-index: 1200;
   display: flex;
   flex-direction: column;
@@ -173,45 +175,24 @@ body.home-page .hamburger .line {
   padding: 0;
   transform: translateY(-100%);
   transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
 }
 
 .nav-overlay.open {
   transform: translateY(0);
 }
 
-/* Nav overlay top bar */
-.nav-header-bar {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 28px 36px 0;
-  flex-shrink: 0;
-}
-
+/* Small MENU label above the nav links */
 .nav-menu-label {
+  display: block;
   font-family: var(--font-sans);
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
-}
-
-.nav-brand-block {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.05rem;
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  color: rgba(255,255,255,0.9);
-  line-height: 1.15;
-  text-align: right;
-  text-transform: uppercase;
-}
-
-.nav-brand-block a {
-  color: inherit;
-  text-decoration: none;
+  color: rgba(255,255,255,0.38);
+  padding: 36px 0 18px 48px;
+  flex-shrink: 0;
 }
 
 /* Nav links list */
@@ -219,8 +200,8 @@ body.home-page .hamburger .line {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
-  padding: 52px 0 0 48px;
+  gap: 2px;
+  padding: 0 0 0 48px;
   margin-bottom: 0;
   flex: 1;
 }
@@ -242,7 +223,7 @@ body.home-page .hamburger .line {
 
 /* Social links at bottom */
 .nav-social {
-  padding: 32px 0 36px 48px;
+  padding: 36px 0 44px 48px;
   display: flex;
   gap: 28px;
   flex-shrink: 0;
@@ -253,7 +234,7 @@ body.home-page .hamburger .line {
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.15em;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.45);
   transition: color 0.3s ease;
 }
 
@@ -261,7 +242,7 @@ body.home-page .hamburger .line {
   color: var(--white);
 }
 
-/* --- Fixed name logo — all pages (inner) --- */
+/* --- Fixed name logo — all inner pages --- */
 .page-name-logo {
   position: fixed;
   top: 24px;
@@ -307,7 +288,7 @@ body.home-page .hamburger .line {
   opacity: 0;
 }
 
-/* Dark-bg pages (about, contact, photography): white name logo */
+/* Dark-bg pages: white name logo */
 body.dark-bg .page-name-logo .first,
 body.dark-bg .page-name-logo .last {
   color: var(--white);
