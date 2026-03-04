@@ -9,7 +9,8 @@ withajay.com/
 │
 ├── index.html             
 ├── about.html              
-├── photos.html             
+├── photography.html        
+├── photos.html             (redirects to photography.html)
 ├── portfolio.html          
 ├── blog.html               
 ├── blog-post.html          
@@ -30,12 +31,10 @@ withajay.com/
 │
 ├── js/
 │   ├── navigation.js       
+│   ├── app.js              
 │   ├── blog-renderer.js    
-│   ├── masonry.js          
-│   └── app.js             
+│   └── click-sound.js      
 │
-├── Photos/                 
-├── Blog/                   
 └── images/                 
 ```
 
@@ -47,7 +46,7 @@ withajay.com/
 - **Markdown blog system** — posts written in `.md`, rendered via `blog-renderer.js`
 - **Minimalist portfolio** — clean white/black card layout
 - **Responsive design** — mobile-first, breakpoints at 1200px and 768px
-- **Google Fonts**: Playfair Display (headings) + Open Sans (body)
+- **Google Fonts**: Playfair Display (headings) + Open Sans (body) + Bebas Neue (accents)
 
 ## Blog Posts
 
