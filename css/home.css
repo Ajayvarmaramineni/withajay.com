@@ -108,11 +108,11 @@
 }
 
 .home-name-logo .first {
-  font-family: var(--font-serif);
+  font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(0.65rem, 1.2vw, 0.9rem);
   font-weight: 400;
   letter-spacing: 0.4em;
-  color: rgba(255,255,255,0.9);
+  color: rgba(255,255,255,0.85);
   text-shadow: 0 1px 10px rgba(0,0,0,0.5);
   display: block;
   text-transform: uppercase;
@@ -121,11 +121,11 @@
 }
 
 .home-name-logo .last {
-  font-family: var(--font-serif);
+  font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(1.4rem, 2.8vw, 2.2rem);
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: var(--white);
+  color: #fff;
   text-shadow: 0 2px 16px rgba(0,0,0,0.5);
   display: block;
   text-transform: uppercase;
