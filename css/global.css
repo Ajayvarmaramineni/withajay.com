@@ -105,7 +105,6 @@ dark-bg .page-footer-line a:hover {
 }
 
 /* --- Hamburger button (shared) --- */
-/* Fixed top-right, z-index above nav overlay (1200) so it stays clickable */
 .hamburger {
   position: fixed;
   top: 24px;
@@ -140,8 +139,6 @@ dark-bg .page-footer-line a:hover {
   transition: transform 350ms ease-in-out, opacity 350ms ease-in-out;
 }
 
-/* Active (open) state: lines rotate into a clean X */
-/* gap between lines is 6px, line height 2px — center line offset = 6+2 = 8px */
 .hamburger.is-active .line:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
@@ -162,7 +159,6 @@ body.home-page .hamburger .line {
 }
 
 /* --- Nav overlay (shared) --- */
-/* Slides down from the top */
 .nav-overlay {
   position: fixed;
   inset: 0;
@@ -182,7 +178,6 @@ body.home-page .hamburger .line {
   transform: translateY(0);
 }
 
-/* Small MENU label above the nav links */
 .nav-menu-label {
   display: block;
   font-family: var(--font-sans);
@@ -245,11 +240,11 @@ body.home-page .hamburger .line {
 /* --- Fixed name logo — all inner pages --- */
 .page-name-logo {
   position: fixed;
-  top: 24px;
+  top: 22px;
   left: 50%;
-  transform: translateX(-48%);
+  transform: translateX(-50%);
   z-index: 1400;
-  text-align: left;
+  text-align: center;
   pointer-events: none;
   transition: opacity 0.7s ease;
 }
@@ -262,25 +257,25 @@ body.home-page .hamburger .line {
 
 .page-name-logo .first {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-size: clamp(0.95rem, 1.4vw, 1.25rem);
   font-weight: 800;
-  letter-spacing: 0;
+  letter-spacing: 0.04em;
   color: var(--black);
   display: block;
   text-transform: uppercase;
   margin-left: 0;
-  line-height: 1;
+  line-height: 1.05;
 }
 
 .page-name-logo .last {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(1.8rem, 3.8vw, 3.5rem);
+  font-size: clamp(0.95rem, 1.4vw, 1.25rem);
   font-weight: 800;
-  letter-spacing: 0;
+  letter-spacing: 0.04em;
   color: var(--black);
   display: block;
   text-transform: uppercase;
-  line-height: 1;
+  line-height: 1.05;
 }
 
 /* Fade on scroll past 80px */
