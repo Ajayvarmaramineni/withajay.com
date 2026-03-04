@@ -69,20 +69,21 @@
 /* --- Panel labels --- */
 .panel-label {
   position: absolute;
-  bottom: 40px;
-  left: 40px;
+  bottom: 48px;
+  left: 48px;
   z-index: 2;
   font-family: var(--font-sans);
-  font-size: 0.65rem;
+  font-size: clamp(0.6rem, 0.9vw, 0.78rem);
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.75);
-  transition: color 0.3s ease;
+  color: rgba(255,255,255,0.7);
+  transition: color 0.3s ease, opacity 0.3s ease;
 }
 
 .panel:hover .panel-label {
-  color: rgba(255,255,255,0.95);
+  color: rgba(255,255,255,1);
+  opacity: 1;
 }
 
 .panel-left .panel-label {
@@ -98,6 +99,7 @@
   z-index: 1400;
   text-align: left;
   pointer-events: none;
+  opacity: 1;
   transition: opacity 0.7s ease;
 }
 
@@ -109,11 +111,10 @@
 
 .home-name-logo .first {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(0.65rem, 1.2vw, 0.9rem);
+  font-size: clamp(0.7rem, 1.3vw, 1rem);
   font-weight: 400;
-  letter-spacing: 0.4em;
-  color: rgba(255,255,255,0.85);
-  text-shadow: 0 1px 10px rgba(0,0,0,0.5);
+  letter-spacing: 0.5em;
+  color: rgba(255,255,255,0.9);
   display: block;
   text-transform: uppercase;
   margin-left: 3px;
@@ -122,11 +123,10 @@
 
 .home-name-logo .last {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+  font-size: clamp(2.2rem, 5vw, 4rem);
   font-weight: 700;
   letter-spacing: 0.08em;
   color: #fff;
-  text-shadow: 0 2px 16px rgba(0,0,0,0.5);
   display: block;
   text-transform: uppercase;
   line-height: 1.1;
