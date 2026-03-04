@@ -1,8 +1,7 @@
-/* navigation.js — Hamburger menu toggle */
+/* navigation.js — Hamburger toggles nav, morphs to X */
 (function () {
-  const hamburger = document.getElementById('hamburger');
-  const navOverlay = document.getElementById('navOverlay');
-  const navClose = document.getElementById('navClose');
+  var hamburger = document.getElementById('hamburger');
+  var navOverlay = document.getElementById('navOverlay');
 
   if (!hamburger || !navOverlay) return;
 
@@ -22,18 +21,17 @@
     document.body.style.overflow = '';
   }
 
-  hamburger.addEventListener('click', openNav);
-
-  if (navClose) navClose.addEventListener('click', closeNav);
+  hamburger.addEventListener('click', function () {
+    if (navOverlay.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
 
   // Close on nav link click
   navOverlay.querySelectorAll('.nav-links a').forEach(function (link) {
     link.addEventListener('click', closeNav);
-  });
-
-  // Close on click outside (on the overlay background itself)
-  navOverlay.addEventListener('click', function (e) {
-    if (e.target === navOverlay) closeNav();
   });
 
   // Close on Escape key

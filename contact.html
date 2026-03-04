@@ -281,44 +281,9 @@
     }
 
     /* Footer */
-    footer {
-      background: rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      color: #fff;
-      padding: 7px 50px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
-    footer .footer-logo {
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-    footer .social-icons {
-      display: flex;
-      gap: 20px;
-      flex: 0 0 auto;
-      justify-content: center;
-    }
-    footer .social-icons img {
-      width: 28px;
-      filter: brightness(0) invert(1);
-      transition: transform 0.4s ease, filter 0.3s ease;
-    }
-    footer .social-icons img:hover {
-      transform: scale(1.2);
-      filter: brightness(1.5);
-    }
-    footer p {
-      font-size: 0.9em;
-      color: #e0e0e0;
-    }
   </style>
 </head>
-<body>
+<body class="dark-bg">
 
   <!-- Hamburger -->
   <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
@@ -327,12 +292,10 @@
 
   <!-- Nav overlay -->
   <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
-    <button class="nav-close" id="navClose" aria-label="Close navigation">&times;</button>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="photography.html">Photography</a></li>
       <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="photography.html">Photography</a></li>
       <li><a href="blog.html">Blog</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
@@ -371,23 +334,9 @@
 
     <div class="section-spacer"></div>
 
-    <footer>
-      <div class="footer-logo">Ajay Varma Ramineni</div>
-      <div class="social-icons flex justify-center gap-6">
-  <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
-    <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Ajay's Instagram Profile" class="icon hover:scale-110 transition">
-  </a>
-  <a href="https://x.com/withloveeajay?s=21" target="_blank" aria-label="X">
-    <img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png" alt="Ajay's X Profile" class="icon hover:scale-110 transition">
-  </a>
-  <a href="https://www.linkedin.com/in/ajayramineni2808?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
-    <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="Ajay's LinkedIn Profile" class="icon hover:scale-110 transition">
-  </a>
-  <a href="https://github.com/Ajayvarmaramineni" target="_blank" aria-label="GitHub">
-    <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="Ajay's GitHub Profile" class="icon hover:scale-110 transition">
-  </a>
-</div>
-      <p>© 2026 Ajay | Powered by Ajay Varma Ramineni</p>
+    <!-- Single-line overlay footer -->
+    <footer class="page-footer-line">
+      <span>Ajay Ramineni &nbsp;·&nbsp; <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener">IG</a> &nbsp;·&nbsp; <a href="https://x.com/withloveeajay" target="_blank" rel="noopener">X</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a> &nbsp;·&nbsp; <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a> &nbsp;·&nbsp; © 2026</span>
     </footer>
   </main>
   <script src="js/navigation.js"></script>

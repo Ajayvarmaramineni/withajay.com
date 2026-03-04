@@ -30,12 +30,10 @@
 
   <!-- Nav overlay -->
   <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
-    <button class="nav-close" id="navClose" aria-label="Close navigation">&times;</button>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="photography.html">Photography</a></li>
       <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="photography.html">Photography</a></li>
       <li><a href="blog.html">Blog</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
@@ -56,30 +54,35 @@
     </a>
     <!-- Right panel -->
     <a href="portfolio.html" class="panel panel-right" aria-label="View Portfolio">
+      <div class="panel-bg"></div>
       <div class="panel-label">ANALYTICS &amp; STRATEGY</div>
     </a>
-    <!-- Center overlay text -->
-    <div class="center-text" id="centerText">
-      <span class="name-first">AJAY</span>
-      <span class="name-last">RAMINENI</span>
-      <span class="tagline">with love, aj</span>
-    </div>
+    <!-- Center overlay text removed -->
   </main>
 
-  <!-- Homepage footer — bottom-left overlay -->
+  <!-- Homepage footer — single centered line -->
   <footer class="home-footer">
-    <span class="home-footer__name">Ajay Ramineni</span>
-    <div class="home-footer__social">
-      <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-      <a href="https://x.com/withloveeajay" target="_blank" rel="noopener" aria-label="X">X</a>
-      <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
-      <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
-    </div>
-    <span class="home-footer__copy">© 2026 Ajay Ramineni</span>
+    <span>Ajay Ramineni &nbsp;·&nbsp; <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener">IG</a> &nbsp;·&nbsp; <a href="https://x.com/withloveeajay" target="_blank" rel="noopener">X</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a> &nbsp;·&nbsp; <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a> &nbsp;·&nbsp; © 2026</span>
   </footer>
+
+  <!-- Home name logo — top center -->
+  <div class="home-name-logo" id="homeNameLogo">
+    <a href="index.html">
+      <span class="first">AJAY</span>
+      <span class="last">RAMINENI</span>
+    </a>
+  </div>
 
   <script src="js/navigation.js"></script>
   <script src="js/app.js"></script>
   <script src="js/click-sound.js"></script>
+  <script>
+    // Fade name logo on split-screen hover
+    var ss = document.querySelector('.split-screen');
+    if (ss) {
+      ss.addEventListener('mouseenter', function() { document.body.classList.add('is-hovering'); });
+      ss.addEventListener('mouseleave', function() { document.body.classList.remove('is-hovering'); });
+    }
+  </script>
 </body>
 </html>

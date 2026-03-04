@@ -66,46 +66,44 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --- Consistent Footer --- */
-.site-footer {
-  background: var(--black);
-  color: var(--white);
-  padding: 32px 48px;
+
+/* --- Inner-page single-line overlay footer --- */
+.page-footer-line {
+  position: relative;
+  width: 100%;
+  padding: 20px 0;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
+  background: transparent;
+  z-index: 10;
 }
 
-.site-footer .footer-logo {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  letter-spacing: 0.1em;
-}
-
-.site-footer .footer-social {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  justify-content: center;
-}
-
-.site-footer .footer-social a {
-  color: var(--gray-mid);
+.page-footer-line span {
+  display: inline-block;
   font-family: var(--font-sans);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
+  font-size: 0.68rem;
   font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(120, 120, 120, 0.85);
+}
+
+.page-footer-line a {
+  color: rgba(120, 120, 120, 0.85);
   transition: color var(--transition);
 }
 
-.site-footer .footer-social a:hover {
-  color: var(--white);
+.page-footer-line a:hover {
+  color: #111;
 }
 
-.site-footer p {
-  font-size: 0.8rem;
-  color: var(--gray-mid);
+/* For pages with dark/image backgrounds (about, contact, photography) */
+.dark-bg .page-footer-line span,
+.dark-bg .page-footer-line a {
+  color: rgba(255,255,255,0.65);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+}
+
+.dark-bg .page-footer-line a:hover {
+  color: var(--white);
 }
 
 /* --- Hamburger button (shared) --- */
@@ -113,7 +111,7 @@ h1, h2, h3, h4, h5, h6 {
   position: fixed;
   top: 20px;
   left: 20px;
-  z-index: 1100;
+  z-index: 1300;
   width: 44px;
   height: 44px;
   display: flex;
@@ -172,19 +170,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-overlay.open {
   transform: translateX(0);
-}
-
-.nav-close {
-  position: absolute;
-  top: 20px;
-  right: 28px;
-  font-size: 2rem;
-  color: var(--gray-mid);
-  transition: color var(--transition);
-}
-
-.nav-close:hover {
-  color: var(--white);
 }
 
 .nav-links {

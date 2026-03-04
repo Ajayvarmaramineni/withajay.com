@@ -351,44 +351,9 @@ body {
     }
 
     /* Footer */
-    footer {
-      background: rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      color: #fff;
-      padding: 7px 50px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
-    footer .footer-logo {
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-    footer .social-icons {
-      display: flex;
-      gap: 20px;
-      flex: 0 0 auto;
-      justify-content: center;
-    }
-    footer .social-icons img {
-      width: 28px;
-      filter: brightness(0) invert(1);
-      transition: transform 0.4s ease, filter 0.3s ease;
-    }
-    footer .social-icons img:hover {
-      transform: scale(1.2);
-      filter: brightness(1.5);
-    }
-    footer p {
-      font-size: 0.9em;
-      color: #e0e0e0;
-    }
   </style>
 </head>
-<body>
+<body class="dark-bg">
 
   <!-- Hamburger -->
   <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
@@ -397,12 +362,10 @@ body {
 
   <!-- Nav overlay -->
   <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
-    <button class="nav-close" id="navClose" aria-label="Close navigation">&times;</button>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="photography.html">Photography</a></li>
       <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="photography.html">Photography</a></li>
       <li><a href="blog.html">Blog</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
@@ -483,15 +446,9 @@ body {
       </div>
     </section>
 
-    <footer class="site-footer">
-      <div class="footer-logo">AJAY RAMINENI</div>
-      <div class="footer-social">
-        <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener">IG</a>
-        <a href="https://x.com/withloveeajay" target="_blank" rel="noopener">X</a>
-        <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a>
-        <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a>
-      </div>
-      <p>© 2026 Ajay | Powered by Ajay Varma Ramineni</p>
+    <!-- Single-line overlay footer -->
+    <footer class="page-footer-line">
+      <span>Ajay Ramineni &nbsp;·&nbsp; <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener">IG</a> &nbsp;·&nbsp; <a href="https://x.com/withloveeajay" target="_blank" rel="noopener">X</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a> &nbsp;·&nbsp; <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a> &nbsp;·&nbsp; © 2026</span>
     </footer>
 
   <script src="js/navigation.js"></script>

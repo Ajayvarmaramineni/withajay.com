@@ -45,13 +45,27 @@
   filter: brightness(0.75);
 }
 
-/* Right panel — light side */
+/* Right panel — image side */
 .panel-right {
   background: var(--gray-light);
+  position: relative;
+  overflow: hidden;
 }
 
-.panel-right:hover {
-  background: #ebebeb;
+.panel-right .panel-bg {
+  position: absolute;
+  inset: 0;
+  background: url('../images/analytics-bg.jpeg') center / cover no-repeat;
+  filter: brightness(0.85);
+  transition: filter 0.4s ease;
+}
+
+.panel-right:hover .panel-bg {
+  filter: brightness(1);
+}
+
+.panel-right .panel-label {
+  color: rgba(255,255,255,0.85);
 }
 
 /* --- Panel labels --- */
@@ -70,119 +84,79 @@
   color: rgba(255,255,255,0.7);
 }
 
-.panel-right .panel-label {
-  color: rgba(17,17,17,0.55);
-}
-
-/* --- Center overlay text --- */
-.center-text {
-  position: absolute;
-  top: 50%;
+/* --- Home name logo — top center editorial style --- */
+.home-name-logo {
+  position: fixed;
+  top: 28px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 100;
+  transform: translateX(-50%);
+  z-index: 500;
   text-align: center;
   pointer-events: none;
   transition: opacity 0.4s ease;
 }
 
-.split-screen:hover .center-text {
+.home-name-logo a {
+  pointer-events: auto;
+  text-decoration: none;
+  display: block;
+}
+
+.home-name-logo .first {
+  font-family: var(--font-serif);
+  font-size: clamp(0.8rem, 1.5vw, 1.1rem);
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 1px 12px rgba(0,0,0,0.6);
+  display: block;
+  margin-left: 0.5em;
+}
+
+.home-name-logo .last {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3.5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--white);
+  text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+  display: block;
+}
+
+body.is-hovering .home-name-logo {
   opacity: 0;
 }
 
-/* Editorial name layout: AJAY smaller above RAMINENI */
-.name-first {
-  display: block;
-  font-family: var(--font-serif);
-  font-size: clamp(1.2rem, 2.5vw, 2.2rem);
-  font-weight: 400;
-  letter-spacing: 0.25em;
-  color: var(--white);
-  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-  white-space: nowrap;
-  margin-bottom: 2px;
-}
-
-.name-last {
-  display: block;
-  font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 5.5vw, 5rem);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--white);
-  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-  white-space: nowrap;
-}
-
-/* Keep legacy .name-text selector working */
-.name-text {
-  display: block;
-  font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 5.5vw, 5rem);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--white);
-  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-  white-space: nowrap;
-}
-
-.tagline {
-  display: block;
-  font-family: var(--font-sans);
-  font-size: clamp(0.75rem, 1.4vw, 1rem);
-  letter-spacing: 0.3em;
-  color: rgba(255,255,255,0.75);
-  margin-top: 10px;
-  text-transform: lowercase;
-}
-
-/* --- Homepage footer (bottom-left overlay) --- */
+/* --- Homepage footer — single centered line overlay --- */
 .home-footer {
   position: fixed;
-  bottom: 28px;
-  left: 32px;
+  bottom: 20px;
+  left: 0;
+  right: 0;
   z-index: 200;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 14px 18px;
-  background: rgba(0,0,0,0.45);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border-radius: 8px;
-  color: var(--white);
-  pointer-events: auto;
+  text-align: center;
+  pointer-events: none;
 }
 
-.home-footer__name {
-  font-family: var(--font-serif);
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  color: rgba(255,255,255,0.9);
-}
-
-.home-footer__social {
-  display: flex;
-  gap: 14px;
-}
-
-.home-footer__social a {
+.home-footer span {
+  display: inline-block;
   font-family: var(--font-sans);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   color: rgba(255,255,255,0.7);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  pointer-events: none;
+}
+
+.home-footer a {
+  color: rgba(255,255,255,0.7);
+  pointer-events: auto;
   transition: color var(--transition);
 }
 
-.home-footer__social a:hover {
+.home-footer a:hover {
   color: var(--white);
-}
-
-.home-footer__copy {
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
-  color: rgba(255,255,255,0.5);
 }
 
 /* --- Homepage hamburger override (white bg) --- */
