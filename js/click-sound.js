@@ -1,5 +1,5 @@
-/* click-sound.js — Global click sound handler using Web Audio API
-   Plays a subtle, professional click sound on all interactive elements.
+/* click-sound.js — Global click sound handler using an audio file
+   Plays sounds/click_left.mp3 on all interactive elements.
    Respects prefers-reduced-motion for users who opt out.
 */
 (function () {
@@ -9,42 +9,18 @@
   var mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (mediaQuery && mediaQuery.matches) return;
 
-  var AudioContext = window.AudioContext || window.webkitAudioContext;
-  if (!AudioContext) return;
-
-  var ctx = null;
-
-  function getContext() {
-    if (!ctx) {
-      ctx = new AudioContext();
-    }
-    return ctx;
-  }
+  // Preload the audio file
+  var clickAudio = new Audio('../sounds/click_left.mp3');
+  clickAudio.preload = 'auto';
+  clickAudio.volume = 0.5;
 
   function playClick() {
     try {
-      var ac = getContext();
-      if (ac.state === 'suspended') {
-        ac.resume();
-      }
-
-      var oscillator = ac.createOscillator();
-      var gainNode = ac.createGain();
-
-      oscillator.connect(gainNode);
-      gainNode.connect(ac.destination);
-
-      // Short tick-like click: high frequency, very brief
-      oscillator.type = 'sine';
-      oscillator.frequency.setValueAtTime(1200, ac.currentTime);
-      oscillator.frequency.exponentialRampToValueAtTime(600, ac.currentTime + 0.05);
-
-      gainNode.gain.setValueAtTime(0, ac.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.35, ac.currentTime + 0.005);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.12);
-
-      oscillator.start(ac.currentTime);
-      oscillator.stop(ac.currentTime + 0.15);
+      var sound = clickAudio.cloneNode();
+      sound.volume = 0.5;
+      sound.play().catch(function () {
+        // Silently fail — audio is non-critical
+      });
     } catch (e) {
       // Silently fail — audio is non-critical
     }
