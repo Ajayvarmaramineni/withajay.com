@@ -62,12 +62,6 @@
   filter: brightness(1);
 }
 
-.panel-right .panel-label {
-  color: rgba(255,255,255,0.75);
-  left: auto;
-  right: 48px;
-}
-
 /* --- Panel labels --- */
 .panel-label {
   position: absolute;
@@ -90,6 +84,12 @@
 
 .panel-left .panel-label {
   color: rgba(255,255,255,0.75);
+}
+
+.panel-right .panel-label {
+  color: rgba(255,255,255,0.75);
+  left: auto;
+  right: 48px;
 }
 
 /* --- Home name logo — Jimmy Nelson style --- */
