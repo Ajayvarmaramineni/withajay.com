@@ -1,0 +1,91 @@
+/* =========================================================
+   responsive.css — Mobile-first breakpoints
+   ========================================================= */
+
+/* --- 1200px — large screens --- */
+@media (max-width: 1200px) {
+  .name-text {
+    font-size: clamp(2rem, 5vw, 4rem);
+  }
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- 768px — tablet and below --- */
+@media (max-width: 768px) {
+  /* Split-screen stacks vertically on mobile */
+  .split-screen {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .panel {
+    flex: none;
+    height: 50vh;
+    min-height: 280px;
+    width: 100%;
+    padding: 24px;
+  }
+
+  .panel:hover {
+    flex: none;
+  }
+
+  .name-text {
+    font-size: clamp(1.6rem, 8vw, 2.6rem);
+    white-space: normal;
+    text-align: center;
+  }
+
+  .tagline {
+    font-size: 0.7rem;
+  }
+
+  /* Nav links smaller on mobile */
+  .nav-links a {
+    font-size: 1.8rem;
+  }
+
+  /* Page header */
+  .page-header {
+    padding: 0 16px;
+  }
+
+  /* Blog & portfolio sections */
+  .blog-section,
+  .portfolio-section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .posts-grid,
+  .cards-grid,
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Portfolio hero */
+  .portfolio-hero {
+    padding: 48px 20px 36px;
+  }
+}
+
+/* --- 480px — small phones --- */
+@media (max-width: 480px) {
+  .hamburger {
+    top: 12px;
+    left: 12px;
+  }
+
+  /* 45vh (slightly less than 50vh) leaves space for the stacked
+     center-text overlay without clipping on very short screens */
+  .panel {
+    height: 45vh;
+  }
+
+  .site-footer {
+    padding: 24px 20px;
+  }
+}

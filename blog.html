@@ -1,60 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog | With Love AJ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="blog.css">
+  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Bebas+Neue&family=Dancing+Script&family=Open+Sans&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/blog.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
-<body>
-  <!-- Toast Notification -->
-  <div id="toast">Comment posted successfully!</div>
+<body class="light-bg">
 
-  <div class="route-loader"></div>
-  <div class="transition-overlay"></div>
+  <!-- Hamburger -->
+  <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
+    <span class="line"></span><span class="line"></span><span class="line"></span>
+  </button>
+
+  <!-- Nav overlay -->
+  <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
+    <div class="nav-header-bar">
+      <span class="nav-menu-label">MENU</span>
+      <div class="nav-brand-block">
+        <a href="index.html">AJAY<br>RAMINENI</a>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="photography.html">Photography</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-social">
+      <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+      <a href="https://x.com/withloveeajay" target="_blank" rel="noopener" aria-label="X">X</a>
+      <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
+      <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+    </div>
+  </nav>
 
   <main id="main-content" data-transition-wrapper>
-    <!-- Header (black, fixed, white icons) -->
-    <header>
-      <div class="header-left">
-        <a href="index.html" style="text-decoration: none;">
-          <img src="images/logo.svg" alt="Ajay Ramineni Logo" class="logo-svg" />
-        </a>
-      </div>
-
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a class="active" href="blog.html">Blog</a></li>
-          <li><a href="photos.html">Photos</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="social-icons">
-        <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Ajay's Instagram Profile" />
-        </a>
-        <a href="https://x.com/withloveeajay?s=21" target="_blank" aria-label="X">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png" alt="Ajay's X Profile" />
-        </a>
-        <a href="https://www.linkedin.com/in/ajayramineni2808?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="Ajay's LinkedIn Profile" />
-        </a>
-        <a href="https://github.com/Ajayvarmaramineni" target="_blank" aria-label="GitHub">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="Ajay's GitHub Profile" />
-        </a>
-      </div>
-    </header>
     <!-- Page intro -->
-    <section class="archive-hero">
+    <section class="archive-hero blog-hero">
       <h1>Blog Posts</h1>
-      <p>Browse by theme: late-night reflections, heartfelt letters, and adventures on the road.</p>
+      <p>late-night reflections, heartfelt letters, and adventures on the road.</p>
     </section>
     <!-- ============ Nights  ============ -->
     <section class="archive-section" id="nights">
@@ -64,67 +57,67 @@
       <div class="posts-grid">
         <!-- 1 -->
         <article class="post-card">
-          <a class="post-thumb" href="blog1.html" aria-label="Read: The Night I Questioned Everything">
-            <img src="Blog/night.jpg" alt="Moody winter night on a porch" loading="lazy">
+          <a class="post-thumb" href="blog-post.html?post=blog/the-night-i-questioned-everything.md" aria-label="Read: The Night I Questioned Everything">
+            <img src="images/blog/night.jpg" alt="Moody winter night on a porch" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="blog1.html">The Night I Questioned Everything</a></h3>
+            <h3 class="post-title"><a href="blog-post.html?post=blog/the-night-i-questioned-everything.md">The Night I Questioned Everything</a></h3>
             <div class="post-meta">By Ajay • Jun 8, 2025 • 6 min read</div>
             <p class="post-excerpt">4 a.m. thoughts, a missing moon, and a semester full of code errors that somehow turned into clarity…</p>
-            <div class="post-actions"><a href="blog1.html">Read more »</a></div>
+            <div class="post-actions"><a href="blog-post.html?post=blog/the-night-i-questioned-everything.md">Read more »</a></div>
           </div>
         </article>
         <!-- 2 -->
         <article class="post-card">
-          <a class="post-thumb" href="blog2.html" aria-label="Read: The Night I Started Accepting">
-            <img src="Blog/blog2.jpg" alt="City lights with calm night sky" loading="lazy">
+          <a class="post-thumb" href="blog-post.html?post=blog/the-night-i-started-accepting.md" aria-label="Read: The Night I Started Accepting">
+            <img src="images/blog/blog2.jpg" alt="City lights with calm night sky" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="blog2.html">The Night I Started Accepting</a></h3>
+            <h3 class="post-title"><a href="blog-post.html?post=blog/the-night-i-started-accepting.md">The Night I Started Accepting</a></h3>
             <div class="post-meta">By Ajay • May 23, 2025 • 5 min read</div>
             <p class="post-excerpt">A quiet shift from fighting uncertainty to working with it—one breath, one line of code at a time.</p>
-            <div class="post-actions"><a href="blog2.html">Read more »</a></div>
+            <div class="post-actions"><a href="blog-post.html?post=blog/the-night-i-started-accepting.md">Read more »</a></div>
           </div>
         </article>
         <!-- 3 -->
         <article class="post-card">
-          <a class="post-thumb" href="blog3.html" aria-label="Read: The Night I Felt Lost">
-            <img src="Blog/blog3.jpg" alt="Soft city haze with distant lights" loading="lazy">
+          <a class="post-thumb" href="blog-post.html?post=blog/the-night-i-felt-lost.md" aria-label="Read: The Night I Felt Lost">
+            <img src="images/blog/blog3.jpg" alt="Soft city haze with distant lights" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="blog3.html">The Night I Felt Lost</a></h3>
+            <h3 class="post-title"><a href="blog-post.html?post=blog/the-night-i-felt-lost.md">The Night I Felt Lost</a></h3>
             <div class="post-meta">By Ajay • Apr 27, 2025 • 5 min read</div>
-            <p class="post-excerpt">The stars were out, but they offered no guidance. It was one of those nights where the world felt...
-            <div class="post-actions"><a href="blog3.html">Read more »</a></div>
+            <p class="post-excerpt">The stars were out, but they offered no guidance. It was one of those nights where the world felt too wide to navigate.</p>
+            <div class="post-actions"><a href="blog-post.html?post=blog/the-night-i-felt-lost.md">Read more »</a></div>
           </div>
         </article>
         <!-- 4 -->
         <article class="post-card">
-          <a class="post-thumb" href="blog4.html" aria-label="Read: The Night I Realised">
-            <img src="Blog/blog4.jpg" alt="Phone lit up against a dark window" loading="lazy">
+          <a class="post-thumb" href="blog-post.html?post=blog/the-night-i-realised.md" aria-label="Read: The Night I Realised">
+            <img src="images/blog/blog4.jpg" alt="Phone lit up against a dark window" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="blog4.html">The Night I Realised</a></h3>
+            <h3 class="post-title"><a href="blog-post.html?post=blog/the-night-i-realised.md">The Night I Realised</a></h3>
             <div class="post-meta">By Ajay • Apr 10, 2025 • 4 min read</div>
             <p class="post-excerpt">One late call, one familiar voice, and a reminder of why I’m here.</p>
-            <div class="post-actions"><a href="blog4.html">Read more »</a></div>
+            <div class="post-actions"><a href="blog-post.html?post=blog/the-night-i-realised.md">Read more »</a></div>
           </div>
         </article>
         <!-- 5 -->
         <article class="post-card">
-          <a class="post-thumb" href="blog5.html" aria-label="Read: The Night I Ran">
-            <img src="Blog/blog5.jpg" alt="Empty street under warm streetlights" loading="lazy">
+          <a class="post-thumb" href="blog-post.html?post=blog/the-night-i-ran.md" aria-label="Read: The Night I Ran">
+            <img src="images/blog/blog5.jpg" alt="Empty street under warm streetlights" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="blog5.html">The Night I Ran</a></h3>
+            <h3 class="post-title"><a href="blog-post.html?post=blog/the-night-i-ran.md">The Night I Ran</a></h3>
             <div class="post-meta">By Ajay • Mar 29, 2025 • 5 min read</div>
             <p class="post-excerpt">Learning to move slower so life doesn’t rush past me.</p>
-            <div class="post-actions"><a href="blog5.html">Read more »</a></div>
+            <div class="post-actions"><a href="blog-post.html?post=blog/the-night-i-ran.md">Read more »</a></div>
           </div>
         </article>
       </div>
@@ -136,72 +129,122 @@
     <section class="archive-section" id="dear-stranger">
       <div class="section-head">
         <h2 class="section-title">Dear Stranger</h2>
-        <div class="section-actions"><a href="dear-stranger.html">View all »</a></div>
+        <div class="section-actions"><a href="blog.html#dear-stranger">View all »</a></div>
       </div>
       <div class="posts-grid">
         <!-- 1 -->
         <article class="post-card">
-          <a class="post-thumb" href="dear-stranger-you-are-not-late.html" aria-label="Read: Dear Stranger, You Are Not Late">
-            <img src="Blog/stranger1.jpg" alt="Sunrise through a window frame" loading="lazy">
+          <a class="post-thumb" href="blog-post.html?post=blog/dear-stranger-you-are-not-late.md" aria-label="Read: Dear Stranger, You Are Not Late">
+            <img src="images/blog/stranger1.jpg" alt="Sunrise through a window frame" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="dear-stranger-you-are-not-late.html">Dear Stranger, You Are Not Late</a></h3>
+            <h3 class="post-title"><a href="blog-post.html?post=blog/dear-stranger-you-are-not-late.md">Dear Stranger, You Are Not Late</a></h3>
             <div class="post-meta">By Ajay • Jul 2, 2025 • 4 min read</div>
             <p class="post-excerpt">Wherever you are on the path, it’s right on time.</p>
-            <div class="post-actions"><a href="dear-stranger-you-are-not-late.html">Read more »</a></div>
+            <div class="post-actions"><a href="blog-post.html?post=blog/dear-stranger-you-are-not-late.md">Read more »</a></div>
           </div>
         </article>
         <!-- 2 -->
         <article class="post-card">
-          <a class="post-thumb" href="dear-stranger-please-be-softer.html" aria-label="Read: Dear Stranger, Please Be Softer">
-            <img src="Blog/stranger2.jpg" alt="Soft light on a notebook page" loading="lazy">
+          <a class="post-thumb" href="blog-post.html?post=blog/dear-stranger-please-be-softer.md" aria-label="Read: Dear Stranger, Please Be Softer">
+            <img src="images/blog/stranger2.jpg" alt="Soft light on a notebook page" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="dear-stranger-please-be-softer.html">Dear Stranger, Please Be Softer</a></h3>
+            <h3 class="post-title"><a href="blog-post.html?post=blog/dear-stranger-please-be-softer.md">Dear Stranger, Please Be Softer</a></h3>
             <div class="post-meta">By Ajay • Jun 18, 2025 • 3 min read</div>
             <p class="post-excerpt">You don’t have to earn your rest or your worth.</p>
-            <div class="post-actions"><a href="dear-stranger-please-be-softer.html">Read more »</a></div>
+            <div class="post-actions"><a href="blog-post.html?post=blog/dear-stranger-please-be-softer.md">Read more »</a></div>
           </div>
         </article>
         <!-- 3 -->
         <article class="post-card">
-          <a class="post-thumb" href="dear-stranger-keep-the-small-promises.html" aria-label="Read: Dear Stranger, Keep the Small Promises">
-            <img src="Blog/stranger3.jpg" alt="Tea cup and a folded note" loading="lazy">
+          <a class="post-thumb" href="blog-post.html?post=blog/dear-stranger-keep-the-small-promises.md" aria-label="Read: Dear Stranger, Keep the Small Promises">
+            <img src="images/blog/stranger3.jpg" alt="Tea cup and a folded note" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="dear-stranger-keep-the-small-promises.html">Dear Stranger, Keep the Small Promises</a></h3>
+            <h3 class="post-title"><a href="blog-post.html?post=blog/dear-stranger-keep-the-small-promises.md">Dear Stranger, Keep the Small Promises</a></h3>
             <div class="post-meta">By Ajay • Jun 1, 2025 • 4 min read</div>
             <p class="post-excerpt">The tiny agreements with yourself shape the biggest turns.</p>
-            <div class="post-actions"><a href="dear-stranger-keep-the-small-promises.html">Read more »</a></div>
+            <div class="post-actions"><a href="blog-post.html?post=blog/dear-stranger-keep-the-small-promises.md">Read more »</a></div>
           </div>
         </article>
         <!-- 4 -->
         <article class="post-card">
-          <a class="post-thumb" href="dear-stranger-its-okay-to-start-again.html" aria-label="Read: Dear Stranger, It’s Okay to Start Again">
-            <img src="Blog/stranger4.jpg" alt="Clean page with a pencil" loading="lazy">
+          <a class="post-thumb" href="blog-post.html?post=blog/dear-stranger-its-okay-to-start-again.md" aria-label="Read: Dear Stranger, It’s Okay to Start Again">
+            <img src="images/blog/stranger4.jpg" alt="Clean page with a pencil" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="dear-stranger-its-okay-to-start-again.html">Dear Stranger, It’s Okay to Start Again</a></h3>
+            <h3 class="post-title"><a href="blog-post.html?post=blog/dear-stranger-its-okay-to-start-again.md">Dear Stranger, It’s Okay to Start Again</a></h3>
             <div class="post-meta">By Ajay • May 20, 2025 • 4 min read</div>
             <p class="post-excerpt">You can put the story down and pick a kinder one up.</p>
-            <div class="post-actions"><a href="dear-stranger-its-okay-to-start-again.html">Read more »</a></div>
+            <div class="post-actions"><a href="blog-post.html?post=blog/dear-stranger-its-okay-to-start-again.md">Read more »</a></div>
           </div>
         </article>
         <!-- 5 -->
         <article class="post-card">
-          <a class="post-thumb" href="dear-stranger-you-are-allowed-to-be-proud.html" aria-label="Read: Dear Stranger, You’re Allowed to Be Proud">
-            <img src="Blog/stranger5.jpg" alt="Light falling across a desk and flowers" loading="lazy">
+          <a class="post-thumb" href="blog-post.html?post=blog/dear-stranger-you-are-allowed-to-be-proud.md" aria-label="Read: Dear Stranger, You’re Allowed to Be Proud">
+            <img src="images/blog/stranger5.jpg" alt="Light falling across a desk and flowers" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="dear-stranger-you-are-allowed-to-be-proud.html">Dear Stranger, You’re Allowed to Be Proud</a></h3>
+            <h3 class="post-title"><a href="blog-post.html?post=blog/dear-stranger-you-are-allowed-to-be-proud.md">Dear Stranger, You’re Allowed to Be Proud</a></h3>
             <div class="post-meta">By Ajay • May 5, 2025 • 3 min read</div>
             <p class="post-excerpt">Progress counts even when no one else sees it.</p>
-            <div class="post-actions"><a href="dear-stranger-you-are-allowed-to-be-proud.html">Read more »</a></div>
+            <div class="post-actions"><a href="blog-post.html?post=blog/dear-stranger-you-are-allowed-to-be-proud.md">Read more »</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="divide"></div>
+
+    <!-- ============ Design & Life (3) ============ -->
+    <section class="archive-section" id="design-life">
+      <div class="section-head">
+        <h2 class="section-title">Design &amp; Life</h2>
+      </div>
+      <div class="posts-grid">
+        <!-- 1 -->
+        <article class="post-card">
+          <a class="post-thumb" href="blog-post.html?post=blog/design-philosophy.md" aria-label="Read: Design Philosophy">
+            <img src="images/blog/blog.jpg" alt="Minimalist design composition" loading="lazy">
+            <span class="readmore-badge">Read more</span>
+          </a>
+          <div class="post-body">
+            <h3 class="post-title"><a href="blog-post.html?post=blog/design-philosophy.md">Design Philosophy</a></h3>
+            <div class="post-meta">By Ajay • Sep 3, 2025 • 5 min read</div>
+            <p class="post-excerpt">Good design is almost invisible. It took enormous effort to produce something that looks effortless.</p>
+            <div class="post-actions"><a href="blog-post.html?post=blog/design-philosophy.md">Read more »</a></div>
+          </div>
+        </article>
+        <!-- 2 -->
+        <article class="post-card">
+          <a class="post-thumb" href="blog-post.html?post=blog/digital-minimalism-journey.md" aria-label="Read: Digital Minimalism Journey">
+            <img src="images/blog/blog.jpg" alt="Phone on a quiet desk" loading="lazy">
+            <span class="readmore-badge">Read more</span>
+          </a>
+          <div class="post-body">
+            <h3 class="post-title"><a href="blog-post.html?post=blog/digital-minimalism-journey.md">Digital Minimalism Journey</a></h3>
+            <div class="post-meta">By Ajay • Aug 28, 2025 • 6 min read</div>
+            <p class="post-excerpt">Your attention is the product. Using these tools requires intentionality.</p>
+            <div class="post-actions"><a href="blog-post.html?post=blog/digital-minimalism-journey.md">Read more »</a></div>
+          </div>
+        </article>
+        <!-- 3 -->
+        <article class="post-card">
+          <a class="post-thumb" href="blog-post.html?post=blog/understanding-minimalism.md" aria-label="Read: Understanding Minimalism">
+            <img src="images/blog/blog.jpg" alt="Empty, clean space" loading="lazy">
+            <span class="readmore-badge">Read more</span>
+          </a>
+          <div class="post-body">
+            <h3 class="post-title"><a href="blog-post.html?post=blog/understanding-minimalism.md">Understanding Minimalism</a></h3>
+            <div class="post-meta">By Ajay • Aug 12, 2025 • 5 min read</div>
+            <p class="post-excerpt">Minimalism isn’t about owning fewer things. It’s about owning things that earn their place.</p>
+            <div class="post-actions"><a href="blog-post.html?post=blog/understanding-minimalism.md">Read more »</a></div>
           </div>
         </article>
       </div>
@@ -213,72 +256,72 @@
     <section class="archive-section" id="travel-diaries">
       <div class="section-head">
         <h2 class="section-title">Travel Diaries</h2>
-        <div class="section-actions"><a href="travel-diaries.html">View all »</a></div>
+        <div class="section-actions"><a href="blog.html#travel-diaries">View all »</a></div>
       </div>
       <div class="posts-grid">
         <!-- 1 -->
         <article class="post-card">
-          <a class="post-thumb" href="travel-dairies-niagara-mist.html" aria-label="Read: Niagara in the Mist">
-            <img src="Blog/travel1.jpg" alt="Niagara Falls misty viewpoint" loading="lazy">
+          <a class="post-thumb" href="blog-post.html?post=blog/niagara-in-the-mist.md" aria-label="Read: Niagara in the Mist">
+            <img src="images/blog/travel1.jpg" alt="Niagara Falls misty viewpoint" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="travel-dairies-niagara-mist.html">Niagara in the Mist</a></h3>
+            <h3 class="post-title"><a href="blog-post.html?post=blog/niagara-in-the-mist.md">Niagara in the Mist</a></h3>
             <div class="post-meta">By Ajay • Jul 7, 2025 • 4 min read</div>
             <p class="post-excerpt">Raincoats, roaring water, and the grin you can’t wipe off.</p>
-            <div class="post-actions"><a href="travel-dairies-niagara-mist.html">Read more »</a></div>
+            <div class="post-actions"><a href="blog-post.html?post=blog/niagara-in-the-mist.md">Read more »</a></div>
           </div>
         </article>
         <!-- 2 -->
         <article class="post-card">
-          <a class="post-thumb" href="travel-diaries-boston-weekend.html" aria-label="Read: A Quiet Weekend in Boston">
-            <img src="Blog/travel2.jpg" alt="Brick streets and brownstones in Boston" loading="lazy">
+          <a class="post-thumb" href="blog-post.html?post=blog/travel-diaries-boston-weekend.md" aria-label="Read: A Quiet Weekend in Boston">
+            <img src="images/blog/travel2.jpg" alt="Brick streets and brownstones in Boston" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="travel-diaries-boston-weekend.html">A Quiet Weekend in Boston</a></h3>
+            <h3 class="post-title"><a href="blog-post.html?post=blog/travel-diaries-boston-weekend.md">A Quiet Weekend in Boston</a></h3>
             <div class="post-meta">By Ajay • Jun 22, 2025 • 4 min read</div>
             <p class="post-excerpt">Cobblestones, coffee, and a museum you shouldn’t skip.</p>
-            <div class="post-actions"><a href="travel-diaries-boston-weekend.html">Read more »</a></div>
+            <div class="post-actions"><a href="blog-post.html?post=blog/travel-diaries-boston-weekend.md">Read more »</a></div>
           </div>
         </article>
         <!-- 3 -->
         <article class="post-card">
-          <a class="post-thumb" href="travel-diaries-finger-lakes.html" aria-label="Read: Still Water at Finger Lakes">
-            <img src="Blog/travel3.jpg" alt="Still lake with soft hills in the distance" loading="lazy">
+          <a class="post-thumb" href="blog-post.html?post=blog/travel-diaries-finger-lakes.md" aria-label="Read: Still Water at Finger Lakes">
+            <img src="images/blog/travel3.jpg" alt="Still lake with soft hills in the distance" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="travel-diaries-finger-lakes.html">Still Water at Finger Lakes</a></h3>
+            <h3 class="post-title"><a href="blog-post.html?post=blog/travel-diaries-finger-lakes.md">Still Water at Finger Lakes</a></h3>
             <div class="post-meta">By Ajay • Jun 9, 2025 • 3 min read</div>
             <p class="post-excerpt">Long walks, short hikes, and the sound a camera shutter makes when you’re content.</p>
-            <div class="post-actions"><a href="travel-diaries-finger-lakes.html">Read more »</a></div>
+            <div class="post-actions"><a href="blog-post.html?post=blog/travel-diaries-finger-lakes.md">Read more »</a></div>
           </div>
         </article>
         <!-- 4 -->
         <article class="post-card">
-          <a class="post-thumb" href="travel-diaries-chicago-lights.html" aria-label="Read: Chicago After the Rain">
-            <img src="Blog/travel4.jpg" alt="City lights reflecting on wet streets" loading="lazy">
+          <a class="post-thumb" href="blog-post.html?post=blog/travel-diaries-chicago-lights.md" aria-label="Read: Chicago After the Rain">
+            <img src="images/blog/travel4.jpg" alt="City lights reflecting on wet streets" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="travel-diaries-chicago-lights.html">Chicago After the Rain</a></h3>
+            <h3 class="post-title"><a href="blog-post.html?post=blog/travel-diaries-chicago-lights.md">Chicago After the Rain</a></h3>
             <div class="post-meta">By Ajay • May 28, 2025 • 4 min read</div>
             <p class="post-excerpt">Skyline moods and the pizza slice that stole the show.</p>
-            <div class="post-actions"><a href="travel-diaries-chicago-lights.html">Read more »</a></div>
+            <div class="post-actions"><a href="blog-post.html?post=blog/travel-diaries-chicago-lights.md">Read more »</a></div>
           </div>
         </article>
         <!-- 5 -->
         <article class="post-card">
-          <a class="post-thumb" href="travel-diaries-amtrak-window.html" aria-label="Read: Notes From an Amtrak Window">
-            <img src="Blog/travel5.jpg" alt="Countryside view from a train window" loading="lazy">
+          <a class="post-thumb" href="blog-post.html?post=blog/travel-diaries-amtrak-window.md" aria-label="Read: Notes From an Amtrak Window">
+            <img src="images/blog/travel5.jpg" alt="Countryside view from a train window" loading="lazy">
             <span class="readmore-badge">Read more</span>
           </a>
           <div class="post-body">
-            <h3 class="post-title"><a href="travel-diaries-amtrak-window.html">Notes From an Amtrak Window</a></h3>
+            <h3 class="post-title"><a href="blog-post.html?post=blog/travel-diaries-amtrak-window.md">Notes From an Amtrak Window</a></h3>
             <div class="post-meta">By Ajay • May 14, 2025 • 3 min read</div>
             <p class="post-excerpt">A moving frame and the thoughts that follow the tracks.</p>
-            <div class="post-actions"><a href="travel-diaries-amtrak-window.html">Read more »</a></div>
+            <div class="post-actions"><a href="blog-post.html?post=blog/travel-diaries-amtrak-window.md">Read more »</a></div>
           </div>
         </article>
       </div>
@@ -286,43 +329,22 @@
 
     <div class="section-spacer"></div>
 
-    <!-- Footer -->
-    <footer>
-    <p>© 2025 Ajay | Powered by Ajay Varma Ramineni</p>
+    <!-- Single-line overlay footer -->
+    <footer class="page-footer-line">
+      <span>Ajay Ramineni &nbsp;·&nbsp; <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener">IG</a> &nbsp;·&nbsp; <a href="https://x.com/withloveeajay" target="_blank" rel="noopener">X</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a> &nbsp;·&nbsp; <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a> &nbsp;·&nbsp; © 2026</span>
     </footer>
   </main>
 
-  <!-- Header shrink + reveal -->
-  <script>
-    // Reveal-on-scroll for any .reveal sections (optional)
-    function revealOnScroll() {
-      const els = document.querySelectorAll('.reveal');
-      const wh = window.innerHeight;
-      els.forEach(el => {
-        const top = el.getBoundingClientRect().top;
-        if (top < wh - 150) el.classList.add('visible');
-      });
-    }
+  <script src="js/navigation.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/click-sound.js"></script>
 
-    // Sticky header shrink
-    (function () {
-      const header = document.querySelector('header');
-      function updateHeader() {
-        if (window.scrollY > 10) header.classList.add('shrink');
-        else header.classList.remove('shrink');
-      }
-      window.addEventListener('scroll', updateHeader, { passive: true });
-      window.addEventListener('load', () => { updateHeader(); revealOnScroll(); });
-      window.addEventListener('scroll', revealOnScroll, { passive: true });
-    })();
-
-    // Optional: font-ready fade-in safeguard
-    document.addEventListener('DOMContentLoaded', function () {
-      let shown = false;
-      function show() { if (!shown) { shown = true; document.body.style.opacity = '1'; } }
-      if (document.fonts && document.fonts.ready) { document.fonts.ready.then(show); }
-      setTimeout(show, 1000);
-    });
-  </script>
+  <!-- Fixed name logo — consistent across all pages -->
+  <div class="page-name-logo" id="pageNameLogo">
+    <a href="index.html">
+      <span class="first">AJAY</span>
+      <span class="last">RAMINENI</span>
+    </a>
+  </div>
 </body>
 </html>

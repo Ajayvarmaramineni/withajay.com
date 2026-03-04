@@ -1,0 +1,312 @@
+/* =========================================================
+   global.css — Reset, base styles, variables, utilities
+   ========================================================= */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Bebas+Neue&family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
+
+/* --- CSS Variables --- */
+:root {
+  --black: #111;
+  --white: #fff;
+  --gray-light: #f5f5f5;
+  --gray-mid: #888;
+  --accent: #111;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Open Sans', system-ui, sans-serif;
+  --transition: 0.3s ease;
+}
+
+/* --- Reset --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--black);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* --- Inner-page single-line overlay footer --- */
+.page-footer-line {
+  position: relative;
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  background: transparent;
+  z-index: 10;
+}
+
+.page-footer-line span {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(120, 120, 120, 0.85);
+}
+
+.page-footer-line a {
+  color: rgba(120, 120, 120, 0.85);
+  transition: color var(--transition);
+}
+
+.page-footer-line a:hover {
+  color: #111;
+}
+
+/* For pages with dark/image backgrounds */
+.dark-bg .page-footer-line span,
+.dark-bg .page-footer-line a {
+  color: rgba(255,255,255,0.65);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+}
+
+dark-bg .page-footer-line a:hover {
+  color: var(--white);
+}
+
+/* --- Hamburger button (shared) --- */
+.hamburger {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  left: auto;
+  z-index: 1500;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  background: none;
+  border: none;
+  border-radius: 0;
+}
+
+.hamburger:hover {
+  background: none;
+}
+
+/* Hamburger 3 lines */
+.hamburger .line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--black);
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform 350ms ease-in-out, opacity 350ms ease-in-out;
+}
+
+.hamburger.is-active .line:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.is-active .line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger.is-active .line:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Dark-bg pages and homepage: white hamburger lines */
+body.dark-bg .hamburger .line,
+body.home-page .hamburger .line {
+  background: var(--white);
+}
+
+/* --- Nav overlay (shared) --- */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 11, 15, 0.98);
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0;
+  transform: translateY(-100%);
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+}
+
+.nav-overlay.open {
+  transform: translateY(0);
+}
+
+.nav-menu-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  padding: 36px 0 18px 48px;
+  flex-shrink: 0;
+}
+
+/* Nav links list */
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 0 0 0 48px;
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.nav-links a {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 400;
+  color: var(--white);
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  transition: opacity 0.25s ease;
+}
+
+.nav-links a:hover {
+  opacity: 0.4;
+  color: var(--white);
+}
+
+/* Social links at bottom */
+.nav-social {
+  padding: 36px 0 44px 48px;
+  display: flex;
+  gap: 28px;
+  flex-shrink: 0;
+}
+
+.nav-social a {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.45);
+  transition: color 0.3s ease;
+}
+
+.nav-social a:hover {
+  color: var(--white);
+}
+
+/* --- Fixed name logo — all inner pages --- */
+.page-name-logo {
+  position: fixed;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1400;
+  text-align: center;
+  pointer-events: none;
+  transition: opacity 0.7s ease;
+}
+
+.page-name-logo a {
+  pointer-events: auto;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.page-name-logo .first {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--black);
+  display: block;
+  text-transform: uppercase;
+  margin-left: 0;
+  line-height: 1.05;
+}
+
+.page-name-logo .last {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--black);
+  display: block;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+/* Fade on scroll past 80px */
+.page-name-logo.scrolled-away {
+  opacity: 0;
+}
+
+/* Dark-bg pages: white name logo */
+body.dark-bg .page-name-logo .first,
+body.dark-bg .page-name-logo .last {
+  color: var(--white);
+  text-shadow: 0 1px 10px rgba(0,0,0,0.5);
+}
+
+/* --- Utility classes --- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" media="print" onload="this.media='all'" />
-<noscript>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" />
-</noscript>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About | With Love AJ</title>
+  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Bebas+Neue&family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/animations.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     /* Google Fonts */
@@ -75,80 +71,6 @@ body {
     /* Shared element transitions */
     .shared-element {
       view-transition-name: shared-element;
-    }
-
-    /* 🌸 Header */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 3px 50px;
-      position: sticky;
-      top: 0;
-      background: rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-    }
-    .logo-svg {
-      height: 90px;
-      width: auto;
-      transition: all 0.3s ease-in-out;
-      cursor: pointer;
-    }
-
-    @keyframes fadeInSlide {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    @media (prefers-color-scheme: dark) {
-      .header-left img {
-        filter: brightness(1.2) contrast(1.1);
-      }
-    }
-
-    nav {
-      flex: 1;
-      text-align: right;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    nav ul {
-      display: flex;
-      gap: 20px;
-      list-style: none;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      color: #f0f0f0;
-      font-weight: bold;
-      font-size: 1.1em;
-      transition: color 0.3s ease, transform 0.4s ease;
-    }
-
-    nav ul li a:hover {
-      color: #ff6f61;
-      transform: scale(1.2);
-    }
-    .social-icons {
-      display: flex;
-      gap: 15px;
-      flex: 0 0 auto;
-    }
-
-    .social-icons img {
-      width: 30px;
-      filter: brightness(0) invert(1);
-      transition: transform 0.4s ease, filter 0.3s ease;
-    }
-
-    .social-icons img:hover {
-      transform: scale(1.2);
-      filter: brightness(1.5);
     }
 
     /* 🌸 Hero Background */
@@ -430,78 +352,40 @@ body {
     }
 
     /* Footer */
-    footer {
-      background: rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      color: #fff;
-      padding: 7px 50px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
-    footer .footer-logo {
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-    footer .social-icons {
-      display: flex;
-      gap: 20px;
-      flex: 0 0 auto;
-      justify-content: center;
-    }
-    footer .social-icons img {
-      width: 28px;
-      filter: brightness(0) invert(1);
-      transition: transform 0.4s ease, filter 0.3s ease;
-    }
-    footer .social-icons img:hover {
-      transform: scale(1.2);
-      filter: brightness(1.5);
-    }
-    footer p {
-      font-size: 0.9em;
-      color: #e0e0e0;
-    }
   </style>
 </head>
-<body>
-  <div class="route-loader"></div>
-  <div class="transition-overlay"></div>
+<body class="dark-bg">
+
+  <!-- Hamburger -->
+  <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
+    <span class="line"></span><span class="line"></span><span class="line"></span>
+  </button>
+
+  <!-- Nav overlay -->
+  <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
+    <div class="nav-header-bar">
+      <span class="nav-menu-label">MENU</span>
+      <div class="nav-brand-block">
+        <a href="index.html">AJAY<br>RAMINENI</a>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="photography.html">Photography</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-social">
+      <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+      <a href="https://x.com/withloveeajay" target="_blank" rel="noopener" aria-label="X">X</a>
+      <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
+      <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+    </div>
+  </nav>
+
   <main id="main-content" data-transition-wrapper>
-    <header>
-      <div class="header-left">
-        <a href="index.html" style="text-decoration: none;">
-          <img src="images/logo.svg" alt="Ajay Ramineni Logo" class="logo-svg" />
-        </a>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="photos.html">Photos</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="social-icons flex justify-center gap-6">
-        <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Ajay's Instagram Profile" class="icon hover:scale-110 transition">
-        </a>
-        <a href="https://x.com/withloveeajay?s=21" target="_blank" aria-label="X">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png" alt="Ajay's X Profile" class="icon hover:scale-110 transition">
-        </a>
-        <a href="https://www.linkedin.com/in/ajayramineni2808?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="Ajay's LinkedIn Profile" class="icon hover:scale-110 transition">
-        </a>
-        <a href="https://github.com/Ajayvarmaramineni" target="_blank" aria-label="GitHub">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="Ajay's GitHub Profile" class="icon hover:scale-110 transition">
-        </a>
-      </div>
-    </header>
 
     <section id="home">
       <div class="hero-background"></div>
@@ -565,25 +449,14 @@ body {
       </div>
     </section>
 
-    <footer>
-      <div class="social-icons flex justify-center gap-6">
-        <a href="https://www.instagram.com/ajayvarmaramineni?igsh=MTN2Nmw4bWJjcmYxNQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Ajay's Instagram Profile" class="icon hover:scale-110 transition">
-        </a>
-        <a href="https://x.com/withloveeajay?s=21" target="_blank" aria-label="X">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png" alt="Ajay's X Profile" class="icon hover:scale-110 transition">
-        </a>
-        <a href="https://www.linkedin.com/in/ajayramineni2808?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="Ajay's LinkedIn Profile" class="icon hover:scale-110 transition">
-        </a>
-        <a href="https://github.com/Ajayvarmaramineni" target="_blank" aria-label="GitHub">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="Ajay's GitHub Profile" class="icon hover:scale-110 transition">
-        </a>
-      </div>
-      <p>© 2025 Ajay | Powered by Ajay Varma Ramineni</p>
+    <!-- Single-line overlay footer -->
+    <footer class="page-footer-line">
+      <span>Ajay Ramineni &nbsp;·&nbsp; <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener">IG</a> &nbsp;·&nbsp; <a href="https://x.com/withloveeajay" target="_blank" rel="noopener">X</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a> &nbsp;·&nbsp; <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a> &nbsp;·&nbsp; © 2026</span>
     </footer>
-  </main>
 
+  <script src="js/navigation.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/click-sound.js"></script>
   <script>
     // Scroll reveal animation for all sections
     function revealOnScroll() {
@@ -599,31 +472,18 @@ body {
       });
     }
 
-    // Add event listeners for scroll and initial load
     document.addEventListener('DOMContentLoaded', () => {
       window.addEventListener('scroll', revealOnScroll);
-      window.addEventListener('load', revealOnScroll);
       revealOnScroll();
     });
-    
-    document.addEventListener('DOMContentLoaded', function() {
-      let pageShown = false;
-      
-      function showPage() {
-          if (!pageShown) {
-              pageShown = true;
-              document.body.style.opacity = '1';
-          }
-      }
-      
-      // Try document.fonts.ready first
-      if (document.fonts && document.fonts.ready) {
-          document.fonts.ready.then(showPage);
-      }
-      
-      // Always set a maximum timeout as backup
-      setTimeout(showPage, 1000);
-    });
   </script>
+
+  <!-- Fixed name logo — consistent across all pages -->
+  <div class="page-name-logo" id="pageNameLogo">
+    <a href="index.html">
+      <span class="first">AJAY</span>
+      <span class="last">RAMINENI</span>
+    </a>
+  </div>
 </body>
 </html>

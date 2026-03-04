@@ -1,0 +1,178 @@
+/* =========================================================
+   home.css — Split-screen homepage styles
+   ========================================================= */
+
+/* --- Split screen container --- */
+.split-screen {
+  position: relative;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* --- Panels --- */
+.panel {
+  flex: 1;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  transition: flex 0.5s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.panel:hover {
+  flex: 1.08;
+}
+
+/* Left panel — dark image side */
+.panel-left {
+  background: var(--black);
+}
+
+.panel-left .panel-bg {
+  position: absolute;
+  inset: 0;
+  background: url('../images/hero.jpg') center / cover no-repeat;
+  filter: brightness(0.55);
+  transition: filter 0.4s ease;
+}
+
+.panel-left:hover .panel-bg {
+  filter: brightness(0.75);
+}
+
+/* Right panel — image side */
+.panel-right {
+  background: var(--gray-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.panel-right .panel-bg {
+  position: absolute;
+  inset: 0;
+  background: url('../images/analytics-bg.jpeg') center / cover no-repeat;
+  filter: brightness(0.85);
+  transition: filter 0.4s ease;
+}
+
+.panel-right:hover .panel-bg {
+  filter: brightness(1);
+}
+
+/* --- Panel labels --- */
+.panel-label {
+  position: absolute;
+  bottom: 48px;
+  left: 48px;
+  z-index: 2;
+  font-family: var(--font-sans);
+  font-size: clamp(0.6rem, 0.9vw, 0.78rem);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.panel:hover .panel-label {
+  color: rgba(255,255,255,1);
+  opacity: 1;
+}
+
+.panel-left .panel-label {
+  color: rgba(255,255,255,0.75);
+}
+
+.panel-right .panel-label {
+  color: rgba(255,255,255,0.75);
+  left: auto;
+  right: 48px;
+}
+
+/* --- Home name logo — Jimmy Nelson style --- */
+.home-name-logo {
+  position: fixed;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1400;
+  text-align: center;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.7s ease;
+}
+
+.home-name-logo a {
+  pointer-events: auto;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.home-name-logo .first {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+  display: block;
+  text-transform: uppercase;
+  margin-left: 0;
+  line-height: 1.05;
+}
+
+.home-name-logo .last {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+  display: block;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+body.is-hovering .home-name-logo {
+  opacity: 0;
+}
+
+/* --- Homepage footer — single centered line overlay --- */
+.home-footer {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  text-align: center;
+  pointer-events: none;
+}
+
+.home-footer span {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.7);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  pointer-events: none;
+}
+
+.home-footer a {
+  color: rgba(255,255,255,0.7);
+  pointer-events: auto;
+  transition: color var(--transition);
+}
+
+.home-footer a:hover {
+  color: var(--white);
+}
+
+/* --- Homepage hamburger override: white lines over dark images --- */
+body.home-page .hamburger .line {
+  background: var(--white);
+}
