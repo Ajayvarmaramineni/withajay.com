@@ -14,5 +14,17 @@
       document.fonts.ready.then(showPage);
     }
     setTimeout(showPage, 800);
+
+    // Fade name logo on scroll (inner pages)
+    var pnl = document.getElementById('pageNameLogo');
+    if (pnl) {
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 80) {
+          pnl.classList.add('scrolled-away');
+        } else {
+          pnl.classList.remove('scrolled-away');
+        }
+      });
+    }
   });
 })();
