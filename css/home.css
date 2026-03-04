@@ -117,6 +117,13 @@
 }
 
 /* --- Home name logo — Jimmy Nelson style --- */
+@keyframes name-fade-pulse {
+  0%   { opacity: 1; }
+  45%  { opacity: 0; }
+  55%  { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 .home-name-logo {
   position: fixed;
   top: 22px;
@@ -124,15 +131,19 @@
   transform: translateX(-50%);
   z-index: 1400;
   text-align: center;
-  pointer-events: none;
+  pointer-events: auto;
   opacity: 1;
-  transition: opacity 0.7s ease;
+  transition: opacity 0.8s ease;
 }
 
 .home-name-logo a {
   pointer-events: auto;
   text-decoration: none;
   display: inline-block;
+}
+
+.home-name-logo:hover {
+  animation: name-fade-pulse 1.8s ease-in-out infinite;
 }
 
 .home-name-logo .first {
@@ -158,10 +169,6 @@
   display: block;
   text-transform: uppercase;
   line-height: 1.05;
-}
-
-body.is-hovering .home-name-logo {
-  opacity: 0;
 }
 
 /* --- Homepage footer — single centered line overlay --- */
