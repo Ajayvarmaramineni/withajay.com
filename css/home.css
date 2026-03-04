@@ -112,26 +112,28 @@
 }
 
 .home-name-logo .first {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(0.7rem, 1.3vw, 1rem);
-  font-weight: 400;
-  letter-spacing: 0.5em;
-  color: rgba(255,255,255,0.9);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  color: #fff;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.45);
   display: block;
   text-transform: uppercase;
-  margin-left: 3px;
-  line-height: 1.4;
+  margin-left: 0;
+  line-height: 1;
 }
 
 .home-name-logo .last {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.2rem, 5vw, 4rem);
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.8rem, 3.8vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: 0;
   color: #fff;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.45);
   display: block;
   text-transform: uppercase;
-  line-height: 1.1;
+  line-height: 1;
 }
 
 body.is-hovering .home-name-logo {
