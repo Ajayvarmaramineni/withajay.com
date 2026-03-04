@@ -62,7 +62,31 @@
   filter: brightness(1);
 }
 
-/* --- Panel labels --- */
+/* --- Panel big title — PHOTOS / PORTFOLIO --- */
+.panel-title {
+  position: absolute;
+  bottom: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.45);
+  white-space: nowrap;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.panel:hover .panel-title {
+  opacity: 0.9;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+/* --- Panel small labels — PHOTOGRAPHY & STORYTELLING / ANALYTICS & STRATEGY --- */
 .panel-label {
   position: absolute;
   bottom: 48px;
