@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Page Not Found | With Love AJ</title>
+  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0a0a0a;
+      color: #f0ece4;
+      font-family: 'Open Sans', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 2rem;
+    }
+    .error-code {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(6rem, 20vw, 12rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: #f0ece4;
+      opacity: 0.15;
+    }
+    .error-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 700;
+      margin-top: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .error-message {
+      font-size: 1rem;
+      color: #a8a8a8;
+      max-width: 400px;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+    .back-home {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      border: 1px solid #f0ece4;
+      color: #f0ece4;
+      text-decoration: none;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .back-home:hover {
+      background: #f0ece4;
+      color: #0a0a0a;
+    }
+    .tagline {
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      color: #555;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="error-code" aria-hidden="true">404</div>
+  <h1 class="error-title">Page Not Found</h1>
+  <p class="error-message">The page you're looking for doesn't exist or may have been moved.</p>
+  <a href="/" class="back-home">Back to Home</a>
+  <p class="tagline">with love, aj</p>
+</body>
+</html>
