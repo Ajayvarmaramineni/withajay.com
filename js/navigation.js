@@ -29,6 +29,10 @@
     }
   });
 
+  // Close button inside nav overlay
+  var navClose = document.getElementById('navClose');
+  if (navClose) navClose.addEventListener('click', closeNav);
+
   // Close on nav link click
   navOverlay.querySelectorAll('.nav-links a').forEach(function (link) {
     link.addEventListener('click', closeNav);
