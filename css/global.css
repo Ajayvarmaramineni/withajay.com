@@ -100,7 +100,7 @@ h1, h2, h3, h4, h5, h6 {
   text-shadow: 0 1px 6px rgba(0,0,0,0.5);
 }
 
-dark-bg .page-footer-line a:hover {
+.dark-bg .page-footer-line a:hover {
   color: var(--white);
 }
 
@@ -132,7 +132,7 @@ dark-bg .page-footer-line a:hover {
 .hamburger .line {
   display: block;
   width: 22px;
-  height: 2px;
+  height: 4px;
   background: var(--black);
   border-radius: 2px;
   transform-origin: center;
@@ -140,7 +140,7 @@ dark-bg .page-footer-line a:hover {
 }
 
 .hamburger.is-active .line:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
+  transform: translateY(13px) rotate(45deg);
 }
 
 .hamburger.is-active .line:nth-child(2) {
@@ -149,9 +149,11 @@ dark-bg .page-footer-line a:hover {
 }
 
 .hamburger.is-active .line:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
+  transform: translateY(-13px) rotate(-45deg);
 }
-
+@media (prefers-reduced-motion: reduce) {  /* ← here */
+  .hamburger .line { transition: none; }
+}
 /* Dark-bg pages and homepage: white hamburger lines */
 body.dark-bg .hamburger .line,
 body.home-page .hamburger .line {
