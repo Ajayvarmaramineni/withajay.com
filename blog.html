@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ajay Ramineni's blog — late-night reflections, heartfelt letters, and adventures on the road.">
+  <meta name="description" content="Ajay Ramineni's blog — late-night reflections, heartfelt letters, and adventures on the road.">  
   <meta property="og:title" content="Blog | Ajay Ramineni">
   <meta property="og:description" content="Late-night reflections, heartfelt letters, and adventures on the road.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://withajay.com/blog.html">
-  <meta property="og:image" content="https://withajay.com/images/blog/night.jpg">
+  <meta property="og:image" content="https://withajay.com/images/blog/bloghero.jpeg">
   <link rel="canonical" href="https://withajay.com/blog.html">
   <title>Blog | With Love AJ</title>
   <link rel="icon" href="images/logo.svg" type="image/svg+xml">
@@ -48,26 +48,75 @@
       pointer-events: none; z-index: 999; opacity: 0.4;
     }
 
-    /* ── HERO ── */
-    .archive-hero {
-      padding: clamp(5rem, 12vw, 9rem) clamp(1.5rem, 6vw, 5rem) clamp(3rem, 5vw, 4.5rem);
-      animation: fadeSlideUp 1s 0.2s ease both;
+    /* ── FIX: white hamburger lines + white name logo on dark blog page ── */
+    body .hamburger .line {
+      background: var(--white);
     }
+    body .page-name-logo .first,
+    body .page-name-logo .last {
+      color: var(--white);
+      text-shadow: 0 1px 10px rgba(0,0,0,0.5);
+    }
+
+    /* ── HERO IMAGE ── */
+    .blog-hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 500px;
+      background: url('images/blog/bloghero.jpeg') center center / cover no-repeat;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    /* dark gradient overlay so text is readable */
+    .blog-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.25) 0%,
+        rgba(0,0,0,0.0) 35%,
+        rgba(0,0,0,0.65) 100%
+      );
+      z-index: 0;
+    }
+
+    .blog-hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 0 0 4rem clamp(1.8rem, 6vw, 5rem);
+      animation: fadeSlideUp 1.1s 0.3s ease both;
+    }
+
+    .blog-hero-content h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: #fff;
+      margin-bottom: 0.9rem;
+    }
+
+    .blog-hero-content p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+    }
+
     @keyframes fadeSlideUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .archive-hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(3.5rem, 9vw, 7rem);
-      line-height: 1; letter-spacing: 0.02em;
-      color: var(--white); margin-bottom: 1rem;
-    }
-    .archive-hero p {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--muted);
+
+    @media (max-width: 600px) {
+      .blog-hero-content { padding: 0 0 3rem 1.8rem; }
     }
 
     /* ── SECTION ── */
@@ -220,17 +269,19 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="nav-social">
-      <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-      <a href="https://x.com/withloveeajay" target="_blank" rel="noopener" aria-label="X">X</a>
-      <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
-      <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+      <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener">IG</a>
+      <a href="https://x.com/withloveeajay" target="_blank" rel="noopener">X</a>
+      <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a>
+      <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a>
     </div>
   </nav>
 
   <!-- Hero -->
-  <section class="archive-hero">
-    <h1>Blog</h1>
-    <p>late-night reflections, heartfelt letters, and adventures on the road.</p>
+  <section class="blog-hero" aria-label="Blog hero">
+    <div class="blog-hero-content">
+      <h1>Blog</h1>
+      <p>late-night reflections, heartfelt letters, and adventures on the road.</p>
+    </div>
   </section>
 
   <!-- ============ Nights ============ -->
