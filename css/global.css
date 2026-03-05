@@ -140,7 +140,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hamburger.is-active .line:nth-child(1) {
-  transform: translateY(13px) rotate(45deg);
+  transform: translateY(10px) rotate(45deg);
 }
 
 .hamburger.is-active .line:nth-child(2) {
@@ -149,7 +149,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hamburger.is-active .line:nth-child(3) {
-  transform: translateY(-13px) rotate(-45deg);
+  transform: translateY(-10px) rotate(-45deg);
 }
 @media (prefers-reduced-motion: reduce) {  /* ← here */
   .hamburger .line { transition: none; }
