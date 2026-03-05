@@ -3,6 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Get in touch with Ajay Ramineni — drop a message for collaborations, projects, or just to say hi.">
+  <meta property="og:title" content="Contact | Ajay Ramineni">
+  <meta property="og:description" content="Get in touch with Ajay Ramineni — drop a message for collaborations, projects, or just to say hi.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://withajay.com/contact.html">
+  <meta property="og:image" content="https://withajay.com/images/contact.jpg">
+  <link rel="canonical" href="https://withajay.com/contact.html">
   <title>Contact | With Love AJ</title>
   <link rel="icon" href="images/logo.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="images/logo.svg">
@@ -317,6 +324,7 @@
   </nav>
 
   <main id="main-content" data-transition-wrapper>
+    <h1 class="sr-only">Contact Ajay Ramineni</h1>
 
     <section id="home">
       <div class="hero-background"></div>
@@ -372,6 +380,8 @@
   document.getElementById("contact-form").addEventListener("submit", function(e) {
     e.preventDefault();
     try {
+      // TODO: Replace YOUR_SERVICE_ID and YOUR_TEMPLATE_ID with your real EmailJS credentials
+      // Get them from https://www.emailjs.com/
       emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", this)
         .then(function() {
           alert("Message sent successfully! ✨");
