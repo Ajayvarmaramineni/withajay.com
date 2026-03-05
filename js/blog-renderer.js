@@ -3,6 +3,7 @@
 
   var MAX_RETRIES = 2;
   var RETRY_DELAY_MS = 800; // base delay; doubles on each subsequent retry
+  var GITHUB_RAW_BASE_URL = 'https://raw.githubusercontent.com/Ajayvarmaramineni/withajay.com/main/';
 
   /**
    * Parse YAML-ish frontmatter (--- delimited)
@@ -202,7 +203,14 @@
 
     renderLoading();
 
-    fetchWithRetry(postPath)
+    // GitHub Pages does not serve raw .md files — rewrite relative paths
+    // to fetch from raw.githubusercontent.com instead.
+    var fetchUrl = postPath;
+    if (!postPath.startsWith('http://') && !postPath.startsWith('https://')) {
+      fetchUrl = GITHUB_RAW_BASE_URL + postPath;
+    }
+
+    fetchWithRetry(fetchUrl)
       .then(function (res) { return res.text(); })
       .then(function (raw) {
         var parsed = parseFrontmatter(raw);
