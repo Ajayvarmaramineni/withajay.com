@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Photography | With Love AJ</title>
   <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="images/logo.svg">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Barlow+Condensed:wght@800&family=Bebas+Neue&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/typography.css">
@@ -12,27 +13,47 @@
   <link rel="stylesheet" href="css/photos.css">
   <link rel="stylesheet" href="css/responsive.css">
   <style>
+    /* ========= Base ========= */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { font-family: 'Open Sans', sans-serif; color: #111; background: #fff; }
+
+    /* ========= HERO — full viewport height ========= */
     .gallery-hero {
-      position: relative; width: 100%; height: 100vh; min-height: 560px;
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 560px;
       background: url('images/photos/hero.jpg') center 60% / cover no-repeat;
-      display: flex; align-items: flex-end; justify-content: flex-start; overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      overflow: hidden;
     }
     .gallery-hero::before {
-      content: ""; position: absolute; inset: 0;
+      content: "";
+      position: absolute;
+      inset: 0;
       background: linear-gradient(to bottom, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.0) 35%, rgba(0,0,0,0.42) 100%);
+    }
+    /* Ken Burns zoom */
+    .gallery-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: inherit;
+      background-size: cover;
+      transform: scale(1.04);
+      animation: heroZoom 9s ease forwards;
       z-index: 0;
     }
-    .gallery-hero-bg {
-      position: absolute; inset: 0;
-      background: url('images/photos/hero.jpg') center 60% / cover no-repeat;
-      transform: scale(1.04); animation: heroZoom 9s ease forwards; z-index: 0;
-    }
     @keyframes heroZoom { to { transform: scale(1); } }
+
     .gallery-hero-content {
-      position: relative; z-index: 1; padding: 0 0 3.5rem 4rem; color: #fff;
+      position: relative;
+      z-index: 1;
+      padding: 0 0 3.5rem 4rem;
+      color: #fff;
       animation: fadeSlideUp 1.2s 0.3s ease both;
     }
     @keyframes fadeSlideUp {
@@ -40,74 +61,174 @@
       to   { opacity: 1; transform: translateY(0); }
     }
     .gallery-hero-title {
-      font-family: 'Cormorant Garamond', serif; font-weight: 300;
-      font-size: clamp(3.5rem, 8vw, 6.5rem); letter-spacing: 0.02em; line-height: 1;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      letter-spacing: 0.02em;
+      line-height: 1;
       text-shadow: 0 2px 20px rgba(0,0,0,0.2);
     }
     .gallery-hero-desc {
-      margin-top: 0.7rem; font-family: 'Open Sans', sans-serif; font-size: 0.82rem;
-      font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.88;
+      margin-top: 0.7rem;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.88;
     }
-    .scroll-cue {
-      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
-      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 6px;
-      opacity: 0.7; animation: fadeSlideUp 1.5s 1s ease both;
+
+    @media (max-width: 600px) {
+      .gallery-hero-content { padding: 0 0 2.5rem 1.8rem; }
     }
-    .scroll-cue span { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; }
-    .scroll-cue::after {
-      content: ''; display: block; width: 1px; height: 40px;
-      background: rgba(255,255,255,0.6); animation: lineGrow 1.5s 1.5s ease both;
+
+    /* ========= INTRO TEXT ========= */
+    .photos-intro {
+      background: #fff;
+      padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 6vw, 5rem);
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
     }
-    @keyframes lineGrow {
-      from { transform: scaleY(0); transform-origin: top; }
-      to   { transform: scaleY(1); transform-origin: top; }
+    .photos-intro h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      color: #1a1209;
+      line-height: 1.2;
+      margin-bottom: 1.4rem;
     }
-    @media (max-width: 600px) { .gallery-hero-content { padding: 0 0 2.5rem 1.5rem; } }
-    .gallery-intro { max-width: 640px; margin: 5rem auto 4rem; padding: 0 2rem; text-align: center; }
-    .gallery-intro h2 {
-      font-family: 'Cormorant Garamond', serif; font-weight: 300;
-      font-size: clamp(1.6rem, 3.5vw, 2.2rem); letter-spacing: 0.04em; line-height: 1.3;
-      color: #111; margin-bottom: 1rem;
+    .photos-intro h2 em {
+      font-style: italic;
+      font-weight: 300;
     }
-    .gallery-intro p { font-size: 0.88rem; font-weight: 300; letter-spacing: 0.06em; color: #666; line-height: 1.8; }
-    .photos-section { background: #fff; padding-bottom: 80px; }
-    .photos-container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
-    .photo-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 260px; gap: 10px; }
-    @media (max-width: 1100px) { .photo-grid { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 220px; } }
-    @media (max-width: 780px)  { .photo-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; } }
-    @media (max-width: 480px)  { .photo-grid { grid-template-columns: 1fr; grid-auto-rows: 260px; } }
-    .photo-item { position: relative; overflow: hidden; cursor: pointer; background: #e8e8e8; }
-    .photo-item.tall  { grid-row: span 2; }
-    .photo-item.wide  { grid-column: span 2; }
-    .photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-    .photo-item:hover img { transform: scale(1.06); }
-    .photo-item .hover-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 60%);
-      opacity: 0; transition: opacity 0.3s ease; display: flex; align-items: flex-end; padding: 16px;
+    .photos-intro p {
+      font-size: 0.93rem;
+      line-height: 1.85;
+      color: #5c4a3a;
+      font-weight: 300;
+      max-width: 600px;
+      margin: 0 auto;
+      letter-spacing: 0.01em;
     }
-    .photo-item:hover .hover-overlay { opacity: 1; }
-    .expand-icon { width: 36px; height: 36px; opacity: 0.9; }
-    .lightbox { position: fixed; inset: 0; background: rgba(10,10,10,.97); display: none; }
-    .lightbox.active { display: block; }
-    .lb-stage { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 10001; }
-    .lb-img { background: #111; border-radius: 12px; box-shadow: 0 10px 36px rgba(0,0,0,.35); max-width: 94vw; max-height: 86vh; object-fit: contain; display: block; }
-    .lb-caption { position: fixed; left: 28px; bottom: 20px; color: #fff; background: rgba(0,0,0,.55); padding: 10px 14px; border-radius: 8px; font-size: .98rem; max-width: 60vw; z-index: 10002; }
-    .lb-counter { position: fixed; right: 28px; bottom: 20px; color: #cfcfcf; font-weight: 600; z-index: 10002; }
-    .lb-arrow { position: fixed; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-style: solid; opacity: .85; cursor: pointer; filter: drop-shadow(0 0 2px rgba(0,0,0,.6)); transition: opacity .15s; z-index: 10003; pointer-events: auto; }
-    .lb-arrow:hover { opacity: 1; }
-    .lb-prev { left: 22px; border-width: 18px 22px 18px 0; border-color: transparent #cfcfcf transparent transparent; }
-    .lb-next { right: 22px; border-width: 18px 0 18px 22px; border-color: transparent transparent transparent #cfcfcf; }
-    .lb-prev:hover { border-right-color: #fff; }
-    .lb-next:hover { border-left-color: #fff; }
-    .lb-close { position: fixed; top: 18px; right: 28px; font-size: 28px; line-height: 1; color: #cfcfcf; background: none; border: none; cursor: pointer; z-index: 10004; pointer-events: auto; }
-    .lb-close:hover { color: #fff; }
+
+    /* ========= PHOTO GRID — Renak style ========= */
+    .photos-section { background: #fff; }
+    .photos-container {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 0 clamp(0.75rem, 2vw, 2rem) clamp(3rem, 6vw, 5rem);
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 240px;
+      gap: 6px;
+    }
+    @media (max-width: 1000px) { .photo-grid { grid-auto-rows: 190px; } }
+    @media (max-width: 720px)  {
+      .photo-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+      .masonry-item.tall { grid-row: span 1 !important; }
+      .masonry-item.wide { grid-column: span 1 !important; }
+    }
+    @media (max-width: 420px)  { .photo-grid { grid-auto-rows: 130px; gap: 4px; } }
+
+    /* Span helpers */
+    .masonry-item.tall { grid-row: span 2; }
+    .masonry-item.wide { grid-column: span 2; }
+
+    .masonry-item {
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      background: #e8e3db;
+    }
+    .masonry-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.55s cubic-bezier(.22,.68,0,1.15), filter 0.35s ease;
+      filter: brightness(0.96) saturate(0.92);
+    }
+    .masonry-item:hover img {
+      transform: scale(1.055);
+      filter: brightness(1.02) saturate(1.05);
+    }
+
+    /* ========= LIGHTBOX ========= */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 9000;
+      background: rgba(8,7,5,0.96);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox img {
+      max-width: 92vw; max-height: 90vh;
+      object-fit: contain;
+      border-radius: 2px;
+      box-shadow: 0 8px 60px rgba(0,0,0,0.6);
+      transform: scale(0.97);
+      transition: transform 0.3s ease;
+    }
+    .lightbox.open img { transform: scale(1); }
+    .lightbox-close {
+      position: absolute; top: 1.4rem; right: 1.8rem;
+      width: 36px; height: 36px;
+      background: none; border: none;
+      cursor: pointer; padding: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-close::before, .lightbox-close::after {
+      content: ''; position: absolute;
+      width: 22px; height: 1.5px; background: rgba(255,255,255,0.75);
+    }
+    .lightbox-close::before { transform: rotate(45deg); }
+    .lightbox-close::after  { transform: rotate(-45deg); }
+    .lightbox-close:hover::before,
+    .lightbox-close:hover::after { background: #fff; }
+    .lightbox-prev, .lightbox-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.6); font-size: 2rem; padding: 1rem;
+      transition: color 0.2s;
+    }
+    .lightbox-prev:hover, .lightbox-next:hover { color: #fff; }
+    .lightbox-prev { left: 1rem; }
+    .lightbox-next { right: 1rem; }
+    .lightbox-counter {
+      position: absolute; bottom: 1.4rem; left: 50%; transform: translateX(-50%);
+      font-family: 'Open Sans', sans-serif; font-size: 0.7rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ========= FOOTER ========= */
+    .photos-footer {
+      background: #fff;
+      text-align: center;
+      padding: clamp(2rem, 4vw, 3rem) 1rem;
+      border-top: 1px solid #ebe7e0;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #b5a898;
+    }
+    .photos-footer a { color: inherit; text-decoration: none; transition: color 0.2s; }
+    .photos-footer a:hover { color: #5c4a3a; }
   </style>
 </head>
-<body class="dark-bg" style="opacity:0; transition:opacity 0.8s;">
+<body>
+
+  <!-- Hamburger -->
   <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
     <span class="line"></span><span class="line"></span><span class="line"></span>
   </button>
+
+  <!-- Nav overlay -->
   <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
     <div class="nav-header-bar">
       <span class="nav-menu-label">MENU</span>
@@ -122,143 +243,142 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="nav-social">
-      <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-      <a href="https://x.com/withloveeajay" target="_blank" rel="noopener" aria-label="X">X</a>
-      <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
-      <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+      <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener">IG</a>
+      <a href="https://x.com/withloveeajay" target="_blank" rel="noopener">X</a>
+      <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a>
+      <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a>
     </div>
   </nav>
-  <section class="gallery-hero">
-    <div class="gallery-hero-bg"></div>
+
+  <!-- HERO -->
+  <section class="gallery-hero" aria-label="Photography hero">
     <div class="gallery-hero-content">
-      <div class="gallery-hero-title">Photography</div>
-      <div class="gallery-hero-desc">A visual journey through landscapes, portraits, and everyday moments</div>
+      <h1 class="gallery-hero-title">Through<br><em>my lens</em></h1>
+      <p class="gallery-hero-desc">A visual diary — moments, light &amp; life</p>
     </div>
-    <div class="scroll-cue"><span>Scroll</span></div>
   </section>
-  <div class="gallery-intro">
-    <h2>Moments frozen in light &amp; time</h2>
-    <p>Every frame here is a quiet conversation — between light and shadow, stillness and motion, the familiar and the foreign.</p>
-  </div>
-  <section class="photos-section">
+
+  <!-- INTRO -->
+  <section class="photos-intro">
+    <h2>Every frame <em>tells a story</em></h2>
+    <p>
+      Photography, for me, is the art of slowing down — of noticing the way light
+      falls at golden hour, the quiet geometry of a street corner, the unguarded
+      expression that lasts only a fraction of a second. These images are my way
+      of holding onto those fleeting moments.
+    </p>
+  </section>
+
+  <!-- GRID -->
+  <section class="photos-section" aria-label="Photo gallery">
     <div class="photos-container">
-      <div class="photo-grid">
-        <div class="photo-item tall" data-index="0"><img src="images/photos/birds.JPG" alt="Birds" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item" data-index="1"><img src="images/photos/blur.JPG" alt="Blur" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item" data-index="2"><img src="images/photos/boat.JPEG" alt="Boat" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item wide" data-index="3"><img src="images/photos/boatman.JPG" alt="Boatman" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item" data-index="4"><img src="images/photos/cat.JPG" alt="Cat" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item tall" data-index="5"><img src="images/photos/dad.JPG" alt="Dad" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item" data-index="6"><img src="images/photos/dome.JPG" alt="Dome" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item" data-index="7"><img src="images/photos/fort.JPG" alt="Fort" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item wide tall" data-index="8"><img src="images/photos/fort1.JPG" alt="Fort1" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item" data-index="9"><img src="images/photos/freedom.JPG" alt="Freedom" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item" data-index="10"><img src="images/photos/friends.JPG" alt="Friends" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item tall" data-index="11"><img src="images/photos/her.JPEG" alt="Her" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item" data-index="12"><img src="images/photos/her1.JPEG" alt="Her1" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item wide" data-index="13"><img src="images/photos/mono.JPG" alt="Mono" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item" data-index="14"><img src="images/photos/pillars.JPG" alt="Pillars" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item" data-index="15"><img src="images/photos/shadow.JPEG" alt="Shadow" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item tall" data-index="16"><img src="images/photos/shadows.JPEG" alt="Shadows" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item" data-index="17"><img src="images/photos/sil.JPEG" alt="Silhouette" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item wide" data-index="18"><img src="images/photos/squirrel.JPG" alt="Squirrel" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item tall" data-index="19"><img src="images/photos/sunset.JPEG" alt="Sunset" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item" data-index="20"><img src="images/photos/temple.JPG" alt="Temple" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item" data-index="21"><img src="images/photos/them.JPEG" alt="Comrades" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item wide" data-index="22"><img src="images/photos/well.JPG" alt="Well" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item" data-index="23"><img src="images/photos/starrynight.JPG" alt="Starrynight" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item tall" data-index="24"><img src="images/photos/sunset.JPG" alt="Sunset 2" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item" data-index="25"><img src="images/photos/taj.JPG" alt="Taj" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item" data-index="26"><img src="images/photos/temple2.JPG" alt="Temple2" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item wide" data-index="27"><img src="images/photos/temple3.JPG" alt="Temple3" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item" data-index="28"><img src="images/photos/trees.jpg" alt="Trees" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
-        <div class="photo-item" data-index="29"><img src="images/photos/wine.jpg" alt="Wine" loading="lazy"><div class="hover-overlay"><svg class="expand-icon" viewBox="0 0 24 24"><path fill="#fff" d="M3 14v7h7v-2H6.414l5.293-5.293-1.414-1.414L5 17.586V14H3zm18-4V3h-7v2h3.586l-5.293 5.293 1.414 1.414L19 6.414V10h2z"/></svg></div></div>
+      <div class="photo-grid" id="photoGrid">
+
+        <!-- Row 1 -->
+        <div class="masonry-item tall"><img src="images/photos/photo1.jpg"  alt="Photo 1"  loading="lazy"></div>
+        <div class="masonry-item wide"><img src="images/photos/photo2.jpg"  alt="Photo 2"  loading="lazy"></div>
+        <div class="masonry-item"     ><img src="images/photos/photo3.jpg"  alt="Photo 3"  loading="lazy"></div>
+
+        <!-- Row 2 -->
+        <div class="masonry-item"     ><img src="images/photos/photo4.jpg"  alt="Photo 4"  loading="lazy"></div>
+        <div class="masonry-item tall"><img src="images/photos/photo5.jpg"  alt="Photo 5"  loading="lazy"></div>
+        <div class="masonry-item"     ><img src="images/photos/photo6.jpg"  alt="Photo 6"  loading="lazy"></div>
+        <div class="masonry-item"     ><img src="images/photos/photo7.jpg"  alt="Photo 7"  loading="lazy"></div>
+
+        <!-- Row 3 -->
+        <div class="masonry-item wide"><img src="images/photos/photo8.jpg"  alt="Photo 8"  loading="lazy"></div>
+        <div class="masonry-item"     ><img src="images/photos/photo9.jpg"  alt="Photo 9"  loading="lazy"></div>
+        <div class="masonry-item"     ><img src="images/photos/photo10.jpg" alt="Photo 10" loading="lazy"></div>
+
+        <!-- Row 4 -->
+        <div class="masonry-item"     ><img src="images/photos/photo11.jpg" alt="Photo 11" loading="lazy"></div>
+        <div class="masonry-item"     ><img src="images/photos/photo12.jpg" alt="Photo 12" loading="lazy"></div>
+        <div class="masonry-item tall"><img src="images/photos/photo13.jpg" alt="Photo 13" loading="lazy"></div>
+        <div class="masonry-item"     ><img src="images/photos/photo14.jpg" alt="Photo 14" loading="lazy"></div>
+
+        <!-- Row 5 -->
+        <div class="masonry-item"     ><img src="images/photos/photo15.jpg" alt="Photo 15" loading="lazy"></div>
+        <div class="masonry-item wide"><img src="images/photos/photo16.jpg" alt="Photo 16" loading="lazy"></div>
+        <div class="masonry-item"     ><img src="images/photos/photo17.jpg" alt="Photo 17" loading="lazy"></div>
+
+        <!-- Row 6 -->
+        <div class="masonry-item"     ><img src="images/photos/photo18.jpg" alt="Photo 18" loading="lazy"></div>
+        <div class="masonry-item"     ><img src="images/photos/photo19.jpg" alt="Photo 19" loading="lazy"></div>
+        <div class="masonry-item"     ><img src="images/photos/photo20.jpg" alt="Photo 20" loading="lazy"></div>
+        <div class="masonry-item tall"><img src="images/photos/photo21.jpg" alt="Photo 21" loading="lazy"></div>
+
       </div>
     </div>
   </section>
-  <div id="lightbox" class="lightbox" aria-hidden="true">
-    <button class="lb-close" aria-label="Close" tabindex="0">&times;</button>
-    <div class="lb-prev lb-arrow" role="button" aria-label="Previous" tabindex="0"></div>
-    <div class="lb-next lb-arrow" role="button" aria-label="Next" tabindex="0"></div>
-    <div class="lb-stage"><img class="lb-img" alt=""></div>
-    <div class="lb-caption"></div>
-    <div class="lb-counter"></div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox">
+    <button class="lightbox-close" id="lbClose" aria-label="Close lightbox"></button>
+    <button class="lightbox-prev"  id="lbPrev"  aria-label="Previous photo">&#8592;</button>
+    <img src="" alt="" id="lbImg">
+    <button class="lightbox-next"  id="lbNext"  aria-label="Next photo">&#8594;</button>
+    <span class="lightbox-counter" id="lbCounter"></span>
   </div>
-  <footer class="page-footer-line">
-    <span>Ajay Ramineni &nbsp;&middot;&nbsp; <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener">IG</a> &nbsp;&middot;&nbsp; <a href="https://x.com/withloveeajay" target="_blank" rel="noopener">X</a> &nbsp;&middot;&nbsp; <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a> &nbsp;&middot;&nbsp; &copy; 2026</span>
+
+  <!-- FOOTER -->
+  <footer class="photos-footer">
+    <p>&copy; 2025 <a href="index.html">Ajay Ramineni</a> &mdash; All images are my own.</p>
   </footer>
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    function showPage() { document.body.style.opacity = '1'; }
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => {
-        const imgs = Array.from(document.querySelectorAll('.photo-item img'));
-        let loaded = 0;
-        if (imgs.length === 0) { showPage(); return; }
-        imgs.forEach(img => {
-          if (img.complete) { loaded++; if (loaded === imgs.length) showPage(); }
-          else {
-            img.addEventListener('load',  () => { loaded++; if (loaded === imgs.length) showPage(); });
-            img.addEventListener('error', () => { loaded++; if (loaded === imgs.length) showPage(); });
-          }
-        });
-      });
-    } else { setTimeout(showPage, 1000); }
-  });
-  const images = [
-    {src:"images/photos/birds.JPG",title:"Freedom",desc:"A flock of birds soaring high, embodying the essence of freedom and the boundless sky."},
-    {src:"images/photos/blur.JPG",title:"Riders",desc:"A dynamic shot capturing the energy and motion of riders in action."},
-    {src:"images/photos/boat.JPEG",title:"Boat",desc:"Delicate ripples on the water as a solitary boat drifts, capturing a moment of serene isolation."},
-    {src:"images/photos/boatman.JPG",title:"Boatman",desc:"A solitary boatman navigating the calm waters, embodying peace and resilience."},
-    {src:"images/photos/cat.JPG",title:"Cat",desc:"A curious cat peering through the foliage, its eyes reflecting the mysteries of the wild."},
-    {src:"images/photos/dad.JPG",title:"Dad",desc:"A portrait capturing the warmth and strength of a father figure."},
-    {src:"images/photos/dome.JPG",title:"Dome",desc:"A majestic dome rising against the sky, a testament to architectural brilliance."},
-    {src:"images/photos/fort.JPG",title:"Fort",desc:"A historic fort standing tall, echoing tales of valor and heritage."},
-    {src:"images/photos/fort1.JPG",title:"Fort1",desc:"A different perspective of the historic fort, highlighting its architectural details."},
-    {src:"images/photos/freedom.JPG",title:"Freedom",desc:"A powerful image symbolizing liberty and the human spirit's unyielding quest for justice."},
-    {src:"images/photos/friends.JPG",title:"Friends",desc:"A candid moment shared among friends, capturing the essence of camaraderie and joy."},
-    {src:"images/photos/her.JPEG",title:"Her",desc:"Lost in the sunset, her silhouette whispers serenity to the sea."},
-    {src:"images/photos/her1.JPEG",title:"Her1",desc:"Lost in the sunset, her silhouette whispers serenity to the sea."},
-    {src:"images/photos/mono.JPG",title:"Mono",desc:"A monochromatic study in light and shadow, emphasizing form and texture."},
-    {src:"images/photos/pillars.JPG",title:"Pillars",desc:"A series of ancient pillars standing tall, echoing stories of a bygone era."},
-    {src:"images/photos/shadow.JPEG",title:"Shadow",desc:"A play of light and darkness, creating mysterious and intriguing shapes."},
-    {src:"images/photos/shadows.JPEG",title:"Shadows",desc:"A dance of light and form, where shadows tell their own stories."},
-    {src:"images/photos/sil.JPEG",title:"Silhouette",desc:"A moment of stillness painted in golden light."},
-    {src:"images/photos/squirrel.JPG",title:"Squirrel",desc:"A quick glimpse of a squirrel in its natural habitat, full of life and curiosity."},
-    {src:"images/photos/sunset.JPEG",title:"Sunset",desc:"A breathtaking view of the sun dipping below the horizon, painting the sky with orange and pink."},
-    {src:"images/photos/temple.JPG",title:"Temple",desc:"A serene temple nestled amidst nature, a place of peace and reflection."},
-    {src:"images/photos/them.JPEG",title:"Comrades",desc:"A heartfelt moment shared between friends, captured in a single frame."},
-    {src:"images/photos/well.JPG",title:"Well",desc:"A rustic well standing as a testament to simpler times, nature's embrace all around."},
-    {src:"images/photos/starrynight.JPG",title:"Starry Night",desc:"A mesmerizing night sky, stars scattered across the darkness like scattered dreams."},
-    {src:"images/photos/sunset.JPG",title:"Golden Hour",desc:"The sky ablaze in warm gold, a fleeting moment between day and dusk."},
-    {src:"images/photos/taj.JPG",title:"Taj Mahal",desc:"An eternal monument to love, standing in timeless marble against the sky."},
-    {src:"images/photos/temple2.JPG",title:"Temple Carvings",desc:"Intricate stone carvings telling centuries-old stories of devotion and craft."},
-    {src:"images/photos/temple3.JPG",title:"Temple Pillars",desc:"Rows of ancient pillars, each a silent witness to history and faith."},
-    {src:"images/photos/trees.jpg",title:"Into the Trees",desc:"A canopy of green, where sunlight filters through in quiet golden streams."},
-    {src:"images/photos/wine.jpg",title:"Still Life",desc:"A quiet moment of warmth and reflection, life's simple pleasures captured."}
-  ];
-  const lightbox=document.getElementById('lightbox'),imgEl=document.querySelector('.lb-img'),captionEl=document.querySelector('.lb-caption'),counterEl=document.querySelector('.lb-counter'),prevEl=document.querySelector('.lb-prev'),nextEl=document.querySelector('.lb-next'),closeEl=document.querySelector('.lb-close'),stage=document.querySelector('.lb-stage');
-  let current=0,touchStartX=0;
-  function fitImage32(){const vw=Math.max(document.documentElement.clientWidth,window.innerWidth||0),vh=Math.max(document.documentElement.clientHeight,window.innerHeight||0),marginW=48,marginH=160,maxW=vw-marginW,maxH=vh-marginH;let w=Math.min(maxW,(3/2)*maxH),h=(2/3)*w;imgEl.style.width=Math.round(w)+'px';imgEl.style.height=Math.round(h)+'px';}
-  function show(){const item=images[(current+images.length)%images.length];fitImage32();imgEl.style.opacity=0;setTimeout(()=>{imgEl.src=item.src;imgEl.alt=item.title;captionEl.textContent=item.desc?`${item.title} — ${item.desc}`:item.title;counterEl.textContent=`${current+1} of ${images.length}`;imgEl.onload=()=>imgEl.style.opacity=1;},100);}
-  function openLightbox(i){current=i;show();lightbox.classList.add('active');lightbox.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
-  function closeLightbox(){lightbox.classList.remove('active');lightbox.setAttribute('aria-hidden','true');document.body.style.overflow='';}
-  document.querySelectorAll('.photo-item').forEach(item=>{item.addEventListener('click',()=>openLightbox(parseInt(item.dataset.index,10)));});
-  function prev(){current=(current-1+images.length)%images.length;show();}
-  function next(){current=(current+1)%images.length;show();}
-  prevEl.addEventListener('click',prev);nextEl.addEventListener('click',next);closeEl.addEventListener('click',closeLightbox);
-  [prevEl,nextEl,closeEl].forEach(el=>{el.addEventListener('keydown',(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el===prevEl?prev():el===nextEl?next():closeLightbox();}});});
-  stage.addEventListener('click',(e)=>{if(e.target===stage)closeLightbox();});
-  document.addEventListener('keydown',(e)=>{if(!lightbox.classList.contains('active'))return;if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')prev();if(e.key==='ArrowRight')next();});
-  stage.addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].screenX;},{passive:true});
-  stage.addEventListener('touchend',e=>{const dx=e.changedTouches[0].screenX-touchStartX;if(Math.abs(dx)>40){dx>0?prev():next();}},{passive:true});
-  window.addEventListener('resize',()=>{if(lightbox.classList.contains('active'))fitImage32();});
-  </script>
+
   <script src="js/navigation.js"></script>
   <script src="js/app.js"></script>
   <script src="js/click-sound.js"></script>
-  <div class="page-name-logo" id="pageNameLogo">
-    <a href="index.html"><span class="first">AJAY</span><span class="last">RAMINENI</span></a>
-  </div>
+  <script>
+    /* ── Lightbox ── */
+    const grid    = document.getElementById('photoGrid');
+    const lb      = document.getElementById('lightbox');
+    const lbImg   = document.getElementById('lbImg');
+    const lbClose = document.getElementById('lbClose');
+    const lbPrev  = document.getElementById('lbPrev');
+    const lbNext  = document.getElementById('lbNext');
+    const lbCnt   = document.getElementById('lbCounter');
+
+    const items = Array.from(grid.querySelectorAll('.masonry-item img'));
+    let current = 0;
+
+    function openLb(idx) {
+      current = idx;
+      lbImg.src = items[idx].src;
+      lbImg.alt = items[idx].alt;
+      lbCnt.textContent = (idx + 1) + ' / ' + items.length;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLb() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(() => { lbImg.src = ''; }, 300);
+    }
+    function stepLb(dir) {
+      current = (current + dir + items.length) % items.length;
+      lbImg.style.opacity = '0';
+      setTimeout(() => {
+        lbImg.src = items[current].src;
+        lbImg.alt = items[current].alt;
+        lbCnt.textContent = (current + 1) + ' / ' + items.length;
+        lbImg.style.opacity = '1';
+      }, 150);
+    }
+
+    items.forEach((img, i) => {
+      img.parentElement.addEventListener('click', () => openLb(i));
+    });
+    lbClose.addEventListener('click', closeLb);
+    lbPrev.addEventListener('click', () => stepLb(-1));
+    lbNext.addEventListener('click', () => stepLb(1));
+    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape')     closeLb();
+      if (e.key === 'ArrowLeft')  stepLb(-1);
+      if (e.key === 'ArrowRight') stepLb(1);
+    });
+    lbImg.style.transition = 'opacity 0.15s ease';
+  </script>
 </body>
 </html>
