@@ -10,7 +10,7 @@
   if (mediaQuery && mediaQuery.matches) return;
 
   // Preload the audio file
-  var clickAudio = new Audio('../sounds/click_left.mp3');
+  var clickAudio = new Audio('/sounds/click_left.mp3');
   clickAudio.preload = 'auto';
   clickAudio.volume = 0.5;
 

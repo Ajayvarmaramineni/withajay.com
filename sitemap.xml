@@ -36,4 +36,54 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://withajay.com/blog-post.html?post=blog/the-night-i-questioned-everything.md</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://withajay.com/blog-post.html?post=blog/the-night-i-started-accepting.md</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://withajay.com/blog-post.html?post=blog/the-night-i-felt-lost.md</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://withajay.com/blog-post.html?post=blog/the-night-i-realised.md</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://withajay.com/blog-post.html?post=blog/the-night-i-wrote-this-for-you.md</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://withajay.com/blog-post.html?post=blog/dear-first-year-me.md</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://withajay.com/blog-post.html?post=blog/a-letter-to-the-city.md</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://withajay.com/blog-post.html?post=blog/a-letter-to-anyone-starting-over.md</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://withajay.com/blog-post.html?post=blog/the-road-to-agra.md</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://withajay.com/blog-post.html?post=blog/lost-in-coorg.md</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
