@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | Ajay Ramineni</title>
+  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+  <meta name="description" content="Get in touch with Ajay Ramineni — open to collaborations, conversations, and new ideas.">
+  <meta property="og:title" content="Contact | Ajay Ramineni">
+  <meta property="og:description" content="Have a project idea or just want to say hi? Reach out to Ajay.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://withajay.com/images/contact.jpg">
+  <meta property="og:url" content="https://withajay.com/contact.html">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+
+  <!-- Grain overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Custom cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Scroll progress -->
+  <div id="scroll-progress"></div>
+
+  <!-- Skip navigation -->
+  <a href="#main-content" class="sr-only">Skip to main content</a>
+
+  <!-- Hamburger -->
+  <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
+    <span class="line"></span><span class="line"></span><span class="line"></span>
+  </button>
+
+  <!-- Nav overlay -->
+  <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
+    <div class="nav-header-bar">
+      <span class="nav-menu-label">MENU</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="photography.html">Photography</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-social">
+      <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+      <a href="https://x.com/withloveeajay" target="_blank" rel="noopener" aria-label="X">X</a>
+      <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener" aria-label="LinkedIn">LI</a>
+      <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════
+       MAIN
+  ═══════════════════════════════════════════════════════ -->
+  <main id="main-content" class="c-page">
+
+    <!-- ── LEFT PANEL ── -->
+    <aside class="c-left">
+
+      <div class="c-left-inner">
+
+        <span class="c-eyebrow">
+          <span class="c-eyebrow-line"></span>
+          Get In Touch
+        </span>
+
+        <h1 class="c-heading">
+          Let's<br>
+          <em>Connect.</em>
+        </h1>
+
+        <p class="c-subtext">
+          Whether you have a project idea, a question,
+          or just want to say hi — I'm always open to
+          a good conversation.
+        </p>
+
+        <!-- Contact details -->
+        <div class="c-details">
+
+          <a href="mailto:ajayvarmaramineni1128@gmail.com" class="c-detail-item">
+            <span class="c-detail-icon"><i class="bi bi-envelope"></i></span>
+            <span class="c-detail-body">
+              <span class="c-detail-label">Email</span>
+              <span class="c-detail-value">ajayvarmaramineni1128@gmail.com</span>
+            </span>
+          </a>
+
+          <div class="c-detail-item">
+            <span class="c-detail-icon"><i class="bi bi-geo-alt"></i></span>
+            <span class="c-detail-body">
+              <span class="c-detail-label">Location</span>
+              <span class="c-detail-value">Worcester, MA · USA</span>
+            </span>
+          </div>
+
+          <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener" class="c-detail-item">
+            <span class="c-detail-icon"><i class="bi bi-linkedin"></i></span>
+            <span class="c-detail-body">
+              <span class="c-detail-label">LinkedIn</span>
+              <span class="c-detail-value">ajayramineni2808</span>
+            </span>
+          </a>
+
+          <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener" class="c-detail-item">
+            <span class="c-detail-icon"><i class="bi bi-github"></i></span>
+            <span class="c-detail-body">
+              <span class="c-detail-label">GitHub</span>
+              <span class="c-detail-value">Ajayvarmaramineni</span>
+            </span>
+          </a>
+
+        </div>
+
+        <!-- Quote -->
+        <blockquote class="c-quote">
+          "Every great collaboration starts with a simple hello."
+        </blockquote>
+
+      </div>
+
+    </aside>
+
+    <!-- ── RIGHT PANEL ── -->
+    <section class="c-right">
+      <div class="c-right-inner">
+
+        <div class="c-form-header">
+          <span class="c-form-label">Send a Message</span>
+          <div class="c-form-label-line"></div>
+        </div>
+
+        <form id="contact-form" class="c-form" novalidate>
+
+          <div class="c-row">
+            <div class="c-field">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Your name"
+                required
+                autocomplete="name"
+              >
+            </div>
+            <div class="c-field">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="your@email.com"
+                required
+                autocomplete="email"
+              >
+            </div>
+          </div>
+
+          <div class="c-field">
+            <label for="subject">Subject</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              placeholder="What's on your mind?"
+            >
+          </div>
+
+          <div class="c-field">
+            <label for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Tell me more…"
+              required
+            ></textarea>
+          </div>
+
+          <div class="c-form-footer">
+            <button type="submit" class="c-submit" id="submit-btn">
+              <span class="c-submit-text">Send Message</span>
+              <i class="bi bi-arrow-right c-submit-icon"></i>
+            </button>
+            <p class="c-status" id="form-status" aria-live="polite"></p>
+          </div>
+
+        </form>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer class="c-footer">
+    <span class="c-footer-copy">Ajay Ramineni &nbsp;&middot;&nbsp; &copy; 2026</span>
+    <div class="c-footer-links">
+      <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener">IG</a>
+      <a href="https://x.com/withloveeajay" target="_blank" rel="noopener">X</a>
+      <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a>
+      <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a>
+    </div>
+  </footer>
+
+  <script src="js/navigation.js"></script>
+  <script src="js/click-sound.js"></script>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <script>
+  (function () {
+    /* ── Page fade-in ── */
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.6s ease';
+    window.addEventListener('load', function () {
+      document.body.style.opacity = '1';
+    });
+
+    /* ── Custom cursor ── */
+    var dot  = document.getElementById('cursor-dot');
+    var ring = document.getElementById('cursor-ring');
+    var mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', function (e) {
+      mx = e.clientX; my = e.clientY;
+      dot.style.transform  = 'translate(' + (mx - 4)  + 'px,' + (my - 4)  + 'px)';
+    });
+    (function animRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.transform = 'translate(' + (rx - 18) + 'px,' + (ry - 18) + 'px)';
+      requestAnimationFrame(animRing);
+    })();
+    document.querySelectorAll('a, button, input, textarea').forEach(function (el) {
+      el.addEventListener('mouseenter', function () { ring.classList.add('cursor-hover'); });
+      el.addEventListener('mouseleave', function () { ring.classList.remove('cursor-hover'); });
+    });
+
+    /* ── Scroll progress ── */
+    var bar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', function () {
+      var pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+      bar.style.width = pct + '%';
+    });
+
+    /* ── EmailJS ── */
+    var PUBLIC_KEY  = 'nHMmaEeDsQ6yN-2Kx';
+    var SERVICE_ID  = 'service_0cgjbdf';
+    var TEMPLATE_ID = 'template_8stcqsc';
+
+    try { emailjs.init(PUBLIC_KEY); } catch (e) { console.warn('EmailJS init:', e); }
+
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn    = document.getElementById('submit-btn');
+      var status = document.getElementById('form-status');
+      var text   = btn.querySelector('.c-submit-text');
+
+      btn.disabled      = true;
+      text.textContent  = 'Sending…';
+      status.textContent = '';
+      status.className   = 'c-status';
+
+      emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, this)
+        .then(function () {
+          status.textContent = '✓ Message sent — thank you!';
+          status.classList.add('success');
+          document.getElementById('contact-form').reset();
+          btn.disabled = false;
+          text.textContent = 'Send Message';
+        })
+        .catch(function (err) {
+          console.error('EmailJS error:', err);
+          status.textContent = 'Something went wrong. Please try again.';
+          status.classList.add('error');
+          btn.disabled = false;
+          text.textContent = 'Send Message';
+        });
+    });
+  })();
+  </script>
+
+</body>
+</html>
