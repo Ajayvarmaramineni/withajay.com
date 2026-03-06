@@ -307,6 +307,13 @@ body.dark-bg .page-name-logo .last {
 .fade-in {
   animation: fadeIn 0.6s ease forwards;
 }
+#scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 2px; background: #c9a96e;
+  z-index: 9998; width: 0%;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 8px rgba(201,169,110,0.5);
+}
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(12px); }
