@@ -312,3 +312,18 @@ body.dark-bg .page-name-logo .last {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+#cursor-dot {
+  position: fixed; top: 0; left: 0;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #c9a96e;
+  pointer-events: none; z-index: 99999;
+}
+#cursor-ring {
+  position: fixed; top: 0; left: 0;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid rgba(201,169,110,0.5);
+  pointer-events: none; z-index: 99998;
+  transition: width 0.2s, height 0.2s, border-color 0.2s;
+}
+#cursor-ring.cursor-hover { width: 52px; height: 52px; border-color: rgba(201,169,110,0.9); }
+@media (hover: none) { #cursor-dot, #cursor-ring { display: none; } }
