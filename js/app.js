@@ -26,7 +26,14 @@
         }
       });
     }
-
+// Scroll progress bar
+var bar = document.getElementById('scroll-progress');
+if (bar) {
+  window.addEventListener('scroll', function() {
+    var pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  });
+}
     // Custom cursor
     var dot  = document.getElementById('cursor-dot');
     var ring = document.getElementById('cursor-ring');
