@@ -16,11 +16,12 @@
   <link rel="stylesheet" href="css/typography.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/about.css">
+  <link rel="stylesheet" href="css/responsive.css">
   <style>
     body { opacity: 0; transition: opacity 0.5s ease; }
   </style>
 </head>
-<body class="about-body dark-bg">
+<body class="about-body">
 
   <!-- Skip navigation -->
   <a href="#main-content" class="sr-only">Skip to main content</a>
@@ -54,83 +55,86 @@
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="about-hero" aria-label="About hero">
-    <div class="about-hero-bg" aria-hidden="true"></div>
-    <div class="about-hero-content">
-      <h1>My Journey</h1>
-      <p>Strategist &nbsp;&middot;&nbsp; Analytics Enthusiast &nbsp;&middot;&nbsp; Storyteller</p>
-    </div>
-  </section>
+  <!-- Black header — same pattern as portfolio -->
+  <header class="about-hero">
+    <h1>About</h1>
+    <p>Strategist, analytics enthusiast, and storyteller. Based in Massachusetts, rooted in Hyderabad.</p>
+  </header>
 
-  <!-- About content -->
+  <!-- Main content -->
   <main id="main-content">
+
+    <!-- Bio section -->
     <section class="about-section">
-      <div class="about-container">
+      <h2>Who I Am</h2>
 
-        <h2 class="about-section-title">About Me</h2>
+      <div class="about-main">
 
-        <div class="about-main">
-
-          <!-- Profile photo -->
-          <div class="about-image">
-            <img
-              src="images/Aj.jpg"
-              alt="Ajay Ramineni at a temple wall in Hyderabad"
-              width="360"
-              height="480"
-            >
-          </div>
-
-          <!-- Text -->
-          <div class="about-text">
-            <h2>Hi, I'm Ajay. Welcome to my corner of the world.</h2>
-
-            <p class="intro">
-              My journey began as a passion project inspired by my family and mentors, who taught me
-              to embrace everything life has to offer and honor the stories of the people I meet.
-            </p>
-
-            <p>
-              My journey began with a passion for blending analytics and creativity. Inspired by my
-              family and mentors, I strive to turn data into stories and strategies into impact. With
-              roots in Hyderabad and a drive for exploration, I've learned to embrace every
-              opportunity life offers.
-            </p>
-
-            <p>
-              I'm currently pursuing my Master's in Business Analytics at WPI, where I dive into
-              predictive modeling and data visualization. My professional experience spans business
-              development, consulting, and creative projects — from managing client relationships to
-              building digital content.
-            </p>
-
-            <p>
-              Recently, I moved from Hyderabad to the vibrant landscape of Massachusetts. It's
-              definitely a change of pace, but I'm always learning, always growing. My journey has
-              also been deeply influenced by my cultural heritage and my experience as an
-              Indian-American navigating different cultural spaces.
-            </p>
-
-            <p>
-              I'm all about making connections — whether that's with people, causes, or the great
-              outdoors. Through my work and personal projects, you'll find me diving into everything
-              from analytics and strategy, to photography and creative storytelling.
-            </p>
-
-            <p>
-              This space is more than a portfolio; it's a living document of my journey. From
-              personal stories and professional insights to the adventures that fuel my creativity,
-              I hope you find something here that resonates with you.
-            </p>
-          </div>
+        <div class="about-image">
+          <img
+            src="images/Aj.jpg"
+            alt="Ajay Ramineni"
+            width="340"
+            height="440"
+          >
         </div>
 
-        <!-- Quote -->
-        <div class="about-quote">
-          <blockquote>
-            "Life is a chessboard, and every move counts. I play with strategy, creativity, and heart."
-          </blockquote>
+        <div class="about-text">
+          <p class="about-intro">
+            My journey began as a passion project inspired by my family and mentors,
+            who taught me to embrace everything life has to offer and honor the stories
+            of the people I meet.
+          </p>
+          <p>
+            I blend analytics and creativity to turn data into stories and strategies
+            into impact. With roots in Hyderabad and a drive for exploration, I've
+            learned to embrace every opportunity life offers.
+          </p>
+          <p>
+            I'm currently pursuing my Master's in Business Analytics at WPI, diving
+            into predictive modeling and data visualization. My professional experience
+            spans business development, consulting, and creative projects — from
+            managing client relationships to building digital content.
+          </p>
+          <p>
+            Recently relocated from Hyderabad to Massachusetts, I'm always learning
+            and growing. My journey has been deeply shaped by my cultural heritage
+            and my experience navigating different cultural spaces as an Indian-American.
+          </p>
+          <p>
+            This space is more than a portfolio — it's a living document of my journey.
+            From personal stories and professional insights to the adventures that fuel
+            my creativity, I hope something here resonates with you.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote — gray band, same as portfolio's gray experience section -->
+    <section class="about-quote-band">
+      <blockquote>
+        "Life is a chessboard, and every move counts. I play with strategy, creativity, and heart."
+      </blockquote>
+    </section>
+
+    <!-- What drives me -->
+    <section class="about-section">
+      <h2>What Drives Me</h2>
+      <div class="about-pillars">
+
+        <div class="pillar-card">
+          <h3>Analytics &amp; Strategy</h3>
+          <p>Turning messy data into clear decisions. I believe every number tells a story — the job is to find it.</p>
+        </div>
+
+        <div class="pillar-card">
+          <h3>Photography &amp; Storytelling</h3>
+          <p>Capturing moments that words can't fully hold. From travel to street to portraits — I shoot what moves me.</p>
+        </div>
+
+        <div class="pillar-card">
+          <h3>Community &amp; Connection</h3>
+          <p>Whether through Rotaract, mentorship, or just a good conversation — I believe in the power of showing up.</p>
         </div>
 
       </div>
@@ -140,12 +144,22 @@
     <footer class="page-footer-line">
       <span>Ajay Ramineni &nbsp;&middot;&nbsp; <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener">IG</a> &nbsp;&middot;&nbsp; <a href="https://x.com/withloveeajay" target="_blank" rel="noopener">X</a> &nbsp;&middot;&nbsp; <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a> &nbsp;&middot;&nbsp; &copy; 2026</span>
     </footer>
+
   </main>
 
   <!-- Fixed name logo -->
   <div class="page-name-logo" id="pageNameLogo">
     <a href="index.html">
       <span class="first">AJAY</span>
+      <span class="last">RAMINENI</span>
+    </a>
+  </div>
+
+  <script src="js/navigation.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/click-sound.js"></script>
+</body>
+</html>      <span class="first">AJAY</span>
       <span class="last">RAMINENI</span>
     </a>
   </div>
