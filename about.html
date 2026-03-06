@@ -11,22 +11,27 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://withajay.com/images/Aj.jpg">
   <meta property="og:url" content="https://withajay.com/about.html">
-  <link rel="canonical" href="https://withajay.com/about.html">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Bebas+Neue&family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/typography.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/about.css">
-  <link rel="stylesheet" href="css/responsive.css">
-  <style>
-    body { opacity: 0; transition: opacity 0.5s ease; }
-  </style>
 </head>
-<body class="about-body">
+<body>
 
-  <!-- Skip navigation -->
+  <!-- Grain overlay -->
+  <div class="ab-grain" aria-hidden="true"></div>
+
+  <!-- Custom cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Scroll progress -->
+  <div id="scroll-progress"></div>
+
+  <!-- Skip nav -->
   <a href="#main-content" class="sr-only">Skip to main content</a>
 
   <!-- Hamburger -->
@@ -38,9 +43,6 @@
   <nav class="nav-overlay" id="navOverlay" aria-hidden="true">
     <div class="nav-header-bar">
       <span class="nav-menu-label">MENU</span>
-      <div class="nav-brand-block">
-        <a href="index.html">AJAY<br>RAMINENI</a>
-      </div>
     </div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -58,32 +60,58 @@
     </div>
   </nav>
 
-  <!-- Black header — same pattern as portfolio -->
-  <header class="about-hero">
-    <h1>About</h1>
-    <p>Strategist, analytics enthusiast, and storyteller. Based in Massachusetts, rooted in Hyderabad.</p>
-  </header>
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section class="ab-hero">
+    <div class="ab-hero-text">
+      <span class="ab-eyebrow">
+        <span class="ab-eyebrow-line"></span>
+        About Me
+      </span>
+      <h1 class="ab-hero-heading">
+        Strategist.<br>
+        Storyteller.<br>
+        <em>Explorer.</em>
+      </h1>
+      <p class="ab-hero-sub">
+        MS Business Analytics · WPI &nbsp;·&nbsp; Worcester, MA<br>
+        Rooted in Hyderabad. Driven by curiosity.
+      </p>
+      <div class="ab-hero-actions">
+        <a href="portfolio.html" class="ab-btn-outline">
+          View Portfolio <i class="bi bi-arrow-right"></i>
+        </a>
+        <a href="contact.html" class="ab-btn-ghost">
+          Say Hello
+        </a>
+      </div>
+    </div>
 
-  <!-- Main content -->
+    <div class="ab-hero-img-wrap">
+      <img src="images/Aj.jpg" alt="Ajay Ramineni" class="ab-hero-img">
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       MAIN
+  ═══════════════════════════════════════════ -->
   <main id="main-content">
 
-    <!-- Bio section -->
-    <section class="about-section">
-      <h2>Who I Am</h2>
+    <!-- ── WHO I AM ── -->
+    <section class="ab-section reveal">
+      <div class="ab-section-meta">
+        <span class="ab-label">
+          <span class="ab-label-line"></span>
+          Who I Am
+        </span>
+        <h2 class="ab-section-heading">The story<br>so far.</h2>
+      </div>
 
-      <div class="about-main">
+      <div class="ab-bio-grid">
 
-        <div class="about-image">
-          <img
-            src="images/Aj.jpg"
-            alt="Ajay Ramineni"
-            width="340"
-            height="440"
-          >
-        </div>
-
-        <div class="about-text">
-          <p class="about-intro">
+        <div class="ab-bio-text">
+          <p class="ab-intro">
             My journey began as a passion project inspired by my family and mentors,
             who taught me to embrace everything life has to offer and honor the stories
             of the people I meet.
@@ -110,56 +138,185 @@
             my creativity, I hope something here resonates with you.
           </p>
         </div>
+
+        <!-- Details panel -->
+        <aside class="ab-details">
+          <div class="ab-detail-item reveal reveal-d1">
+            <span class="ab-detail-icon"><i class="bi bi-mortarboard"></i></span>
+            <div class="ab-detail-body">
+              <span class="ab-detail-label">Education</span>
+              <span class="ab-detail-value">MS Business Analytics</span>
+              <span class="ab-detail-sub">Worcester Polytechnic Institute</span>
+            </div>
+          </div>
+          <div class="ab-detail-item reveal reveal-d2">
+            <span class="ab-detail-icon"><i class="bi bi-geo-alt"></i></span>
+            <div class="ab-detail-body">
+              <span class="ab-detail-label">Based In</span>
+              <span class="ab-detail-value">Worcester, MA</span>
+              <span class="ab-detail-sub">Originally from Hyderabad, India</span>
+            </div>
+          </div>
+          <div class="ab-detail-item reveal reveal-d3">
+            <span class="ab-detail-icon"><i class="bi bi-briefcase"></i></span>
+            <div class="ab-detail-body">
+              <span class="ab-detail-label">Focus</span>
+              <span class="ab-detail-value">Data & Business Analytics</span>
+              <span class="ab-detail-sub">Predictive modelling · Visualisation</span>
+            </div>
+          </div>
+          <div class="ab-detail-item reveal reveal-d4">
+            <span class="ab-detail-icon"><i class="bi bi-camera"></i></span>
+            <div class="ab-detail-body">
+              <span class="ab-detail-label">Creative Side</span>
+              <span class="ab-detail-value">Photography & Writing</span>
+              <span class="ab-detail-sub">Travel · Street · Portraits</span>
+            </div>
+          </div>
+          <a href="images/Grad_Resume.pdf" target="_blank" class="ab-resume-btn">
+            <i class="bi bi-file-earmark-text"></i> Download Résumé
+          </a>
+        </aside>
+
       </div>
     </section>
 
-    <!-- Quote — gray band, same as portfolio's gray experience section -->
-    <section class="about-quote-band">
-      <blockquote>
-        "Life is a chessboard, and every move counts. I play with strategy, creativity, and heart."
-      </blockquote>
+    <!-- ── QUOTE BAND ── -->
+    <section class="ab-quote-band reveal">
+      <div class="ab-quote-inner">
+        <span class="ab-quote-mark">"</span>
+        <blockquote class="ab-quote-text">
+          Life is a chessboard, and every move counts.<br>
+          I play with strategy, creativity, and heart.
+        </blockquote>
+      </div>
     </section>
 
-    <!-- What drives me -->
-    <section class="about-section">
-      <h2>What Drives Me</h2>
-      <div class="about-pillars">
+    <!-- ── WHAT DRIVES ME ── -->
+    <section class="ab-section reveal">
+      <div class="ab-section-meta">
+        <span class="ab-label">
+          <span class="ab-label-line"></span>
+          What Drives Me
+        </span>
+        <h2 class="ab-section-heading">Passions &<br>Principles.</h2>
+      </div>
 
-        <div class="pillar-card">
-          <h3>Analytics &amp; Strategy</h3>
-          <p>Turning messy data into clear decisions. I believe every number tells a story — the job is to find it.</p>
+      <div class="ab-pillars">
+
+        <div class="ab-pillar reveal reveal-d1">
+          <span class="ab-pillar-num">01</span>
+          <div class="ab-pillar-body">
+            <h3 class="ab-pillar-title">Analytics &amp; Strategy</h3>
+            <p class="ab-pillar-text">
+              Turning messy data into clear decisions. I believe every number tells
+              a story — the job is to find it and tell it well.
+            </p>
+          </div>
         </div>
 
-        <div class="pillar-card">
-          <h3>Photography &amp; Storytelling</h3>
-          <p>Capturing moments that words can't fully hold. From travel to street to portraits — I shoot what moves me.</p>
+        <div class="ab-pillar reveal reveal-d2">
+          <span class="ab-pillar-num">02</span>
+          <div class="ab-pillar-body">
+            <h3 class="ab-pillar-title">Photography &amp; Storytelling</h3>
+            <p class="ab-pillar-text">
+              Capturing moments that words can't fully hold. From travel to street
+              to portraits — I shoot what moves me and write what stays with me.
+            </p>
+          </div>
         </div>
 
-        <div class="pillar-card">
-          <h3>Community &amp; Connection</h3>
-          <p>Whether through Rotaract, mentorship, or just a good conversation — I believe in the power of showing up.</p>
+        <div class="ab-pillar reveal reveal-d3">
+          <span class="ab-pillar-num">03</span>
+          <div class="ab-pillar-body">
+            <h3 class="ab-pillar-title">Community &amp; Connection</h3>
+            <p class="ab-pillar-text">
+              Whether through Rotaract, mentorship, or just a good conversation —
+              I believe in the power of showing up for people.
+            </p>
+          </div>
         </div>
 
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="page-footer-line">
-      <span>Ajay Ramineni &nbsp;&middot;&nbsp; <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener">IG</a> &nbsp;&middot;&nbsp; <a href="https://x.com/withloveeajay" target="_blank" rel="noopener">X</a> &nbsp;&middot;&nbsp; <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a> &nbsp;&middot;&nbsp; &copy; 2026</span>
-    </footer>
+    <!-- ── CTA BAND ── -->
+    <section class="ab-cta-band reveal">
+      <div class="ab-cta-inner">
+        <span class="ab-label">
+          <span class="ab-label-line"></span>
+          Let's Talk
+        </span>
+        <h2 class="ab-cta-heading">Have a project or<br>just want to connect?</h2>
+        <a href="contact.html" class="ab-btn-outline">
+          Get In Touch <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+    </section>
 
   </main>
 
-  <!-- Fixed name logo -->
-  <div class="page-name-logo" id="pageNameLogo">
-    <a href="index.html">
-      <span class="first">AJAY</span>
-      <span class="last">RAMINENI</span>
-    </a>
-  </div>
+  <!-- ── FOOTER ── -->
+  <footer class="ab-footer">
+    <span class="ab-footer-copy">Ajay Ramineni &nbsp;&middot;&nbsp; &copy; 2026</span>
+    <div class="ab-footer-links">
+      <a href="https://www.instagram.com/ajayvarmaramineni" target="_blank" rel="noopener">IG</a>
+      <a href="https://x.com/withloveeajay" target="_blank" rel="noopener">X</a>
+      <a href="https://www.linkedin.com/in/ajayramineni2808" target="_blank" rel="noopener">LI</a>
+      <a href="https://github.com/Ajayvarmaramineni" target="_blank" rel="noopener">GH</a>
+    </div>
+  </footer>
 
   <script src="js/navigation.js"></script>
   <script src="js/app.js"></script>
   <script src="js/click-sound.js"></script>
+
+  <script>
+  (function () {
+    /* ── Page fade-in ── */
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.7s ease';
+    window.addEventListener('load', function () { document.body.style.opacity = '1'; });
+
+    /* ── Custom cursor ── */
+    var dot  = document.getElementById('cursor-dot');
+    var ring = document.getElementById('cursor-ring');
+    var mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', function (e) {
+      mx = e.clientX; my = e.clientY;
+      dot.style.transform = 'translate(' + (mx - 4) + 'px,' + (my - 4) + 'px)';
+    });
+    (function animRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.transform = 'translate(' + (rx - 18) + 'px,' + (ry - 18) + 'px)';
+      requestAnimationFrame(animRing);
+    })();
+    document.querySelectorAll('a, button').forEach(function (el) {
+      el.addEventListener('mouseenter', function () { ring.classList.add('cursor-hover'); });
+      el.addEventListener('mouseleave', function () { ring.classList.remove('cursor-hover'); });
+    });
+
+    /* ── Scroll progress ── */
+    var bar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', function () {
+      var pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+      bar.style.width = Math.min(pct, 100) + '%';
+    });
+
+    /* ── Scroll reveal ── */
+    var revealEls = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function (el) { observer.observe(el); });
+  })();
+  </script>
+
 </body>
 </html>
