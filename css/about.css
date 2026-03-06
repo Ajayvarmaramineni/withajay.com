@@ -1,165 +1,135 @@
 /* =========================================================
-   about.css — About page styles
+   about.css — About page — mirrors portfolio.css patterns
    ========================================================= */
 
-body.about-body {
+.about-body {
   background: var(--white);
   color: var(--black);
 }
 
-/* ── Hero ────────────────────────────────────────────────── */
+/* ── Black header — identical to .portfolio-hero ─────────── */
 .about-hero {
-  position: relative;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  overflow: hidden;
-}
-
-.about-hero-bg {
-  position: absolute;
-  inset: 0;
-  background: url('../images/hero.jpg') center / cover no-repeat;
-  z-index: 0;
-}
-
-.about-hero-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.52);
-}
-
-.about-hero-content {
-  position: relative;
-  z-index: 1;
+  background: var(--black);
   color: var(--white);
-  padding: 0 24px;
+  padding: 80px 48px 60px;
 }
 
-.about-hero-content h1 {
-  font-family: var(--font-serif);
-  font-size: clamp(2.8rem, 6vw, 5rem);
-  font-weight: 700;
-  letter-spacing: 0.04em;
+.about-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.6rem);
   margin-bottom: 16px;
-  line-height: 1.1;
+  letter-spacing: 0.04em;
 }
 
-.about-hero-content p {
-  font-family: var(--font-sans);
-  font-size: clamp(0.75rem, 1.3vw, 0.88rem);
-  font-weight: 600;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.65);
+.about-hero p {
+  font-size: 1.05rem;
+  color: var(--gray-mid);
+  max-width: 560px;
+  line-height: 1.7;
 }
 
-/* ── Main content section ────────────────────────────────── */
+/* ── Content section — identical to .portfolio-section ───── */
 .about-section {
-  background: var(--white);
-  padding: 80px 48px 100px;
-  position: relative;
-  z-index: 2;
-}
-
-.about-container {
+  padding: 60px 48px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Section title — mirrors portfolio h2 */
-.about-section-title {
-  font-family: var(--font-serif);
+.about-section h2 {
   font-size: 1.6rem;
-  font-weight: 700;
+  margin-bottom: 36px;
   letter-spacing: 0.04em;
   border-bottom: 2px solid var(--black);
   padding-bottom: 12px;
-  margin-bottom: 56px;
 }
 
-/* ── Two-column layout ───────────────────────────────────── */
+/* ── Two-column bio layout ───────────────────────────────── */
 .about-main {
   display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 72px;
+  grid-template-columns: 340px 1fr;
+  gap: 64px;
   align-items: flex-start;
-  margin-bottom: 72px;
 }
 
 .about-image img {
   width: 100%;
-  height: 480px;
+  height: 440px;
   object-fit: cover;
   display: block;
 }
 
-/* ── Text content ────────────────────────────────────────── */
-.about-text h2 {
-  font-family: var(--font-serif);
-  font-size: clamp(1.4rem, 2.2vw, 2rem);
-  font-weight: 700;
-  margin-bottom: 20px;
-  line-height: 1.25;
-}
-
-.about-text .intro {
+/* ── Bio text — Open Sans, matches portfolio card text ───── */
+.about-text .about-intro {
   font-size: 1rem;
   font-style: italic;
   color: var(--gray-mid);
   line-height: 1.75;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .about-text p {
   font-size: 0.94rem;
   line-height: 1.85;
   color: #444;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .about-text p:last-child {
   margin-bottom: 0;
 }
 
-/* ── Quote block ─────────────────────────────────────────── */
-.about-quote {
-  border-left: 3px solid var(--black);
-  padding: 28px 36px;
+/* ── Quote band — gray strip, same as portfolio experience section ── */
+.about-quote-band {
   background: var(--gray-light);
-  max-width: 800px;
+  padding: 52px 48px;
+  text-align: center;
 }
 
-.about-quote blockquote {
+.about-quote-band blockquote {
   font-family: var(--font-serif);
-  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
   font-style: italic;
   font-weight: 400;
   color: var(--black);
+  line-height: 1.6;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ── Pillar cards — same as .project-card ────────────────── */
+.about-pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+.pillar-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.pillar-card:hover {
+  box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+  transform: translateY(-4px);
+}
+
+.pillar-card h3 {
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+}
+
+.pillar-card p {
+  font-size: 0.92rem;
   line-height: 1.65;
-  margin: 0;
+  color: #444;
 }
 
 /* ── Responsive ──────────────────────────────────────────── */
-@media (max-width: 1024px) {
-  .about-main {
-    grid-template-columns: 300px 1fr;
-    gap: 48px;
-  }
-
-  .about-image img {
-    height: 400px;
-  }
-}
-
-@media (max-width: 768px) {
-  .about-section {
-    padding: 60px 24px 80px;
-  }
-
+@media (max-width: 900px) {
   .about-main {
     grid-template-columns: 1fr;
     gap: 36px;
@@ -167,17 +137,20 @@ body.about-body {
 
   .about-image img {
     height: 320px;
-    max-width: 420px;
-    margin: 0 auto;
-  }
-
-  .about-quote {
-    padding: 24px 20px;
+    max-width: 380px;
   }
 }
 
-@media (max-width: 480px) {
-  .about-image img {
-    height: 260px;
+@media (max-width: 768px) {
+  .about-hero {
+    padding: 60px 24px 48px;
+  }
+
+  .about-section {
+    padding: 48px 24px;
+  }
+
+  .about-quote-band {
+    padding: 40px 24px;
   }
 }
