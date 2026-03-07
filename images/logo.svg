@@ -1,1 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200"><rect width="200" height="200" fill="url('#gradient')"></rect><defs><linearGradient id="gradient" gradientTransform="rotate(45 0.5 0.5)"><stop offset="0%" stop-color="#fdfdfd"></stop><stop offset="100%" stop-color="#f5fff9"></stop></linearGradient></defs><g><g fill="#000000" transform="matrix(6.87248322147651,0,0,6.87248322147651,10.209598900287745,148.8627314887591)" stroke="#050505" stroke-width="0.2"><path d="M9.98 0L9.15-2.66L4.45-2.66L3.63 0L-0.03 0L5.19-14.22L8.41-14.22L13.66 0L9.98 0ZM6.80-10.23L5.27-5.30L8.33-5.30L6.80-10.23ZM22.49 0L19.98-5.02L18.13-5.02L18.13 0L14.70 0L14.70-14.22L20.29-14.22Q22.82-14.22 24.25-13.10Q25.67-11.97 25.67-9.92L25.67-9.92Q25.67-8.44 25.07-7.46Q24.47-6.48 23.19-5.88L23.19-5.88L26.16-0.15L26.16 0L22.49 0ZM18.13-11.57L18.13-7.67L20.29-7.67Q21.27-7.67 21.76-8.18Q22.26-8.69 22.26-9.61Q22.26-10.53 21.76-11.05Q21.26-11.57 20.29-11.57L20.29-11.57L18.13-11.57Z"></path></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="gradient-light" gradientTransform="rotate(45 0.5 0.5)">
+      <stop offset="0%" stop-color="#fdfdfd"/>
+      <stop offset="100%" stop-color="#f5fff9"/>
+    </linearGradient>
+    <linearGradient id="gradient-dark" gradientTransform="rotate(45 0.5 0.5)">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#0c0b09"/>
+    </linearGradient>
+  </defs>
+  <style>
+    #bg-dark  { display: none; }
+    #monogram { fill: #000000; stroke: #050505; }
+    @media (prefers-color-scheme: dark) {
+      #bg-light { display: none; }
+      #bg-dark  { display: block; }
+      #monogram { fill: #f5f0e8; stroke: #f5f0e8; }
+    }
+  </style>
+  <rect id="bg-light" width="200" height="200" fill="url('#gradient-light')"/>
+  <rect id="bg-dark"  width="200" height="200" fill="url('#gradient-dark')"/>
+  <g>
+    <g id="monogram" transform="matrix(6.87248322147651,0,0,6.87248322147651,10.209598900287745,148.8627314887591)" stroke-width="0.2">
+      <path d="M9.98 0L9.15-2.66L4.45-2.66L3.63 0L-0.03 0L5.19-14.22L8.41-14.22L13.66 0L9.98 0ZM6.80-10.23L5.27-5.30L8.33-5.30L6.80-10.23ZM22.49 0L19.98-5.02L18.13-5.02L18.13 0L14.70 0L14.70-14.22L20.29-14.22Q22.82-14.22 24.25-13.10Q25.67-11.97 25.67-9.92L25.67-9.92Q25.67-8.44 25.07-7.46Q24.47-6.48 23.19-5.88L23.19-5.88L26.16-0.15L26.16 0L22.49 0ZM18.13-11.57L18.13-7.67L20.29-7.67Q21.27-7.67 21.76-8.18Q22.26-8.69 22.26-9.61Q22.26-10.53 21.76-11.05Q21.26-11.57 20.29-11.57L20.29-11.57L18.13-11.57Z"/>
+    </g>
+  </g>
+</svg>
