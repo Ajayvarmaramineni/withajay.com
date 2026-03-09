@@ -16,9 +16,8 @@
 
   function playClick() {
     try {
-      var sound = clickAudio.cloneNode();
-      sound.volume = 0.5;
-      sound.play().catch(function () {
+      clickAudio.currentTime = 0;
+      clickAudio.play().catch(function () {
         // Silently fail — audio is non-critical
       });
     } catch (e) {

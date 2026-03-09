@@ -1,6 +1,9 @@
 /* portfolio.js — Ajay Ramineni Portfolio */
 (function () {
 
+  /* ── EMAILJS INIT (one-time) ── */
+  try { emailjs.init('nHMmaEeDsQ6yN-2Kx'); } catch (e) {}
+
   /* ── PAGE REVEAL ── */
   setTimeout(function () { document.body.style.opacity = '1'; }, 400);
 
@@ -111,17 +114,16 @@
 
       btn.disabled = true; btn.textContent = 'Sending…'; setStatus('', false);
 
-      fetch('https://formspree.io/f/YOUR_FORM_ID', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name, email: mail, subject: subj, message: msg })
-      })
-      .then(function (r) {
-        if (r.ok) { setStatus('Message sent — I\'ll be in touch soon.', false); form.reset(); }
-        else { setStatus('Something went wrong. Email aramineni@wpi.edu', true); }
-      })
-      .catch(function () { setStatus('Network error. Please try again.', true); })
-      .finally(function () { btn.disabled = false; btn.textContent = 'Send Message'; });
+      emailjs.sendForm('service_0cgjbdf', 'template_8stcqsc', form)
+        .then(function () {
+          setStatus('Message sent — I\'ll be in touch soon.', false);
+          form.reset();
+          btn.disabled = false; btn.textContent = 'Send Message';
+        })
+        .catch(function () {
+          setStatus('Something went wrong. Please email aramineni@wpi.edu', true);
+          btn.disabled = false; btn.textContent = 'Send Message';
+        });
     });
   }
   function setStatus(msg, err) {

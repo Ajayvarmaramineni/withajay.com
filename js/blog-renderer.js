@@ -191,6 +191,12 @@
     return new Promise(function (resolve) { setTimeout(resolve, ms); });
   }
 
+  /** Set a meta/link tag attribute if the element exists */
+  function setMeta(selector, attr, value) {
+    var el = document.querySelector(selector);
+    if (el) el.setAttribute(attr, value);
+  }
+
   /** Main: load post from URL ?post=path/to/file.md */
   function loadPost() {
     var params = new URLSearchParams(window.location.search);
@@ -246,21 +252,18 @@
       (plainText.split(/\s+/).slice(0, 30).join(' ') + '…');
     var postUrl = window.location.href;
 
-    var descTag = document.querySelector('meta[name="description"]');
-    if (descTag) descTag.setAttribute('content', postDesc);
-
-    var ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', postTitle);
-
-    var ogDesc = document.querySelector('meta[property="og:description"]');
-    if (ogDesc) ogDesc.setAttribute('content', postDesc);
-
-    var ogUrl = document.querySelector('meta[property="og:url"]');
-    if (ogUrl) ogUrl.setAttribute('content', postUrl);
+    // Update meta, Open Graph, canonical, and Twitter card tags
+    setMeta('meta[name="description"]',          'content', postDesc);
+    setMeta('meta[property="og:title"]',         'content', postTitle);
+    setMeta('meta[property="og:description"]',   'content', postDesc);
+    setMeta('meta[property="og:url"]',           'content', postUrl);
+    setMeta('link[rel="canonical"]',             'href',    postUrl);
+    setMeta('meta[name="twitter:title"]',        'content', postTitle);
+    setMeta('meta[name="twitter:description"]',  'content', postDesc);
 
     if (meta.image) {
-      var ogImage = document.querySelector('meta[property="og:image"]');
-      if (ogImage) ogImage.setAttribute('content', meta.image);
+      setMeta('meta[property="og:image"]',       'content', meta.image);
+      setMeta('meta[name="twitter:image"]',      'content', meta.image);
 
       var heroImg = document.getElementById('post-hero-img');
       if (heroImg) {

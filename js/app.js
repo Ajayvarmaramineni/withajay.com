@@ -49,10 +49,24 @@ if (bar) {
         ring.style.transform = 'translate(' + (rx - 18) + 'px,' + (ry - 18) + 'px)';
         requestAnimationFrame(animRing);
       })();
-      document.querySelectorAll('a, button').forEach(function(el) {
+      document.querySelectorAll('a, button, input, textarea').forEach(function(el) {
         el.addEventListener('mouseenter', function() { ring.classList.add('cursor-hover'); });
         el.addEventListener('mouseleave', function() { ring.classList.remove('cursor-hover'); });
       });
+    }
+
+    // Scroll reveal (shared across all pages with .reveal elements)
+    var revealEls = document.querySelectorAll('.reveal');
+    if (revealEls.length) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealEls.forEach(function (el) { observer.observe(el); });
     }
 
   });

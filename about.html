@@ -9,8 +9,15 @@
   <meta property="og:title" content="About | Ajay Ramineni">
   <meta property="og:description" content="Strategist, analytics enthusiast, and storyteller. Based in Massachusetts, rooted in Hyderabad.">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Ajay Ramineni">
   <meta property="og:image" content="https://withajay.com/images/Aj.jpg">
   <meta property="og:url" content="https://withajay.com/about.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@withloveeajay">
+  <meta name="twitter:title" content="About | Ajay Ramineni">
+  <meta name="twitter:description" content="Strategist, analytics enthusiast, and storyteller. Based in Massachusetts, rooted in Hyderabad.">
+  <meta name="twitter:image" content="https://withajay.com/images/Aj.jpg">
+  <link rel="canonical" href="https://withajay.com/about.html">
 
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -18,9 +25,9 @@
   <link rel="stylesheet" href="css/typography.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/about.css">
+  <noscript><style>body { opacity: 1 !important; }</style></noscript>
 </head>
-<body>
-<body class="dark-bg">
+<body class="dark-bg" style="opacity:0; transition: opacity 0.7s ease;">
   <div class="page-name-logo" id="pageNameLogo">
   <a href="index.html">
     <span class="first">AJAY</span>
@@ -179,7 +186,7 @@
               <span class="ab-detail-sub">Travel · Street · Portraits</span>
             </div>
           </div>
-          <a href="images/Grad_Resume.pdf" target="_blank" class="ab-resume-btn">
+          <a href="files/Grad_Resume.pdf" target="_blank" class="ab-resume-btn">
             <i class="bi bi-file-earmark-text"></i> Download Résumé
           </a>
         </aside>
@@ -277,52 +284,6 @@
   <script src="js/app.js"></script>
   <script src="js/click-sound.js"></script>
 
-  <script>
-  (function () {
-    /* ── Page fade-in ── */
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.7s ease';
-    window.addEventListener('load', function () { document.body.style.opacity = '1'; });
-
-    /* ── Custom cursor ── */
-    var dot  = document.getElementById('cursor-dot');
-    var ring = document.getElementById('cursor-ring');
-    var mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', function (e) {
-      mx = e.clientX; my = e.clientY;
-      dot.style.transform = 'translate(' + (mx - 4) + 'px,' + (my - 4) + 'px)';
-    });
-    (function animRing() {
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
-      ring.style.transform = 'translate(' + (rx - 18) + 'px,' + (ry - 18) + 'px)';
-      requestAnimationFrame(animRing);
-    })();
-    document.querySelectorAll('a, button').forEach(function (el) {
-      el.addEventListener('mouseenter', function () { ring.classList.add('cursor-hover'); });
-      el.addEventListener('mouseleave', function () { ring.classList.remove('cursor-hover'); });
-    });
-
-    /* ── Scroll progress ── */
-    var bar = document.getElementById('scroll-progress');
-    window.addEventListener('scroll', function () {
-      var pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-      bar.style.width = Math.min(pct, 100) + '%';
-    });
-
-    /* ── Scroll reveal ── */
-    var revealEls = document.querySelectorAll('.reveal');
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    revealEls.forEach(function (el) { observer.observe(el); });
-  })();
-  </script>
 
 </body>
 </html>
