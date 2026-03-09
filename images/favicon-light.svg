@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" width="100" height="100">
+  <rect width="100" height="100" fill="white"/>
+  <circle cx="50" cy="50" r="46" fill="none" stroke="black" stroke-width="1.5"/>
+  <circle cx="50" cy="50" r="43" fill="none" stroke="black" stroke-width="0.5"/>
+  <text x="50" y="57" font-family="Georgia, serif" font-size="26" font-weight="bold" text-anchor="middle" fill="black">AR</text>
+  <defs>
+    <path id="lightCircle" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"/>
+  </defs>
+  <text font-family="Arial, sans-serif" font-size="6.5" fill="black" letter-spacing="1.2">
+    <textPath xlink:href="#lightCircle">RAMINENI AJAY VARMA · RAMINENI AJAY VARMA ·</textPath>
+  </text>
+</svg>
