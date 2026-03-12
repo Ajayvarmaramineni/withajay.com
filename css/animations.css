@@ -1,0 +1,23 @@
+/* =========================================================
+   animations.css — Hamburger animation, fade transitions
+   ========================================================= */
+
+/* --- Lightbox fade --- */
+@keyframes lbFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.lightbox.active {
+  animation: lbFadeIn 200ms ease-out forwards;
+}
+
+/* --- Hover lift effect for buttons/links --- */
+.btn-hover-lift {
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.btn-hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}

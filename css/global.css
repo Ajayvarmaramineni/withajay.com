@@ -1,0 +1,418 @@
+/* =========================================================
+   global.css — Reset, base styles, variables, utilities
+   ========================================================= */
+
+/* --- Google Fonts --- */
+
+/* --- CSS Variables --- */
+:root {
+  /* Light / homepage palette */
+  --black: #111;
+  --white: #fff;
+  --gray-light: #f5f5f5;
+  --gray-mid: #888;
+  --accent: #111;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Open Sans', system-ui, sans-serif;
+  --transition: 0.3s ease;
+
+}
+
+/* --- Reset --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--black);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* --- Inner-page single-line overlay footer --- */
+.page-footer-line {
+  position: relative;
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  background: transparent;
+  z-index: 10;
+}
+
+.page-footer-line span {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(120, 120, 120, 0.85);
+}
+
+.page-footer-line a {
+  color: rgba(120, 120, 120, 0.85);
+  transition: color var(--transition);
+}
+
+.page-footer-line a:hover {
+  color: #111;
+}
+
+/* For pages with dark/image backgrounds */
+.dark-bg .page-footer-line span,
+.dark-bg .page-footer-line a {
+  color: rgba(255,255,255,0.65);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+}
+
+.dark-bg .page-footer-line a:hover {
+  color: var(--white);
+}
+
+/* --- Hamburger button (shared) --- */
+.hamburger {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  left: auto;
+  z-index: 1500;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  background: none;
+  border: none;
+  border-radius: 0;
+}
+
+.hamburger:hover {
+  background: none;
+}
+
+/* Hamburger 3 lines */
+.hamburger .line {
+  display: block;
+  width: 22px;
+  height: 4px;
+  background: var(--black);
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform 350ms ease-in-out, opacity 350ms ease-in-out;
+}
+
+.hamburger.is-active .line:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.hamburger.is-active .line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger.is-active .line:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+/* Dark-bg pages and homepage: white hamburger lines */
+body.dark-bg .hamburger .line,
+body.home-page .hamburger .line {
+  background: var(--white);
+}
+
+/* --- Nav overlay (shared) --- */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 11, 15, 0.98);
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0;
+  transform: translateY(-100%);
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+}
+
+.nav-overlay.open {
+  transform: translateY(0);
+}
+
+.nav-menu-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  padding: 36px 0 18px 48px;
+  flex-shrink: 0;
+}
+
+/* Nav links list */
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 0 0 0 48px;
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.nav-links a {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 400;
+  color: var(--white);
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  transition: opacity 0.25s ease;
+}
+
+.nav-links a:hover {
+  opacity: 0.4;
+  color: var(--white);
+}
+
+/* Social links at bottom */
+.nav-social {
+  padding: 36px 0 44px 48px;
+  display: flex;
+  gap: 28px;
+  flex-shrink: 0;
+}
+
+.nav-social a {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.45);
+  transition: color 0.3s ease;
+}
+
+.nav-social a:hover {
+  color: var(--white);
+}
+
+/* --- Fixed name logo — all inner pages --- */
+.page-name-logo {
+  position: fixed;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1400;
+  text-align: center;
+  pointer-events: none;
+  transition: opacity 0.7s ease;
+}
+
+.page-name-logo a {
+  pointer-events: auto;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.page-name-logo .first {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--black);
+  display: block;
+  text-transform: uppercase;
+  margin-left: 0;
+  line-height: 1.05;
+}
+
+.page-name-logo .last {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--black);
+  display: block;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+/* Fade on scroll past 80px */
+.page-name-logo.scrolled-away {
+  opacity: 0;
+}
+
+/* Dark-bg pages: white name logo */
+body.dark-bg .page-name-logo .first,
+body.dark-bg .page-name-logo .last {
+  color: var(--white);
+  text-shadow: 0 1px 10px rgba(0,0,0,0.5);
+}
+
+/* --- Utility classes --- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+#scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 2px; background: #c9a96e;
+  z-index: 9998; width: 0%;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 8px rgba(201,169,110,0.5);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+#cursor-dot {
+  position: fixed; top: 0; left: 0;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #c9a96e;
+  pointer-events: none; z-index: 99999;
+}
+#cursor-ring {
+  position: fixed; top: 0; left: 0;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid rgba(201,169,110,0.5);
+  pointer-events: none; z-index: 99998;
+  transition: width 0.2s, height 0.2s, border-color 0.2s;
+}
+#cursor-ring.cursor-hover { width: 52px; height: 52px; border-color: rgba(201,169,110,0.9); }
+@media (hover: none) { #cursor-dot, #cursor-ring { display: none; } }
+
+/* --- Sound toggle button (injected by click-sound.js) --- */
+#sound-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 28px;
+  z-index: 1300;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  background: rgba(14, 13, 11, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.25s ease, opacity 0.25s ease;
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.75);
+  text-transform: uppercase;
+  user-select: none;
+}
+#sound-toggle:hover {
+  border-color: rgba(255, 255, 255, 0.32);
+  color: rgba(255, 255, 255, 0.95);
+}
+#sound-toggle svg {
+  display: block;
+  flex-shrink: 0;
+}
+/* Animated wave bars (ON state) */
+#sound-toggle .wave-bar {
+  display: inline-block;
+  width: 2px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.8);
+  transform-origin: bottom;
+  animation: soundBar 0.8s ease-in-out infinite alternate;
+}
+#sound-toggle .wave-bar:nth-child(1) { height: 5px;  animation-delay: 0s;    animation-duration: 0.7s; }
+#sound-toggle .wave-bar:nth-child(2) { height: 10px; animation-delay: 0.15s; animation-duration: 0.9s; }
+#sound-toggle .wave-bar:nth-child(3) { height: 6px;  animation-delay: 0.3s;  animation-duration: 0.75s; }
+@keyframes soundBar {
+  from { transform: scaleY(0.25); opacity: 0.5; }
+  to   { transform: scaleY(1);    opacity: 1; }
+}
+/* Wave icon layout */
+#sound-toggle .wave-icon {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+/* Muted state — hide wave, show flat line */
+#sound-toggle.muted .wave-icon { display: none; }
+#sound-toggle:not(.muted) .mute-icon { display: none; }
+
+/* --- Focus visible — keyboard navigation ring --- */
+:focus-visible {
+  outline: 2px solid #c9a96e;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* --- Reduced motion — respect system preference --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

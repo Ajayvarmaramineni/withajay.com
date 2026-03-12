@@ -1,0 +1,250 @@
+/* =========================================================
+   photos.css — Photography page styles
+   ========================================================= */
+
+/* ========= Base (reset handled by global.css) ========= */
+body { font-family: 'Open Sans', sans-serif; color: #d8d2c8; background: #0c0b09; }
+
+/* --- Page header override for photos page --- */
+.photos-page-header {
+  background: var(--black);
+}
+
+/* ========= HERO — full viewport height ========= */
+.gallery-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 560px;
+  background: url('../images/photos/hero.jpeg') center 60% / cover no-repeat;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+.gallery-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.0) 35%, rgba(0,0,0,0.42) 100%);
+}
+/* Ken Burns zoom */
+.gallery-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  background-size: cover;
+  transform: scale(1.04);
+  animation: heroZoom 9s ease forwards;
+  z-index: 0;
+}
+@keyframes heroZoom { to { transform: scale(1); } }
+
+.gallery-hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 0 0 3.5rem 4rem;
+  color: #000000;
+  animation: fadeSlideUp 1.2s 0.3s ease both;
+}
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.gallery-hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+}
+.gallery-hero-desc {
+  margin-top: 0.7rem;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .gallery-hero-content { padding: 0 0 2.5rem 1.8rem; }
+}
+
+/* ========= INTRO TEXT ========= */
+.photos-intro {
+  background: #0c0b09;
+  padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 6vw, 5rem);
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+.photos-intro h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  color: #f5f0e8;
+  line-height: 1.2;
+  margin-bottom: 1.4rem;
+}
+.photos-intro h2 em {
+  font-style: italic;
+  font-weight: 300;
+}
+.photos-intro p {
+  font-size: 0.93rem;
+  line-height: 1.85;
+  color: #7a7169;
+  font-weight: 300;
+  max-width: 600px;
+  margin: 0 auto;
+  letter-spacing: 0.01em;
+}
+
+/* ========= PHOTO GRID — Pinterest-style columns ========= */
+.photos-section { background: #0c0b09; }
+.photos-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 clamp(0.75rem, 2vw, 2rem) clamp(3rem, 6vw, 5rem);
+}
+
+.photo-grid {
+  columns: 4;
+  column-gap: 8px;
+}
+@media (max-width: 1100px) { .photo-grid { columns: 3; } }
+@media (max-width: 720px)  { .photo-grid { columns: 2; column-gap: 6px; } }
+@media (max-width: 420px)  { .photo-grid { columns: 1; } }
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 8px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: #1c1a17;
+  border-radius: 6px;
+}
+.masonry-item img {
+  display: block;
+  width: 100%;
+  height: auto;   /* natural aspect ratio — no cropping */
+  transition: transform 0.55s cubic-bezier(.22,.68,0,1.15);
+}
+.masonry-item:hover img { transform: scale(1.04); }
+
+/* Hover overlay */
+.hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.52) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 0.28s;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.8rem 1rem;
+}
+.masonry-item:hover .hover-overlay { opacity: 1; }
+
+.expand-icon {
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  opacity: 0;
+  transition: opacity 0.28s;
+  background: rgba(255,255,255,0.12);
+  border-radius: 50%;
+  padding: 7px;
+  backdrop-filter: blur(4px);
+}
+.masonry-item:hover .expand-icon { opacity: 1; }
+
+/* ========= LIGHTBOX ========= */
+.lightbox { position: fixed; inset: 0; background: rgba(10,10,10,.97); display: none; }
+.lightbox.active { display: block; }
+.lb-stage { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 10001; }
+.lb-img {
+  background: #111; border-radius: 12px; box-shadow: 0 10px 36px rgba(0,0,0,.35);
+  max-width: 94vw; max-height: 86vh; object-fit: contain; display: block;
+}
+.lb-caption { display: none; }
+.lb-counter { position: fixed; right: 28px; bottom: 20px; color: #cfcfcf; font-weight: 600; z-index: 10002; }
+.lb-arrow {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  width: 0; height: 0; border-style: solid; opacity: .85; cursor: pointer;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,.6));
+  transition: opacity .15s; z-index: 10003; pointer-events: auto;
+}
+.lb-arrow:hover { opacity: 1; }
+.lb-prev { left: 22px; border-width: 18px 22px 18px 0; border-color: transparent #cfcfcf transparent transparent; }
+.lb-next { right: 22px; border-width: 18px 0 18px 22px; border-color: transparent transparent transparent #cfcfcf; }
+.lb-prev:hover { border-right-color: #fff; }
+.lb-next:hover { border-left-color: #fff; }
+.lb-close {
+  position: fixed; top: 18px; right: 28px; font-size: 28px; line-height: 1; color: #cfcfcf;
+  background: none; border: none; cursor: pointer; z-index: 10004; pointer-events: auto;
+}
+.lb-close:hover { color: #fff; }
+
+/* ========= Instagram CTA ========= */
+.photo-instagram-cta {
+  background: #0d0d0d;
+  padding: clamp(3rem, 6vw, 5rem) 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+}
+.photo-instagram-cta .cta-eyebrow {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #c9a96e;
+}
+.photo-instagram-cta .cta-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  color: #fff;
+  line-height: 1.2;
+}
+.ig-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+  padding: 0.85rem 2rem;
+  background: transparent;
+  border: 1px solid #c9a96e;
+  color: #c9a96e;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background 0.25s, color 0.25s;
+}
+.ig-cta-btn:hover {
+  background: #c9a96e;
+  color: #0d0d0d;
+}
+.ig-cta-btn svg {
+  width: 17px !important;
+  height: 17px !important;
+  max-width: 17px !important;
+  max-height: 17px !important;
+  flex-shrink: 0;
+  display: inline-block;
+}
+

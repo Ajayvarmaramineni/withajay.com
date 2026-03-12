@@ -1,0 +1,43 @@
+/* ============================================================
+   shared-dark.css — Shared dark-theme utilities
+   Used by: about.html, contact.html, portfolio.html, blog.html
+   ============================================================ */
+
+/* ── Shared dark palette variables ── */
+:root {
+  --dk-bg:       #0c0b09;
+  --dk-surface:  #141310;
+  --dk-surface2: #1c1a17;
+  --dk-border:   #2a2620;
+  --dk-text:     #d8d2c8;
+  --dk-muted:    #7a7169;
+  --dk-accent:   #c9a96e;
+  --dk-white:    #f5f0e8;
+}
+
+/* ── Film grain overlay — shared across all dark pages ── */
+.grain-overlay {
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.4;
+}
+
+/* ── Scroll reveal — shared across dark pages ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.reveal.revealed  { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+.reveal-d4 { transition-delay: 0.4s; }
+
+/* ── Shared fade-up animation ── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
